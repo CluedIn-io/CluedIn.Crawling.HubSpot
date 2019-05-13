@@ -1,0 +1,70 @@
+root = true
+
+[*]
+# (Please don't specify an indent_size here; that has too many unintended consequences.)
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+
+indent_size = 4
+dotnet_style_require_accessibility_modifiers = always
+dotnet_style_readonly_field = true:warning
+dotnet_style_null_propagation = true:error
+dotnet_style_coalesce_expression = true:error
+dotnet_style_collection_initializer = true:error
+dotnet_style_object_initializer = true:error
+
+dotnet_sort_system_directives_first = true
+
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
+csharp_new_line_before_open_brace = all
+csharp_style_conditional_delegate_call = true:warning
+csharp_style_inlined_variable_declaration = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:error
+csharp_style_pattern_matching_over_is_with_cast_check = true:error
+csharp_style_throw_expression = true:error
+csharp_style_var_elsewhere = true:suggestion
+csharp_style_var_for_built_in_types = true:error
+csharp_style_var_when_type_is_apparent = true:error
+csharp_preserve_single_line_statements = false
+
+# this. prefixes
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+#static fields with s_ and 
+dotnet_naming_rule.static_fields_have_s_prefix.symbols = static_fields
+dotnet_naming_symbols.static_fields.applicable_kinds = field
+dotnet_naming_symbols.static_fields.applicable_accessibilities = *
+dotnet_naming_symbols.static_fields.required_modifiers = static
+
+dotnet_naming_rule.static_fields_have_s_prefix.style = s_prefix
+dotnet_naming_style.s_prefix.required_prefix = s_
+dotnet_naming_style.s_prefix.capitalization = camel_case
+
+dotnet_naming_rule.static_fields_have_s_prefix.severity = warning
+
+# Prefix instance fields with _
+dotnet_naming_rule.instance_fields_have_underscore_prefix.symbols = instance_fields
+dotnet_naming_symbols.instance_fields.applicable_kinds = field
+dotnet_naming_symbols.instance_fields.applicable_accessibilities = *
+
+dotnet_naming_rule.instance_fields_have_underscore_prefix.style = underscore_prefix
+dotnet_naming_style.underscore_prefix.required_prefix = _
+dotnet_naming_style.underscore_prefix.capitalization = camel_case
+
+dotnet_naming_rule.instance_fields_have_underscore_prefix.severity = warning
+
+# Upper case class, struct, property, method event and delegates
+dotnet_naming_rule.upper_case_rule.symbols = upper_case_symbols
+dotnet_naming_symbols.upper_case_symbols.applicable_kinds = struct,property,method,event,delegate
+dotnet_naming_symbols.upper_case_symbols.applicable_accessibilities = *
+
+dotnet_naming_rule.upper_case_rule.style = pascal_case
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.upper_case_rule.severity = warning
