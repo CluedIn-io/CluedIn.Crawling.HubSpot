@@ -22,7 +22,7 @@
     <ProjectReference Include="..\Hubspot.Core\Crawling.Hubspot.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core" Version="2.22.2" />
+    <PackageReference Include="CluedIn.Core" Version="2.18.0-alpha0846" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
