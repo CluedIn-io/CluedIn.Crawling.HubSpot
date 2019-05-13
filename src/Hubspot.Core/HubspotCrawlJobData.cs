@@ -1,8 +1,8 @@
 using CluedIn.Core.Crawling;
 
-namespace CluedIn.Crawling.Hubspot.Core
+namespace CluedIn.Crawling.HubSpot.Core
 {
-  public class HubspotCrawlJobData : CrawlJobData
+  public class HubSpotCrawlJobData : CrawlJobData
   {
     public string ApiKey { get; set; }
   }

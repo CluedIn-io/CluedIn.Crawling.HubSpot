@@ -8,7 +8,7 @@ using Moq;
 using Should;
 using Xunit;
 
-namespace Crawling.Hubspot.Test.ClueProducers
+namespace Crawling.HubSpot.Test.ClueProducers
 {
     public abstract class BaseClueProducerTest<T>
     {

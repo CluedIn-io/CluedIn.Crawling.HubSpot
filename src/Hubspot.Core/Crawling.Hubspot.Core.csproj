@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{46D89BED-5F80-454B-9496-3163759DBEB4}</ProjectGuid>
-    <RootNamespace>CluedIn.Crawling.Hubspot.Core</RootNamespace>
-    <AssemblyName>CluedIn.Crawling.Hubspot.Core</AssemblyName>
+    <RootNamespace>CluedIn.Crawling.HubSpot.Core</RootNamespace>
+    <AssemblyName>CluedIn.Crawling.HubSpot.Core</AssemblyName>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Crawling.Hubspot.Core</AssemblyTitle>
-    <Product>Crawling.Hubspot.Core</Product>
+    <AssemblyTitle>Crawling.HubSpot.Core</AssemblyTitle>
+    <Product>Crawling.HubSpot.Core</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

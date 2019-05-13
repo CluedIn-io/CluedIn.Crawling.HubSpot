@@ -1,6 +1,6 @@
-# CluedIn.Crawling.Hubspot
+# CluedIn.Crawling.HubSpot
 
-TODO simple description
+CluedIn crawler for HubSpot.
 
 ------
 
@@ -10,11 +10,12 @@ TODO build status badge
 
 ```Shell
 # Create a new directory for the crawler
-md Crawler.Hubspot
-cd Crawler.Hubspot
+md Crawler.HubSpot
+cd Crawler.HubSpot
 
 # Initialize the folder as a Git repository
 git init
+git flow init
 
 # Run the yeoman generator
 #  Answers to generator prompts:

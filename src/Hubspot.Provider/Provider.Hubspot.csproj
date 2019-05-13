@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{E1744515-A08B-4972-9185-0D56131AC429}</ProjectGuid>
-    <RootNamespace>CluedIn.Provider.Hubspot</RootNamespace>
-    <AssemblyName>CluedIn.Provider.Hubspot</AssemblyName>
+    <RootNamespace>CluedIn.Provider.HubSpot</RootNamespace>
+    <AssemblyName>CluedIn.Provider.HubSpot</AssemblyName>
     <TargetFramework>net452</TargetFramework>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <AssemblyTitle>CluedIn.Provider.Hubspot</AssemblyTitle>
-    <Product>CluedIn.Provider.Hubspot</Product>
+    <AssemblyTitle>CluedIn.Provider.HubSpot</AssemblyTitle>
+    <Product>CluedIn.Provider.HubSpot</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -19,11 +19,11 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hubspot.Core\Crawling.Hubspot.Core.csproj" />
-    <ProjectReference Include="..\Hubspot.Infrastructure\Crawling.Hubspot.Infrastructure.csproj" />
+    <ProjectReference Include="..\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+    <ProjectReference Include="..\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HubspotProviderComponent.config">
+    <EmbeddedResource Include="HubSpotProviderComponent.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -52,6 +52,6 @@
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Mesh\HubspotMeshProcessor.cs" />
+    <Compile Remove="Mesh\HubSpotMeshProcessor.cs" />
   </ItemGroup>
 </Project>

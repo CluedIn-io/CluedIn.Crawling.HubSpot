@@ -2,34 +2,34 @@ using Castle.MicroKernel.Registration;
 
 using CluedIn.Core;
 using CluedIn.Core.Providers;
-// 
+//
 using CluedIn.Core.Webhooks;
-// 
-using CluedIn.Crawling.Hubspot.Core;
-using CluedIn.Crawling.Hubspot.Infrastructure.Installers;
-// 
+//
+using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Infrastructure.Installers;
+//
 using CluedIn.Server;
 using ComponentHost;
 
-namespace CluedIn.Provider.Hubspot
+namespace CluedIn.Provider.HubSpot
 {
-    [Component(HubspotConstants.ProviderName, "Providers", ComponentType.Service, ServerComponents.ProviderWebApi, Components.Server, Components.DataStores, Isolation = ComponentIsolation.NotIsolated)]
-    public sealed class HubspotProviderComponent : ServiceApplicationComponent<EmbeddedServer>
+    [Component(HubSpotConstants.ProviderName, "Providers", ComponentType.Service, ServerComponents.ProviderWebApi, Components.Server, Components.DataStores, Isolation = ComponentIsolation.NotIsolated)]
+    public sealed class HubSpotProviderComponent : ServiceApplicationComponent<EmbeddedServer>
     {
         /**********************************************************************************************************
          * CONSTRUCTOR
          **********************************************************************************************************/
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HubspotProviderComponent" /> class.
+        /// Initializes a new instance of the <see cref="HubSpotProviderComponent" /> class.
         /// </summary>
         /// <param name="componentInfo">The component information.</param>
-        public HubspotProviderComponent(ComponentInfo componentInfo)
+        public HubSpotProviderComponent(ComponentInfo componentInfo)
             : base(componentInfo)
         {
             // Dev. Note: Potential for compiler warning here ... CA2214: Do not call overridable methods in constructors
             //   this class has been sealed to prevent the CA2214 waring being raised by the compiler
-            Container.Register(Component.For<HubspotProviderComponent>().Instance(this));  
+            Container.Register(Component.For<HubSpotProviderComponent>().Instance(this));
         }
 
         /**********************************************************************************************************

@@ -2,15 +2,15 @@ using System;
 using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Crawling.Factories;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 using RuleConstants = CluedIn.Core.Constants.Validation.Rules;
 
-namespace CluedIn.Crawling.Hubspot.Factories
+namespace CluedIn.Crawling.HubSpot.Factories
 {
-  public class HubspotClueFactory : ClueFactory
+  public class HubSpotClueFactory : ClueFactory
   {
-    public HubspotClueFactory()
-        : base(HubspotConstants.CodeOrigin, HubspotConstants.ProviderRootCodeValue)
+    public HubSpotClueFactory()
+        : base(HubSpotConstants.CodeOrigin, HubSpotConstants.ProviderRootCodeValue)
     {
     }
 
@@ -19,9 +19,9 @@ namespace CluedIn.Crawling.Hubspot.Factories
       if (clue == null) throw new ArgumentNullException(nameof(clue));
 
       var data = clue.Data.EntityData;
-      data.Name = HubspotConstants.CrawlerName;
-      data.Uri = new Uri(HubspotConstants.Uri);
-      data.Description = HubspotConstants.CrawlerDescription;
+      data.Name = HubSpotConstants.CrawlerName;
+      data.Uri = new Uri(HubSpotConstants.Uri);
+      data.Description = HubSpotConstants.CrawlerDescription;
 
       // TODO this should not be necessary
       clue.ValidationRuleSuppressions.AddRange(new[]

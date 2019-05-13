@@ -1,21 +1,21 @@
 using System;
 using CluedIn.Core.Logging;
 using CluedIn.Core.Providers;
-using CluedIn.Crawling.Hubspot.Core;
-using CluedIn.Crawling.Hubspot.Core.Models;
+using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using System.Collections.Generic;
 using RestSharp;
 
-namespace CluedIn.Crawling.Hubspot.Infrastructure
+namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
-  public class HubspotClient
+  public class HubSpotClient
   {
     private const string s_baseUri = "http://sample.com";
 
     // ReSharper disable once NotAccessedField.Local
     private readonly ILogger _log;
 
-    public HubspotClient(ILogger log, HubspotCrawlJobData hubspotCrawlJobData, IRestClient client) // TODO: pass on any extra dependencies
+    public HubSpotClient(ILogger log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client) // TODO: pass on any extra dependencies
     {
         if (hubspotCrawlJobData == null) throw new ArgumentNullException(nameof(hubspotCrawlJobData));
        if (client == null) throw new ArgumentNullException(nameof(client));

@@ -4,7 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using CluedIn.Core;
 
-namespace CluedIn.Crawling.Hubspot.Installers
+namespace CluedIn.Crawling.HubSpot.Installers
 {
     // Use this class to add any further dependencies to the container
 

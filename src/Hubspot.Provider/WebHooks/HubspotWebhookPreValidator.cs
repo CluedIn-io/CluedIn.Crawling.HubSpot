@@ -1,12 +1,12 @@
 using CluedIn.Core.Webhooks;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace CluedIn.Provider.Hubspot.WebHooks
+namespace CluedIn.Provider.HubSpot.WebHooks
 {
     public class Name_WebhookPreValidator : BaseWebhookPrevalidator
     {
         public Name_WebhookPreValidator()
-            : base(HubspotConstants.ProviderId, HubspotConstants.ProviderName)
+            : base(HubSpotConstants.ProviderId, HubSpotConstants.ProviderName)
         {
         }
     }

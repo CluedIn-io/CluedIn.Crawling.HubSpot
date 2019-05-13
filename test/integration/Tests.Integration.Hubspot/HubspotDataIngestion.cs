@@ -3,22 +3,22 @@ using System.Linq;
 using CrawlerIntegrationTesting.Clues;
 using Xunit.Abstractions;
 
-namespace Tests.Integration.Hubspot
+namespace Tests.Integration.HubSpot
 {
-    public class DataIngestion : IClassFixture<HubspotTestFixture>
+    public class DataIngestion : IClassFixture<HubSpotTestFixture>
     {
-        private readonly HubspotTestFixture _fixture;
+        private readonly HubSpotTestFixture _fixture;
         private readonly ITestOutputHelper _output;
 
-        public DataIngestion(HubspotTestFixture fixture, ITestOutputHelper output)
+        public DataIngestion(HubSpotTestFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
             _output = output;
-            
+
         }
 
         [Theory(Skip = "Failing Integration Test")]
-        [InlineData("/Provider/Root", 1)] 
+        [InlineData("/Provider/Root", 1)]
         [InlineData("/Files/Directory", 1)]
         [InlineData("/Files/File", 2)]
         public void CorrectNumberOfEntityTypes(string entityType, int expectedCount)
@@ -29,7 +29,7 @@ namespace Tests.Integration.Hubspot
 
         [Fact(Skip = "Failing Integration Test")]
         public void EntityCodesAreUnique()
-        {            
+        {
             var count = _fixture.ClueStorage.Clues.Count();
             var unique = _fixture.ClueStorage.Clues.Distinct(new ClueComparer()).Count();
 

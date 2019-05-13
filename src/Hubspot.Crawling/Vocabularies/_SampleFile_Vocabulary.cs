@@ -2,18 +2,18 @@ using CluedIn.Core.Data;
 using CluedIn.Core.Data.Vocabularies;
 using Vocabs = CluedIn.Core.Data.Vocabularies.Vocabularies;
 
-namespace CluedIn.Crawling.Hubspot.Vocabularies
+namespace CluedIn.Crawling.HubSpot.Vocabularies
 {
   public class _SampleFile_Vocabulary : SimpleVocabulary
   {
     public _SampleFile_Vocabulary()
     {
-      VocabularyName = "Hubspot [SampleFile]"; // TODO: Set value
+      VocabularyName = "HubSpot [SampleFile]"; // TODO: Set value
       KeyPrefix = "hubspot.[samplefile]"; // TODO: Set value
       KeySeparator = ".";
       Grouping = EntityType.Unknown; // TODO: Set value
 
-      AddGroup("Hubspot Details", group =>
+      AddGroup("HubSpot Details", group =>
       {
         Id = group.Add(new VocabularyKey("Id", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.Visible));
         Name = group.Add(new VocabularyKey("Name", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.Visible));
@@ -21,7 +21,7 @@ namespace CluedIn.Crawling.Hubspot.Vocabularies
         FolderId = group.Add(new VocabularyKey("ParentId", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.Hidden));
       });
 
-      // Mappings to Common Vocabulary      
+      // Mappings to Common Vocabulary
       AddMapping(Uri, Vocabs.CluedInFile.DownloadUrl);
     }
 

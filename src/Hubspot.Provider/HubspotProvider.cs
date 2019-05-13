@@ -9,22 +9,22 @@ using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
 using System.Configuration;
 using CluedIn.Core.Configuration;
-using CluedIn.Crawling.Hubspot.Core;
-using CluedIn.Crawling.Hubspot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Providers.Models;
 
-namespace CluedIn.Provider.Hubspot
+namespace CluedIn.Provider.HubSpot
 {
-  public class HubspotProvider : ProviderBase
+  public class HubSpotProvider : ProviderBase
   {
-    private readonly IHubspotClientFactory _hubspotClientFactory;
+    private readonly IHubSpotClientFactory _hubspotClientFactory;
 
     /**********************************************************************************************************
      * CONSTRUCTORS
      **********************************************************************************************************/
 
-    public HubspotProvider([NotNull] ApplicationContext appContext, IHubspotClientFactory hubspotClientFactory)
-        : base(appContext, HubspotConstants.CreateProviderMetadata())
+    public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory)
+        : base(appContext, HubSpotConstants.CreateProviderMetadata())
     {
       _hubspotClientFactory = hubspotClientFactory;
     }
@@ -42,9 +42,9 @@ namespace CluedIn.Provider.Hubspot
     {
       if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-      var hubspotCrawlJobData = new HubspotCrawlJobData();
-      if (configuration.ContainsKey(HubspotConstants.KeyName.ApiKey))
-      { hubspotCrawlJobData.ApiKey = configuration[HubspotConstants.KeyName.ApiKey].ToString(); }
+      var hubspotCrawlJobData = new HubSpotCrawlJobData();
+      if (configuration.ContainsKey(HubSpotConstants.KeyName.ApiKey))
+      { hubspotCrawlJobData.ApiKey = configuration[HubSpotConstants.KeyName.ApiKey].ToString(); }
 
       return await Task.FromResult(hubspotCrawlJobData);
     }
@@ -75,11 +75,11 @@ namespace CluedIn.Provider.Hubspot
 
       var dictionary = new Dictionary<string, object>();
 
-      if (jobData is HubspotCrawlJobData hubspotCrawlJobData)
+      if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
       {
         //TODO add the transformations from specific CrawlJobData object to dictionary
         // add tests to GetHelperConfigurationBehaviour.cs
-        dictionary.Add(HubspotConstants.KeyName.ApiKey, hubspotCrawlJobData.ApiKey);
+        dictionary.Add(HubSpotConstants.KeyName.ApiKey, hubspotCrawlJobData.ApiKey);
       }
 
       return await Task.FromResult(dictionary);
@@ -100,7 +100,7 @@ namespace CluedIn.Provider.Hubspot
     {
       if (jobData == null) throw new ArgumentNullException(nameof(jobData));
 
-      var hubspotCrawlJobData = jobData as HubspotCrawlJobData;
+      var hubspotCrawlJobData = jobData as HubSpotCrawlJobData;
 
       if (hubspotCrawlJobData == null)
       {

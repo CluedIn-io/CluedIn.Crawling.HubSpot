@@ -1,22 +1,22 @@
 using CluedIn.Core.Crawling;
 using CluedIn.Crawling;
-using CluedIn.Crawling.Hubspot;
-using CluedIn.Crawling.Hubspot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot;
+using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using Moq;
 using Should;
 using Xunit;
 
-namespace Crawling.Hubspot.Test
+namespace Crawling.HubSpot.Test
 {
-  public class HubspotCrawlerBehaviour
+  public class HubSpotCrawlerBehaviour
   {
     private readonly ICrawlerDataGenerator _sut;
 
-    public HubspotCrawlerBehaviour()
+    public HubSpotCrawlerBehaviour()
     {
-        var nameClientFactory = new Mock<IHubspotClientFactory>();
+        var nameClientFactory = new Mock<IHubSpotClientFactory>();
 
-        _sut = new HubspotCrawler(nameClientFactory.Object);
+        _sut = new HubSpotCrawler(nameClientFactory.Object);
     }
 
     [Fact]

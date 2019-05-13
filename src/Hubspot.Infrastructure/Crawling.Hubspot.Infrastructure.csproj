@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}</ProjectGuid>
-    <RootNamespace>CluedIn.Crawling.Hubspot.Infrastructure</RootNamespace>
-    <AssemblyName>CluedIn.Crawling.Hubspot.Infrastructure</AssemblyName>
+    <RootNamespace>CluedIn.Crawling.HubSpot.Infrastructure</RootNamespace>
+    <AssemblyName>CluedIn.Crawling.HubSpot.Infrastructure</AssemblyName>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Crawling.Hubspot.Client</AssemblyTitle>
-    <Product>Crawling.Hubspot.Client</Product>
+    <AssemblyTitle>Crawling.HubSpot.Client</AssemblyTitle>
+    <Product>Crawling.HubSpot.Client</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -19,7 +19,7 @@
     <Reference Include="System.Management" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hubspot.Core\Crawling.Hubspot.Core.csproj" />
+    <ProjectReference Include="..\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CluedIn.Core" Version="2.18.0-alpha0846" />

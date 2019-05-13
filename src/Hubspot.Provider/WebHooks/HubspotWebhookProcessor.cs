@@ -13,20 +13,20 @@ using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
 using CluedIn.Crawling;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace CluedIn.Provider.Hubspot.WebHooks
+namespace CluedIn.Provider.HubSpot.WebHooks
 {
-    public class HubspotWebhookProcessor : BaseWebhookProcessor
+    public class HubSpotWebhookProcessor : BaseWebhookProcessor
     {
-        public HubspotWebhookProcessor(ApplicationContext appContext)
+        public HubSpotWebhookProcessor(ApplicationContext appContext)
             : base(appContext)
         {
         }
 
         public override bool Accept(IWebhookDefinition webhookDefinition)
         {
-            return webhookDefinition.ProviderId == HubspotConstants.ProviderId || base.Accept(webhookDefinition);
+            return webhookDefinition.ProviderId == HubSpotConstants.ProviderId || base.Accept(webhookDefinition);
         }
 
         public override IEnumerable<Clue> DoProcess(ExecutionContext context, WebhookDataCommand command)
@@ -50,17 +50,17 @@ namespace CluedIn.Provider.Hubspot.WebHooks
 
                     if (jobDataCheck != null)
                     {
-                        var crawlJobData = new HubspotCrawlJobData();
+                        var crawlJobData = new HubSpotCrawlJobData();
 
                         var clues = new List<Clue>();
 
                         IAgentJobProcessorArguments jobArgs = new DebugAgentJobProcessorArguments
                         {
                             TaskScheduler = TaskScheduler.Default,
-                            Job           = new AgentJob(Guid.NewGuid(), AgentJobPriority.Normal, "CluedIn" + HubspotConstants.ProviderName, ProcessingRestriction.Any, null, null)
+                            Job           = new AgentJob(Guid.NewGuid(), AgentJobPriority.Normal, "CluedIn" + HubSpotConstants.ProviderName, ProcessingRestriction.Any, null, null)
                         };
 
-                        var processorState = new AgentJobProcessorState<HubspotCrawlJobData>(jobArgs, AppContext)
+                        var processorState = new AgentJobProcessorState<HubSpotCrawlJobData>(jobArgs, AppContext)
                         {
                             JobData = crawlJobData,
                             Status = new AgentJobStatus {Statistics = new AgentJobStatusStatistics()}

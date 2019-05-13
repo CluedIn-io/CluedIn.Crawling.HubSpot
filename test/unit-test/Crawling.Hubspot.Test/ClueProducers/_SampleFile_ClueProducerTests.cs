@@ -2,11 +2,11 @@ using System;
 using AutoFixture.Xunit2;
 using CluedIn.Core.Data;
 using CluedIn.Crawling;
-using CluedIn.Crawling.Hubspot.ClueProducers;
-using CluedIn.Crawling.Hubspot.Core.Models;
+using CluedIn.Crawling.HubSpot.ClueProducers;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using Xunit;
 
-namespace Crawling.Hubspot.Test.ClueProducers
+namespace Crawling.HubSpot.Test.ClueProducers
 {
     public class _SampleFile_ClueProducerTests : BaseClueProducerTest<_SampleFile_>
     {

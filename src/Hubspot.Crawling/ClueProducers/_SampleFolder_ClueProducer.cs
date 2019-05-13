@@ -1,14 +1,14 @@
 using System;
 using CluedIn.Core.Data;
-using CluedIn.Crawling.Hubspot.Core.Models;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.Factories;
 using CluedIn.Core;
-using CluedIn.Crawling.Hubspot.Vocabularies;
+using CluedIn.Crawling.HubSpot.Vocabularies;
 using CluedIn.Crawling.Helpers;
 using RuleConstants = CluedIn.Core.Constants.Validation.Rules;
 
 
-namespace CluedIn.Crawling.Hubspot.ClueProducers
+namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
   public class _SampleFolder_ClueProducer : BaseClueProducer<_SampleFolder_>
   {
@@ -24,7 +24,7 @@ namespace CluedIn.Crawling.Hubspot.ClueProducers
     {
       if (input == null) throw new ArgumentNullException(nameof(input));
 
-      // TODO: Create clue specifying the type of entity it is and ID            
+      // TODO: Create clue specifying the type of entity it is and ID
       var clue = _factory.Create(EntityType.Files.Directory, input.Id.ToString(), accountId);
 
       // TODO: Populate clue data

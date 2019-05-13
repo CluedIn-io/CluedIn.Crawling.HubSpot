@@ -4,11 +4,11 @@ using CluedIn.Core.Data;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 
-using CluedIn.Crawling.Hubspot.Vocabularies;
-using CluedIn.Crawling.Hubspot.Core.Models;
+using CluedIn.Crawling.HubSpot.Vocabularies;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using RuleConstants = CluedIn.Core.Constants.Validation.Rules;
 
-namespace CluedIn.Crawling.Hubspot.ClueProducers
+namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
   public class _SampleFile_ClueProducer : BaseClueProducer<_SampleFile_>
   {

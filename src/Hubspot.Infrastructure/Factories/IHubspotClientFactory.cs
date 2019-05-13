@@ -1,9 +1,9 @@
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace CluedIn.Crawling.Hubspot.Infrastructure.Factories
+namespace CluedIn.Crawling.HubSpot.Infrastructure.Factories
 {
-    public interface IHubspotClientFactory
+    public interface IHubSpotClientFactory
     {
-        HubspotClient CreateNew(HubspotCrawlJobData hubspotCrawlJobData);
+        HubSpotClient CreateNew(HubSpotCrawlJobData hubspotCrawlJobData);
     }
 }

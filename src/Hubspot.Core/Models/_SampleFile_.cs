@@ -1,6 +1,6 @@
 using System;
 
-namespace CluedIn.Crawling.Hubspot.Core.Models
+namespace CluedIn.Crawling.HubSpot.Core.Models
 {
   public class _SampleFile_
   {

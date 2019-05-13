@@ -5,24 +5,24 @@ using System.Collections.Generic;
 using CluedIn.Core.Data;
 using CluedIn.Core.Mesh;
 using CluedIn.Core.Messages.WebApp;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
 namespace CluedIn.Providers.Mesh
 {
-  public class Hubspot_Command_MeshProcessor : BaseMeshProcessor
+  public class HubSpot_Command_MeshProcessor : BaseMeshProcessor
   {
-    public Hubspot_Command_MeshProcessor(ApplicationContext appContext)
+    public HubSpot_Command_MeshProcessor(ApplicationContext appContext)
         : base(appContext)
     {
     }
 
     public override Guid GetProviderId() =>
-      HubspotConstants.ProviderId;
+      HubSpotConstants.ProviderId;
 
     /* TODO de-comment and implement the override for Accept method in your deriverd Provider class if requiring any more behavious than base class implementation
     public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
     {
-      // TODO filter on action 
+      // TODO filter on action
       // e.g. query.Action == ActionType.*;
       return base.Accept(command, query, entity);
     }

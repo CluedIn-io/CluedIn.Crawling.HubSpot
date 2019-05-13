@@ -1,15 +1,15 @@
 using System.Collections.Generic;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace Tests.Integration.Hubspot
+namespace Tests.Integration.HubSpot
 {
-  public static class HubspotConfiguration
+  public static class HubSpotConfiguration
   {
     public static Dictionary<string, object> Create()
     {
       return new Dictionary<string, object>
             {
-                { HubspotConstants.KeyName.ApiKey, "demo" }
+                { HubSpotConstants.KeyName.ApiKey, "demo" }
             };
     }
   }

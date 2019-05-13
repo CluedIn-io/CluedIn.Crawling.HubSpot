@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using CluedIn.Core.Net.Mail;
 using CluedIn.Core.Providers;
 
-namespace CluedIn.Crawling.Hubspot.Core
+namespace CluedIn.Crawling.HubSpot.Core
 {
-  public class HubspotConstants
+  public class HubSpotConstants
   {
     public struct KeyName
     {
       public static readonly string ApiKey = nameof(ApiKey);
     }
 
-    public const string CodeOrigin = "Hubspot";
-    public const string ProviderRootCodeValue = "Hubspot";
-    public const string CrawlerName = "HubspotCrawler";
-    public const string CrawlerComponentName = "HubspotCrawler";
-    public const string CrawlerDescription = "Hubspot is a ... to be completed ..."; // TODO complete the crawler description
-    public const string CrawlerDisplayName = "Hubspot";  // TODO RJ - this field is never used can it be removed ?
+    public const string CodeOrigin = "HubSpot";
+    public const string ProviderRootCodeValue = "HubSpot";
+    public const string CrawlerName = "HubSpotCrawler";
+    public const string CrawlerComponentName = "HubSpotCrawler";
+    public const string CrawlerDescription = "HubSpot is a ... to be completed ..."; // TODO complete the crawler description
+    public const string CrawlerDisplayName = "HubSpot";  // TODO RJ - this field is never used can it be removed ?
     public const string Uri = "http://www.sampleurl.com";
 
-     
+
 
     public static readonly Guid ProviderId = Guid.Parse("2d3cf71a-8d29-4ac0-9864-e413f3c7246d");   // TODO: Replace value
-    public const string ProviderName = "Hubspot";         // TODO: Replace value
+    public const string ProviderName = "HubSpot";         // TODO: Replace value
     public const bool SupportsConfiguration = true;             // TODO: Replace value
     public const bool SupportsWebHooks = false;             // TODO: Replace value
     public const bool SupportsAutomaticWebhookCreation = true;             // TODO: Replace value

@@ -4,17 +4,17 @@ using CluedIn.Core.Crawling;
 using AutoFixture.Xunit2;
 using Should;
 using Xunit;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace Provider.Hubspot.Test.HubspotProvider
+namespace Provider.HubSpot.Test.HubSpotProvider
 {
-  public class GetHelperConfigurationBehaviour : HubspotProviderTest
+  public class GetHelperConfigurationBehaviour : HubSpotProviderTest
   {
     private readonly CrawlJobData _jobData;
 
     public GetHelperConfigurationBehaviour()
     {
-      _jobData = new HubspotCrawlJobData();
+      _jobData = new HubSpotCrawlJobData();
     }
 
     [Fact]

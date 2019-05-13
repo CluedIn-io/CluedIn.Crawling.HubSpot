@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ProjectGuid>{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Provider.Hubspot.Test</AssemblyTitle>
-    <Product>Provider.Hubspot.Test</Product>
+    <AssemblyTitle>Provider.HubSpot.Test</AssemblyTitle>
+    <Product>Provider.HubSpot.Test</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -27,9 +27,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Hubspot.Core\Crawling.Hubspot.Core.csproj" />
-    <ProjectReference Include="..\..\..\src\Hubspot.Infrastructure\Crawling.Hubspot.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\src\Hubspot.Provider\Provider.Hubspot.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

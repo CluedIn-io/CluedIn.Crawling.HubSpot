@@ -1,10 +1,10 @@
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace CluedIn.Crawling.Hubspot
+namespace CluedIn.Crawling.HubSpot
 {
-    public class HubspotCrawlerJobProcessor : GenericCrawlerTemplateJobProcessor<HubspotCrawlJobData>
+    public class HubSpotCrawlerJobProcessor : GenericCrawlerTemplateJobProcessor<HubSpotCrawlJobData>
     {
-        public HubspotCrawlerJobProcessor(HubspotCrawlerComponent component) : base(component)
+        public HubSpotCrawlerJobProcessor(HubSpotCrawlerComponent component) : base(component)
         {
         }
     }

@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ProjectGuid>{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Tests.Integration.Hubspot</AssemblyTitle>
-    <Product>Tests.Integration.Hubspot</Product>
+    <AssemblyTitle>Tests.Integration.HubSpot</AssemblyTitle>
+    <Product>Tests.Integration.HubSpot</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,9 +30,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Hubspot.Core\Crawling.Hubspot.Core.csproj" />
-    <ProjectReference Include="..\..\..\src\Hubspot.Crawling\Crawling.Hubspot.csproj" />
-    <ProjectReference Include="..\..\..\src\Hubspot.Infrastructure\Crawling.Hubspot.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\src\Hubspot.Provider\Provider.Hubspot.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Crawling\Crawling.HubSpot.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
   </ItemGroup>
 </Project>

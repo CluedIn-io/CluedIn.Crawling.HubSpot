@@ -1,14 +1,14 @@
 using CluedIn.Core;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 
 using ComponentHost;
 
-namespace CluedIn.Crawling.Hubspot
+namespace CluedIn.Crawling.HubSpot
 {
-    [Component(HubspotConstants.CrawlerComponentName, "Crawlers", ComponentType.Service, Components.Server, Components.ContentExtractors, Isolation = ComponentIsolation.NotIsolated)]
-    public class HubspotCrawlerComponent : CrawlerComponentBase
+    [Component(HubSpotConstants.CrawlerComponentName, "Crawlers", ComponentType.Service, Components.Server, Components.ContentExtractors, Isolation = ComponentIsolation.NotIsolated)]
+    public class HubSpotCrawlerComponent : CrawlerComponentBase
     {
-        public HubspotCrawlerComponent([NotNull] ComponentInfo componentInfo)
+        public HubSpotCrawlerComponent([NotNull] ComponentInfo componentInfo)
             : base(componentInfo)
         {
         }

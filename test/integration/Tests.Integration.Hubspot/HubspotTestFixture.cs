@@ -1,23 +1,23 @@
 using CluedIn.Crawling;
-using CluedIn.Crawling.Hubspot.Core;
+using CluedIn.Crawling.HubSpot.Core;
 using System.IO;
 using System.Reflection;
 using CrawlerIntegrationTesting.Clues;
 
-namespace Tests.Integration.Hubspot
+namespace Tests.Integration.HubSpot
 {
-    public class HubspotTestFixture
+    public class HubSpotTestFixture
     {
-        public HubspotTestFixture()
+        public HubSpotTestFixture()
         {
             var executingFolder = new FileInfo(Assembly.GetExecutingAssembly().CodeBase.Substring(8)).DirectoryName;
-            var p = new DebugCrawlerHost<HubspotCrawlJobData>(executingFolder, HubspotConstants.ProviderName);
+            var p = new DebugCrawlerHost<HubSpotCrawlJobData>(executingFolder, HubSpotConstants.ProviderName);
 
             ClueStorage = new ClueStorage();
 
-            p.ProcessClue += ClueStorage.AddClue;            
+            p.ProcessClue += ClueStorage.AddClue;
 
-            p.Execute(HubspotConfiguration.Create(), HubspotConstants.ProviderId);
+            p.Execute(HubSpotConfiguration.Create(), HubSpotConstants.ProviderId);
         }
 
         public ClueStorage ClueStorage { get; }

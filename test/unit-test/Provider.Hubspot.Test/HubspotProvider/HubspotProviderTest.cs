@@ -1,24 +1,24 @@
 using Castle.Windsor;
 using CluedIn.Core;
 using CluedIn.Core.Providers;
-using CluedIn.Crawling.Hubspot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using Moq;
 
-namespace Provider.Hubspot.Test.HubspotProvider
+namespace Provider.HubSpot.Test.HubSpotProvider
 {
-  public abstract class HubspotProviderTest
+  public abstract class HubSpotProviderTest
   {
     protected readonly ProviderBase Sut;
 
-    protected Mock<IHubspotClientFactory> NameClientFactory;
+    protected Mock<IHubSpotClientFactory> NameClientFactory;
     protected Mock<IWindsorContainer> Container;
 
-    protected HubspotProviderTest()
+    protected HubSpotProviderTest()
     {
       Container = new Mock<IWindsorContainer>();
-      NameClientFactory = new Mock<IHubspotClientFactory>();
+      NameClientFactory = new Mock<IHubSpotClientFactory>();
       var applicationContext = new ApplicationContext(Container.Object);
-      Sut = new CluedIn.Provider.Hubspot.HubspotProvider(applicationContext, NameClientFactory.Object);
+      Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(applicationContext, NameClientFactory.Object);
     }
   }
 }

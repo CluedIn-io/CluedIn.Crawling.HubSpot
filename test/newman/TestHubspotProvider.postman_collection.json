@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Test Hubspot Provider",
+		"name": "Test HubSpot Provider",
 		"_postman_id": "8605efd5-db09-9c82-203b-31849fe31f93",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -80,7 +80,7 @@
 			"response": []
 		},
 		{
-			"name": "Add Hubspot",
+			"name": "Add HubSpot",
 			"event": [
 				{
 					"listen": "test",
@@ -118,12 +118,12 @@
 					}
 				],
 				"body": {},
-				"description": "Add Hubspot provider for the current organization"
+				"description": "Add HubSpot provider for the current organization"
 			},
 			"response": []
 		},
 		{
-			"name": "Enable Hubspot Provider",
+			"name": "Enable HubSpot Provider",
 			"event": [
 				{
 					"listen": "test",
@@ -168,7 +168,7 @@
 						}
 					]
 				},
-				"description": "Enable Hubspot provider for the current organization"
+				"description": "Enable HubSpot provider for the current organization"
 			},
 			"response": []
 		}

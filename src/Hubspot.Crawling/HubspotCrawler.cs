@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 
 using CluedIn.Core.Crawling;
-using CluedIn.Crawling.Hubspot.Core;
-using CluedIn.Crawling.Hubspot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 
-namespace CluedIn.Crawling.Hubspot
+namespace CluedIn.Crawling.HubSpot
 {
-    public class HubspotCrawler : ICrawlerDataGenerator
+    public class HubSpotCrawler : ICrawlerDataGenerator
     {
-        private readonly IHubspotClientFactory _clientFactory;
-        public HubspotCrawler(IHubspotClientFactory clientFactory)
+        private readonly IHubSpotClientFactory _clientFactory;
+        public HubSpotCrawler(IHubSpotClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
 
         public IEnumerable<object> GetData(CrawlJobData jobData)
         {
-            var hubspotcrawlJobData = jobData as HubspotCrawlJobData;
+            var hubspotcrawlJobData = jobData as HubSpotCrawlJobData;
             if(hubspotcrawlJobData == null)
             {
                 yield break;
@@ -34,6 +34,6 @@ namespace CluedIn.Crawling.Hubspot
                     yield return file;
                 }
             }
-        }       
+        }
     }
 }

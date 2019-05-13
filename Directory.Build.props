@@ -20,7 +20,7 @@
 
     <Description>Internal CluedIn Assembly</Description>
 
-    <RepositoryUrl>https://github.com/CluedIn-io/CluedIn.Crawling.Hubspot.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 

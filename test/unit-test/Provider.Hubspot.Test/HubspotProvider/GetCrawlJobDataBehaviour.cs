@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 using Xunit;
 
-namespace Provider.Hubspot.Test.HubspotProvider
+namespace Provider.HubSpot.Test.HubSpotProvider
 {
-  public class GetCrawlJobDataBehaviour : HubspotProviderTest
+  public class GetCrawlJobDataBehaviour : HubSpotProviderTest
   {
     [Theory]
     [InlineAutoData]

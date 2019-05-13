@@ -4,10 +4,10 @@ using Castle.Windsor;
 using Castle.Facilities.TypedFactory;
 
 using CluedIn.Core;
-using CluedIn.Crawling.Hubspot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using RestSharp;
 
-namespace CluedIn.Crawling.Hubspot.Infrastructure.Installers
+namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
 {
   public class InstallComponents : IWindsorInstaller
   {
@@ -15,8 +15,8 @@ namespace CluedIn.Crawling.Hubspot.Infrastructure.Installers
     {
       container
           .AddFacilityIfNotExists<TypedFactoryFacility>()
-          .Register(Component.For<IHubspotClientFactory>().AsFactory())
-          .Register(Component.For<HubspotClient>().LifestyleTransient());
+          .Register(Component.For<IHubSpotClientFactory>().AsFactory())
+          .Register(Component.For<HubSpotClient>().LifestyleTransient());
 
       if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
         container.Register(Component.For<IRestClient, RestClient>());
