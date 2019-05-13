@@ -1,0 +1,104 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+  tags:
+    include:
+      - v*
+  paths:
+    exclude:
+    - '*.md'
+
+pr:
+  branches:
+    include:
+    - develop
+    - master
+    - release/*
+  paths:
+    exclude:
+    - '*.md'
+
+jobs:
+- job: compile_test_pack_push
+  displayName: 'Compile, test, pack and push'
+  pool:
+    vmImage: 'VS2017-Win2016'
+
+  variables:
+    BuildConfiguration: 'Release'
+    Dotnet.Skip.First.Time.Experience: 'True'
+
+  steps:
+  # DotNet SDK
+  - task: DotNetCoreInstaller@0
+    inputs:
+      version: '2.2.100'
+
+  # Restore NuGet
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore NuGet packages'
+    inputs:
+      command: 'restore'
+      feedsToUse: 'config'
+      nugetConfigPath: 'nuget.config'
+      verbosityRestore: 'normal'
+
+  # GitVersion
+  - task: GitVersion@4
+    inputs:
+      preferBundledVersion: true
+
+  # Build
+  - task: DotNetCoreCLI@2
+    displayName: 'Build solution'
+    inputs:
+      command: 'build'
+
+  # Test
+  - task: DotNetCoreCLI@2
+    displayName: 'Run tests'
+    inputs:
+      command: 'test'
+
+  # Pack
+  - task: DotNetCoreCLI@2
+    displayName: 'Create NuGet packages'
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/*.csproj'
+      packDirectory: '$(Build.ArtifactStagingDirectory)'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: GITVERSION_NUGETVERSIONV2
+      includeSymbols: true
+
+  # Publish Artifacts
+  - task: PublishPipelineArtifact@0
+    displayName: 'Create Pipeline Artifact'
+    inputs:
+      artifactName: 'Nuget'
+      targetPath: $(Build.ArtifactStagingDirectory)
+
+  # Push NuGet packages to Develop
+  - task: NuGetCommand@2
+    displayName: 'Push to develop feed'
+    condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      allowPackageConflicts: true
+      publishVstsFeed: 'develop'
+      includeSymbols: true
+
+  - task: NuGetCommand@2
+    displayName: 'Push to release feed'
+    condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      allowPackageConflicts: true
+      publishVstsFeed: 'release'
+      includeSymbols: false
