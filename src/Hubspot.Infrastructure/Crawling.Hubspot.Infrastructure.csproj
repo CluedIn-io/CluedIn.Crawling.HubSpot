@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <SkipValidatePackageReferences>true</SkipValidatePackageReferences>
     <ProjectGuid>{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}</ProjectGuid>
     <RootNamespace>CluedIn.Crawling.Hubspot.Infrastructure</RootNamespace>
     <AssemblyName>CluedIn.Crawling.Hubspot.Infrastructure</AssemblyName>

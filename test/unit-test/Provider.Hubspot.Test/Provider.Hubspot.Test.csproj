@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <SkipValidatePackageReferences>true</SkipValidatePackageReferences>
     <ProjectGuid>{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
     <AssemblyTitle>Provider.Hubspot.Test</AssemblyTitle>
