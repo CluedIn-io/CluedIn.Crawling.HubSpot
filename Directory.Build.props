@@ -11,7 +11,7 @@
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <SkipValidatePackageReferences>true</SkipValidatePackageReferences>
+    <SkipValidatePackageReferences>false</SkipValidatePackageReferences>
   </PropertyGroup>
 
   <PropertyGroup>
