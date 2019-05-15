@@ -93,12 +93,13 @@ jobs:
       publishVstsFeed: 'develop'
       includeSymbols: true
 
-  - task: NuGetCommand@2
-    displayName: 'Push to release feed'
-    condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-      allowPackageConflicts: true
-      publishVstsFeed: 'release'
-      includeSymbols: false
+# TODO restore once master branch creates valid packages for release
+  # - task: NuGetCommand@2
+  #   displayName: 'Push to release feed'
+  #   condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #   inputs:
+  #     command: 'push'
+  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+  #     allowPackageConflicts: true
+  #     publishVstsFeed: 'release'
+  #     includeSymbols: false
