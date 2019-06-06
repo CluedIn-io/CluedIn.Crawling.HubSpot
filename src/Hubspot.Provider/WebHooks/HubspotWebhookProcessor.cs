@@ -50,23 +50,23 @@ namespace CluedIn.Provider.HubSpot.WebHooks
 
                     if (jobDataCheck != null)
                     {
-                        var crawlJobData = new HubSpotCrawlJobData();
+                        //var crawlJobData = new HubSpotCrawlJobData();
 
-                        var clues = new List<Clue>();
+                        //var clues = new List<Clue>();
 
-                        IAgentJobProcessorArguments jobArgs = new DebugAgentJobProcessorArguments
-                        {
-                            TaskScheduler = TaskScheduler.Default,
-                            Job           = new AgentJob(Guid.NewGuid(), AgentJobPriority.Normal, "CluedIn" + HubSpotConstants.ProviderName, ProcessingRestriction.Any, null, null)
-                        };
+                        //IAgentJobProcessorArguments jobArgs = new DebugAgentJobProcessorArguments
+                        //{
+                        //    TaskScheduler = TaskScheduler.Default,
+                        //    Job           = new AgentJob(Guid.NewGuid(), AgentJobPriority.Normal, "CluedIn" + HubSpotConstants.ProviderName, ProcessingRestriction.Any, null, null)
+                        //};
 
-                        var processorState = new AgentJobProcessorState<HubSpotCrawlJobData>(jobArgs, AppContext)
-                        {
-                            JobData = crawlJobData,
-                            Status = new AgentJobStatus {Statistics = new AgentJobStatusStatistics()}
-                        };
+                        //var processorState = new AgentJobProcessorState<HubSpotCrawlJobData>(jobArgs, AppContext)
+                        //{
+                        //    JobData = crawlJobData,
+                        //    Status = new AgentJobStatus {Statistics = new AgentJobStatusStatistics()}
+                        //};
 
-                        throw new NotImplementedException($"TODO: Implement this to populate '{clues.GetType()}' with '{processorState}'");
+                        throw new NotImplementedException($"TODO: Implement this to populate ");
                     }
                 }
             }

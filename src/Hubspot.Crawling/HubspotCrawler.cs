@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Threading.Tasks;
 using CluedIn.Core.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
@@ -13,27 +15,42 @@ namespace CluedIn.Crawling.HubSpot
         {
             _clientFactory = clientFactory;
         }
-
         public IEnumerable<object> GetData(CrawlJobData jobData)
         {
             var hubspotcrawlJobData = jobData as HubSpotCrawlJobData;
-            if(hubspotcrawlJobData == null)
+            if (hubspotcrawlJobData == null)
             {
                 yield break;
             }
 
             var client = _clientFactory.CreateNew(hubspotcrawlJobData);
 
-            //crawl data from provider and yield objects
+            //TODO
+            var settings = client.GetSettingsAsync().Result;
 
-            foreach( var folder in client.GetFolders())
+            var companies = client.GetCompaniesAsync().Result;
+            foreach (var company in companies.results)
             {
-                yield return folder;
-                foreach (var file in client.GetFilesForFolder(folder.Id))
+                yield return company;
+                if (company.companyId.HasValue)
                 {
-                    yield return file;
+                    var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
+                    foreach(var contact in contacts.contacts)
+                    {
+                        yield return contact;
+                    }
                 }
             }
+
+            //foreach( var folder in client.GetFolders())
+            //{
+            //    yield return folder;
+            //    foreach (var file in client.GetFilesForFolder(folder.Id))
+            //    {
+            //        yield return file;
+            //    }
+            //}
+            throw new NotImplementedException();
         }
     }
 }
