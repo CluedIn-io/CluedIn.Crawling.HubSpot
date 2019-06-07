@@ -5,4 +5,29 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+  <!-- TODO hard coded implementation follows .. original should be restored with dependencies.props from TODO https://github.com/aspnet/EntityFrameworkCore.git -->
+  <PropertyGroup>
+    <AutoFixturePackageVersion>4.8.0</AutoFixturePackageVersion>
+    <CoverletMsbuildPackageVersion>2.6.1</CoverletMsbuildPackageVersion>
+    <MicrosoftNETTestSdkPackageVersion>15.9.0</MicrosoftNETTestSdkPackageVersion>
+    <XunitPackageVersion>2.4.1</XunitPackageVersion>
+    <XunitCorePackageVersion>$(XunitPackageVersion)</XunitCorePackageVersion>
+    <XunitAssertPackageVersion>$(XunitPackageVersion)</XunitAssertPackageVersion>
+    <XunitRunnerVisualStudioPackageVersion>$(XunitPackageVersion)</XunitRunnerVisualStudioPackageVersion>
+    <XunitAnalyzersPackageVersion>0.10.0</XunitAnalyzersPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture.Xunit2" Version="$(AutoFixturePackageVersion)" />
+    <PackageReference Include="coverlet.msbuild" Version="$(CoverletMsbuildPackageVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitPackageVersion)" />
+    <PackageReference Include="xunit.analyzers" Version="$(XunitAnalyzersPackageVersion)" />
+    <!-- De-comment to use xunit.core and .assert instead of the main package
+         because compilation fails due to warnings triggered by xunit.analyzers.
+    <PackageReference Include="xunit.core" Version="$(XunitCorePackageVersion)" />
+    <PackageReference Include="xunit.assert" Version="$(XunitAssertPackageVersion)" />
+     -->
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVisualStudioPackageVersion)" />
+  </ItemGroup>
 </Project>
