@@ -52,5 +52,3 @@ dotnet pack
   * Requires `Node.js` version 12
   * Requires `gulp` ... `npm install gulp`
     * [X] `npm` found 10 package vulnerabilities (4 moderate, 6 high). Ref <https://github.com/CluedIn-io/yeoman-crawler-template/issues/16>
-
-* [ ] rename `test\unit-test`folder to `test\unit` in `crawler-template` repository

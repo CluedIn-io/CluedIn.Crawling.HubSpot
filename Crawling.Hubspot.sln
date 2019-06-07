@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.HubSpot", "src\HubSpot.Provider\Provider.HubSpot.csproj", "{E1744515-A08B-4972-9185-0D56131AC429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Test", "test\unit-test\Crawling.HubSpot.Test\Crawling.HubSpot.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Test", "test\unit\Crawling.HubSpot.Test\Crawling.HubSpot.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.HubSpot.Test", "test\unit-test\Provider.HubSpot.Test\Provider.HubSpot.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.HubSpot.Test", "test\unit\Provider.HubSpot.Test\Provider.HubSpot.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Config", "_Config", "{153182F5-8A66-4AF5-AEE5-A35ACF793692}"
 	ProjectSection(SolutionItems) = preProject

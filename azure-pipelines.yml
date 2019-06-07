@@ -31,6 +31,7 @@ jobs:
   variables:
     BuildConfiguration: 'Release'
     Dotnet.Skip.First.Time.Experience: 'True'
+    testFolderPath: '$(Build.SourcesDirectory)/test'
 
   steps:
   # DotNet SDK
@@ -58,11 +59,18 @@ jobs:
     inputs:
       command: 'build'
 
-  # Test
+  # Unit and Integration Test
   - task: DotNetCoreCLI@2
-    displayName: 'Run tests'
+    displayName: 'Run Unit and Integration tests'
     inputs:
       command: 'test'
+
+  # Acceptance Test
+  - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
+    displayName: 'Run Acceptance tests'
+    inputs:
+      scriptFolder: '$(testFolderPath)'
+      tag: Acceptance
 
   # Pack
   - task: DotNetCoreCLI@2
