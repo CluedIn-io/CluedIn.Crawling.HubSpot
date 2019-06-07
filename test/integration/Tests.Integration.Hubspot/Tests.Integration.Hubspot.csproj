@@ -13,21 +13,10 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core" Version="2.18.0-alpha0846" />
     <PackageReference Include="CrawlerIntegrationTesting" Version="1.1.1" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
-    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
-    <PackageReference Include="xunit.core" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
