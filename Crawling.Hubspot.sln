@@ -1,24 +1,25 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Core", "src\HubSpot.Core\Crawling.HubSpot.Core.csproj", "{46D89BED-5F80-454B-9496-3163759DBEB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Core", "src\HubSpot.Core\Crawling.HubSpot.Core.csproj", "{46D89BED-5F80-454B-9496-3163759DBEB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot", "src\HubSpot.Crawling\Crawling.HubSpot.csproj", "{5F649221-EBE9-4E5C-9463-F4E40A435435}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot", "src\HubSpot.Crawling\Crawling.HubSpot.csproj", "{5F649221-EBE9-4E5C-9463-F4E40A435435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Infrastructure", "src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj", "{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Infrastructure", "src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj", "{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.HubSpot", "src\HubSpot.Provider\Provider.HubSpot.csproj", "{E1744515-A08B-4972-9185-0D56131AC429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot", "src\HubSpot.Provider\Provider.HubSpot.csproj", "{E1744515-A08B-4972-9185-0D56131AC429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Test", "test\unit-test\Crawling.HubSpot.Test\Crawling.HubSpot.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Test", "test\unit\Crawling.HubSpot.Test\Crawling.HubSpot.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.HubSpot.Test", "test\unit-test\Provider.HubSpot.Test\Provider.HubSpot.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Test", "test\unit\Provider.HubSpot.Test\Provider.HubSpot.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Config", "_Config", "{153182F5-8A66-4AF5-AEE5-A35ACF793692}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		Nuget.config = Nuget.config
 	EndProjectSection
 EndProject
@@ -28,8 +29,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Docs", "_Docs", "{57E743C9
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{4D081256-19A6-4190-8224-FB9CF5793B6A}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{32830E2D-B53F-4D0F-984E-806248F7C8D8}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{6068A50D-8E76-434E-ADE8-2E4A0A66333D}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,10 +44,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{60
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}"
+	ProjectSection(SolutionItems) = preProject
+		test\unit\Directory.Build.props = test\unit\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{CBD22F04-6415-467D-B079-44D5B01965D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Integration.HubSpot", "test\integration\Tests.Integration.HubSpot\Tests.Integration.HubSpot.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Integration.HubSpot", "test\integration\Tests.Integration.HubSpot\Tests.Integration.HubSpot.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
