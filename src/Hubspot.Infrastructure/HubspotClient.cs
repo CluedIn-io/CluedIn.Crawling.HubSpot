@@ -44,7 +44,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                new QueryStringParameter("offset", offset)
                );
 
-        public async Task<DealResponse> GetRecentDealsAsync(int count = 100, int offset = 0, DateTime since) =>
+        public async Task<DealResponse> GetRecentDealsAsync(DateTime since, int count = 100, int offset = 0) =>
             throw new NotImplementedException();
 
         public async Task<DealResponse> GetDealsAsync(int limit = 100, int offset = 0 /*TODO properties*/) =>
