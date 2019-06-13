@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  # seq:
+  #   image: datalust/seq:latest
+  #   restart: unless-stopped
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #   ports:
+  #     - "3200:80"
+
+  wiremock:
+      image: rodolpheche/wiremock
+      container_name: wiremock-standalone
+      ports: 
+        - "8080:8080"
+      volumes:
+        - ./docker/wiremock/stubs:/home/wiremock
