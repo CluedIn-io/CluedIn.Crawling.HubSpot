@@ -12,7 +12,7 @@ using Task = CluedIn.Crawling.HubSpot.Core.Models.Task;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
-    public class HubSpotClient
+    public class HubSpotClient : IHubSpotClient
     {
         // ReSharper disable once NotAccessedField.Local
         private readonly ILogger _log;
@@ -125,13 +125,14 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             return result;
         }
+        
+        public async Task<IList<string>> GetDealPropertiesAsync(Settings settings)
+        {
+          var result =  await GetAsync<IList<PropertyDefinition>>("properties/v1/deals/properties");
 
-
-        public async Task<PropertyDefinition> GetDealPropertiesAsync(Settings settings) =>
-            await GetAsync<PropertyDefinition>("properties/v1/deals/properties");
-
-
-
+          return result.Select(n => n.Name).ToList();
+        }
+        
         public async Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, int offset = 0)
         {
             var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
@@ -145,8 +146,14 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         public async Task<DealResponse> GetRecentDealsAsync(DateTime since, int count = 100, int offset = 0) =>
             throw new NotImplementedException();
 
-        public async Task<DealResponse> GetDealsAsync(IList<string> properties, Settings settings, int limit = 100, int offset = 0) =>
-          throw new NotImplementedException();
+        public async Task<DealResponse> GetDealsAsync(IList<string> properties, Settings settings, int limit = 100, int offset = 0)
+        {
+            var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
+            queryStrings.Insert(0, new QueryStringParameter("offset", offset));
+            queryStrings.Insert(0, new QueryStringParameter("limit", limit));
+
+            return await GetAsync<DealResponse>("deals/v1/deal/paged", queryStrings);
+        }
 
         public async Task<EngagementResponse> GetEngagementsAsync(int limit = 100, int offset = 0 /*TODO properties*/) =>
         throw new NotImplementedException();
@@ -201,5 +208,22 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         {
             return new AccountInformation("", ""); //TODO
         }
+    }
+
+    public interface IHubSpotClient
+    {
+        Task<Settings> GetSettingsAsync();
+        Task<List<string>> GetCompanyPropertiesAsync(Settings settings);
+        Task<IEnumerable<object>> GetEngagementByIdAndTypeAsync(long objectId, string objectType);
+        Task<IList<string>> GetDealPropertiesAsync(Settings settings);
+        Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, int offset = 0);
+        Task<DealResponse> GetRecentDealsAsync(DateTime since, int count = 100, int offset = 0);
+        Task<DealResponse> GetDealsAsync(IList<string> properties, Settings settings, int limit = 100, int offset = 0);
+        Task<EngagementResponse> GetEngagementsAsync(int limit = 100, int offset = 0 /*TODO properties*/);
+        Task<CompanyResponse> GetRecentlyCreatedCompaniesAsync(int count = 100, int offset = 0);
+        Task<CompanyResponse> GetRecentlyModifiedCompaniesAsync(int count = 100, int offset = 0);
+        Task<List<DealPipeline>> GetDealPipelinesAsync(long portalId);
+        Task<ContactResponse> GetContactsByCompanyAsync(long companyId);
+        AccountInformation GetAccountInformation();
     }
 }

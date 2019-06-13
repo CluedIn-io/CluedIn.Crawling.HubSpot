@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CluedIn.Core.Logging;
 using Client = CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient;
 using Moq;
 using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using RestSharp;
 using Xunit;
+using Task = System.Threading.Tasks.Task;
 
 namespace Tests.Integration.HubSpot.HubSpotClient
 {
@@ -41,14 +39,14 @@ namespace Tests.Integration.HubSpot.HubSpotClient
         [Fact]
         public async Task CompanyPropertiesAreAvailable()
         {
-            var companyProperties = await _sut.GetCompanyPropertiesAsync();
+            var companyProperties = await _sut.GetCompanyPropertiesAsync(new Settings());
             Assert.NotNull(companyProperties);
         }
 
         [Fact]
         public async Task UpTo100CompaniesAreAvailable()
         {
-            var companies = await _sut.GetCompaniesAsync();
+            var companies = await _sut.GetCompaniesAsync(new List<string>());
             Assert.InRange(companies.results.Count,1,100);
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +28,6 @@ namespace CluedIn.Crawling.HubSpot
 
             var client = _clientFactory.CreateNew(hubspotcrawlJobData);
 
-            //TODO
             var settings = client.GetSettingsAsync().Result;
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
@@ -39,7 +39,10 @@ namespace CluedIn.Crawling.HubSpot
 
 
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
-
+            foreach (var deal in GetDealsAndAssociatedObjects(client, dealProperties, settings))
+            {
+                yield return deal;
+            }
 
             //var companies = client.GetCompaniesAsync().Result;
             //foreach (var company in companies.results)
@@ -66,60 +69,91 @@ namespace CluedIn.Crawling.HubSpot
             throw new NotImplementedException();
         }
 
+        private IEnumerable<object> GetDealsAndAssociatedObjects(HubSpotClient client, IList<string> properties, Settings settings)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetDealsAsync(properties, settings, limit, offset).Result;
+
+                if (response?.deals == null || !response.deals.Any())
+                    break;
+
+                foreach (var deal in response.deals)
+                {
+
+                    if (settings?.currency != null)
+                        deal.Currency = settings.currency;
+
+                    if (deal.dealId.HasValue)
+                    {
+                        var engagements = client.GetEngagementByIdAndTypeAsync(deal.dealId.Value, "DEAL").Result;
+                        foreach (var engagement in engagements)
+                        {
+                            yield return engagement;
+                        }
+                    }
+
+                    yield return deal;
+                }
+
+                if (response.hasMore == false || response.deals.Count < limit)
+                    break;
+
+                offset = response.offset;
+            }
+        }
+
         private static IEnumerable<object> GetCompaniesAndAssociatedObjects(HubSpotClient client, List<string> companyProperties, Settings settings)
         {
             int offset = 0;
             long portalId = 0;
             while (true)
             {
-                var companies = client.GetCompaniesAsync(companyProperties, 100, offset).Result;
+                var limit = 100;
+                var response = client.GetCompaniesAsync(companyProperties, limit, offset).Result;
 
-                if (companies.results != null)
+                if (response.results == null || !response.results.Any())
+                    break;
+
+                foreach (var company in response.results)
                 {
-                    foreach (var company in companies.results)
+                    if (settings != null && settings.currency != null)
+                        company.Currency = settings.currency;
+
+                    if (company.portalId.HasValue)
+                        portalId = company.portalId.Value;
+
+                    yield return company;
+
+                    if (company.companyId.HasValue)
                     {
-                        if (settings != null && settings.currency != null)
-                            company.Currency = settings.currency;
-
-                        if (company.portalId.HasValue)
-                            portalId = company.portalId.Value;
-
-                        yield return company;
-
-                        if (company.companyId.HasValue)
+                        var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
+                        foreach (var contact in contacts.contacts)
                         {
-                            var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
-                            foreach (var contact in contacts.contacts)
-                            {
-                                yield return contact;
-                            }
+                            yield return contact;
+                        }
 
-                            var engagements = client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
-                            foreach (var engagement in engagements)
-                            {
-                                yield return engagement;
-                            }
+                        var engagements = client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
+                        foreach (var engagement in engagements)
+                        {
+                            yield return engagement;
                         }
                     }
                 }
 
-                if (companies.results == null || companies.hasMore == false)
+
+                if (response.hasMore == false || response.offset == null || response.results.Count < limit)
                     break;
 
-                if (companies.offset == null)
-                    break;
-
-                if (companies.results.Count < 100)
-                    break;
-
-                offset = companies.offset.Value;
-
-                //System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(10)).Wait(state.CancellationTokenSource.Token);
+                offset = response.offset.Value;
             }
 
             // TODO Is this correct? Just get deal pipelines for last company portal id?
-            var dealPipelines = client.GetDealPipelinesAsync(portalId);
-            foreach (var dealPipeline in dealPipelines.Result)
+            var dealPipelines = client.GetDealPipelinesAsync(portalId).Result;
+            foreach (var dealPipeline in dealPipelines)
             {
                 yield return dealPipeline;
             }
