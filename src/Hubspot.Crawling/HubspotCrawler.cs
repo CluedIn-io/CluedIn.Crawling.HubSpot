@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CluedIn.Core.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -31,42 +29,406 @@ namespace CluedIn.Crawling.HubSpot
             var settings = client.GetSettingsAsync().Result;
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
-
-            foreach (var o in GetCompaniesAndAssociatedObjects(client, companyProperties, settings))
-            {
-                yield return o;
-            }
-
-
+            yield return GetCompaniesAndAssociatedObjects(client, companyProperties, settings);
+            
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
-            foreach (var deal in GetDealsAndAssociatedObjects(client, dealProperties, settings))
+            yield return GetDealsAndAssociatedObjects(client, dealProperties, settings);
+
+            var contactProperties = client.GetContactPropertiesAsync(settings).Result;
+            yield return GetContactsAndAssociatedObjects(client, contactProperties, settings);
+
+            yield return GetDynamicContactLists(client);
+            yield return client.GetFormsAsync().Result;
+            yield return client.GetKeywordsAsync().Result;
+            yield return client.GetOwnersAsync().Result;
+            yield return client.GetPublishingChannelsAsync().Result;
+            yield return GetFiles(client, jobData);
+            yield return GetSiteMaps(client, jobData);
+            yield return GetTemplates(client);
+            yield return GetUrlMappings(client, jobData);
+            yield return GetEngagements(client);
+            yield return GetRecentDeals(client, jobData);
+            yield return GetRecentlyCreatedDeals(client, jobData);
+            yield return client.GetSmtpTokensAsync().Result;
+            yield return GetSocialCalendarEvents(client, jobData);
+            yield return GetStaticContactLists(client);
+            yield return GetTaskCalendarEvents(client, jobData);
+            yield return client.GetWorkflowsAsync().Result;
+            yield return GetBlogPosts(client, jobData);
+            yield return GetBlogs(client, jobData);
+            yield return GetBlogTopics(client, jobData);
+            yield return GetDomains(client, jobData);
+            yield return GetBroadcastMessages(client, jobData);
+        }
+
+        private IEnumerable<object> GetFiles(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
             {
-                yield return deal;
+                var limit = 20;
+                var response = client.GetFilesAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
             }
+        }
+        
+        private IEnumerable<object> GetSocialCalendarEvents(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
 
-            //var companies = client.GetCompaniesAsync().Result;
-            //foreach (var company in companies.results)
-            //{
-            //    yield return company;
-            //    if (company.companyId.HasValue)
-            //    {
-            //        var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
-            //        foreach(var contact in contacts.contacts)
-            //        {
-            //            yield return contact;
-            //        }
-            //    }
-            //}
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetSocialCalendarEventsAsync(jobData.LastCrawlFinishTime, DateTimeOffset.UtcNow, limit, offset).Result;
 
-            //foreach( var folder in client.GetFolders())
-            //{
-            //    yield return folder;
-            //    foreach (var file in client.GetFilesForFolder(folder.Id))
-            //    {
-            //        yield return file;
-            //    }
-            //}
-            throw new NotImplementedException();
+                if (response == null || !response.Any())
+                    break;
+
+                yield return response;
+
+                if (response.Count < limit)
+                    break;
+
+                offset += 100;
+            }
+        }
+
+        private IEnumerable<object> GetTaskCalendarEvents(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetTaskCalendarEventsAsync(jobData.LastCrawlFinishTime, DateTimeOffset.UtcNow, limit, offset).Result;
+
+                if (response == null || !response.Any())
+                    break;
+
+                yield return response;
+
+                if (response.Count < limit)
+                    break;
+
+                offset += 100;
+            }
+        }
+
+        private IEnumerable<object> GetRecentDeals(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetRecentDealsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.deals == null || !response.deals.Any())
+                    break;
+
+                yield return response.deals;
+
+                if (response.deals.Count < limit)
+                    break;
+
+                offset = response.offset;
+            }
+        }
+
+        private IEnumerable<object> GetRecentlyCreatedDeals(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetRecentlyCreatedDealsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.deals == null || !response.deals.Any())
+                    break;
+
+                yield return response.deals;
+
+                if (response.deals.Count < limit)
+                    break;
+
+                offset = response.offset;
+            }
+        }
+
+        private IEnumerable<object> GetBroadcastMessages(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetBroadcastMessagesAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.deals == null || !response.deals.Any())
+                    break;
+
+                yield return response.deals;
+
+                if (response.deals.Count < limit)
+                    break;
+
+                offset += limit;
+            }
+        }
+
+        private IEnumerable<object> GetUrlMappings(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetUrlMappingsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetTemplates(HubSpotClient client)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetTemplatesAsync(limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetEngagements(HubSpotClient client)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetEngagementsAsync(limit, offset).Result;
+
+                if (response?.results == null || !response.results.Any())
+                    break;
+
+                yield return response.results;
+
+                if (response.results.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetSiteMaps(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetSiteMapsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetBlogPosts(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetBlogPostsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetDomains(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetDomainsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetBlogTopics(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetBlogTopicsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetBlogs(HubSpotClient client, CrawlJobData jobData)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetBlogsAsync(jobData.LastCrawlFinishTime, limit, offset).Result;
+
+                if (response?.objects == null || !response.objects.Any())
+                    break;
+
+                yield return response.objects;
+
+                if (response.objects.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetDynamicContactLists(HubSpotClient client)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetDynamicContactListsAsync(limit, offset).Result;
+
+                if (response?.lists == null || !response.lists.Any())
+                    break;
+
+                yield return response.lists;
+
+                if (response.hasMore == false || response.lists.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetStaticContactLists(HubSpotClient client)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetStaticContactListsAsync(limit, offset).Result;
+
+                if (response?.lists == null || !response.lists.Any())
+                    break;
+
+                yield return response.lists;
+
+                if (response.hasMore == false || response.lists.Count < limit || response.offset == null)
+                    break;
+
+                offset = response.offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetContactsAndAssociatedObjects(HubSpotClient client, List<string> properties, Settings settings)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetContactsFromAllListsAsync(properties, limit, offset).Result;
+
+                if (response?.contacts == null || !response.contacts.Any())
+                    break;
+
+                foreach (var contact in response.contacts)
+                {
+
+                    if (contact.Vid.HasValue)
+                    {
+                        var engagements = client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result;
+                        foreach (var engagement in engagements)
+                        {
+                            yield return engagement;
+                        }
+                    }
+
+                    yield return contact;
+                }
+
+                if (response.hasMore == false || response.contacts.Count < limit || response.vidOffset == null)
+                    break;
+
+                offset = response.vidOffset.Value;
+            }
         }
 
         private IEnumerable<object> GetDealsAndAssociatedObjects(HubSpotClient client, IList<string> properties, Settings settings)
