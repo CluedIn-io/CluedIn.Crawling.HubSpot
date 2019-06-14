@@ -1,27 +1,26 @@
 using System;
-using System.Net;
 using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Data.Parts;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 
 using CluedIn.Crawling.HubSpot.Vocabularies;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Core.Utilities;
+using CluedIn.Crawling.HubSpot.Infrastructure;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class BlogPostClueProducer : BaseClueProducer<BlogPost>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private IHubSpotImageFetcher _imageFetcher;
 
-        public BlogPostClueProducer(IClueFactory factory, ILogger log)
+        public BlogPostClueProducer(IClueFactory factory, IHubSpotImageFetcher imageFetcher)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-            _log = log ?? throw new ArgumentNullException(nameof(log));
+            _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
         }
 
         protected override Clue MakeClueImpl(BlogPost input, Guid accountId)
@@ -103,7 +102,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.featured_image != null)
             {
-                var previewImagePart = FetchPreviewImage(input, clue);
+                var previewImagePart = _imageFetcher.FetchAsRawDataPart(input.featured_image, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                 if (previewImagePart != null)
                 {
                     clue.Details.RawData.Add(previewImagePart);
@@ -114,34 +113,5 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             return clue;
         }
 
-        private RawDataPart FetchPreviewImage(BlogPost input, Clue clue)
-        {
-            RawDataPart rawDataPart = null;
-            try
-            {
-                using (var webClient = new WebClient())
-                using (var stream = webClient.OpenRead(input.featured_image))
-                {
-                    var inArray = StreamUtilies.ReadFully(stream);
-                    if (inArray != null)
-                    {
-                        rawDataPart = new RawDataPart()
-                        {
-                            Type = "/RawData/PreviewImage",
-                            MimeType = CluedIn.Core.FileTypes.MimeType.Jpeg.Code,
-                            FileName = "preview_{0}".FormatWith(clue.OriginEntityCode.Key),
-                            RawDataMD5 = FileHashUtility.GetMD5Base64String(inArray),
-                            RawData = Convert.ToBase64String(inArray)
-                        };
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                _log.Warn(() => "Could not download HubSpot Blog Post thumbnail", exception);
-            }
-
-            return rawDataPart;
-        }
     }
 }
