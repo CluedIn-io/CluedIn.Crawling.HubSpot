@@ -114,10 +114,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
 
             //TODO
-            //if (input.item_layout_id != null)
-            //    this.factory.CreateEntityReference(clue, EntityType.Template, EntityEdgeType.IsType, input, s => s.item_layout_id.Value.ToString());
+            if (input.item_layout_id != null)
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Template, EntityEdgeType.IsType, input.item_layout_id.Value.ToString());
 
-
+            //_factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, )
 
             return clue;
         }

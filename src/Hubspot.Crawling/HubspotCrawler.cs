@@ -29,13 +29,13 @@ namespace CluedIn.Crawling.HubSpot
             var settings = client.GetSettingsAsync().Result;
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
-            yield return GetCompaniesAndAssociatedObjects(client, companyProperties, settings);
+            yield return GetCompaniesAndAssociatedObjects(client, hubspotcrawlJobData, companyProperties, settings);
             
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
             yield return GetDealsAndAssociatedObjects(client, dealProperties, settings);
 
             var contactProperties = client.GetContactPropertiesAsync(settings).Result;
-            yield return GetContactsAndAssociatedObjects(client, contactProperties, settings);
+            yield return GetContactsAndAssociatedObjects(client, contactProperties);
 
             yield return GetDynamicContactLists(client);
             yield return client.GetFormsAsync().Result;
@@ -59,6 +59,15 @@ namespace CluedIn.Crawling.HubSpot
             yield return GetBlogTopics(client, jobData);
             yield return GetDomains(client, jobData);
             yield return GetBroadcastMessages(client, jobData);
+
+            var productProperties = client.GetProductPropertiesAsync(settings).Result;
+            yield return GetProducts(client, productProperties);
+
+            var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;
+            yield return GetLineItemsAndAssociatedObjects(client, lineItemProperties);
+
+            var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;
+            yield return GetTicketsAndAssociatedObjects(client, ticketProperties);
         }
 
         private IEnumerable<object> GetFiles(HubSpotClient client, CrawlJobData jobData)
@@ -397,7 +406,28 @@ namespace CluedIn.Crawling.HubSpot
             }
         }
 
-        private IEnumerable<object> GetContactsAndAssociatedObjects(HubSpotClient client, List<string> properties, Settings settings)
+        private IEnumerable<object> GetDealAssociations(HubSpotClient client, int objectId)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 20;
+                var response = client.GetDealAssociationsAsync(objectId, limit, offset).Result;
+
+                if (response?.Results == null || !response.Results.Any())
+                    break;
+
+                yield return response.Results;
+
+                if (response.HasMore == false || response.Results.Count < limit)
+                    break;
+
+                offset = response.Offset;
+            }
+        }
+
+        private IEnumerable<object> GetContactsAndAssociatedObjects(HubSpotClient client, List<string> properties)
         {
             int offset = 0;
 
@@ -415,10 +445,7 @@ namespace CluedIn.Crawling.HubSpot
                     if (contact.Vid.HasValue)
                     {
                         var engagements = client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result;
-                        foreach (var engagement in engagements)
-                        {
-                            yield return engagement;
-                        }
+                        yield return engagements;
                     }
 
                     yield return contact;
@@ -428,6 +455,85 @@ namespace CluedIn.Crawling.HubSpot
                     break;
 
                 offset = response.vidOffset.Value;
+            }
+        }
+        private IEnumerable<object> GetLineItemsAndAssociatedObjects(HubSpotClient client, List<string> properties)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetLineItemsAsync(properties, limit, offset).Result;
+
+                if (response?.Objects == null || !response.Objects.Any())
+                    break;
+
+                foreach (var lineItem in response.Objects)
+                {
+                    if (lineItem.ObjectId.HasValue)
+                    {
+                        yield return GetDealAssociations(client, lineItem.ObjectId.Value);
+                    }
+
+                    yield return lineItem;
+                }
+
+                if (response.HasMore == false || response.Objects.Count < limit || response.Offset == null)
+                    break;
+
+                offset = response.Offset.Value;
+            }
+        }
+
+        private IEnumerable<object> GetTicketsAndAssociatedObjects(HubSpotClient client, List<string> properties)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetTicketsAsync(properties, limit, offset).Result;
+
+                if (response?.Objects == null || !response.Objects.Any())
+                    break;
+
+                foreach (var ticket in response.Objects)
+                {
+                    if (ticket.ObjectId.HasValue)
+                    {
+                        yield return GetDealAssociations(client, ticket.ObjectId.Value);
+                    }
+
+                    yield return ticket;
+                }
+
+                if (response.HasMore == false || response.Objects.Count < limit || response.Offset == null)
+                    break;
+
+                offset = response.Offset.Value;
+            }
+        }
+        
+        private IEnumerable<object> GetProducts(HubSpotClient client, List<string> properties)
+        {
+            int offset = 0;
+
+            while (true)
+            {
+                var limit = 100;
+                var response = client.GetProductsAsync(properties, limit, offset).Result;
+
+                if (response?.Objects == null || !response.Objects.Any())
+                    break;
+
+                yield return response.Objects;
+      
+
+                if (response.Objects.Count < limit || response.Offset == null)
+                    break;
+
+                offset = response.Offset.Value;
             }
         }
 
@@ -452,10 +558,7 @@ namespace CluedIn.Crawling.HubSpot
                     if (deal.dealId.HasValue)
                     {
                         var engagements = client.GetEngagementByIdAndTypeAsync(deal.dealId.Value, "DEAL").Result;
-                        foreach (var engagement in engagements)
-                        {
-                            yield return engagement;
-                        }
+                        yield return engagements;
                     }
 
                     yield return deal;
@@ -468,7 +571,7 @@ namespace CluedIn.Crawling.HubSpot
             }
         }
 
-        private static IEnumerable<object> GetCompaniesAndAssociatedObjects(HubSpotClient client, List<string> companyProperties, Settings settings)
+        private static IEnumerable<object> GetCompaniesAndAssociatedObjects(HubSpotClient client, HubSpotCrawlJobData jobData, List<string> companyProperties, Settings settings)
         {
             int offset = 0;
             long portalId = 0;
@@ -493,16 +596,10 @@ namespace CluedIn.Crawling.HubSpot
                     if (company.companyId.HasValue)
                     {
                         var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
-                        foreach (var contact in contacts.contacts)
-                        {
-                            yield return contact;
-                        }
+                        yield return contacts;
 
                         var engagements = client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
-                        foreach (var engagement in engagements)
-                        {
-                            yield return engagement;
-                        }
+                        yield return engagements;
                     }
                 }
 
@@ -514,10 +611,48 @@ namespace CluedIn.Crawling.HubSpot
             }
 
             // TODO Is this correct? Just get deal pipelines for last company portal id?
-            var dealPipelines = client.GetDealPipelinesAsync(portalId).Result;
+            var dealPipelines = client.GetDealPipelinesAsync().Result;
             foreach (var dealPipeline in dealPipelines)
             {
-                yield return dealPipeline;
+                dealPipeline.portalId = portalId;
+            }
+            yield return dealPipelines;
+
+            var tables = client.GetTablesAsync().Result;
+            foreach (var table in tables)
+            {
+                table.PortalId = portalId;
+                yield return GetTableRows(client, jobData, table, portalId);
+            }
+            yield return tables;
+        }
+
+        private static IEnumerable<object> GetTableRows(HubSpotClient client, HubSpotCrawlJobData jobData, Table table, long portalId)
+        {
+            int offset = 0;
+            int count = 0;
+            while (true)
+            {
+                var dateColumn = table.columns.Find(c => c.type == "DATE");
+                var limit = 500;
+                var response = client.GetTableRowsAsync(jobData.LastCrawlFinishTime, table.id, dateColumn, portalId, limit, offset).Result;
+
+                if (response.Objects == null || !response.Objects.Any())
+                    break;
+
+                foreach (var row in response.Objects)
+                {
+                    row.Columns = table.columns;
+                    row.Table = table.id;
+                    yield return row;
+                }
+
+                count += 500;
+
+                if (response.Total < count || response.TotalCount < count)
+                    break;
+
+                offset = response.Offset;
             }
         }
     }

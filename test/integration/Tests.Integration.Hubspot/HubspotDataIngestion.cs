@@ -19,8 +19,6 @@ namespace Tests.Integration.HubSpot
 
         [Theory(Skip = "Failing Integration Test")]
         [InlineData("/Provider/Root", 1)]
-        [InlineData("/Files/Directory", 1)]
-        [InlineData("/Files/File", 2)]
         public void CorrectNumberOfEntityTypes(string entityType, int expectedCount)
         {
             var foundCount = _fixture.ClueStorage.CountOfType(entityType);

@@ -220,6 +220,54 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             return await GetAsync<CompanyResponse>("companies/v2/companies/paged", queryStrings);
         }
 
+        public async Task<List<string>> GetProductPropertiesAsync(Settings settings)
+        {
+            var items = await GetAsync<List<PropertyDefinition>>("properties/v1/contacts/properties");
+
+            return items.Select(s => s.Name).ToList();
+        }
+
+        public async Task<ProductResponse> GetProductsAsync(IList<string> properties, int limit = 100, int offset = 0)
+        {
+            var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
+            queryStrings.Insert(0, new QueryStringParameter("offset", offset));
+            queryStrings.Insert(0, new QueryStringParameter("limit", limit));
+
+            return await GetAsync<ProductResponse>("crm-objects/v1/objects/products/paged", queryStrings);
+        }
+
+        public async Task<List<string>> GetLineItemPropertiesAsync(Settings settings)
+        {
+            var items = await GetAsync<List<PropertyDefinition>>("properties/v2/line_items/properties");
+
+            return items.Select(s => s.Name).ToList();
+        }
+
+        public async Task<LineItemResponse> GetLineItemsAsync(IList<string> properties, int limit = 100, int offset = 0)
+        {
+            var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
+            queryStrings.Insert(0, new QueryStringParameter("offset", offset));
+            queryStrings.Insert(0, new QueryStringParameter("limit", limit));
+
+            return await GetAsync<LineItemResponse>("crm-objects/v1/objects/LineItems/paged", queryStrings);
+        }
+
+        public async Task<List<string>> GetTicketPropertiesAsync(Settings settings)
+        {
+            var items = await GetAsync<List<PropertyDefinition>>("properties/v2/tickets/properties");
+
+            return items.Select(s => s.Name).ToList();
+        }
+
+        public async Task<TicketResponse> GetTicketsAsync(IList<string> properties, int limit = 100, int offset = 0)
+        {
+            var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
+            queryStrings.Insert(0, new QueryStringParameter("offset", offset));
+            queryStrings.Insert(0, new QueryStringParameter("limit", limit));
+
+            return await GetAsync<TicketResponse>("crm-objects/v1/objects/tickets/paged", queryStrings);
+        }
+
         public async Task<ContactListResponse> GetDynamicContactListsAsync(int limit = 20, int offset = 0) =>
             await GetAsync<ContactListResponse>("contacts/v1/lists/dynamic", new List<QueryStringParameter>
             {
@@ -229,6 +277,14 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         public async Task<ContactListResponse> GetStaticContactListsAsync(int limit = 20, int offset = 0) =>
             await GetAsync<ContactListResponse>("contacts/v1/lists/Static", new List<QueryStringParameter>
+            {
+                new QueryStringParameter("offset", offset),
+                new QueryStringParameter("limit", limit)
+            });
+        
+
+        public async Task<AssociationResponse> GetDealAssociationsAsync(int objectId, int limit = 100, int offset = 0) =>
+            await GetAsync<AssociationResponse>($"crm-associations/v1/associations/{objectId}/HUBSPOT_DEFINED/20", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
@@ -365,8 +421,28 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 new QueryStringParameter("created__gt", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
             });
 
+        public async Task<RowResponse> GetTableRowsAsync(DateTimeOffset greaterThanEpoch, long tableId, Column dateColumn, long portalId, int limit = 20, int offset = 0)
+        {
+            var queryStrings = new List<QueryStringParameter>
+            {
+                new QueryStringParameter("offset", offset),
+                new QueryStringParameter("limit", limit),
+                new QueryStringParameter("portalId", portalId),
+            };
+
+            if (dateColumn != null)
+            {
+                queryStrings.Add(new QueryStringParameter(dateColumn.name + "__gte", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch)));
+            }
+
+            return await GetAsync<RowResponse>($"hubdb/api/v2/tables/{tableId}/rows", queryStrings);
+        }
+
         public async Task<List<Form>> GetFormsAsync() =>
             await GetAsync<List<Form>>("forms/v2/forms");
+
+        public async Task<List<Table>> GetTablesAsync() =>
+            await GetAsync<List<Table>>("hubdb/api/v2/tables");
 
         public async Task<List<WorkflowsResponse>> GetWorkflowsAsync() =>
             await GetAsync<List<WorkflowsResponse>>("automation/v3/workflows");
@@ -382,14 +458,9 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         public async Task<List<KeywordResponse>> GetKeywordsAsync() =>
             await GetAsync<List<KeywordResponse>>("keywords/v2/keywords");
-            
-        public async Task<CompanyResponse> GetRecentlyCreatedCompaniesAsync(int count = 100, int offset = 0) =>
-                throw new NotImplementedException();
-        public async Task<CompanyResponse> GetRecentlyModifiedCompaniesAsync(int count = 100, int offset = 0) =>
-                throw new NotImplementedException();
 
-        public async Task<List<DealPipeline>> GetDealPipelinesAsync(long portalId) =>
-                throw new NotImplementedException();
+        public async Task<List<DealPipeline>> GetDealPipelinesAsync() =>
+            await GetAsync<List<DealPipeline>>("deals/v1/pipelines");
 
         public async Task<ContactResponse> GetContactsByCompanyAsync(long companyId) =>
             await GetAsync<ContactResponse>($"companies/v2/companies/{companyId}/contacts");
