@@ -6,7 +6,6 @@ using CluedIn.Crawling.Helpers;
 
 using CluedIn.Crawling.HubSpot.Vocabularies;
 using CluedIn.Crawling.HubSpot.Core.Models;
-using RuleConstants = CluedIn.Core.Constants.Validation.Rules;
 using CluedIn.Core.Utilities;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -116,9 +115,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             //TODO
             if (input.item_layout_id != null)
                 _factory.CreateOutgoingEntityReference(clue, EntityType.Template, EntityEdgeType.IsType, input.item_layout_id.Value.ToString());
-
-            //_factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, )
-
+                
             return clue;
         }
 
