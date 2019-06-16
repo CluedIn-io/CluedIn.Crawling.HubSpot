@@ -19,57 +19,57 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        protected override Clue MakeClueImpl(Deal value, Guid accountId)
+        protected override Clue MakeClueImpl(Deal input, Guid accountId)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
             // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, value.dealId.ToString(), accountId);
+            var clue = _factory.Create(EntityType.News, input.dealId.ToString(), accountId);
 
             // TODO: Populate clue data
             var data = clue.Data.EntityData;
 
-            data.Name = value.dealId.Value.ToString(CultureInfo.InvariantCulture);
+            data.Name = input.dealId.Value.ToString(CultureInfo.InvariantCulture);
 
-            if (value.associations != null)
+            if (input.associations != null)
             {
-                if (value.associations != null)
-                    foreach (var company in value.associations.associatedCompanyIds)
+                if (input.associations != null)
+                    foreach (var company in input.associations.associatedCompanyIds)
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, value, s => company.ToString());
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
                     }
-                if (value.associations.associatedCompanyIds != null)
-                    foreach (var company in value.associations.associatedCompanyIds)
+                if (input.associations.associatedCompanyIds != null)
+                    foreach (var company in input.associations.associatedCompanyIds)
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, value, s => company.ToString());
-                    }
-
-                if (value.associations.associatedDealIds != null)
-                    foreach (var company in value.associations.associatedDealIds)
-                    {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, value, s => company.ToString());
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
                     }
 
-                if (value.associations.associatedVids != null)
-                    foreach (var company in value.associations.associatedVids)
+                if (input.associations.associatedDealIds != null)
+                    foreach (var company in input.associations.associatedDealIds)
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, value, s => company.ToString());
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, s => company.ToString());
+                    }
+
+                if (input.associations.associatedVids != null)
+                    foreach (var company in input.associations.associatedVids)
+                    {
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, input, s => company.ToString());
                     }
             }
-            if (value.portalId != null)
+            if (input.portalId != null)
             {
                 if (data.OutgoingEdges.Count == 0)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, value, s => s.portalId.ToString(), s => "Hubspot");
+                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "Hubspot");
                 }
-                string url = string.Format("https://app.hubspot.com/sales/{0}/deal/{1}/", value.portalId, value.dealId);
+                string url = string.Format("https://app.hubspot.com/sales/{0}/deal/{1}/", input.portalId, input.dealId);
                 data.Uri = new Uri(url);
             }
 
-            if (value.properties != null)
+            if (input.properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(value.properties));
+                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.properties));
 
                 foreach (var property in allProperties)
                 {
@@ -123,8 +123,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "amount")
                     {
-                        if (value.Currency != null && !string.IsNullOrEmpty(val))
-                            val = val + value.Currency;
+                        if (input.Currency != null && !string.IsNullOrEmpty(val))
+                            val = val + input.Currency;
                         data.Properties[HubSpotVocabulary.Deal.DealInformationAmount] = val;
                     }
                     else if (property.Key == "dealstage")
@@ -166,7 +166,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "hubspot_owner_id")
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, value, s => val.ToString());
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => val.ToString());
                     }
                     else if (property.Key == "notes_last_contacted")
                     {

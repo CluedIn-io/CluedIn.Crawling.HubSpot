@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Data.Parts;
@@ -24,32 +23,32 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
         }
 
-        protected override Clue MakeClueImpl(Company value, Guid accountId)
+        protected override Clue MakeClueImpl(Company input, Guid accountId)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
             // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, value.companyId.ToString(), accountId);
+            var clue = _factory.Create(EntityType.News, input.companyId.ToString(), accountId);
 
             // TODO: Populate clue data
             var data = clue.Data.EntityData;
 
-            data.Name = value.companyId.PrintIfAvailable();
+            data.Name = input.companyId.PrintIfAvailable();
 
-            if (value.portalId != null)
-                data.Uri = new Uri($"https://app.hubspot.com/sales/{value.portalId}/company/{value.companyId}/");
+            if (input.portalId != null)
+                data.Uri = new Uri($"https://app.hubspot.com/sales/{input.portalId}/company/{input.companyId}/");
 
-            data.Properties[HubSpotVocabulary.Company.CompanyId] = value.companyId.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.Company.IsDeleted] = value.isDeleted.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.Company.PortalId] = value.portalId.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.Company.CompanyId] = input.companyId.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.Company.IsDeleted] = input.isDeleted.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.Company.PortalId] = input.portalId.PrintIfAvailable();
 
-            if (value.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, value, s => value.portalId.Value.ToString(), s => "HubSpot");
+            if (input.portalId != null)
+                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => input.portalId.Value.ToString(), s => "HubSpot");
 
-            if (value.properties != null)
+            if (input.properties != null)
             {
-                var properties = JsonUtility.Deserialize<Dictionary<string, Property>>(JsonUtility.Serialize(value.properties));
+                var properties = JsonUtility.Deserialize<Dictionary<string, Property>>(JsonUtility.Serialize(input.properties));
 
                 foreach (var property in properties)
                 {
@@ -264,8 +263,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "total_revenue")
                     {
-                        if (value.Currency != null && !string.IsNullOrEmpty(property.Value.Value))
-                            property.Value.Value = property.Value.Value + value.Currency;
+                        if (input.Currency != null && !string.IsNullOrEmpty(property.Value.Value))
+                            property.Value.Value = property.Value.Value + input.Currency;
                         data.Properties[HubSpotVocabulary.Company.CompanyInformationTotalRevenue] = property.Value.Value;
                     }
                     else if (property.Key == "name")
@@ -341,7 +340,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_id")
                     {
                         if (property.Value != null)
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, value, s => property.Value.Value.ToString());
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => property.Value.Value.ToString());
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
@@ -395,8 +394,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "annualrevenue")
                     {
-                        if (value.Currency != null && !string.IsNullOrEmpty(property.Value.Value))
-                            property.Value.Value = property.Value.Value + value.Currency;
+                        if (input.Currency != null && !string.IsNullOrEmpty(property.Value.Value))
+                            property.Value.Value = property.Value.Value + input.Currency;
                         data.Properties[HubSpotVocabulary.Company.CompanyInformationAnnualRevenue] = property.Value.Value;
                     }
                     else if (property.Key == "lifecyclestage")

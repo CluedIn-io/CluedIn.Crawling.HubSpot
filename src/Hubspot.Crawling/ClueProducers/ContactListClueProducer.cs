@@ -18,34 +18,34 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        protected override Clue MakeClueImpl(ContactList value, Guid accountId)
+        protected override Clue MakeClueImpl(ContactList input, Guid accountId)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
             // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, value.listId.ToString(), accountId);
+            var clue = _factory.Create(EntityType.News, input.listId.ToString(), accountId);
 
             // TODO: Populate clue data
             var data = clue.Data.EntityData;
 
-            data.Name = value.name;
+            data.Name = input.name;
 
-            if (value.createdAt != null)
-                data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(value.createdAt.Value);
+            if (input.createdAt != null)
+                data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(input.createdAt.Value);
 
-            if (value.updatedAt != null)
-                data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(value.updatedAt.Value);
+            if (input.updatedAt != null)
+                data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(input.updatedAt.Value);
 
-            data.Properties[HubSpotVocabulary.ContactList.Deleted] = value.deleted.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.Dynamic] = value.dynamic.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.Filters] = value.filters.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
-            data.Properties[HubSpotVocabulary.ContactList.InternalListId] = value.internalListId.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.ListId] = value.listId.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.MetaData] = value.metaData.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.ContactList.Deleted] = input.deleted.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.ContactList.Dynamic] = input.dynamic.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.ContactList.Filters] = input.filters.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.ContactList.InternalListId] = input.internalListId.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.ContactList.ListId] = input.listId.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.ContactList.MetaData] = input.metaData.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
 
-            if (value.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, value, s => s.portalId.Value.ToString(), s => "HubSpot");
+            if (input.portalId != null)
+                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(), s => "HubSpot");
 
 
             return clue;

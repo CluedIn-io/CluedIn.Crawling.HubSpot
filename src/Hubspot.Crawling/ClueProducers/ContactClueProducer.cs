@@ -24,36 +24,36 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
         }
 
-        protected override Clue MakeClueImpl(Contact value, Guid accountId)
+        protected override Clue MakeClueImpl(Contact input, Guid accountId)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
             // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, value.Vid.ToString(), accountId);
+            var clue = _factory.Create(EntityType.News, input.Vid.ToString(), accountId);
 
             // TODO: Populate clue data
             var data = clue.Data.EntityData;
 
-            data.Name = value.ProfileUrl;
+            data.Name = input.ProfileUrl;
 
-            if (value.AddedAt != null)
+            if (input.AddedAt != null)
             {
-                data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(value.AddedAt.Value);
+                data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(input.AddedAt.Value);
             }
 
-            if (value.CanonicalVid != null)
-                data.Properties[HubSpotVocabulary.Contact.CanonicalVid] = value.CanonicalVid.Value.ToString(CultureInfo.InvariantCulture);
-            if (value.FormSubmissions != null)
+            if (input.CanonicalVid != null)
+                data.Properties[HubSpotVocabulary.Contact.CanonicalVid] = input.CanonicalVid.Value.ToString(CultureInfo.InvariantCulture);
+            if (input.FormSubmissions != null)
             {
-                data.Properties[HubSpotVocabulary.Contact.FormSubmissions] = JsonUtility.Serialize(value.FormSubmissions);
+                data.Properties[HubSpotVocabulary.Contact.FormSubmissions] = JsonUtility.Serialize(input.FormSubmissions);
             }
 
-            if (value.IdentityProfiles != null)
+            if (input.IdentityProfiles != null)
             {
                 try
                 {
-                    var identity = JsonUtility.Deserialize<IEnumerable<IdentityProfile>>(JsonUtility.Serialize(value.IdentityProfiles));
+                    var identity = JsonUtility.Deserialize<IEnumerable<IdentityProfile>>(JsonUtility.Serialize(input.IdentityProfiles));
 
                     foreach (var identiy in identity)
                     {
@@ -91,14 +91,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else if (property.type == "firstname")
                             {
-                                if (string.IsNullOrEmpty(value.FirstName))
-                                    value.FirstName = property.value;
+                                if (string.IsNullOrEmpty(input.FirstName))
+                                    input.FirstName = property.value;
                                 data.Properties[HubSpotVocabulary.Company.FirstName] = property.value;
                             }
                             else if (property.type == "lastname")
                             {
-                                if (string.IsNullOrEmpty(value.LastName))
-                                    value.LastName = property.value;
+                                if (string.IsNullOrEmpty(input.LastName))
+                                    input.LastName = property.value;
                                 data.Properties[HubSpotVocabulary.Company.LastName] = property.value;
                             }
                             else if (property.type == "company")
@@ -224,7 +224,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 catch (Exception)
                 {
-                    var identity = JsonUtility.Deserialize<IdentityHook>(JsonUtility.Serialize(value.IdentityProfiles));
+                    var identity = JsonUtility.Deserialize<IdentityHook>(JsonUtility.Serialize(input.IdentityProfiles));
                     foreach (var property in identity.identities.values)
                     {
                         if (property.type == "EMAIL")
@@ -251,14 +251,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "firstname")
                         {
-                            if (string.IsNullOrEmpty(value.FirstName))
-                                value.FirstName = property.value;
+                            if (string.IsNullOrEmpty(input.FirstName))
+                                input.FirstName = property.value;
                             data.Properties[HubSpotVocabulary.Company.FirstName] = property.value;
                         }
                         else if (property.type == "lastname")
                         {
-                            if (string.IsNullOrEmpty(value.LastName))
-                                value.LastName = property.value;
+                            if (string.IsNullOrEmpty(input.LastName))
+                                input.LastName = property.value;
                             data.Properties[HubSpotVocabulary.Company.LastName] = property.value;
                         }
                         else if (property.type == "company")
@@ -339,12 +339,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "createddate")
                         {
-                            if (long.TryParse(property.value.ToString(), out long created))
+                            if (long.TryParse(property.value, out long created))
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(created);
                         }
                         else if (property.type == "lastmodifieddate")
                         {
-                            if (long.TryParse(property.value.ToString(), out long modified))
+                            if (long.TryParse(property.value, out long modified))
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(modified);
                         }
                         else
@@ -355,9 +355,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
             }
 
-            if (value.IsContact == true && value.Properties != null)
+            if (input.IsContact == true && input.Properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(value.Properties));
+                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
 
                 foreach (var property in allProperties)
                 {
@@ -581,14 +581,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "firstname")
                     {
-                        if (string.IsNullOrEmpty(value.FirstName))
-                            value.FirstName = (string)property.Value.First;
+                        if (string.IsNullOrEmpty(input.FirstName))
+                            input.FirstName = (string)property.Value.First;
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationFirstName] = val;
                     }
                     else if (property.Key == "lastname")
                     {
-                        if (string.IsNullOrEmpty(value.LastName))
-                            value.LastName = (string)property.Value.First;
+                        if (string.IsNullOrEmpty(input.LastName))
+                            input.LastName = (string)property.Value.First;
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationLastName] = val;
                     }
                     else if (property.Key == "hs_analytics_first_url")
@@ -687,7 +687,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationHubSpotOwner] = val;
                         if ((string)property.Value.First != null)
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, value, s => (string)property.Value.First);
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => (string)property.Value.First);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
@@ -735,7 +735,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, value, s => (string)property.Value.First);
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, input, s => (string)property.Value.First);
                         }
                     }
                     else if (property.Key == "linkedinbio")
@@ -798,7 +798,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "photo")
                     {
                         data.Properties[HubSpotVocabulary.Contact.SocialMediaInformationPhoto] = val;
-                        value.Photo = (string)property.Value.First;
+                        input.Photo = (string)property.Value.First;
                     }
                     else if (property.Key == "closedate")
                     {
@@ -898,7 +898,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, value, s => val);
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => val);
                         }
                     }
                     else if (property.Key == "associatedcompanylastupdated")
