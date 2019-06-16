@@ -38,6 +38,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             clue.Details.RawData.Add(rawDataPart);
 
             clue.Data.EntityData.PreviewImage = new ImageReferencePart(rawDataPart, 128, 128);
+            clue.Data.EntityData.Properties.Add("Created", DateTime.Now.ToString());
 
             return clue;
         }

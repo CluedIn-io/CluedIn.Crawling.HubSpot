@@ -21,7 +21,7 @@ namespace CluedIn.Crawling.HubSpot
             var hubspotcrawlJobData = jobData as HubSpotCrawlJobData;
             if (hubspotcrawlJobData == null)
             {
-                yield break;
+                return Enumerable.Empty<object>();
             }
 
             var client = _clientFactory.CreateNew(hubspotcrawlJobData);
@@ -29,45 +29,49 @@ namespace CluedIn.Crawling.HubSpot
             var settings = client.GetSettingsAsync().Result;
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
-            yield return GetCompaniesAndAssociatedObjects(client, hubspotcrawlJobData, companyProperties, settings);
-            
+
+            var data = new List<object>();
+            data.AddRange(GetCompaniesAndAssociatedObjects(client, hubspotcrawlJobData, companyProperties, settings));
+
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
-            yield return GetDealsAndAssociatedObjects(client, dealProperties, settings);
+            data.AddRange(GetDealsAndAssociatedObjects(client, dealProperties, settings));
 
             var contactProperties = client.GetContactPropertiesAsync(settings).Result;
-            yield return GetContactsAndAssociatedObjects(client, contactProperties);
+            data.AddRange(GetContactsAndAssociatedObjects(client, contactProperties));
 
-            yield return GetDynamicContactLists(client);
-            yield return client.GetFormsAsync().Result;
-            yield return client.GetKeywordsAsync().Result;
-            yield return client.GetOwnersAsync().Result;
-            yield return client.GetPublishingChannelsAsync().Result;
-            yield return GetFiles(client, jobData);
-            yield return GetSiteMaps(client, jobData);
-            yield return GetTemplates(client);
-            yield return GetUrlMappings(client, jobData);
-            yield return GetEngagements(client);
-            yield return GetRecentDeals(client, jobData);
-            yield return GetRecentlyCreatedDeals(client, jobData);
-            yield return client.GetSmtpTokensAsync().Result;
-            yield return GetSocialCalendarEvents(client, jobData);
-            yield return GetStaticContactLists(client);
-            yield return GetTaskCalendarEvents(client, jobData);
-            yield return client.GetWorkflowsAsync().Result;
-            yield return GetBlogPosts(client, jobData);
-            yield return GetBlogs(client, jobData);
-            yield return GetBlogTopics(client, jobData);
-            yield return GetDomains(client, jobData);
-            yield return GetBroadcastMessages(client, jobData);
+            data.AddRange(GetDynamicContactLists(client));
+            data.AddRange(client.GetFormsAsync().Result);
+            // yield return client.GetKeywordsAsync().Result; TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
+            data.AddRange(client.GetOwnersAsync().Result);
+            //yield return client.GetPublishingChannelsAsync().Result;  TODO Returns Http Forbidden code
+            data.AddRange(GetFiles(client, jobData));
+            data.AddRange(GetSiteMaps(client, jobData));
+            data.AddRange(GetTemplates(client));
+            data.AddRange(GetUrlMappings(client, jobData));
+            data.AddRange(GetEngagements(client));
+            data.AddRange(GetRecentDeals(client, jobData));
+            data.AddRange(GetRecentlyCreatedDeals(client, jobData));
+            //yield return client.GetSmtpTokensAsync().Result; TODO Returns Http Forbidden code
+            data.AddRange(GetSocialCalendarEvents(client, jobData));
+            data.AddRange(GetStaticContactLists(client));
+            data.AddRange(GetTaskCalendarEvents(client, jobData));
+            //yield return client.GetWorkflowsAsync().Result; TODO Returns Http Forbidden code
+            data.AddRange(GetBlogPosts(client, jobData));
+            data.AddRange(GetBlogs(client, jobData));
+            data.AddRange(GetBlogTopics(client, jobData));
+            data.AddRange(GetDomains(client, jobData));
+            data.AddRange(GetBroadcastMessages(client, jobData));
 
             var productProperties = client.GetProductPropertiesAsync(settings).Result;
-            yield return GetProducts(client, productProperties);
+            data.AddRange(GetProducts(client, productProperties));
 
             var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;
-            yield return GetLineItemsAndAssociatedObjects(client, lineItemProperties);
+            data.AddRange(GetLineItemsAndAssociatedObjects(client, lineItemProperties));
 
             var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;
-            yield return GetTicketsAndAssociatedObjects(client, ticketProperties);
+            data.AddRange(GetTicketsAndAssociatedObjects(client, ticketProperties));
+
+            return data;
         }
 
         private IEnumerable<object> GetFiles(HubSpotClient client, CrawlJobData jobData)
@@ -82,7 +86,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -90,7 +97,7 @@ namespace CluedIn.Crawling.HubSpot
                 offset = response.offset.Value;
             }
         }
-        
+
         private IEnumerable<object> GetSocialCalendarEvents(HubSpotClient client, CrawlJobData jobData)
         {
             int offset = 0;
@@ -103,7 +110,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response == null || !response.Any())
                     break;
 
-                yield return response;
+                foreach (var obj in response)
+                {
+                    yield return obj;
+                }
 
                 if (response.Count < limit)
                     break;
@@ -124,7 +134,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response == null || !response.Any())
                     break;
 
-                yield return response;
+                foreach (var obj in response)
+                {
+                    yield return obj;
+                }
 
                 if (response.Count < limit)
                     break;
@@ -145,7 +158,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.deals == null || !response.deals.Any())
                     break;
 
-                yield return response.deals;
+                foreach (var obj in response.deals)
+                {
+                    yield return obj;
+                }
 
                 if (response.deals.Count < limit)
                     break;
@@ -166,7 +182,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.deals == null || !response.deals.Any())
                     break;
 
-                yield return response.deals;
+                foreach (var obj in response.deals)
+                {
+                    yield return obj;
+                }
 
                 if (response.deals.Count < limit)
                     break;
@@ -187,7 +206,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.deals == null || !response.deals.Any())
                     break;
 
-                yield return response.deals;
+                foreach (var obj in response.deals)
+                {
+                    yield return obj;
+                }
 
                 if (response.deals.Count < limit)
                     break;
@@ -208,7 +230,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -229,7 +254,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -250,7 +278,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.results == null || !response.results.Any())
                     break;
 
-                yield return response.results;
+                foreach (var obj in response.results)
+                {
+                    yield return obj;
+                }
 
                 if (response.results.Count < limit || response.offset == null)
                     break;
@@ -271,7 +302,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -292,7 +326,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -313,7 +350,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -334,7 +374,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -355,7 +398,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.objects == null || !response.objects.Any())
                     break;
 
-                yield return response.objects;
+                foreach (var obj in response.objects)
+                {
+                    yield return obj;
+                }
 
                 if (response.objects.Count < limit || response.offset == null)
                     break;
@@ -376,7 +422,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.lists == null || !response.lists.Any())
                     break;
 
-                yield return response.lists;
+                foreach (var list in response.lists)
+                {
+                    yield return list;
+                }
 
                 if (response.hasMore == false || response.lists.Count < limit || response.offset == null)
                     break;
@@ -397,7 +446,11 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.lists == null || !response.lists.Any())
                     break;
 
-                yield return response.lists;
+                foreach (var list in response.lists)
+                {
+                    yield return list;
+                }
+                
 
                 if (response.hasMore == false || response.lists.Count < limit || response.offset == null)
                     break;
@@ -418,7 +471,10 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.Results == null || !response.Results.Any())
                     break;
 
-                yield return response.Results;
+                foreach (var result in response.Results)
+                {
+                    yield return result;
+                }
 
                 if (response.HasMore == false || response.Results.Count < limit)
                     break;
@@ -444,8 +500,10 @@ namespace CluedIn.Crawling.HubSpot
 
                     if (contact.Vid.HasValue)
                     {
-                        var engagements = client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result;
-                        yield return engagements;
+                        foreach (var engagement in client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result)
+                        {
+                            yield return engagement;
+                        }
                     }
 
                     yield return contact;
@@ -473,7 +531,10 @@ namespace CluedIn.Crawling.HubSpot
                 {
                     if (lineItem.ObjectId.HasValue)
                     {
-                        yield return GetDealAssociations(client, lineItem.ObjectId.Value);
+                        foreach (var dealAssociation in GetDealAssociations(client, lineItem.ObjectId.Value))
+                        {
+                            yield return dealAssociation;
+                        }
                     }
 
                     yield return lineItem;
@@ -502,7 +563,10 @@ namespace CluedIn.Crawling.HubSpot
                 {
                     if (ticket.ObjectId.HasValue)
                     {
-                        yield return GetDealAssociations(client, ticket.ObjectId.Value);
+                        foreach (var dealAssociation in GetDealAssociations(client, ticket.ObjectId.Value))
+                        {
+                            yield return dealAssociation;
+                        }
                     }
 
                     yield return ticket;
@@ -514,7 +578,7 @@ namespace CluedIn.Crawling.HubSpot
                 offset = response.Offset.Value;
             }
         }
-        
+
         private IEnumerable<object> GetProducts(HubSpotClient client, List<string> properties)
         {
             int offset = 0;
@@ -527,8 +591,12 @@ namespace CluedIn.Crawling.HubSpot
                 if (response?.Objects == null || !response.Objects.Any())
                     break;
 
-                yield return response.Objects;
-      
+                foreach (var obj in response.Objects)
+                {
+                    yield return obj;
+                }
+                
+
 
                 if (response.Objects.Count < limit || response.Offset == null)
                     break;
@@ -558,7 +626,12 @@ namespace CluedIn.Crawling.HubSpot
                     if (deal.dealId.HasValue)
                     {
                         var engagements = client.GetEngagementByIdAndTypeAsync(deal.dealId.Value, "DEAL").Result;
-                        yield return engagements;
+                        foreach (var engagement in engagements)
+                        {
+                            yield return engagement;
+                        }
+
+                        
                     }
 
                     yield return deal;
@@ -596,10 +669,16 @@ namespace CluedIn.Crawling.HubSpot
                     if (company.companyId.HasValue)
                     {
                         var contacts = client.GetContactsByCompanyAsync(company.companyId.Value).Result;
-                        yield return contacts;
+                        foreach (var contact in contacts.contacts)
+                        {
+                            yield return contact;
+                        }
 
                         var engagements = client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
-                        yield return engagements;
+                        foreach (var engagement in engagements)
+                        {
+                            yield return engagement;
+                        }
                     }
                 }
 
@@ -615,16 +694,22 @@ namespace CluedIn.Crawling.HubSpot
             foreach (var dealPipeline in dealPipelines)
             {
                 dealPipeline.portalId = portalId;
+                yield return dealPipeline;
             }
-            yield return dealPipelines;
+
 
             var tables = client.GetTablesAsync().Result;
             foreach (var table in tables)
             {
                 table.PortalId = portalId;
-                yield return GetTableRows(client, jobData, table, portalId);
+
+                yield return table;
+                foreach (var row in GetTableRows(client, jobData, table, portalId))
+                {
+                    yield return row;
+                }
             }
-            yield return tables;
+
         }
 
         private static IEnumerable<object> GetTableRows(HubSpotClient client, HubSpotCrawlJobData jobData, Table table, long portalId)

@@ -457,7 +457,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             await GetAsync<List<Owner>>("owners/v2/owners");
 
         public async Task<List<KeywordResponse>> GetKeywordsAsync() =>
-            await GetAsync<List<KeywordResponse>>("keywords/v2/keywords");
+            await GetAsync<List<KeywordResponse>>("keywords/v1/keywords");
 
         public async Task<List<DealPipeline>> GetDealPipelinesAsync() =>
             await GetAsync<List<DealPipeline>>("deals/v1/pipelines");
