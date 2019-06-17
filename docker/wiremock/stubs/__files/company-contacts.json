@@ -1,0 +1,118 @@
+{
+    "contacts": [
+        {
+            "identities": [
+                {
+                    "vid": 1,
+                    "identity": [
+                        {
+                            "value": "coolrobot@hubspot.com",
+                            "type": "EMAIL",
+                            "timestamp": 1517489641639,
+                            "isPrimary": true
+                        },
+                        {
+                            "value": "cd600696-7eac-4489-9a24-633d40a6fadd",
+                            "type": "LEAD_GUID",
+                            "timestamp": 1517489641714
+                        }
+                    ],
+                    "linkedVid": []
+                }
+            ],
+            "properties": [
+                {
+                    "name": "firstname",
+                    "value": "Cool",
+                    "sourceVid": []
+                },
+                {
+                    "name": "lastmodifieddate",
+                    "value": "1517489645750",
+                    "sourceVid": []
+                },
+                {
+                    "name": "company",
+                    "value": "HubSpot",
+                    "sourceVid": []
+                },
+                {
+                    "name": "lastname",
+                    "value": "Robot (Sample Contact)",
+                    "sourceVid": []
+                }
+            ],
+            "formSubmissions": [],
+            "listMembership": [],
+            "vid": 1,
+            "portalId": 4275951,
+            "isContact": true,
+            "vids": [],
+            "imports": [],
+            "publicToken": "AO_T-mO4yoqjAsKgczfKq3fGEeO9mrlz2uFQbymVWD49a4vNSt0QnwxdFH_aRS__dO3cXY9sYZafoGFJ8dIHxjqBrpHLhVDDz599BUGhjH2pLBPs1A9RXy3lJnnKuzL-S-ZPEk2NF7dv",
+            "canonicalVid": 1,
+            "mergeAudit": [],
+            "mergedVids": [],
+            "campaigns": [],
+            "stateChanges": []
+        },
+        {
+            "identities": [
+                {
+                    "vid": 51,
+                    "identity": [
+                        {
+                            "value": "bh@hubspot.com",
+                            "type": "EMAIL",
+                            "timestamp": 1517489641639,
+                            "isPrimary": true
+                        },
+                        {
+                            "value": "44828f59-c0d7-4149-a99f-47f479efcb4d",
+                            "type": "LEAD_GUID",
+                            "timestamp": 1517489641878
+                        }
+                    ],
+                    "linkedVid": []
+                }
+            ],
+            "properties": [
+                {
+                    "name": "firstname",
+                    "value": "Brian",
+                    "sourceVid": []
+                },
+                {
+                    "name": "lastmodifieddate",
+                    "value": "1517489649929",
+                    "sourceVid": []
+                },
+                {
+                    "name": "company",
+                    "value": "HubSpot",
+                    "sourceVid": []
+                },
+                {
+                    "name": "lastname",
+                    "value": "Halligan (Sample Contact)",
+                    "sourceVid": []
+                }
+            ],
+            "formSubmissions": [],
+            "listMembership": [],
+            "vid": 51,
+            "portalId": 4275951,
+            "isContact": true,
+            "vids": [],
+            "imports": [],
+            "publicToken": "AO_T-mOuVjB9EYjUeLF2r9R6UZvZtWlhNO8KF-fPyHUGe17Wugvcl6SsASEBhdlbtFur05mUq96ZXvfv0PgQCzzWtpeeouqUL0wzkPbti-qL1u3GadhoGhbjkui9IjWliTbIfF4x5z-O",
+            "canonicalVid": 51,
+            "mergeAudit": [],
+            "mergedVids": [],
+            "campaigns": [],
+            "stateChanges": []
+        }
+    ],
+    "vidOffset": 51,
+    "hasMore": false
+}

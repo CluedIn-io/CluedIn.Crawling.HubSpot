@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "properties/v1/contacts/properties"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "contacts-properties.json"
+  }
+}

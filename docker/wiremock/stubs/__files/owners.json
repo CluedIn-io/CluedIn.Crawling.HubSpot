@@ -1,0 +1,27 @@
+[
+    {
+        "portalId": 4275951,
+        "ownerId": 31308910,
+        "type": "PERSON",
+        "firstName": "Evropi",
+        "lastName": "Parlama",
+        "email": "emp@cluedin.com",
+        "createdAt": 1517489639568,
+        "updatedAt": 1559718319561,
+        "signature": "<div>jyfjfjh</div>",
+        "remoteList": [
+            {
+                "id": 26829235,
+                "portalId": 4275951,
+                "ownerId": 31308910,
+                "remoteId": "5305024",
+                "remoteType": "HUBSPOT",
+                "active": true
+            }
+        ],
+        "hasContactsAccess": false,
+        "activeUserId": 5305024,
+        "userIdIncludingInactive": 5305024,
+        "isActive": true
+    }
+]

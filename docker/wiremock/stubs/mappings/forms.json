@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "forms/v2/forms"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "forms.json"
+    }
+}

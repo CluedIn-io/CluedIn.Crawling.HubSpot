@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "url": "/engagements/v1/engagements/associated/COMPANY/686724251/paged"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "engagement-associated-company-paged.json"
+    }
+  }

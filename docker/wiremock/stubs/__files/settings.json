@@ -1,9 +1,7 @@
 {
-    "Settings": {
-        "portalId" : 1,
-        "timeZone" : "TODO",
-        "currency" : "TODO",
-        "utcOffsetMilliseconds" : 12345678,
-        "utcOffset" : "TODO"
-    }
+    "portalId": 4275951,
+    "timeZone": "US/Eastern",
+    "currency": "USD",
+    "utcOffsetMilliseconds": -14400000,
+    "utcOffset": "-04:00"
 }

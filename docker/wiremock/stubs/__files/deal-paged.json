@@ -1,0 +1,1111 @@
+{
+    "deals": [
+        {
+            "portalId": 4275951,
+            "dealId": 251941095,
+            "isDeleted": false,
+            "associations": {
+                "associatedVids": [],
+                "associatedCompanyIds": [],
+                "associatedDealIds": [],
+                "associatedTicketIds": []
+            },
+            "properties": {
+                "dealname": {
+                    "value": "Sample Deal Name",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealname",
+                            "value": "Sample Deal Name",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "closed_lost_reason": {
+                    "value": "This is a sample Closed Lost reason.",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "closed_lost_reason",
+                            "value": "This is a sample Closed Lost reason.",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "amount": {
+                    "value": "10000",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "amount",
+                            "value": "10000",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "closedate": {
+                    "value": "1451710800000",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "closedate",
+                            "value": "1451710800000",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_associated_contacts": {
+                    "value": "0",
+                    "timestamp": 1517489990895,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "num_associated_contacts",
+                            "value": "0",
+                            "timestamp": 1517489990895,
+                            "source": "CALCULATED",
+                            "sourceVid": [],
+                            "sourceMetadata": "SWdub3JlVGhpc1Byb3BlcnR5VmFsdWVJblVwZGF0ZUZhY3Rvcnk="
+                        }
+                    ]
+                },
+                "description": {
+                    "value": "This is a sample deal description.",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "description",
+                            "value": "This is a sample deal description.",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "createdate": {
+                    "value": "1517489990895",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "createdate",
+                            "value": "1517489990895",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "amount_in_home_currency": {
+                    "value": "10000",
+                    "timestamp": 1538916589580,
+                    "source": "BATCH_UPDATE",
+                    "sourceId": "RecalculatePropertiesProcessor",
+                    "versions": [
+                        {
+                            "name": "amount_in_home_currency",
+                            "value": "10000",
+                            "timestamp": 1538916589580,
+                            "sourceId": "RecalculatePropertiesProcessor",
+                            "source": "BATCH_UPDATE",
+                            "sourceVid": [],
+                            "sourceMetadata": ""
+                        }
+                    ]
+                },
+                "pipeline": {
+                    "value": "default",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "pipeline",
+                            "value": "default",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_lastmodifieddate": {
+                    "value": "1538916589690",
+                    "timestamp": 1538916589690,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_lastmodifieddate",
+                            "value": "1538916589690",
+                            "timestamp": 1538916589690,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source": {
+                    "value": "",
+                    "timestamp": 1517489991180,
+                    "source": "CALCULATED",
+                    "sourceId": "deal sync with no associated contacts",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source",
+                            "value": "",
+                            "timestamp": 1517489991180,
+                            "sourceId": "deal sync with no associated contacts",
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealstage": {
+                    "value": "appointmentscheduled",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealstage",
+                            "value": "appointmentscheduled",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_createdate": {
+                    "value": "1517489990895",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "hs_createdate",
+                            "value": "1517489990895",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_object_id": {
+                    "value": "251941095",
+                    "timestamp": 1517489990895,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_object_id",
+                            "value": "251941095",
+                            "timestamp": 1517489990895,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_2": {
+                    "value": "",
+                    "timestamp": 1517489991180,
+                    "source": "CALCULATED",
+                    "sourceId": "deal sync with no associated contacts",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_2",
+                            "value": "",
+                            "timestamp": 1517489991180,
+                            "sourceId": "deal sync with no associated contacts",
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_1": {
+                    "value": "",
+                    "timestamp": 1517489991180,
+                    "source": "CALCULATED",
+                    "sourceId": "deal sync with no associated contacts",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_1",
+                            "value": "",
+                            "timestamp": 1517489991180,
+                            "sourceId": "deal sync with no associated contacts",
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealtype": {
+                    "value": "newbusiness",
+                    "timestamp": 1517489990895,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealtype",
+                            "value": "newbusiness",
+                            "timestamp": 1517489990895,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                }
+            },
+            "imports": [],
+            "stateChanges": []
+        },
+        {
+            "portalId": 4275951,
+            "dealId": 252040507,
+            "isDeleted": false,
+            "associations": {
+                "associatedVids": [
+                    551
+                ],
+                "associatedCompanyIds": [
+                    686724958
+                ],
+                "associatedDealIds": [],
+                "associatedTicketIds": []
+            },
+            "properties": {
+                "notes_last_updated": {
+                    "value": "1518538725015",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_last_updated",
+                            "value": "1518538725015",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealname": {
+                    "value": "Netflix - New Deal",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "dealname",
+                            "value": "Netflix - New Deal",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "amount": {
+                    "value": "",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "amount",
+                            "value": "",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "closedate": {
+                    "value": "1519772400000",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "closedate",
+                            "value": "1519772400000",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_associated_contacts": {
+                    "value": "1",
+                    "timestamp": 1517502022972,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "num_associated_contacts",
+                            "value": "1",
+                            "timestamp": 1517502022972,
+                            "source": "CALCULATED",
+                            "sourceVid": [],
+                            "sourceMetadata": "SWdub3JlVGhpc1Byb3BlcnR5VmFsdWVJblVwZGF0ZUZhY3Rvcnk="
+                        }
+                    ]
+                },
+                "createdate": {
+                    "value": "1517439600000",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "createdate",
+                            "value": "1517439600000",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "engagements_last_meeting_booked": {
+                    "value": "",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "engagements_last_meeting_booked",
+                            "value": "",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "pipeline": {
+                    "value": "default",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "pipeline",
+                            "value": "default",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hubspot_owner_id": {
+                    "value": "31308910",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "hubspot_owner_id",
+                            "value": "31308910",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_contacted_notes": {
+                    "value": "0",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "num_contacted_notes",
+                            "value": "0",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_lastmodifieddate": {
+                    "value": "1538845405725",
+                    "timestamp": 1538845405725,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_lastmodifieddate",
+                            "value": "1538845405725",
+                            "timestamp": 1538845405725,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source": {
+                    "value": "OFFLINE",
+                    "timestamp": 1517502023905,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by vid=551",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source",
+                            "value": "OFFLINE",
+                            "timestamp": 1517502023905,
+                            "sourceId": "deal sync triggered by vid=551",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "notes_last_contacted": {
+                    "value": "",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_last_contacted",
+                            "value": "",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hubspot_owner_assigneddate": {
+                    "value": "1517502022972",
+                    "timestamp": 1517502022972,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "hubspot_owner_assigneddate",
+                            "value": "1517502022972",
+                            "timestamp": 1517502022972,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealstage": {
+                    "value": "decisionmakerboughtin",
+                    "timestamp": 1519317458968,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "dealstage",
+                            "value": "decisionmakerboughtin",
+                            "timestamp": 1519317458968,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_createdate": {
+                    "value": "1517502022972",
+                    "timestamp": 1517502022972,
+                    "source": "CONTACTS",
+                    "sourceId": "CRM_UI",
+                    "versions": [
+                        {
+                            "name": "hs_createdate",
+                            "value": "1517502022972",
+                            "timestamp": 1517502022972,
+                            "sourceId": "CRM_UI",
+                            "source": "CONTACTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_object_id": {
+                    "value": "252040507",
+                    "timestamp": 1517502022972,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_object_id",
+                            "value": "252040507",
+                            "timestamp": 1517502022972,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_2": {
+                    "value": "0d796026-7464-47c6-ab13-75198b26b44c",
+                    "timestamp": 1517502023905,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by vid=551",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_2",
+                            "value": "0d796026-7464-47c6-ab13-75198b26b44c",
+                            "timestamp": 1517502023905,
+                            "sourceId": "deal sync triggered by vid=551",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_1": {
+                    "value": "IMPORT",
+                    "timestamp": 1517502023905,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by vid=551",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_1",
+                            "value": "IMPORT",
+                            "timestamp": 1517502023905,
+                            "sourceId": "deal sync triggered by vid=551",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_all_owner_ids": {
+                    "value": "31308910",
+                    "timestamp": 1538439819747,
+                    "source": "MIGRATION",
+                    "sourceId": "PermissionsUpdater",
+                    "versions": [
+                        {
+                            "name": "hs_all_owner_ids",
+                            "value": "31308910",
+                            "timestamp": 1538439819747,
+                            "sourceId": "PermissionsUpdater",
+                            "source": "MIGRATION",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_notes": {
+                    "value": "1",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "num_notes",
+                            "value": "1",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "notes_next_activity_date": {
+                    "value": "",
+                    "timestamp": 1518538727336,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_next_activity_date",
+                            "value": "",
+                            "timestamp": 1518538727336,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealtype": {
+                    "value": "existingbusiness",
+                    "timestamp": 1518539987650,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "dealtype",
+                            "value": "existingbusiness",
+                            "timestamp": 1518539987650,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                }
+            },
+            "imports": [],
+            "stateChanges": []
+        },
+        {
+            "portalId": 4275951,
+            "dealId": 253640037,
+            "isDeleted": false,
+            "associations": {
+                "associatedVids": [
+                    1601
+                ],
+                "associatedCompanyIds": [
+                    686724958
+                ],
+                "associatedDealIds": [],
+                "associatedTicketIds": []
+            },
+            "properties": {
+                "dealname": {
+                    "value": "Sample Deal Name",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealname",
+                            "value": "Sample Deal Name",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_associated_contacts": {
+                    "value": "1",
+                    "timestamp": 1518089779981,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "num_associated_contacts",
+                            "value": "1",
+                            "timestamp": 1518089779981,
+                            "source": "CALCULATED",
+                            "sourceVid": [],
+                            "sourceMetadata": "SWdub3JlVGhpc1Byb3BlcnR5VmFsdWVJblVwZGF0ZUZhY3Rvcnk="
+                        }
+                    ]
+                },
+                "description": {
+                    "value": "This is a sample deal description.",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "description",
+                            "value": "This is a sample deal description.",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "createdate": {
+                    "value": "1518089779981",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "createdate",
+                            "value": "1518089779981",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "amount_in_home_currency": {
+                    "value": "10000",
+                    "timestamp": 1538845405650,
+                    "source": "BATCH_UPDATE",
+                    "sourceId": "RecalculatePropertiesProcessor",
+                    "versions": [
+                        {
+                            "name": "amount_in_home_currency",
+                            "value": "10000",
+                            "timestamp": 1538845405650,
+                            "sourceId": "RecalculatePropertiesProcessor",
+                            "source": "BATCH_UPDATE",
+                            "sourceVid": [],
+                            "sourceMetadata": ""
+                        }
+                    ]
+                },
+                "hubspot_owner_id": {
+                    "value": "31308910",
+                    "timestamp": 1519400608750,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "hubspot_owner_id",
+                            "value": "31308910",
+                            "timestamp": 1519400608750,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_contacted_notes": {
+                    "value": "0",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "num_contacted_notes",
+                            "value": "0",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source": {
+                    "value": "OFFLINE",
+                    "timestamp": 1519305392606,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by company id=686724958",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source",
+                            "value": "OFFLINE",
+                            "timestamp": 1519305392606,
+                            "sourceId": "deal sync triggered by company id=686724958",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_createdate": {
+                    "value": "1518089779981",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "hs_createdate",
+                            "value": "1518089779981",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_all_owner_ids": {
+                    "value": "31308910",
+                    "timestamp": 1538529677148,
+                    "source": "MIGRATION",
+                    "sourceId": "PermissionsUpdater",
+                    "versions": [
+                        {
+                            "name": "hs_all_owner_ids",
+                            "value": "31308910",
+                            "timestamp": 1538529677148,
+                            "sourceId": "PermissionsUpdater",
+                            "source": "MIGRATION",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "notes_next_activity_date": {
+                    "value": "",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_next_activity_date",
+                            "value": "",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealtype": {
+                    "value": "newbusiness",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealtype",
+                            "value": "newbusiness",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "notes_last_updated": {
+                    "value": "1519400614552",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_last_updated",
+                            "value": "1519400614552",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "closed_lost_reason": {
+                    "value": "This is a sample Closed Lost reason.",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "closed_lost_reason",
+                            "value": "This is a sample Closed Lost reason.",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "amount": {
+                    "value": "10000",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "amount",
+                            "value": "10000",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "closedate": {
+                    "value": "1451710800000",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "closedate",
+                            "value": "1451710800000",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "engagements_last_meeting_booked": {
+                    "value": "",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "engagements_last_meeting_booked",
+                            "value": "",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "pipeline": {
+                    "value": "default",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "pipeline",
+                            "value": "default",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_lastmodifieddate": {
+                    "value": "1538845405786",
+                    "timestamp": 1538845405786,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_lastmodifieddate",
+                            "value": "1538845405786",
+                            "timestamp": 1538845405786,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "notes_last_contacted": {
+                    "value": "",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "notes_last_contacted",
+                            "value": "",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hubspot_owner_assigneddate": {
+                    "value": "1519400608750",
+                    "timestamp": 1519400608750,
+                    "source": "CRM_UI",
+                    "sourceId": "emp@cluedin.com",
+                    "versions": [
+                        {
+                            "name": "hubspot_owner_assigneddate",
+                            "value": "1519400608750",
+                            "timestamp": 1519400608750,
+                            "sourceId": "emp@cluedin.com",
+                            "source": "CRM_UI",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "dealstage": {
+                    "value": "appointmentscheduled",
+                    "timestamp": 1518089779981,
+                    "source": "IMPORT",
+                    "sourceId": "DealTasks:DealsImport",
+                    "versions": [
+                        {
+                            "name": "dealstage",
+                            "value": "appointmentscheduled",
+                            "timestamp": 1518089779981,
+                            "sourceId": "DealTasks:DealsImport",
+                            "source": "IMPORT",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_object_id": {
+                    "value": "253640037",
+                    "timestamp": 1518089779981,
+                    "source": "CALCULATED",
+                    "sourceId": null,
+                    "versions": [
+                        {
+                            "name": "hs_object_id",
+                            "value": "253640037",
+                            "timestamp": 1518089779981,
+                            "source": "CALCULATED",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_2": {
+                    "value": "67d55479-f775-4cc1-b7ef-66577d3717ee",
+                    "timestamp": 1519400443411,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by vid=1601",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_2",
+                            "value": "67d55479-f775-4cc1-b7ef-66577d3717ee",
+                            "timestamp": 1519400443411,
+                            "sourceId": "deal sync triggered by vid=1601",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "hs_analytics_source_data_1": {
+                    "value": "IMPORT",
+                    "timestamp": 1519305392606,
+                    "source": "DEALS",
+                    "sourceId": "deal sync triggered by company id=686724958",
+                    "versions": [
+                        {
+                            "name": "hs_analytics_source_data_1",
+                            "value": "IMPORT",
+                            "timestamp": 1519305392606,
+                            "sourceId": "deal sync triggered by company id=686724958",
+                            "source": "DEALS",
+                            "sourceVid": []
+                        }
+                    ]
+                },
+                "num_notes": {
+                    "value": "1",
+                    "timestamp": 1519400615018,
+                    "source": "ENGAGEMENTS",
+                    "sourceId": "ObjectPropertyUpdater",
+                    "versions": [
+                        {
+                            "name": "num_notes",
+                            "value": "1",
+                            "timestamp": 1519400615018,
+                            "sourceId": "ObjectPropertyUpdater",
+                            "source": "ENGAGEMENTS",
+                            "sourceVid": []
+                        }
+                    ]
+                }
+            },
+            "imports": [],
+            "stateChanges": []
+        }
+    ],
+    "hasMore": false,
+    "offset": 253640037
+}

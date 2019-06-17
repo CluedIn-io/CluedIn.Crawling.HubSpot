@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "deals/v1/deal/recent/modified"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "deals-empty-results.json"
+    }
+}

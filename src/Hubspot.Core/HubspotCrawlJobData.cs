@@ -11,14 +11,14 @@ namespace CluedIn.Crawling.HubSpot.Core
         {
             if (configuration != null)
             {
-                this.ApiToken = this.GetValue<string>(configuration, HubSpotConstants.KeyName.ApiToken);
-                this.CustomerSubDomain = this.GetValue<string>(configuration, HubSpotConstants.KeyName.CustomerSubDomain);
+                ApiToken = GetValue<string>(configuration, HubSpotConstants.KeyName.ApiToken);
+                CustomerSubDomain = GetValue<string>(configuration, HubSpotConstants.KeyName.CustomerSubDomain);
             }
         }
 
         public IDictionary<string, object> ToDictionary()
         {
-            return new Dictionary<string, object>() {
+            return new Dictionary<string, object> {
                { HubSpotConstants.KeyName.ApiToken, ApiToken },
                { HubSpotConstants.KeyName.CustomerSubDomain, ApiToken }
             };

@@ -14,12 +14,11 @@ namespace Tests.Integration.HubSpot
         {
             _fixture = fixture;
             _output = output;
-
         }
 
-        //[Theory(Skip = "Failing Integration Test")]
         [Theory]
         [InlineData("/Provider/Root", 1)]
+        [InlineData("/Organization", 5)]
 
         public void CorrectNumberOfEntityTypes(string entityType, int expectedCount)
         {

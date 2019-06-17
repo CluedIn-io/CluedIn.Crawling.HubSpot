@@ -27,7 +27,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                     var inArray = StreamUtilies.ReadFully(stream);
                     if (inArray != null)
                     {
-                        rawDataPart = new RawDataPart()
+                        rawDataPart = new RawDataPart
                         {
                             Type = type,
                             MimeType = CluedIn.Core.FileTypes.MimeType.Jpeg.Code,
@@ -40,7 +40,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
             catch (Exception exception)
             {
-                _log.Warn(() => "Could not download HubSpot thumbnail", exception);
+                _log.Warn(() => "Could not download HubSpot thumbnail", exception);  // TODO Warn or Fail
             }
 
             return rawDataPart;

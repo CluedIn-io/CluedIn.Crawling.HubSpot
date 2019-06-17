@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "crm-objects/v1/objects/products/paged"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "crm-products-paged.json"
+    }
+}

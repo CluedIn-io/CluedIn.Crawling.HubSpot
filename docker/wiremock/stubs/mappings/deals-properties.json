@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "url": "properties/v1/deals/properties"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "deals-properties.json"
+    }
+  }

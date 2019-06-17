@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "companies/v2/companies/paged"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "companies-paged.json"
+    }
+}

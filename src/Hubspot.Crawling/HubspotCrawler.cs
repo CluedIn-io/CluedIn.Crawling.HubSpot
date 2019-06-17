@@ -12,14 +12,15 @@ namespace CluedIn.Crawling.HubSpot
     public class HubSpotCrawler : ICrawlerDataGenerator
     {
         private readonly IHubSpotClientFactory _clientFactory;
+
         public HubSpotCrawler(IHubSpotClientFactory clientFactory)
         {
-            _clientFactory = clientFactory;
+            _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
         }
+
         public IEnumerable<object> GetData(CrawlJobData jobData)
         {
-            var hubspotcrawlJobData = jobData as HubSpotCrawlJobData;
-            if (hubspotcrawlJobData == null)
+            if (!(jobData is HubSpotCrawlJobData crawlerJobData))
             {
                 return Enumerable.Empty<object>();
             }

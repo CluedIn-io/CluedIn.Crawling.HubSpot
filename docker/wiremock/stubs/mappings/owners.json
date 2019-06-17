@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "owners/v2/owners"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "owners.json"
+    }
+}

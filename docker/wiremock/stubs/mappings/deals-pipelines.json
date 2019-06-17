@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "url": "deals/v1/pipelines"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "deals-pipelines.json"
+    }
+  }
