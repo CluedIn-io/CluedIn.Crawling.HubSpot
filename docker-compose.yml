@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+
+  # seq:
+  #   image: datalust/seq:latest
+  #   restart: unless-stopped
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #   ports:
+  #     - "3200:80"
+
+  wiremock:
+    image: ${DOCKER_REGISTRY-}cluedinhubspotwiremock
+    build:
+      context: docker/wiremock/
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports: 
+      - 8080:8080
+    healthcheck:
+      interval: 1m
+      retries: 3
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/__admin/
+      timeout: 3s
