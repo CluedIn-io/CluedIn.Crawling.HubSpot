@@ -1,11 +1,3 @@
-using System;
-using AutoFixture.Xunit2;
-using CluedIn.Core.Data;
-using CluedIn.Crawling;
-using CluedIn.Crawling.HubSpot.ClueProducers;
-using CluedIn.Crawling.HubSpot.Core.Models;
-using Xunit;
-
 namespace Crawling.HubSpot.Test.ClueProducers
 {
     //public class _SampleFolder_ClueProducerTests : BaseClueProducerTest<_SampleFolder_>

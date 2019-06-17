@@ -1,11 +1,3 @@
-using System;
-using System.Linq;
-using CluedIn.Core.Crawling;
-using AutoFixture.Xunit2;
-using Should;
-using Xunit;
-using CluedIn.Crawling.HubSpot.Core;
-
 namespace Provider.HubSpot.Test.HubSpotProvider
 {
   //public class GetHelperConfigurationBehaviour : HubSpotProviderTest

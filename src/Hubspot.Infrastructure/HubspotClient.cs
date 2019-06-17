@@ -9,7 +9,6 @@ using RestSharp;
 using System.Threading.Tasks;
 using CluedIn.Core.Utilities;
 using Newtonsoft.Json;
-using Task = CluedIn.Crawling.HubSpot.Core.Models.Task;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
 {

@@ -2,17 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Threading.Tasks;
-
 using CluedIn.Core;
-using CluedIn.Core.Agent.Jobs;
 using CluedIn.Core.Configuration;
 using CluedIn.Core.Data;
 using CluedIn.Core.DataStore;
 using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
-using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 
 namespace CluedIn.Provider.HubSpot.WebHooks

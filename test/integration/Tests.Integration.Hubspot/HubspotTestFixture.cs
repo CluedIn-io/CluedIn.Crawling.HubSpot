@@ -3,9 +3,6 @@ using CluedIn.Crawling.HubSpot.Core;
 using System.IO;
 using System.Reflection;
 using CrawlerIntegrationTesting.Clues;
-using Newtonsoft.Json;
-using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace Tests.Integration.HubSpot
 {
