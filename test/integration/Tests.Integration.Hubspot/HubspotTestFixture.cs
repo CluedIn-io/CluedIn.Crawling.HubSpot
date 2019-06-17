@@ -3,30 +3,46 @@ using CluedIn.Crawling.HubSpot.Core;
 using System.IO;
 using System.Reflection;
 using CrawlerIntegrationTesting.Clues;
+using Newtonsoft.Json;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Tests.Integration.HubSpot
 {
     public class HubSpotTestFixture
     {
+        //private readonly ITestOutputHelper _outputHelper;
+
         public HubSpotTestFixture()
         {
+            //_outputHelper = new TestOutputHelper();
+
             var executingFolder = new FileInfo(Assembly.GetExecutingAssembly().CodeBase.Substring(8)).DirectoryName;
-            var p = new DebugCrawlerHost<HubSpotCrawlJobData>(executingFolder, HubSpotConstants.ProviderName);
+
+            //_outputHelper.WriteLine($"Creating crawler host {HubSpotConstants.ProviderName} from folder {executingFolder}");
+
+            var crawlerHost = new DebugCrawlerHost<HubSpotCrawlJobData>(executingFolder, HubSpotConstants.ProviderName);
 
             ClueStorage = new ClueStorage();
 
-            p.ProcessClue += ClueStorage.AddClue;
+            crawlerHost.ProcessClue += CrawlerHost_ProcessClue;
 
-            p.Execute(HubSpotConfiguration.Create(), HubSpotConstants.ProviderId);
+            var credentials = HubSpotConfiguration.Create();
+
+            //_outputHelper.WriteLine($"Executing crawler host {HubSpotConstants.ProviderName} ({HubSpotConstants.ProviderId}) with credentials {JsonConvert.SerializeObject(credentials)}");
+
+            crawlerHost.Execute(credentials, HubSpotConstants.ProviderId);
+
+            //_outputHelper.WriteLine($"Executing crawler host {HubSpotConstants.ProviderName} completed");
         }
 
         public ClueStorage ClueStorage { get; }
 
-        public void Dispose()
+        private void CrawlerHost_ProcessClue(CluedIn.Core.Data.Clue clue)
         {
-        }
+            //_outputHelper.WriteLine($"Processing crawler clue {JsonConvert.SerializeObject(clue)}");
 
+            ClueStorage.AddClue(clue);
+        }
     }
 }
-
-
