@@ -249,7 +249,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             queryStrings.Insert(0, new QueryStringParameter("offset", offset));
             queryStrings.Insert(0, new QueryStringParameter("limit", limit));
 
-            return await GetAsync<LineItemResponse>("crm-objects/v1/objects/LineItems/paged", queryStrings);
+            return await GetAsync<LineItemResponse>("/crm-objects/v1/objects/line_items/paged", queryStrings);
         }
 
         public async Task<List<string>> GetTicketPropertiesAsync(Settings settings)
@@ -276,7 +276,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             });
 
         public async Task<ContactListResponse> GetStaticContactListsAsync(int limit = 20, int offset = 0) =>
-            await GetAsync<ContactListResponse>("contacts/v1/lists/Static", new List<QueryStringParameter>
+            await GetAsync<ContactListResponse>("contacts/v1/lists/static", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
@@ -368,7 +368,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         });
 
         public async Task<TemplateResponse> GetTemplatesAsync(int limit = 20, int offset = 0) =>
-            await GetAsync<TemplateResponse>("filemanager/api/v2/templates", new List<QueryStringParameter>
+            await GetAsync<TemplateResponse>("content/api/v2/templates", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)

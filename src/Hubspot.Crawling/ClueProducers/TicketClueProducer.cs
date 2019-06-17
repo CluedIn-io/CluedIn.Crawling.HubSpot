@@ -29,10 +29,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, input.ObjectId.ToString(), accountId);
-
-            // TODO: Populate clue data
+            var clue = _factory.Create(EntityType.Support.Ticket, input.ObjectId.ToString(), accountId);
+            
             var data = clue.Data.EntityData;
 
             data.Uri = new Uri(string.Format("https://app.hubspot.com/tickets/{0}/tickets?ticketId={1}", input.PortalId.Value, input.ObjectId));
