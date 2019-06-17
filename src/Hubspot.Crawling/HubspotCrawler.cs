@@ -71,7 +71,7 @@ namespace CluedIn.Crawling.HubSpot
 
             //var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;              // TODO Must have scope TICKETS_READ
             //data.AddRange(GetTicketsAndAssociatedObjects(client, ticketProperties));
-
+            
             return data;
         }
 
