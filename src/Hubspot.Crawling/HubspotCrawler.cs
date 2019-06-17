@@ -25,14 +25,14 @@ namespace CluedIn.Crawling.HubSpot
                 return Enumerable.Empty<object>();
             }
 
-            var client = _clientFactory.CreateNew(hubspotcrawlJobData);
+            var client = _clientFactory.CreateNew(crawlerJobData);
 
             var settings = client.GetSettingsAsync().Result;
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
 
             var data = new List<object>();
-            data.AddRange(GetCompaniesAndAssociatedObjects(client, hubspotcrawlJobData, companyProperties, settings));
+            data.AddRange(GetCompaniesAndAssociatedObjects(client, crawlerJobData, companyProperties, settings));
 
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
             data.AddRange(GetDealsAndAssociatedObjects(client, dealProperties, settings));
