@@ -479,10 +479,10 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var data = JsonConvert.DeserializeObject<T>(response.Content);
-                _log.Verbose($"HubspotClient returning {data}");
+                _log.Verbose($"HubSpotClient returning {data} {JsonConvert.SerializeObject(data)}");
                 return data;
             }
-            throw new InvalidOperationException("Communication to hubspot unavailable");
+            throw new InvalidOperationException("Communication to HubSpot unavailable");
         }
 
         private class QueryStringParameter
