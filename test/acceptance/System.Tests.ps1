@@ -15,6 +15,20 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
             docker-compose build
 
             docker-compose up -d --remove-orphans
+
+            $systemStarted = 'false'
+
+            Do {
+
+                try {
+                    docker inspect (docker-compose ps -q wiremock)  
+                    $systemStarted = 'true '
+                }
+                catch {
+                    Write-Host 'waiting ...'
+                }
+
+            } While ($systemStarted -eq 'false')
         }
 
         It "Should start services" {
