@@ -59,6 +59,7 @@ jobs:
     displayName: 'Build solution'
     inputs:
       command: 'build'
+      projects: 'Crawling.Hubspot.sln'
 
   # Unit and Integration Test
   - task: DotNetCoreCLI@2
