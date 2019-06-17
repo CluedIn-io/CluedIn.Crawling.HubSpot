@@ -2,9 +2,12 @@
 
     <ItemGroup>
 
+        <!-- TODO SBUILD : error : An error occurred: Invalid input for GitVersionTask.GenerateGitVersionInformation+Input.. [D:\source\CluedIn-io\CluedIn.Crawling.HubSpot\docker-compose.dcproj]
+        
         <PackageReference Include="GitVersionTask" Version="5.0.0-beta3-4">
             <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
+        </PackageReference> 
+        -->
 
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
             <PrivateAssets>all</PrivateAssets>
