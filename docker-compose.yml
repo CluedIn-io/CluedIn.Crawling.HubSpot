@@ -17,3 +17,12 @@ services:
         - 8080:8080
       volumes:
         - ./docker/wiremock/stubs/:/home/wiremock
+      healthcheck:
+        interval: 1m
+        retries: 3
+        test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8080/__admin/
+        timeout: 3s
