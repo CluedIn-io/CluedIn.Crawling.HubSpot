@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "forms/v2/forms"
+        "url": "/forms/v2/forms"
     },
     "response": {
         "status": 200,

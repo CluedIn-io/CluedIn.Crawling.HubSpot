@@ -1,7 +1,7 @@
 {
     "request": {
       "method": "GET",
-      "url": "companies/v2/companies/686724251/contacts"
+      "url": "/companies/v2/companies/686724251/contacts"
     },
     "response": {
       "status": 200,

@@ -1,7 +1,7 @@
 {
     "request": {
       "method": "GET",
-      "url": "deals/v1/deal/recent/created"
+      "url": "/deals/v1/deal/recent/created"
     },
     "response": {
       "status": 200,

@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "owners/v2/owners"
+        "url": "/owners/v2/owners"
     },
     "response": {
         "status": 200,

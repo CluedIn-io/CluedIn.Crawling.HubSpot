@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "crm-objects/v1/objects/products/paged"
+        "url": "/crm-objects/v1/objects/products/paged"
     },
     "response": {
         "status": 200,

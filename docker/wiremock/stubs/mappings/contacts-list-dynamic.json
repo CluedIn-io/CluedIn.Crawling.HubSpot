@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "contacts/v1/lists/dynamic"
+        "url": "/contacts/v1/lists/dynamic"
     },
     "response": {
         "status": 200,
