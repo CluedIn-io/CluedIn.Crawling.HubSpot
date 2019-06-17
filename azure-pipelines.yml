@@ -47,6 +47,7 @@ jobs:
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
       verbosityRestore: 'normal'
+      projects: 'Crawling.Hubspot.sln'
 
   # GitVersion
   - task: GitVersion@4
