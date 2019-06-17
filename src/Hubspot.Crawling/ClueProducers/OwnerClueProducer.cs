@@ -25,10 +25,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, input.ownerId.ToString(), accountId);
-
-            // TODO: Populate clue data
+            var clue = _factory.Create(EntityType.Person, input.ownerId.ToString(), accountId);
+            
             var data = clue.Data.EntityData;
 
             if (input.firstName != null && input.lastName != null)

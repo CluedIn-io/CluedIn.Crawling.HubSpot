@@ -41,35 +41,35 @@ namespace CluedIn.Crawling.HubSpot
 
             data.AddRange(GetDynamicContactLists(client));
             data.AddRange(client.GetFormsAsync().Result);
-            // yield return client.GetKeywordsAsync().Result; TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
+            //data.AddRange(client.GetKeywordsAsync().Result; TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
             data.AddRange(client.GetOwnersAsync().Result);
-            //yield return client.GetPublishingChannelsAsync().Result;  TODO Returns Http Forbidden code
+            //data.AddRange(client.GetPublishingChannelsAsync().Result);;  TODO Returns Http Forbidden code
             data.AddRange(GetFiles(client, jobData));
-            data.AddRange(GetSiteMaps(client, jobData));
-            data.AddRange(GetTemplates(client));
-            data.AddRange(GetUrlMappings(client, jobData));
+            //data.AddRange(GetSiteMaps(client, jobData)); TODO Returns Http Forbidden code
+            //data.AddRange(GetTemplates(client)); TODO Returns Http Forbidden code
+            //data.AddRange(GetUrlMappings(client, jobData)); TODO Returns Http Forbidden code
             data.AddRange(GetEngagements(client));
             data.AddRange(GetRecentDeals(client, jobData));
             data.AddRange(GetRecentlyCreatedDeals(client, jobData));
-            //yield return client.GetSmtpTokensAsync().Result; TODO Returns Http Forbidden code
-            data.AddRange(GetSocialCalendarEvents(client, jobData));
+            //data.AddRange(client.GetSmtpTokensAsync().Result); TODO Returns Http Forbidden code
+            //data.AddRange(GetSocialCalendarEvents(client, jobData)); TODO Returns Http Forbidden code
             data.AddRange(GetStaticContactLists(client));
-            data.AddRange(GetTaskCalendarEvents(client, jobData));
-            //yield return client.GetWorkflowsAsync().Result; TODO Returns Http Forbidden code
-            data.AddRange(GetBlogPosts(client, jobData));
-            data.AddRange(GetBlogs(client, jobData));
-            data.AddRange(GetBlogTopics(client, jobData));
-            data.AddRange(GetDomains(client, jobData));
-            data.AddRange(GetBroadcastMessages(client, jobData));
+            //data.AddRange(GetTaskCalendarEvents(client, jobData));  TODO Returns Http Forbidden code
+            //data.AddRange(client.GetWorkflowsAsync().Result)); TODO Returns Http Forbidden code
+            //data.AddRange(GetBlogPosts(client, jobData)); TODO Returns Http Forbidden code
+            //data.AddRange(GetBlogs(client, jobData)); TODO Returns Http Forbidden code
+            //data.AddRange(GetBlogTopics(client, jobData)); TODO Returns Http Forbidden code
+            //data.AddRange(GetDomains(client, jobData)); TODO Returns Http Forbidden code
+            //data.AddRange(GetBroadcastMessages(client, jobData)); TODO Returns Http Forbidden code
 
             var productProperties = client.GetProductPropertiesAsync(settings).Result;
             data.AddRange(GetProducts(client, productProperties));
 
-            var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;
-            data.AddRange(GetLineItemsAndAssociatedObjects(client, lineItemProperties));
+            //var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;                      // TODO Must have scope DEAL_LINE_ITEM_READ
+            //data.AddRange(GetLineItemsAndAssociatedObjects(client, lineItemProperties));
 
-            var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;
-            data.AddRange(GetTicketsAndAssociatedObjects(client, ticketProperties));
+            //var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;              // TODO Must have scope TICKETS_READ
+            //data.AddRange(GetTicketsAndAssociatedObjects(client, ticketProperties));
 
             return data;
         }
@@ -698,17 +698,17 @@ namespace CluedIn.Crawling.HubSpot
             }
 
 
-            var tables = client.GetTablesAsync().Result;
-            foreach (var table in tables)
-            {
-                table.PortalId = portalId;
+            //var tables = client.GetTablesAsync().Result; TODO Forbidden
+            //foreach (var table in tables)
+            //{
+            //    table.PortalId = portalId;
 
-                yield return table;
-                foreach (var row in GetTableRows(client, jobData, table, portalId))
-                {
-                    yield return row;
-                }
-            }
+            //    yield return table;
+            //    foreach (var row in GetTableRows(client, jobData, table, portalId))
+            //    {
+            //        yield return row;
+            //    }
+            //}
 
         }
 

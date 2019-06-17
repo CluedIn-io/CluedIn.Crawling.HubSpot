@@ -22,10 +22,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            // TODO: Create clue specifying the type of entity it is and ID
-            var clue = _factory.Create(EntityType.News, value.keyword_guid, accountId);
-
-            // TODO: Populate clue data
+            var clue = _factory.Create(EntityType.Tag, value.keyword_guid, accountId);
+            
             var data = clue.Data.EntityData;
 
             data.Name = value.keyword;
