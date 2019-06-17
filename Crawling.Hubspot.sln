@@ -14,26 +14,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Test", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Test", "test\unit\Provider.HubSpot.Test\Provider.HubSpot.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Config", "_Config", "{153182F5-8A66-4AF5-AEE5-A35ACF793692}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.gitignore = .gitignore
-		Directory.Build.props = Directory.Build.props
-		Directory.Build.targets = Directory.Build.targets
-		Nuget.config = Nuget.config
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Docs", "_Docs", "{57E743C9-2E9B-4CA7-A9BD-E89B46B390E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{57E743C9-2E9B-4CA7-A9BD-E89B46B390E9}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{4D081256-19A6-4190-8224-FB9CF5793B6A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D081256-19A6-4190-8224-FB9CF5793B6A}"
 	ProjectSection(SolutionItems) = preProject
 		src\Directory.Build.props = src\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{32830E2D-B53F-4D0F-984E-806248F7C8D8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{32830E2D-B53F-4D0F-984E-806248F7C8D8}"
 	ProjectSection(SolutionItems) = preProject
 		test\Directory.Build.props = test\Directory.Build.props
 	EndProjectSection
@@ -53,6 +44,31 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Integration.HubSpot", "test\integration\Tests.Integration.HubSpot\Tests.Integration.HubSpot.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2890545-0A08-46C6-96F1-EC7F2F59F54D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{4B8F8BD3-E95D-434A-9B56-92703E9EE646}"
+	ProjectSection(SolutionItems) = preProject
+		Nuget.config = Nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5DBEE18B-9635-495A-BB7F-13E0C6E05634}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{25845449-3550-4E1F-9095-415076333019}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{646CF1D9-7E2F-4FBB-A134-BF8B7CE7D823}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{E34F1771-5B93-4754-8DFE-C8875E09FE48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,10 +119,17 @@ Global
 		{E1744515-A08B-4972-9185-0D56131AC429} = {4D081256-19A6-4190-8224-FB9CF5793B6A}
 		{D5313469-60EA-4B41-9D76-347F5D4101E8} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
 		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
+		{57E743C9-2E9B-4CA7-A9BD-E89B46B390E9} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
 		{6068A50D-8E76-434E-ADE8-2E4A0A66333D} = {57E743C9-2E9B-4CA7-A9BD-E89B46B390E9}
 		{D10B16B9-F33D-498D-8C6F-442B0EC7C6E2} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
 		{CBD22F04-6415-467D-B079-44D5B01965D1} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
 		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B} = {CBD22F04-6415-467D-B079-44D5B01965D1}
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E} = {E34F1771-5B93-4754-8DFE-C8875E09FE48}
+		{4B8F8BD3-E95D-434A-9B56-92703E9EE646} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{5DBEE18B-9635-495A-BB7F-13E0C6E05634} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{25845449-3550-4E1F-9095-415076333019} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{646CF1D9-7E2F-4FBB-A134-BF8B7CE7D823} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{E34F1771-5B93-4754-8DFE-C8875E09FE48} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F65A0D1-C784-4ABE-8B71-22B8FBD404C0}
