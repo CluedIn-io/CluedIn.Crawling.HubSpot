@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/engagements/v1/engagements/associated/CONTACT/([0-9]*)/paged(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "engagement-associated-contact-paged.json"
+  }
+}
