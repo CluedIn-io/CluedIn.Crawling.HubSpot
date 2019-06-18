@@ -466,6 +466,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         private async Task<T> GetAsync<T>(string url, IList<QueryStringParameter> parameters = null)
         {
             var request = new RestRequest(url, Method.GET);
+
             if (parameters != null)
             {
                 foreach (var parameter in parameters)
@@ -477,13 +478,17 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                _log.Error(() => $"Request to {_client.BaseUrl}{url} failed, response {response.StatusCode} {response.ErrorMessage}");
+                var diagnosticMessage = $"Request to {_client.BaseUrl}{url} failed, response {response.ErrorMessage} ({response.StatusCode})";
 
-                throw new InvalidOperationException("Communication to HubSpot unavailable");
+                _log.Error(() => diagnosticMessage);
+
+                throw new InvalidOperationException($"Communication to HubSpot unavailable. {diagnosticMessage}");
             }
 
             var data = JsonConvert.DeserializeObject<T>(response.Content);
+
             _log.Verbose($"HubSpotClient returning {data} {JsonConvert.SerializeObject(data)}");
+            
             return data;
         }
 
