@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CluedIn.Crawling.HubSpot.Core;
 
-namespace Tests.Integration.HubSpot
+namespace Crawling.Hubspot.Integration.Test
 {
   public static class HubSpotConfiguration
   {

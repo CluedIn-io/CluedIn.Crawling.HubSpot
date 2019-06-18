@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using CluedIn.Core.Logging;
-using Client = CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient;
-using Moq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
+using Moq;
 using RestSharp;
 using Xunit;
+using Client = CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient;
 using Task = System.Threading.Tasks.Task;
 
-namespace Tests.Integration.HubSpot.HubSpotClient
+namespace Crawling.Hubspot.Integration.Test.HubSpotClient
 {
     public class HappyPath
     {

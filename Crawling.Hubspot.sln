@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{D10B16B9-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{CBD22F04-6415-467D-B079-44D5B01965D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Integration.HubSpot", "test\integration\Tests.Integration.HubSpot\Tests.Integration.HubSpot.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.Hubspot.Integration.Test", "test\integration\Crawling.Hubspot.Integration.Test\Crawling.Hubspot.Integration.Test.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}"
 EndProject

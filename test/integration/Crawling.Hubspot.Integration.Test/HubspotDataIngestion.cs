@@ -1,9 +1,9 @@
-using Xunit;
 using System.Linq;
 using CrawlerIntegrationTesting.Clues;
+using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Integration.HubSpot
+namespace Crawling.Hubspot.Integration.Test
 {
     public class DataIngestion : IClassFixture<HubSpotTestFixture>
     {

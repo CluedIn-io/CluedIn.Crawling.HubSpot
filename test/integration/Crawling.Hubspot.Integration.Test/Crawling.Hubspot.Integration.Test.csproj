@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ProjectGuid>{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Tests.Integration.HubSpot</AssemblyTitle>
-    <Product>Tests.Integration.HubSpot</Product>
+    <AssemblyTitle>Crawling.Hubspot.Integration.Test</AssemblyTitle>
+    <Product>Crawling.Hubspot.Integration.Test</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

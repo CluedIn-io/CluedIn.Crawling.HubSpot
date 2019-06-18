@@ -1,10 +1,10 @@
-using CluedIn.Crawling;
-using CluedIn.Crawling.HubSpot.Core;
 using System.IO;
 using System.Reflection;
+using CluedIn.Crawling;
+using CluedIn.Crawling.HubSpot.Core;
 using CrawlerIntegrationTesting.Clues;
 
-namespace Tests.Integration.HubSpot
+namespace Crawling.Hubspot.Integration.Test
 {
     public class HubSpotTestFixture
     {
