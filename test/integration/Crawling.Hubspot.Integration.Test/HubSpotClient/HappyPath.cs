@@ -12,15 +12,15 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 {
     public class HappyPath
     {
-        private readonly Mock<ILogger> _logger;
         private readonly Client _sut;
+
         public HappyPath()
         {
             var crawlJobData = new HubSpotCrawlJobData(HubSpotConfiguration.Create());
 
-            _logger = new Mock<ILogger>();
+            var logger = new Mock<ILogger>();
 
-            _sut = new Client(_logger.Object, crawlJobData, new RestClient());
+            _sut = new Client(logger.Object, crawlJobData, new RestClient("http://127.0.0.1:8080/"));
         }
 
         [Fact]
