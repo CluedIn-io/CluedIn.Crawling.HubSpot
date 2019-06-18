@@ -8,7 +8,7 @@ using Xunit;
 using Client = CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient;
 using Task = System.Threading.Tasks.Task;
 
-namespace Crawling.Hubspot.Integration.Test.HubSpotClient
+namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 {
     public class HappyPath
     {

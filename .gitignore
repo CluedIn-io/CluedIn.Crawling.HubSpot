@@ -263,5 +263,5 @@ __pycache__/
 
 # VS Code
 .vscode/
-/src/Hubspot.Crawling/ClueProducers/Delete ClueProducer.cs
-/src/Hubspot.Crawling/ClueProducers/TempClueProducer.cs
+/src/HubSpot.Crawling/ClueProducers/Delete ClueProducer.cs
+/src/HubSpot.Crawling/ClueProducers/TempClueProducer.cs

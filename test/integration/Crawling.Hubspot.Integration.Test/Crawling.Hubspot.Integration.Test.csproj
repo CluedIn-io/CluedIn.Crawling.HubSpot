@@ -2,9 +2,11 @@
   <PropertyGroup>
     <ProjectGuid>{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Crawling.Hubspot.Integration.Test</AssemblyTitle>
-    <Product>Crawling.Hubspot.Integration.Test</Product>
+    <AssemblyTitle>Crawling.HubSpot.Integration.Test</AssemblyTitle>
+    <Product>Crawling.HubSpot.Integration.Test</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <RootNamespace>Crawling.HubSpot.Integration.Test</RootNamespace>
+    <AssemblyName>Crawling.HubSpot.Integration.Test</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>

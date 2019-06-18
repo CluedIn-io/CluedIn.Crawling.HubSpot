@@ -3,7 +3,7 @@ using CrawlerIntegrationTesting.Clues;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Crawling.Hubspot.Integration.Test
+namespace Crawling.HubSpot.Integration.Test
 {
     public class DataIngestion : IClassFixture<HubSpotTestFixture>
     {

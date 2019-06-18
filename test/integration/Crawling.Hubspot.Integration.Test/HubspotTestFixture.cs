@@ -4,7 +4,7 @@ using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CrawlerIntegrationTesting.Clues;
 
-namespace Crawling.Hubspot.Integration.Test
+namespace Crawling.HubSpot.Integration.Test
 {
     public class HubSpotTestFixture
     {

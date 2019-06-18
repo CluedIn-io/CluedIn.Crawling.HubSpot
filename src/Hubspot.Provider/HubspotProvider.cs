@@ -78,7 +78,7 @@ namespace CluedIn.Provider.HubSpot
                 // add tests to GetHelperConfigurationBehaviour.cs
                 return await Task.FromResult(hubspotCrawlJobData.ToDictionary());
             }
-            throw new InvalidOperationException($"Unpexected data type for HubspotJobCrawlData, {jobData.GetType()}");
+            throw new InvalidOperationException($"Unpexected data type for HubSpotJobCrawlData, {jobData.GetType()}");
         }
 
         public override Task<IDictionary<string, object>> GetHelperConfiguration(

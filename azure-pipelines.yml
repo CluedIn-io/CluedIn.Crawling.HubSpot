@@ -47,7 +47,7 @@ jobs:
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
       verbosityRestore: 'normal'
-      projects: 'Crawling.Hubspot.sln'
+      projects: 'Crawling.HubSpot.sln'
 
   # GitVersion
   - task: GitVersion@4
@@ -59,14 +59,14 @@ jobs:
     displayName: 'Build solution'
     inputs:
       command: 'build'
-      projects: 'Crawling.Hubspot.sln'
+      projects: 'Crawling.HubSpot.sln'
 
   # Unit and Integration Test
   - task: DotNetCoreCLI@2
     displayName: 'Run Unit and Integration tests'
     inputs:
       command: 'test'
-      projects: 'Crawling.Hubspot.sln'
+      projects: 'Crawling.HubSpot.sln'
 
   # Acceptance Test
   - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
