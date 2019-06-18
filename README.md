@@ -6,49 +6,52 @@ CluedIn crawler for HubSpot.
 
 ------
 
-## Migration Notes
+## Overview
+
+This repository contains the code and associated tests for the [HubSpot](https://developers.hubspot.com/docs/overview) crawler.
+
+## Working with the Code
+
+Load [Crawling.Hubspot.sln](.\Crawling.Hubspot.sln) in Visual Studio or your preferred development IDE.
+
+### Running Tests
+
+A mocked environment is required to run `integration` and `acceptance` tests. The mocked environment can be built and run using the following [Docker](https://www.docker.com/) command:
 
 ```Shell
-# Create a new directory for the crawler
-md Crawler.HubSpot
-cd Crawler.HubSpot
-
-# Initialize the folder as a Git repository
-git init
-git flow init
-
-# Run the yeoman generator
-#  Answers to generator prompts:
-#   Yes to Webhooks
-#   No to OAuth
-docker run --rm -ti -v ${PWD}:/generated cluedin/generator-crawler-template
-
-
-# TODO Create Git repository for CluedIn.Crawling.HubSpot
-# Add Git remote
-git remote add origin https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot.git
-git push -u origin master
-
-# TODO fix all the broken bits for dotnet build to run
-
-# .NET Build
-dotnet build
-dotnet test
-dotnet pack
-
-# TODO add coverlet to generate test code coverage statistics from build
-
+docker-compose up --build -d
 ```
 
-## Issues Identified
+To run all `unit` and `integration` tests
 
-* [ ] `dotnet build` fails after yeoman generator has been run
+```Shell
+dotnet test .\Crawling.Hubspot.sln
+```
 
-* [ ] `C:\windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe` fails after yeoman generator has been run
+To run only `integration` tests
 
-* [ ] update `yeoman-crawler-template` repository to use latest `crawler-template` as a Git sub-module
+```Shell
+dotnet test .\test\integration\Crawling.Hubspot.Integration.Test\
+```
 
-  * PR #15 failing test. Ref: <https://github.com/CluedIn-io/yeoman-crawler-template/pull/15>
-  * Requires `Node.js` version 12
-  * Requires `gulp` ... `npm install gulp`
-    * [X] `npm` found 10 package vulnerabilities (4 moderate, 6 high). Ref <https://github.com/CluedIn-io/yeoman-crawler-template/issues/16>
+To run [Pester](https://github.com/pester/Pester) `acceptance` tests
+
+```PowerShell
+invoke-pester test\acceptance
+```
+
+To review the [WireMock](http://wiremock.org/) HTTP proxy logs
+
+```Shell
+docker-compose logs wiremock
+```
+
+## References
+
+* [HubSpot](https://developers.hubspot.com/docs/overview)
+
+### Tooling
+
+* [Docker](https://www.docker.com/)
+* [Pester](https://github.com/pester/Pester)
+* [WireMock](http://wiremock.org/)
