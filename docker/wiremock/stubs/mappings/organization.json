@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "/Organization"
+        "urlPattern": "/Organization(.*)"
     },
     "response": {
         "status": 200,

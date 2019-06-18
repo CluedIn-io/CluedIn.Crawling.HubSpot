@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/properties/v1/companies/properties"
+    "urlPattern": "/properties/v1/companies/properties(.*)"
   },
   "response": {
     "status": 200,

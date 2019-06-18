@@ -1,7 +1,8 @@
 {
     "request": {
         "method": "GET",
-        "url": "/companies/v2/companies/paged"
+        "urlPattern": "/companies/v2/companies/paged(.*)"
+
     },
     "response": {
         "status": 200,

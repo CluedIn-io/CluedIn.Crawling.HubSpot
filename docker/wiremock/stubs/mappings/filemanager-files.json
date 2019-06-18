@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "/filemanager/api/v2/files"
+        "urlPattern": "/filemanager/api/v2/files(.*)"
     },
     "response": {
         "status": 200,

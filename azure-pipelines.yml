@@ -61,12 +61,21 @@ jobs:
       command: 'build'
       projects: 'Crawling.HubSpot.sln'
 
-  # Unit and Integration Test
+  # Unit Test
   - task: DotNetCoreCLI@2
-    displayName: 'Run Unit and Integration tests'
+    displayName: 'Run Unit tests'
     inputs:
       command: 'test'
-      projects: 'Crawling.HubSpot.sln'
+      projects: 'test/unit/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Unit'
+
+  # Integration Test
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Integration tests'
+    inputs:
+      command: 'test'
+      projects: 'test/integration/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)  /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Integration'
 
   # Acceptance Test
   - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8

@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "/engagements/v1/engagements/paged"
+        "urlPattern": "/engagements/v1/engagements/paged(.*)"
     },
     "response": {
         "status": 200,

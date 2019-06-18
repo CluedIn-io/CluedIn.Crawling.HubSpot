@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "/contacts/v1/lists/static"
+        "urlPattern": "/contacts/v1/lists/static(.*)"
     },
     "response": {
         "status": 200,

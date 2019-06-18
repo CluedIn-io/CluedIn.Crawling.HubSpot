@@ -8,11 +8,14 @@ namespace CluedIn.Crawling.HubSpot.Core
     {
         public HubSpotCrawlJobData(IDictionary<string, object> configuration)
         {
-            if (configuration != null)
+            if (configuration == null)
             {
-                ApiToken = GetValue<string>(configuration, HubSpotConstants.KeyName.ApiToken);
-                CustomerSubDomain = GetValue<string>(configuration, HubSpotConstants.KeyName.CustomerSubDomain);
+                return;
             }
+
+            BaseUri = GetValue<Uri>(configuration, HubSpotConstants.KeyName.BaseUri);
+            ApiToken = GetValue<string>(configuration, HubSpotConstants.KeyName.ApiToken);
+            CustomerSubDomain = GetValue<string>(configuration, HubSpotConstants.KeyName.CustomerSubDomain);
         }
 
         public IDictionary<string, object> ToDictionary()
