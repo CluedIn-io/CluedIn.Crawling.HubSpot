@@ -14,6 +14,8 @@ namespace Crawling.HubSpot.Integration.Test
         {
             _fixture = fixture;
             _output = output;
+
+            OutputClueOriginEntityCodes();
         }
 
         [Theory]
@@ -34,19 +36,15 @@ namespace Crawling.HubSpot.Integration.Test
             Assert.Equal(expectedCount, foundCount);
         }
 
-        [Fact(Skip = "Failing Integration Test")]
+        [Fact]
         public void EntityCodesAreUnique()
         {
-            var count = _fixture.ClueStorage.Clues.Count();
-            var unique = _fixture.ClueStorage.Clues.Distinct(new ClueComparer()).Count();
-
-            //You could use this method to output info of all clues
-            PrintClues();
-
-            Assert.Equal(unique, count);
+            Assert.Equal(
+                _fixture.ClueStorage.Clues.Distinct(new ClueComparer()).Count(),
+                _fixture.ClueStorage.Clues.Count());
         }
 
-        private void PrintClues()
+        private void OutputClueOriginEntityCodes()
         {
             foreach(var clue in _fixture.ClueStorage.Clues)
             {
