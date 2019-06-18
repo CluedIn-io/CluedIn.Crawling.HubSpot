@@ -46,7 +46,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             clue.Details.RawData.Add(rawDataPart);
 
             clue.Data.EntityData.PreviewImage = new ImageReferencePart(rawDataPart, 128, 128);
-            clue.Data.EntityData.Properties.Add("Created", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+            clue.Data.EntityData.Properties.Add("Created", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)); // TODO Can remove this when validation suppresed
 
             return clue;
         }

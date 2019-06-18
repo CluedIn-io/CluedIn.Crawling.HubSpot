@@ -6,7 +6,6 @@ namespace CluedIn.Crawling.HubSpot.Core
 {
     public class HubSpotCrawlJobData : CrawlJobData
     {
-
         public HubSpotCrawlJobData(IDictionary<string, object> configuration)
         {
             if (configuration != null)
