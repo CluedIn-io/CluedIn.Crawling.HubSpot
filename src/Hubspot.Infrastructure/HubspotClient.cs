@@ -14,7 +14,6 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
     public class HubSpotClient : IHubSpotClient
     {
-        // ReSharper disable once NotAccessedField.Local
         private readonly ILogger _log;
         private readonly IRestClient _client;
 
@@ -22,13 +21,11 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         {
             if (hubspotCrawlJobData == null)
                 throw new ArgumentNullException(nameof(hubspotCrawlJobData));
-            if (client == null)
-                throw new ArgumentNullException(nameof(client));
 
             _log = log ?? throw new ArgumentNullException(nameof(log));
 
             // TODO use info from hubspotCrawlJobData to instantiate the connection
-            _client = client;
+            _client = client ?? throw new ArgumentNullException(nameof(client));
             _client.BaseUrl = new Uri(HubSpotConstants.ApiBaseUri);
             _client.AddDefaultParameter("hapikey", hubspotCrawlJobData.ApiToken, ParameterType.QueryString);
         }
@@ -475,13 +472,17 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 }
             }
             var response = await _client.ExecuteTaskAsync(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                var data = JsonConvert.DeserializeObject<T>(response.Content);
-                _log.Verbose($"HubSpotClient returning {data} {JsonConvert.SerializeObject(data)}");
-                return data;
+                _log.Error(() => $"Request to {_client.BaseUrl}{url} failed, response {response.StatusCode} {response.ErrorMessage}");
+
+                throw new InvalidOperationException("Communication to HubSpot unavailable");
             }
-            throw new InvalidOperationException("Communication to HubSpot unavailable");
+
+            var data = JsonConvert.DeserializeObject<T>(response.Content);
+            _log.Verbose($"HubSpotClient returning {data} {JsonConvert.SerializeObject(data)}");
+            return data;
         }
 
         private class QueryStringParameter
