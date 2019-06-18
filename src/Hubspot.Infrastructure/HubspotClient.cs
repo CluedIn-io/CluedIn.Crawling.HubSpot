@@ -17,16 +17,19 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         private readonly ILogger _log;
         private readonly IRestClient _client;
 
-        public HubSpotClient(ILogger log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client) // TODO: pass on any extra dependencies
+        public HubSpotClient(ILogger log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client)
         {
             if (hubspotCrawlJobData == null)
                 throw new ArgumentNullException(nameof(hubspotCrawlJobData));
 
             _log = log ?? throw new ArgumentNullException(nameof(log));
 
-            // TODO use info from hubspotCrawlJobData to instantiate the connection
             _client = client ?? throw new ArgumentNullException(nameof(client));
-            _client.BaseUrl = new Uri(HubSpotConstants.ApiBaseUri);
+            _client.BaseUrl =
+                hubspotCrawlJobData.BaseUri != null
+                    ? hubspotCrawlJobData.BaseUri
+                    : new Uri(HubSpotConstants.ApiBaseUri);
+
             _client.AddDefaultParameter("hapikey", hubspotCrawlJobData.ApiToken, ParameterType.QueryString);
         }
 
@@ -37,6 +40,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             var items = await GetAsync<List<PropertyDefinition>>("properties/v1/companies/properties");
 
             var properties = items.Select(s => s.Name).ToList();
+
             if (!properties.Contains("name"))
                 properties.Add("name");
             if (!properties.Contains("companyname"))
@@ -193,8 +197,6 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                     break;
 
                 offset = response.offset;
-
-
             }
 
             return result;
@@ -504,8 +506,5 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         {
             return new AccountInformation("", ""); //TODO
         }
-
-
-
     }
 }

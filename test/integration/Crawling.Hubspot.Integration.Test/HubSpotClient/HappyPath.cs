@@ -20,7 +20,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
             var logger = new Mock<ILogger>();
 
-            _sut = new Client(logger.Object, crawlJobData, new RestClient("http://127.0.0.1:8080/"));
+            _sut = new Client(logger.Object, crawlJobData, new RestClient());
         }
 
         [Fact]

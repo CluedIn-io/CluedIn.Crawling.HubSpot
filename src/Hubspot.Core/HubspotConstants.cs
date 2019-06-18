@@ -9,6 +9,7 @@ namespace CluedIn.Crawling.HubSpot.Core
     {
         public struct KeyName
         {
+            public const string BaseUri = "baseUri";
             public const string ApiToken = "apiToken";
             public const string CustomerSubDomain = "customerSubDomain";
         }
