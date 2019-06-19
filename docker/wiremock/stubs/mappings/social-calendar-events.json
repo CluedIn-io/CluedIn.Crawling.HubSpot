@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/calendar/v1/events/social(.*)"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "social-calendar-events.json"
+    }
+}

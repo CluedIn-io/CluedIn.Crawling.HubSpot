@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
 using CluedIn.Core.Logging;
@@ -52,7 +53,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         {
             Assert.InRange(
                 (await _sut.GetCompaniesAsync(properties)).results.Count,
-                0,100);
+                0, 100);
         }
 
         [Theory]
@@ -154,6 +155,221 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
             Assert.InRange(
                 (await _sut.GetAssociationsAsync(objectId, AssociationType.LineItemToDeal)).Results.Count,
                 0, 100);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo100ContactsFromAllListsAreAvailable(List<string> properties)
+        {
+            Assert.InRange(
+                (await _sut.GetContactsFromAllListsAsync(properties)).contacts.Count,
+                0, 100);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo100DealsAreAvailable(List<string> properties, Settings settings)
+        {
+            Assert.InRange(
+                (await _sut.GetDealsAsync(properties, settings)).deals.Count,
+                0, 100);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20FilesAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetFilesAsync(greaterThanEpoch)).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20SocialCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
+        {
+            Assert.InRange(
+                (await _sut.GetSocialCalendarEventsAsync(startDate, endDate)).Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20TaskCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
+        {
+            Assert.InRange(
+                (await _sut.GetTaskCalendarEventsAsync(startDate, endDate)).Count,
+                0, 20);
+
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20RecentDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetRecentDealsAsync(greaterThanEpoch)).deals.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20RecentlyCreatedDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).deals.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo100BroadcastMessagesOfDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetBroadcastMessagesAsync(greaterThanEpoch)).deals.Count,
+                0, 100);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo100UrlMappingsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetUrlMappingsAsync(greaterThanEpoch)).objects.Count,
+                0, 100);
+        }
+
+        [Fact]
+        public async Task UpTo20TemplatesAreAvailable()
+        {
+            Assert.InRange(
+                (await _sut.GetTemplatesAsync()).objects.Count,
+                0, 20);
+        }
+
+        [Fact]
+        public async Task UpTo100EngagementsAreAvailable()
+        {
+            Assert.InRange(
+                (await _sut.GetEngagementsAsync()).results.Count,
+                0, 100);
+        }
+
+        [Fact]
+        public async Task UpTo20SiteMapsAreAvailable()
+        {
+            Assert.InRange(
+                (await _sut.GetSiteMapsAsync()).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20BlogPostsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetBlogPostsAsync(greaterThanEpoch)).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20BlogTopicsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetBlogTopicsAsync(greaterThanEpoch)).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20BlogsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetBlogsAsync(greaterThanEpoch)).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
+        {
+            Assert.InRange(
+                (await _sut.GetDomainsAsync(greaterThanEpoch)).objects.Count,
+                0, 20);
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task UpTo20TableRowsAreAvailable(DateTimeOffset greaterThanEpoch, long tableId, Column dateColumn, long portalId)
+        {
+            Assert.InRange(
+                (await _sut.GetTableRowsAsync(greaterThanEpoch, tableId, dateColumn, portalId)).Objects.Count,
+                0, 20);
+        }
+
+        [Fact]
+        public async Task FormsAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetFormsAsync());
+        }
+
+        [Fact]
+        public async Task TablesAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetTablesAsync());
+        }
+
+        [Fact]
+        public async Task WorkFlowsAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetWorkflowsAsync());
+        }
+
+        [Fact]
+        public async Task SmtpTokensAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetSmtpTokensAsync());
+        }
+
+        [Fact]
+        public async Task PublishingChannelsAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetPublishingChannelsAsync());
+        }
+
+        [Fact]
+        public async Task OwnersAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetOwnersAsync());
+        }
+
+        [Fact]
+        public async Task KeywordsAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetKeywordsAsync());
+        }
+
+        [Fact]
+        public async Task DealPipelinesAreAvailable()
+        {
+            Assert.NotNull(
+                await _sut.GetDealPipelinesAsync());
+        }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task ContactsByCompanyAreAvailable(long companyId)
+        {
+            Assert.NotNull(
+                await _sut.GetContactsByCompanyAsync(companyId));
         }
     }
 }

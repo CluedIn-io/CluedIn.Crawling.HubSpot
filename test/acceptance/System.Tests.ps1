@@ -64,6 +64,12 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
         Context "HubSpot API" {        
 
+            It "Blogs" {
+
+                { Invoke-WebRequest "$mockServer/content/api/v2/blogs" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+
             It "Companies Paged" {
 
                 { Invoke-WebRequest "$mockServer/companies/v2/companies/paged" -UseBasicParsing } | 
@@ -159,6 +165,12 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                 { Invoke-WebRequest "$mockServer/deals/v1/deal/recent/modified" -UseBasicParsing } | 
                     Should -Not -Throw
             }
+
+            It "Domains" {
+
+                { Invoke-WebRequest "$mockServer/content/api/v4/domains" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
                 
             It "Engagement Associated Company Paged" {
 
@@ -226,11 +238,35 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }  
             
+            It "Social Calendar Events" {
+
+                { Invoke-WebRequest "$mockServer/calendar/v1/events/social?hapikey=demo&startDate=15102018&endDate=30102018" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
+            It "Tables" {
+
+                { Invoke-WebRequest "$mockServer/hubdb/api/v2/tables" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }   
+
+            It "Templates" {
+
+                { Invoke-WebRequest "$mockServer/content/api/v2/templates" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
+
             It "Tickets Properties" {
 
                 { Invoke-WebRequest "$mockServer/properties/v2/tickets/properties" -UseBasicParsing } | 
                     Should -Not -Throw
-            }             
+            }  
+            
+            It "Workflows" {
+
+                { Invoke-WebRequest "$mockServer/automation/v3/workflows" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
         }
     }
 }
