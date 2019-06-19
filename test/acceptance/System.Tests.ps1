@@ -226,6 +226,10 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }  
             
+            # TODO test Tables , Blogs , Workflows , Templates
+
+            # TODO test SocialCalendarEvents ... https://api.hubapi.com/calendar/v1/events/social?hapikey=demo&startDate=15102018&endDate=30102018
+
             It "Tickets Properties" {
 
                 { Invoke-WebRequest "$mockServer/properties/v2/tickets/properties" -UseBasicParsing } | 
