@@ -208,7 +208,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task UpTo20RecentDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
             Assert.InRange(
-                (await _sut.GetRecentDealsAsync(greaterThanEpoch)).deals.Count,
+                (await _sut.GetRecentDealsAsync(greaterThanEpoch)).results.Count,
                 0, 20);
         }
 
@@ -217,7 +217,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task UpTo20RecentlyCreatedDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
             Assert.InRange(
-                (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).deals.Count,
+                (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).results.Count,
                 0, 20);
         }
 
@@ -226,7 +226,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task UpTo100BroadcastMessagesOfDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
             Assert.InRange(
-                (await _sut.GetBroadcastMessagesAsync(greaterThanEpoch)).deals.Count,
+                (await _sut.GetBroadcastMessagesAsync(greaterThanEpoch)).Count,
                 0, 100);
         }
 
