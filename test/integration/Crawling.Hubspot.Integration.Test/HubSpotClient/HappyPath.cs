@@ -143,7 +143,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task UpTo20StaticContactListsAreAvailable()
         {
             Assert.InRange(
-                (await _sut.GetStaticContactListsAsync()).contacts.Count,
+                (await _sut.GetStaticContactListsAsync()).lists.Count,
                 0, 20);
         }
 
