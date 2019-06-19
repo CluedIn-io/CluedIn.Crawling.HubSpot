@@ -255,12 +255,11 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 0, 100);
         }
 
-        [Theory]
-        [InlineAutoData]
-        public async Task UpTo20SiteMapsAreAvailable(DateTimeOffset greaterThanEpoch)
+        [Fact]
+        public async Task UpTo20SiteMapsAreAvailable()
         {
             Assert.InRange(
-                (await _sut.GetSiteMapsAsync(greaterThanEpoch)).objects.Count,
+                (await _sut.GetSiteMapsAsync()).objects.Count,
                 0, 20);
         }
 
