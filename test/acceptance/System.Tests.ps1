@@ -106,9 +106,27 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }
 
+            It "CRM Deal Associations Paged" {
+
+                { Invoke-WebRequest "$mockServer/crm-associations/v1/associations/123/SomeThing/456" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+            
+            It "CRM Line Items Paged" {
+
+                { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/line_items/paged" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
             It "CRM Products Paged" {
 
                 { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/products/paged" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+            
+            It "CRM Tickets Paged" {
+
+                { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/tickets/paged" -UseBasicParsing } | 
                     Should -Not -Throw
             }
 
@@ -148,6 +166,24 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }
 
+            It "Engagement Associated Contact Paged" {
+
+                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/CONTACT/123/paged" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
+            It "Engagement Associated Deal Paged" {
+
+                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/DEAL/12345678/paged" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
+            It "Engagement Associated Object Type Paged" {
+
+                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/ABC/123456/paged" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
             It "Engagements Paged" {
 
                 { Invoke-WebRequest "$mockServer/engagements/v1/engagements/paged" -UseBasicParsing } | 
@@ -163,6 +199,12 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
             It "Forms" {
 
                 { Invoke-WebRequest "$mockServer/forms/v2/forms" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }
+
+            It "Line Items Properties" {
+
+                { Invoke-WebRequest "$mockServer/properties/v2/line_items/properties" -UseBasicParsing } | 
                     Should -Not -Throw
             }
 
@@ -182,7 +224,13 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
                 { Invoke-WebRequest "$mockServer/integrations/v1/me" -UseBasicParsing } | 
                     Should -Not -Throw
-            }            
+            }  
+            
+            It "Tickets Properties" {
+
+                { Invoke-WebRequest "$mockServer/properties/v2/tickets/properties" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }             
         }
     }
 }
