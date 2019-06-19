@@ -247,7 +247,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             queryStrings.Insert(0, new QueryStringParameter("offset", offset));
             queryStrings.Insert(0, new QueryStringParameter("limit", limit));
 
-            return await GetAsync<LineItemResponse>("/crm-objects/v1/objects/line_items/paged", queryStrings);
+            return await GetAsync<LineItemResponse>("crm-objects/v1/objects/line_items/paged", queryStrings);
         }
 
         public async Task<List<string>> GetTicketPropertiesAsync(Settings settings)

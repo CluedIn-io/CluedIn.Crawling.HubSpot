@@ -23,8 +23,6 @@ namespace CluedIn.Crawling.HubSpot.Factories
                 throw new ArgumentNullException(nameof(clue));
             }
 
-            // TODO configure validation rule suppressions ... clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
-
             var data = clue.Data;
             data.EntityData.Name = "HubSpot CRM";
             data.EntityData.Description = "HubSpot CRM is a web and mobile application for customers.";
