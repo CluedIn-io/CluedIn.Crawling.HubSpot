@@ -1,0 +1,49 @@
+{
+    "workflows": [
+        {
+            "portalId": 62515,
+            "personaTagIds": [],
+            "lastUpdatedByUserId": 215482,
+            "originalAuthorUserId": 215482,
+            "contactListIds": {
+                "enrolled": 522883,
+                "active": 522884,
+                "completed": 522885,
+                "succeeded": 522886
+            },
+            "contactCounts": {
+                "active": 0,
+                "enrolled": 1
+            },
+            "creationSource": {
+                "sourceApplication": {
+                    "source": "WORKFLOWS_APP",
+                    "serviceName": "https://app.hubspot.com/workflows/62515/platform/create/new?flowType=CONTACT&scrollToElementId=scroll-to-new-action-config-CONTACT"
+                },
+                "createdByUser": {
+                    "userId": 215482,
+                    "userEmail": "testapi@hubspot.com"
+                },
+                "createdAt": 1560795850987
+            },
+            "name": "tester",
+            "id": 5155841,
+            "type": "DRIP_DELAY",
+            "description": "",
+            "updateSource": {
+                "sourceApplication": {
+                    "source": "WORKFLOWS_APP",
+                    "serviceName": "https://app.hubspot.com/workflows/62515/flow/5155841/edit"
+                },
+                "updatedByUser": {
+                    "userId": 215482,
+                    "userEmail": "testapi@hubspot.com"
+                },
+                "updatedAt": 1560796014312
+            },
+            "enabled": true,
+            "insertedAt": 1560795851071,
+            "updatedAt": 1560796014312
+        }
+    ]
+}

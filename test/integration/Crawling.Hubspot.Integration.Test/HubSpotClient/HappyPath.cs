@@ -363,5 +363,13 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
             Assert.NotNull(
                 await _sut.GetDealPipelinesAsync());
         }
+
+        [Theory]
+        [InlineAutoData]
+        public async Task ContactsByCompanyAreAvailable(long companyId)
+        {
+            Assert.NotNull(
+                await _sut.GetContactsByCompanyAsync(companyId));
+        }
     }
 }
