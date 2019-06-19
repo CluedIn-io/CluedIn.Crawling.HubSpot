@@ -101,7 +101,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task LineItemPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 await _sut.GetLineItemPropertiesAsync(settings));
         }
 
@@ -118,7 +118,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task TicketPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 await _sut.GetTicketPropertiesAsync(settings));
         }
 
