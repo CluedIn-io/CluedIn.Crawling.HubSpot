@@ -5,6 +5,6 @@
     },
     "response": {
         "status": 200,
-        "bodyFileName": "filemanager-files.json"
+        "bodyFileName": "filemanager-files-empty-results.json"
     }
 }

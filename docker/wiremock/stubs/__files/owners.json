@@ -1,59 +1,27 @@
 [
     {
-        "portalId": 62515,
-        "ownerId": 64,
+        "portalId": 4275951,
+        "ownerId": 31308910,
         "type": "PERSON",
-        "firstName": "Holly",
-        "lastName": "Flax",
-        "email": "holly@dundermifflin.com",
-        "createdAt": 1405605858624,
-        "updatedAt": 1416928146449,
+        "firstName": "Evropi",
+        "lastName": "Parlama",
+        "email": "emp@cluedin.com",
+        "createdAt": 1517489639568,
+        "updatedAt": 1559718319561,
+        "signature": "<div>jyfjfjh</div>",
         "remoteList": [
             {
-                "portalId": 62515,
-                "ownerId": 64,
-                "remoteId": "137304",
+                "id": 26829235,
+                "portalId": 4275951,
+                "ownerId": 31308910,
+                "remoteId": "5305024",
                 "remoteType": "HUBSPOT",
                 "active": true
             }
-        ]
-    },
-    {
-        "portalId": 62515,
-        "ownerId": 65,
-        "type": "PERSON",
-        "firstName": "Michael",
-        "lastName": "Scott",
-        "email": "michael@dundermifflin.com",
-        "createdAt": 1405605858732,
-        "updatedAt": 1416928145437,
-        "remoteList": [
-            {
-                "portalId": 62515,
-                "ownerId": 65,
-                "remoteId": "153112",
-                "remoteType": "HUBSPOT",
-                "active": true
-            }
-        ]
-    },
-    {
-        "portalId": 62515,
-        "ownerId": 66,
-        "type": "PERSON",
-        "firstName": "Dwight",
-        "lastName": "Schrute",
-        "email": "dwight@dundermifflin.com",
-        "createdAt": 1405605858898,
-        "updatedAt": 1416928146430,
-        "remoteList": [
-            {
-                "portalId": 62515,
-                "ownerId": 66,
-                "remoteId": "166656",
-                "remoteType": "HUBSPOT",
-                "active": true
-            }
-        ]
+        ],
+        "hasContactsAccess": false,
+        "activeUserId": 5305024,
+        "userIdIncludingInactive": 5305024,
+        "isActive": true
     }
 ]
