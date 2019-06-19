@@ -9,18 +9,20 @@ using RestSharp;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
 {
-  public class InstallComponents : IWindsorInstaller
-  {
-    public void Install(IWindsorContainer container, IConfigurationStore store)
+    public class InstallComponents : IWindsorInstaller
     {
-      container
-          .AddFacilityIfNotExists<TypedFactoryFacility>()
-          .Register(Component.For<IHubSpotClientFactory>().AsFactory())
-          .Register(Component.For<IHubSpotImageFetcher, HubSpotImageFetcher>())
-          .Register(Component.For<HubSpotClient>().LifestyleTransient());
+        public void Install(IWindsorContainer container, IConfigurationStore store)
+        {
+            container
+                .AddFacilityIfNotExists<TypedFactoryFacility>()
+                .Register(Component.For<IHubSpotClientFactory>().AsFactory())
+                .Register(Component.For<IHubSpotImageFetcher, HubSpotImageFetcher>())
+                .Register(Component.For<HubSpotClient>().LifestyleTransient());
 
-      if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
-        container.Register(Component.For<IRestClient, RestClient>());
+            if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
+            {
+                container.Register(Component.For<IRestClient, RestClient>());
+            }
+        }
     }
-  }
 }
