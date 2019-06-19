@@ -20,14 +20,15 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
 
+            limit = limit ?? 100;
+
             while (true)
             {
-                var limit = 100;
-                var response = Client.GetDealsAsync(_properties, _settings, limit, offset).Result;
+                var response = Client.GetDealsAsync(_properties, _settings, limit.Value, offset).Result;
 
                 if (response?.deals == null || !response.deals.Any())
                     break;
@@ -45,8 +46,6 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                         {
                             yield return engagement;
                         }
-
-
                     }
 
                     yield return deal;

@@ -11,14 +11,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
         {
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
+            limit = limit ?? 100;
 
             while (true)
             {
-                var limit = 20;
-                var response = Client.GetTemplatesAsync(limit, offset).Result;
+                var response = Client.GetTemplatesAsync(limit.Value, offset).Result;
 
                 if (response?.objects == null || !response.objects.Any())
                     break;
@@ -31,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                 if (response.objects.Count < limit || response.offset == null)
                     break;
 
-                offset = response.offset.Value;
+                offset += limit.Value;
             }
         }
     }

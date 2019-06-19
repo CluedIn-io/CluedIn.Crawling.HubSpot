@@ -45,9 +45,9 @@ namespace CluedIn.Crawling.HubSpot
             data.AddRange(client.GetOwnersAsync().Result);
             //data.AddRange(client.GetPublishingChannelsAsync().Result);  TODO Returns Http Forbidden code
             data.AddRange(new FilesIterater(client, crawlerJobData).Iterate());
-            //data.AddRange(new SiteMapsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new Templates(client).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new UrlMappingsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
+            data.AddRange(new SiteMapsIterater(client, crawlerJobData).Iterate());
+            data.AddRange(new TemplatesIterater(client, crawlerJobData).Iterate()); 
+            data.AddRange(new UrlMappingsIterater(client, crawlerJobData).Iterate()); 
             data.AddRange(new EngagementsIterater(client, crawlerJobData).Iterate());
             data.AddRange(new RecentDealsIterater(client, crawlerJobData).Iterate());
             data.AddRange(new RecentlyCreatedDealsIterater(client, crawlerJobData).Iterate());

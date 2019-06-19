@@ -11,14 +11,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
         {
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
+            limit = limit ?? 20;
 
             while (true)
             {
-                var limit = 20;
-                var response = Client.GetUrlMappingsAsync(JobData.LastCrawlFinishTime, limit, offset).Result;
+                var response = Client.GetUrlMappingsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
 
                 if (response?.objects == null || !response.objects.Any())
                     break;

@@ -12,14 +12,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
         {
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit)
         {
             int offset = 0;
+            limit = limit ?? 20;
 
             while (true)
             {
-                var limit = 20;
-                var response = Client.GetSocialCalendarEventsAsync(JobData.LastCrawlFinishTime, DateTimeOffset.UtcNow, limit, offset).Result;
+                var response = Client.GetSocialCalendarEventsAsync(JobData.LastCrawlFinishTime, DateTimeOffset.UtcNow, limit.Value, offset).Result;
 
                 if (response == null || !response.Any())
                     break;
@@ -32,7 +32,7 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                 if (response.Count < limit)
                     break;
 
-                offset += 100;
+                offset += limit.Value;
             }
         }
     }

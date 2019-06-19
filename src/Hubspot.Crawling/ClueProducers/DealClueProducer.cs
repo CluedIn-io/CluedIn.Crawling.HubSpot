@@ -36,27 +36,25 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input.associations != null)
             {
                 if (input.associations != null)
-                    foreach (var company in input.associations.associatedCompanyIds)
-                    {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
-                    }
-                if (input.associations.associatedCompanyIds != null)
-                    foreach (var company in input.associations.associatedCompanyIds)
-                    {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
-                    }
+                {
+                    if (input.associations.associatedCompanyIds != null)
+                        foreach (var company in input.associations.associatedCompanyIds)
+                        {
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
+                        }
 
-                if (input.associations.associatedDealIds != null)
-                    foreach (var company in input.associations.associatedDealIds)
-                    {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, s => company.ToString());
-                    }
+                    if (input.associations.associatedDealIds != null)
+                        foreach (var company in input.associations.associatedDealIds)
+                        {
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, s => company.ToString());
+                        }
 
-                if (input.associations.associatedVids != null)
-                    foreach (var company in input.associations.associatedVids)
-                    {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, input, s => company.ToString());
-                    }
+                    if (input.associations.associatedVids != null)
+                        foreach (var company in input.associations.associatedVids)
+                        {
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, input, s => company.ToString());
+                        }
+                }
             }
             if (input.portalId != null)
             {
@@ -64,7 +62,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 {
                     _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "Hubspot");
                 }
-                string url = string.Format("https://app.hubspot.com/sales/{0}/deal/{1}/", input.portalId, input.dealId);
+                string url = $"https://app.hubspot.com/sales/{input.portalId}/deal/{input.dealId}/";
                 data.Uri = new Uri(url);
             }
 

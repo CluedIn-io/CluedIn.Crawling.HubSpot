@@ -31,10 +31,10 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         Task<DealResponse> GetRecentDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);
         Task<DealResponse> GetRecentlyCreatedDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);
         Task<DealResponse> GetBroadcastMessagesAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0);
-        Task<FileMetaDataResponse> GetUrlMappingsAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0);
+        Task<UrlMappingResponse> GetUrlMappingsAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0);
         Task<TemplateResponse> GetTemplatesAsync(int limit = 20, int offset = 0);
-        Task<EngagementResponse> GetEngagementsAsync(int limit = 100, int offset = 0);
-        Task<SiteMapResponse> GetSiteMapsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);
+        Task<EngagementResponse> GetEngagementsAsync(int limit = 100, long offset = 0);
+        Task<SiteMapResponse> GetSiteMapsAsync(int limit = 20, int offset = 0);
         Task<SiteMapResponse> GetBlogPostsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);
         Task<SiteMapResponse> GetBlogTopicsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);
         Task<SiteMapResponse> GetBlogsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0);

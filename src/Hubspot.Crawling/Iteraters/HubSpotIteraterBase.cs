@@ -16,6 +16,6 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             JobData = jobData ?? throw new ArgumentNullException(nameof(jobData));
         }
 
-        public abstract IEnumerable<object> Iterate();
+        public abstract IEnumerable<object> Iterate(int? limit = null);
     }
 }

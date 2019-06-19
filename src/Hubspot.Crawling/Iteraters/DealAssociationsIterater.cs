@@ -14,14 +14,15 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             _objectId = objectId;
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit)
         {
             int offset = 0;
 
+            limit = limit ?? 20;
+
             while (true)
             {
-                var limit = 20;
-                var response = Client.GetDealAssociationsAsync(_objectId, limit, offset).Result;
+                var response = Client.GetDealAssociationsAsync(_objectId, limit.Value, offset).Result;
 
                 if (response?.Results == null || !response.Results.Any())
                     break;
