@@ -165,7 +165,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         public async Task<IEnumerable<object>> GetEngagementByIdAndTypeAsync(long objectId, string objectType)
         {
             var result = new List<object>();
-            int? offset = 0;
+            long? offset = 0;
             while (true)
             {
                 var queryStrings = new List<QueryStringParameter>
@@ -357,8 +357,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             new QueryStringParameter("since", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
         });
 
-        public async Task<FileMetaDataResponse> GetUrlMappingsAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0) =>
-            await GetAsync<FileMetaDataResponse>("url-mappings/v3/url-mappings", new List<QueryStringParameter>
+        public async Task<UrlMappingResponse> GetUrlMappingsAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0) =>
+            await GetAsync<UrlMappingResponse>("url-mappings/v3/url-mappings", new List<QueryStringParameter>
         {
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
@@ -372,19 +372,18 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 new QueryStringParameter("limit", limit)
             });
 
-        public async Task<EngagementResponse> GetEngagementsAsync(int limit = 100, int offset = 0) =>
+        public async Task<EngagementResponse> GetEngagementsAsync(int limit = 100, long offset = 0) =>
             await GetAsync<EngagementResponse>("engagements/v1/engagements/paged", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
             });
 
-        public async Task<SiteMapResponse> GetSiteMapsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+        public async Task<SiteMapResponse> GetSiteMapsAsync(int limit = 20, int offset = 0) =>
             await GetAsync<SiteMapResponse>("content/api/v2/site-maps", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
-                new QueryStringParameter("limit", limit),
-                new QueryStringParameter("created__gt", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
+                new QueryStringParameter("limit", limit)
             });
 
         public async Task<SiteMapResponse> GetBlogPostsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>

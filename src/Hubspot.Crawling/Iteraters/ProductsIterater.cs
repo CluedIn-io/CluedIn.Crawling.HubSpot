@@ -16,14 +16,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             _properties = properties ?? throw new ArgumentNullException(nameof(properties));
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
+            limit = limit ?? 100;
 
             while (true)
             {
-                var limit = 100;
-                var response = Client.GetProductsAsync(_properties, limit, offset).Result;
+                var response = Client.GetProductsAsync(_properties, limit.Value, offset).Result;
 
                 if (response?.Objects == null || !response.Objects.Any())
                     break;

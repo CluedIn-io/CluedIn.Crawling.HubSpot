@@ -11,14 +11,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
         {
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
+            limit = limit ?? 12000;
 
             while (true)
             {
-                var limit = 20;
-                var response = Client.GetRecentlyCreatedDealsAsync(JobData.LastCrawlFinishTime, limit, offset).Result;
+                var response = Client.GetRecentlyCreatedDealsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
 
                 if (response?.deals == null || !response.deals.Any())
                     break;

@@ -11,14 +11,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
         {
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit)
         {
             int offset = 0;
+            limit = limit ?? 100;
 
             while (true)
             {
-                var limit = 100;
-                var response = Client.GetBroadcastMessagesAsync(JobData.LastCrawlFinishTime, limit, offset).Result;
+                var response = Client.GetBroadcastMessagesAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
 
                 if (response?.deals == null || !response.deals.Any())
                     break;
@@ -31,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                 if (response.deals.Count < limit)
                     break;
 
-                offset += limit;
+                offset += limit.Value;
             }
         }
     }

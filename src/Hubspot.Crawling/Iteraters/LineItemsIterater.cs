@@ -16,14 +16,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             _properties = properties ?? throw new ArgumentNullException(nameof(properties));
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit)
         {
             int offset = 0;
+            limit = limit ?? 100;
 
             while (true)
             {
-                var limit = 100;
-                var response = Client.GetLineItemsAsync(_properties, limit, offset).Result;
+                var response = Client.GetLineItemsAsync(_properties, limit.Value, offset).Result;
 
                 if (response?.Objects == null || !response.Objects.Any())
                     break;
@@ -32,7 +32,7 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                 {
                     if (lineItem.ObjectId.HasValue)
                     {
-                        foreach (var dealAssociation in new DealAssociationsIterater(Client, JobData, lineItem.ObjectId.Value).Iterate())
+                        foreach (var dealAssociation in new DealAssociationsIterater(Client, JobData, lineItem.ObjectId.Value).Iterate(limit))
                         {
                             yield return dealAssociation;
                         }

@@ -5,7 +5,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
     public class EngagementResponse : Response
     {
         public bool hasMore { get; set; }
-        public int? offset { get; set; }
+        public long? offset { get; set; }
         public List<EngagementResult> results { get; set; }
     }
 
@@ -24,7 +24,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public bool? active { get; set; }
         public object createdAt { get; set; }
         public int? createdBy { get; set; }
-        public int? id { get; set; }
+        public long? id { get; set; }
         public object lastUpdated { get; set; }
         public int? modifiedBy { get; set; }
         public int? ownerId { get; set; }

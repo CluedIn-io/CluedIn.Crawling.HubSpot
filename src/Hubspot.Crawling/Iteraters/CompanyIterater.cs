@@ -19,14 +19,14 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
-        public override IEnumerable<object> Iterate()
+        public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
             long portalId = 0;
+            limit = limit ?? 100;
             while (true)
             {
-                var limit = 100;
-                var response = Client.GetCompaniesAsync(_properties, limit, offset).Result;
+                var response = Client.GetCompaniesAsync(_properties, limit.Value, offset).Result;
 
                 if (response.results == null || !response.results.Any())
                     break;
@@ -57,7 +57,6 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                     }
                 }
 
-
                 if (response.hasMore == false || response.offset == null || response.results.Count < limit)
                     break;
 
@@ -72,47 +71,19 @@ namespace CluedIn.Crawling.HubSpot.Iteraters
                 yield return dealPipeline;
             }
 
+            var tables = Client.GetTablesAsync().Result;
 
-            //var tables = client.GetTablesAsync().Result; TODO Forbidden
-            //foreach (var table in tables)
-            //{
-            //    table.PortalId = portalId;
-
-            //    yield return table;
-            //    foreach (var row in GetTableRows(client, jobData, table, portalId))
-            //    {
-            //        yield return row;
-            //    }
-            //}
-        }
-
-        private static IEnumerable<object> GetTableRows(HubSpotClient client, HubSpotCrawlJobData jobData, Table table, long portalId)
-        {
-            int offset = 0;
-            int count = 0;
-            while (true)
+            foreach (var table in tables)
             {
-                var dateColumn = table.columns.Find(c => c.type == "DATE");
-                var limit = 500;
-                var response = client.GetTableRowsAsync(jobData.LastCrawlFinishTime, table.id, dateColumn, portalId, limit, offset).Result;
+                table.PortalId = portalId;
 
-                if (response.Objects == null || !response.Objects.Any())
-                    break;
-
-                foreach (var row in response.Objects)
+                yield return table;
+                foreach (var row in new TableRowsIterater(Client, JobData, table, portalId).Iterate())
                 {
-                    row.Columns = table.columns;
-                    row.Table = table.id;
                     yield return row;
                 }
-
-                count += 500;
-
-                if (response.Total < count || response.TotalCount < count)
-                    break;
-
-                offset = response.Offset;
             }
         }
+
     }
 }
