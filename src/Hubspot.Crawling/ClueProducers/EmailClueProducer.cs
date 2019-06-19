@@ -25,7 +25,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            var clue = _factory.Create(EntityType.Mail, input.metadata.messageId, accountId);
+            var clue = _factory.Create(EntityType.Mail, input.engagement.id?.ToString(), accountId);
             
             var data = clue.Data.EntityData;
 

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CluedIn.Crawling.HubSpot.Core.Models
 {
@@ -25,34 +24,6 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
 
         public MetaData metaData { get; set; }
 
-    }
-
-    public class MetaData
-    {
-        public long? lastProcessingStateChangeAt { get; set; }
-
-        public string processing { get; set; }
-
-        public long? lastSizeChangeAt { get; set; }
-
-        public string error { get; set; }
-
-        public ulong? size { get; set; }
-
-    }
-
-    public class ContactListResponse : Response
-    {
-        public List<ContactList> contacts { get; set; }
-
-        [JsonProperty("has-more")]
-        public bool hasMore { get; set; }
-
-        [JsonProperty("offset")]
-        public int? offset { get; set; }
-
-        public List<ContactList> lists { get; set; }
- 
     }
 }
 

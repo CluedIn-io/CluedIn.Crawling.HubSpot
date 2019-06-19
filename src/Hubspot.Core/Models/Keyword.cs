@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CluedIn.Crawling.HubSpot.Core.Models
+﻿namespace CluedIn.Crawling.HubSpot.Core.Models
 {
     public class Keyword
     {
@@ -11,11 +9,5 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public int contacts { get; set; }
         public int leads { get; set; }
         public long created_at { get; set; }
-    }
-
-    public class KeywordResponse : Response
-    {
-        public int? limit { get; set; }
-        public List<Keyword> keywords { get; set; }
     }
 }

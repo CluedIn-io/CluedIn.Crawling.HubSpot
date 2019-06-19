@@ -148,17 +148,4 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
             }
         }
     }
-
-    public class Task : EngagementResult
-    {
-        public long? Reminder { get; set; }
-    }
-
-    public class Meeting : EngagementResult
-    {
-        public long? Reminder { get; set; }
-    }
-
-    public class Note : EngagementResult { }
-    public class Call : EngagementResult { }
 }

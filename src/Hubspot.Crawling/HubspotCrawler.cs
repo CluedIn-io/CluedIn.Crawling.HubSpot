@@ -4,7 +4,7 @@ using System.Linq;
 using CluedIn.Core.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
-using CluedIn.Crawling.HubSpot.Iteraters;
+using CluedIn.Crawling.HubSpot.Iterators;
 
 namespace CluedIn.Crawling.HubSpot
 {
@@ -30,47 +30,49 @@ namespace CluedIn.Crawling.HubSpot
 
             var companyProperties = client.GetCompanyPropertiesAsync(settings).Result;
 
+            crawlerJobData.LastCrawlFinishTime = new DateTimeOffset(new DateTime(2019, 6, 18, 0, 0, 0));
+
             var data = new List<object>();
-            data.AddRange(new CompanyIterater(client, crawlerJobData, companyProperties, settings).Iterate());
+            data.AddRange(new CompanyIterator(client, crawlerJobData, companyProperties, settings).Iterate());
 
             var dealProperties = client.GetDealPropertiesAsync(settings).Result;
-            data.AddRange(new DealIterater(client, crawlerJobData, dealProperties, settings).Iterate());
+            data.AddRange(new DealIterator(client, crawlerJobData, dealProperties, settings).Iterate());
 
             var contactProperties = client.GetContactPropertiesAsync(settings).Result;
-            data.AddRange(new ContactIterater(client, crawlerJobData, contactProperties).Iterate());
+            data.AddRange(new ContactIterator(client, crawlerJobData, contactProperties).Iterate());
 
-            data.AddRange(new DynamicContactListIterater(client, crawlerJobData).Iterate());
+            data.AddRange(new DynamicContactListIterator(client, crawlerJobData).Iterate());
             data.AddRange(client.GetFormsAsync().Result);
             //data.AddRange(client.GetKeywordsAsync().Result; TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
             data.AddRange(client.GetOwnersAsync().Result);
-            //data.AddRange(client.GetPublishingChannelsAsync().Result);  TODO Returns Http Forbidden code
-            data.AddRange(new FilesIterater(client, crawlerJobData).Iterate());
-            data.AddRange(new SiteMapsIterater(client, crawlerJobData).Iterate());
-            data.AddRange(new TemplatesIterater(client, crawlerJobData).Iterate()); 
-            data.AddRange(new UrlMappingsIterater(client, crawlerJobData).Iterate()); 
-            data.AddRange(new EngagementsIterater(client, crawlerJobData).Iterate());
-            data.AddRange(new RecentDealsIterater(client, crawlerJobData).Iterate());
-            data.AddRange(new RecentlyCreatedDealsIterater(client, crawlerJobData).Iterate());
-            //data.AddRange(client.GetSmtpTokensAsync().Result); TODO Returns Http Forbidden code
-            //data.AddRange(new SocialCalendarEventsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            data.AddRange(new StaticContactListIterater(client,crawlerJobData).Iterate());
-            //data.AddRange(new TaskCalendarEventsIterater(client, crawlerJobData).Iterate());  TODO Returns Http Forbidden code
-            //data.AddRange(client.GetWorkflowsAsync().Result)); TODO Returns Http Forbidden code
-            //data.AddRange(new BlogPostsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new BlogsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new BlogTopicsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new DomainsIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
-            //data.AddRange(new BroadcastMessagesIterater(client, crawlerJobData).Iterate()); TODO Returns Http Forbidden code
+            data.AddRange(client.GetPublishingChannelsAsync().Result); // TODO This is connected to fake LinkedIn using bfi@cluedin.com
+            data.AddRange(new FilesIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new SiteMapsIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new TemplatesIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new UrlMappingsIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new EngagementsIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new RecentDealsIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData).Iterate());
+            //data.AddRange(client.GetSmtpTokensAsync().Result);  TODO Returns Http Forbidden code
+            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData).Iterate()); // TODO Not sure how to test this
+            data.AddRange(new StaticContactListIterator(client,crawlerJobData).Iterate());
+            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData).Iterate());//  TODO Not sure how to test this
+            data.AddRange(client.GetWorkflowsAsync().Result.workflows);
+            data.AddRange(new BlogPostsIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new BlogsIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new BlogTopicsIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new DomainsIterator(client, crawlerJobData).Iterate()); 
+            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData).Iterate()); 
 
             var productProperties = client.GetProductPropertiesAsync(settings).Result;
-            data.AddRange(new ProductsIterater(client, crawlerJobData, productProperties).Iterate());
+            data.AddRange(new ProductsIterator(client, crawlerJobData, productProperties).Iterate());
 
-            //var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;                      // TODO Must have scope DEAL_LINE_ITEM_READ
-            //data.AddRange(new LineItemsIterater(client, lineItemProperties).Iterate());
+            var lineItemProperties = client.GetLineItemPropertiesAsync(settings).Result;                      
+            data.AddRange(new LineItemsIterator(client, crawlerJobData, lineItemProperties).Iterate());
 
-            //var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;              // TODO Must have scope TICKETS_READ
-            //data.AddRange(new TicketsIterater(client, ticketProperties).Iterate());
-            
+            var ticketProperties = client.GetTicketPropertiesAsync(settings).Result;              
+            data.AddRange(new TicketsIterator(client, crawlerJobData, ticketProperties).Iterate());
+
             return data;
         }
     }

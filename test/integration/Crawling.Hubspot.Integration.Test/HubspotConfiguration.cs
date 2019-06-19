@@ -8,9 +8,9 @@ namespace Crawling.HubSpot.Integration.Test
         public static Dictionary<string, object> Create()
         {
             return new Dictionary<string, object> {
-                    { HubSpotConstants.KeyName.BaseUri, "http://127.0.0.1:8080/" },
-                    { HubSpotConstants.KeyName.ApiToken,"b2fecc8c-1dcc-4254-a95a-73be97b0e8af" },
-                    { HubSpotConstants.KeyName.CustomerSubDomain, "" }
+                { HubSpotConstants.KeyName.BaseUri, "https://api.hubapi.com/" },
+                { HubSpotConstants.KeyName.ApiToken,"4fad15b1-8d51-4919-b11a-125bd9346e51" },
+                { HubSpotConstants.KeyName.CustomerSubDomain, "" }
             };
         }
     }

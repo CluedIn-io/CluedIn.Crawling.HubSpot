@@ -152,7 +152,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task UpTo100DealAssociationsAreAvailable(int objectId)
         {
             Assert.InRange(
-                (await _sut.GetDealAssociationsAsync(objectId)).Results.Count,
+                (await _sut.GetAssociationsAsync(objectId, AssociationType.LineItemToDeal)).Results.Count,
                 0, 100);
         }
     }

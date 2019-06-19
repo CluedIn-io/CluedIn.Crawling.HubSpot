@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CluedIn.Crawling.HubSpot.Core.Models
+﻿namespace CluedIn.Crawling.HubSpot.Core.Models
 {
     public class Topic
     {
@@ -12,14 +10,5 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public long? created { get; set; }
         public long? updated { get; set; }
         public long? deletedAt { get; set; }
-    }
-
-    public class TopicResponse : Response
-    {
-        public int? limit { get; set; }
-        public int? offset { get; set; }
-        public int? total { get; set; }
-        public int? totalCount { get; set; }
-        public List<Topic> objects { get; set; }
     }
 }

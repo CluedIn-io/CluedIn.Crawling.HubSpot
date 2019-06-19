@@ -16,20 +16,6 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public string Currency { get; set; }
     }
 
-    public class Associations
-    {
-        public List<long> associatedVids { get; set; }
-        public List<long> associatedCompanyIds { get; set; }
-        public List<long> associatedDealIds { get; set; }
-    }
-
-    public class DealResponse : Response
-    {
-        public List<Deal> deals { get; set; }
-        public bool hasMore { get; set; }
-        public int offset { get; set; }
-    }
-
     /*
     *{
             "portalId": 62515,

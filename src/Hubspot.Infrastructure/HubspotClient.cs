@@ -281,8 +281,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             });
         
 
-        public async Task<AssociationResponse> GetDealAssociationsAsync(int objectId, int limit = 100, int offset = 0) =>
-            await GetAsync<AssociationResponse>($"crm-associations/v1/associations/{objectId}/HUBSPOT_DEFINED/20", new List<QueryStringParameter>
+        public async Task<AssociationResponse> GetAssociationsAsync(int objectId, AssociationType associationType, int limit = 100, int offset = 0) =>
+            await GetAsync<AssociationResponse>($"crm-associations/v1/associations/{objectId}/HUBSPOT_DEFINED/" + Convert.ToInt32(associationType), new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
@@ -321,7 +321,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
             new QueryStringParameter("startDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(startDate)),
-            new QueryStringParameter("endDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(endDate))
+            new QueryStringParameter("endDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(endDate)),
+            new QueryStringParameter("includeNoCampaigns", true)
         });
 
         public async Task<List<CalendarEvent>> GetTaskCalendarEventsAsync(DateTimeOffset startDate, DateTimeOffset endDate, int limit = 20, int offset = 0) =>
@@ -330,27 +331,28 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
             new QueryStringParameter("startDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(startDate)),
-            new QueryStringParameter("endDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(endDate))
+            new QueryStringParameter("endDate", DateUtilities.ConvertDatetimeToUnixTimeStamp(endDate)),
+            new QueryStringParameter("includeNoCampaigns", true)
         });
 
-        public async Task<DealResponse> GetRecentDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<DealResponse>("deals/v1/deal/recent/modified", new List<QueryStringParameter>
+        public async Task<RecentDealResponse> GetRecentDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<RecentDealResponse>("deals/v1/deal/recent/modified", new List<QueryStringParameter>
         {
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
             new QueryStringParameter("since", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
         });
 
-        public async Task<DealResponse> GetRecentlyCreatedDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<DealResponse>("deals/v1/deal/recent/created", new List<QueryStringParameter>
+        public async Task<RecentDealResponse> GetRecentlyCreatedDealsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<RecentDealResponse>("deals/v1/deal/recent/created", new List<QueryStringParameter>
         {
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
             new QueryStringParameter("since", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
         });
 
-        public async Task<DealResponse> GetBroadcastMessagesAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0) =>
-            await GetAsync<DealResponse>("broadcast/v1/broadcasts", new List<QueryStringParameter>
+        public async Task<IList<BroadcastMessage>> GetBroadcastMessagesAsync(DateTimeOffset greaterThanEpoch, int limit = 100, int offset = 0) =>
+            await GetAsync<IList<BroadcastMessage>>("broadcast/v1/broadcasts", new List<QueryStringParameter>
         {
             new QueryStringParameter("offset", offset),
             new QueryStringParameter("limit", limit),
@@ -386,32 +388,32 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 new QueryStringParameter("limit", limit)
             });
 
-        public async Task<SiteMapResponse> GetBlogPostsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<SiteMapResponse>("content/api/v2/blog-posts", new List<QueryStringParameter>
+        public async Task<BlogPostResponse> GetBlogPostsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<BlogPostResponse>("content/api/v2/blog-posts", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit),
                 new QueryStringParameter("created__gt", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
             });
 
-        public async Task<SiteMapResponse> GetBlogTopicsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<SiteMapResponse>("blogs/v3/topics", new List<QueryStringParameter>
+        public async Task<TopicResponse> GetBlogTopicsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<TopicResponse>("blogs/v3/topics", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit),
                 new QueryStringParameter("created__gt", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
             });
 
-        public async Task<SiteMapResponse> GetBlogsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<SiteMapResponse>("content/api/v2/blogs", new List<QueryStringParameter>
+        public async Task<BlogPostResponse> GetBlogsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<BlogPostResponse>("content/api/v2/blogs", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit),
                 new QueryStringParameter("created__gt", DateUtilities.ConvertDatetimeToUnixTimeStamp(greaterThanEpoch))
             });
 
-        public async Task<SiteMapResponse> GetDomainsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
-            await GetAsync<SiteMapResponse>("content/api/v4/domains", new List<QueryStringParameter>
+        public async Task<DomainResponse> GetDomainsAsync(DateTimeOffset greaterThanEpoch, int limit = 20, int offset = 0) =>
+            await GetAsync<DomainResponse>("content/api/v4/domains", new List<QueryStringParameter>
             {
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit),
@@ -441,8 +443,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         public async Task<List<Table>> GetTablesAsync() =>
             await GetAsync<List<Table>>("hubdb/api/v2/tables");
 
-        public async Task<List<WorkflowsResponse>> GetWorkflowsAsync() =>
-            await GetAsync<List<WorkflowsResponse>>("automation/v3/workflows");
+        public async Task<WorkflowsResponse> GetWorkflowsAsync() =>
+            await GetAsync<WorkflowsResponse>("automation/v3/workflows");
 
         public async Task<List<Form>> GetSmtpTokensAsync() =>
             await GetAsync<List<Form>>("email/public/v1/smtpapi/tokens");
