@@ -286,6 +286,12 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }  
             
+            It "URL Mappings" {
+
+                { Invoke-WebRequest "$mockServer/url-mappings/v3/url-mappings" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+
             It "Workflows" {
 
                 { Invoke-WebRequest "$mockServer/automation/v3/workflows" -UseBasicParsing } | 
