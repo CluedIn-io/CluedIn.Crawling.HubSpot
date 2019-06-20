@@ -350,7 +350,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetOwnersAsync());
         }
 
-        [Fact]
+        [Fact(Skip = "https://api.hubapi.com/keywords/v2/keywords?hapikey=demo returns 404 Not Found")]
         public async Task KeywordsAreAvailable()
         {
             Assert.NotNull(
