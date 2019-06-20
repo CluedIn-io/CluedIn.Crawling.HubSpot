@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoFixture.Xunit2;
+using CluedIn.Core;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -49,11 +49,10 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100CompaniesAreAvailable(List<string> properties)
+        public async Task CompaniesAreAvailable(List<string> properties)
         {
-            Assert.InRange(
-                (await _sut.GetCompaniesAsync(properties)).results.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetCompaniesAsync(properties)).results);
         }
 
         [Theory]
@@ -65,12 +64,11 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         }
 
         [Theory]
-        [InlineAutoData]
-        public async Task UpTo20ResultsInEngagementsQueryableByIdAndType(long objectId, string objectType)
+        [InlineData(12345678, "contact")]
+        public async Task EngagementsQueryableByIdAndType(long objectId, string objectType)
         {
-            Assert.InRange(
-                (await _sut.GetEngagementByIdAndTypeAsync(objectId, objectType)).Count(),
-                0, 20);
+            Assert.NotNull(
+                await _sut.GetEngagementByIdAndTypeAsync(objectId, objectType));
         }
 
         [Theory]
@@ -91,35 +89,33 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100ProductsAreAvailable(List<string> properties)
+        public async Task ProductsAreAvailable(List<string> properties)
         {
-            Assert.InRange(
-                (await _sut.GetProductsAsync(properties)).Objects.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetProductsAsync(properties)).Objects);
         }
 
         [Theory]
         [InlineAutoData]
         public async Task LineItemPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetLineItemPropertiesAsync(settings));
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100LineItemsAreAvailable(List<string> properties)
+        public async Task LineItemsAreAvailable(List<string> properties)
         {
-            Assert.InRange(
-                (await _sut.GetLineItemsAsync(properties)).Objects.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetLineItemsAsync(properties)).Objects);
         }
 
         [Theory]
         [InlineAutoData]
         public async Task TicketPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetTicketPropertiesAsync(settings));
         }
 
@@ -133,110 +129,98 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         }
 
         [Fact]
-        public async Task UpTo20DynamicContactListsAreAvailable()
+        public async Task DynamicContactListsAreAvailable()
         {
-            Assert.InRange(
-                (await _sut.GetDynamicContactListsAsync()).contacts.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetDynamicContactListsAsync()).lists);
         }
 
         [Fact]
-        public async Task UpTo20StaticContactListsAreAvailable()
+        public async Task StaticContactListsAreAvailable()
         {
-            Assert.InRange(
-                (await _sut.GetStaticContactListsAsync()).lists.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetStaticContactListsAsync()).lists);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100DealAssociationsAreAvailable(int objectId)
+        public async Task DealAssociationsAreAvailable(int objectId)
         {
-            Assert.InRange(
-                (await _sut.GetAssociationsAsync(objectId, AssociationType.LineItemToDeal)).Results.Count,
-                0, 100);
+            Assert.NotNull(
+                (await _sut.GetAssociationsAsync(objectId, AssociationType.LineItemToDeal)).Results);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100ContactsFromAllListsAreAvailable(List<string> properties)
+        public async Task ContactsFromAllListsAreAvailable(List<string> properties)
         {
-            Assert.InRange(
-                (await _sut.GetContactsFromAllListsAsync(properties)).contacts.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetContactsFromAllListsAsync(properties)).contacts);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100DealsAreAvailable(List<string> properties, Settings settings)
+        public async Task DealsAreAvailable(List<string> properties, Settings settings)
         {
-            Assert.InRange(
-                (await _sut.GetDealsAsync(properties, settings)).deals.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetDealsAsync(properties, settings)).deals);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20FilesAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task FilesAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetFilesAsync(greaterThanEpoch)).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetFilesAsync(greaterThanEpoch)).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20SocialCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
+        public async Task SocialCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            Assert.InRange(
-                (await _sut.GetSocialCalendarEventsAsync(startDate, endDate)).Count,
-                0, 20);
+            Assert.NotNull(
+                await _sut.GetSocialCalendarEventsAsync(startDate, endDate));
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20TaskCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
+        public async Task TaskCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            Assert.InRange(
-                (await _sut.GetTaskCalendarEventsAsync(startDate, endDate)).Count,
-                0, 20);
+            Assert.NotNull(
+                await _sut.GetTaskCalendarEventsAsync(startDate, endDate));
 
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20RecentDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task RecentDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetRecentDealsAsync(greaterThanEpoch)).results.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetRecentDealsAsync(greaterThanEpoch)).results);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20RecentlyCreatedDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task RecentlyCreatedDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).results.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).results);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100BroadcastMessagesOfDealsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task BroadcastMessagesOfDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetBroadcastMessagesAsync(greaterThanEpoch)).Count,
-                0, 100);
+            Assert.NotEmpty(
+                await _sut.GetBroadcastMessagesAsync(greaterThanEpoch));
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100UrlMappingsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task UrlMappingsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetUrlMappingsAsync(greaterThanEpoch)).objects.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetUrlMappingsAsync(greaterThanEpoch)).objects);
         }
 
         [Fact]
@@ -247,64 +231,57 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         }
 
         [Fact]
-        public async Task UpTo100EngagementsAreAvailable()
+        public async Task EngagementsAreAvailable()
         {
-            Assert.InRange(
-                (await _sut.GetEngagementsAsync()).results.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetEngagementsAsync()).results);
         }
 
         [Fact]
-        public async Task UpTo20SiteMapsAreAvailable()
+        public async Task SiteMapsAreAvailable()
         {
-            Assert.InRange(
-                (await _sut.GetSiteMapsAsync()).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetSiteMapsAsync()).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20BlogPostsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task BlogPostsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetBlogPostsAsync(greaterThanEpoch)).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetBlogPostsAsync(greaterThanEpoch)).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20BlogTopicsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task BlogTopicsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetBlogTopicsAsync(greaterThanEpoch)).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetBlogTopicsAsync(greaterThanEpoch)).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20BlogsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task BlogsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetBlogsAsync(greaterThanEpoch)).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetBlogsAsync(greaterThanEpoch)).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task UpTo2DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.InRange(
-                (await _sut.GetDomainsAsync(greaterThanEpoch)).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetDomainsAsync(greaterThanEpoch)).objects);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo20TableRowsAreAvailable(DateTimeOffset greaterThanEpoch, long tableId, Column dateColumn, long portalId)
+        public async Task TableRowsAreAvailable(long tableId, Column dateColumn, long portalId)
         {
-            Assert.InRange(
-                (await _sut.GetTableRowsAsync(greaterThanEpoch, tableId, dateColumn, portalId)).Objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetTableRowsAsync(DateTimeOffset.MaxValue, tableId, dateColumn, portalId)).Objects);
         }
 
         [Fact]
@@ -317,49 +294,49 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [Fact]
         public async Task TablesAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetTablesAsync());
         }
 
         [Fact]
         public async Task WorkFlowsAreAvailable()
         {
-            Assert.NotNull(
-                await _sut.GetWorkflowsAsync());
+            Assert.NotEmpty(
+                (await _sut.GetWorkflowsAsync()).workflows);
         }
 
         [Fact]
         public async Task SmtpTokensAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetSmtpTokensAsync());
         }
 
         [Fact]
         public async Task PublishingChannelsAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetPublishingChannelsAsync());
         }
 
         [Fact]
         public async Task OwnersAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetOwnersAsync());
         }
 
         [Fact(Skip = "https://api.hubapi.com/keywords/v2/keywords?hapikey=demo returns 404 Not Found")]
         public async Task KeywordsAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetKeywordsAsync());
         }
 
         [Fact]
         public async Task DealPipelinesAreAvailable()
         {
-            Assert.NotNull(
+            Assert.NotEmpty(
                 await _sut.GetDealPipelinesAsync());
         }
 
@@ -368,7 +345,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         public async Task ContactsByCompanyAreAvailable(long companyId)
         {
             Assert.NotNull(
-                await _sut.GetContactsByCompanyAsync(companyId));
+                (await _sut.GetContactsByCompanyAsync(companyId)).contacts);
         }
     }
 }
