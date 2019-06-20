@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using CluedIn.Core;
@@ -121,11 +121,10 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo100TicketsAreAvailable(List<string> properties)
+        public async Task TicketsAreAvailable(List<string> properties)
         {
-            Assert.InRange(
-                (await _sut.GetTicketsAsync(properties)).Objects.Count,
-                0, 100);
+            Assert.NotEmpty(
+                (await _sut.GetTicketsAsync(properties)).Objects);
         }
 
         [Fact]
@@ -270,7 +269,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         [Theory]
         [InlineAutoData]
-        public async Task UpTo2DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
+        public async Task DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
             Assert.NotEmpty(
                 (await _sut.GetDomainsAsync(greaterThanEpoch)).objects);
