@@ -81,6 +81,18 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                 { Invoke-WebRequest "$mockServer/blogs/v3/topics" -UseBasicParsing } | 
                     Should -Not -Throw
             }  
+            
+            It "Broadcasts" {
+
+                { Invoke-WebRequest "$mockServer/broadcast/v1/broadcasts" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
+            
+            It "Broadcast Channel Settings" {
+
+                { Invoke-WebRequest "$mockServer/broadcast/v1/channels/setting/publish/current" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
 
             It "Calendar Events" {
 
@@ -259,6 +271,12 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
             It "Settings" {
 
                 { Invoke-WebRequest "$mockServer/integrations/v1/me" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+            
+            It "Site Maps" {
+
+                { Invoke-WebRequest "$mockServer/content/api/v2/site-maps" -UseBasicParsing } | 
                     Should -Not -Throw
             }  
             
