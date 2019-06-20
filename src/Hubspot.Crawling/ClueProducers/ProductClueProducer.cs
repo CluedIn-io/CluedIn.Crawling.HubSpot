@@ -31,12 +31,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             var clue = _factory.Create(EntityType.Product, input.ObjectId.ToString(), accountId);
             
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
             var data = clue.Data.EntityData;
 
-            data.Uri = new Uri(string.Format("https://app.hubspot.com/settings/{0}/sales/products", input.PortalId));
+            data.Uri = new Uri($"https://app.hubspot.com/settings/{input.PortalId}/sales/products");  // TODO take from configuration
 
             data.Properties[HubSpotVocabulary.Product.Version] = input.Version.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Product.IsDeleted] = input.IsDeleted.PrintIfAvailable();
@@ -125,7 +125,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
 
             if (!data.OutgoingEdges.Any() && input.PortalId != null)
-                this._factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
+                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
 
 
             return clue;

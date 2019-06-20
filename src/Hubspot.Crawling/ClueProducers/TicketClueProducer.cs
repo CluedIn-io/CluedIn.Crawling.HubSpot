@@ -31,12 +31,13 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             var clue = _factory.Create(EntityType.Support.Ticket, input.ObjectId.ToString(), accountId);
             
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
             var data = clue.Data.EntityData;
 
-            data.Uri = new Uri(string.Format("https://app.hubspot.com/tickets/{0}/tickets?ticketId={1}", input.PortalId.Value, input.ObjectId));
+            data.Uri = new Uri(
+                $"https://app.hubspot.com/tickets/{input.PortalId.Value}/tickets?ticketId={input.ObjectId}");  // TODO take from configuration
             data.Properties[HubSpotVocabulary.Product.Version] = input.Version.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Product.IsDeleted] = input.IsDeleted.PrintIfAvailable();
 
@@ -83,7 +84,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (data.CreatedDate != null)
                                 data.Properties[HubSpotVocabulary.Ticket.CreatedDate] = data.CreatedDate.Value.ToString("o");
                             if (r.SourceId != null)
-                                this._factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
+                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
                         }
                         else if (r.Name == "first_agent_reply_date")
                         {

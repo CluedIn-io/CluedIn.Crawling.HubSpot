@@ -27,7 +27,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             data.EntityData.Name = "HubSpot CRM";
             data.EntityData.Description = "HubSpot CRM is a web and mobile application for customers.";
             data.EntityData.DisplayName = "HubSpot CRM";
-            data.EntityData.Uri = new Uri("https://app.hubspot.com/login");
+            data.EntityData.Uri = new Uri("https://app.hubspot.com/login");  // TODO take from configuration
             data.EntityData.Codes.Add(new EntityCode(EntityType.Product, "CluedIn", "HubSpot"));
 
             var iconBytes = GetIcon();

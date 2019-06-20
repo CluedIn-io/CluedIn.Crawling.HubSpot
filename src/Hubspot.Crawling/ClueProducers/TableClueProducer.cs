@@ -31,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             data.Name = input.name;
             data.Description = input.rowCount + " rows";
-            data.Uri = new Uri("http://app.hubspot.com/l/hubdb");
+            data.Uri = new Uri("http://app.hubspot.com/l/hubdb");  // TODO take from configuration
 
             if (input.createdAt != null && long.TryParse(input.createdAt.ToString(), out long date))
                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);

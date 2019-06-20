@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             var data = clue.Data.EntityData;
 
             data.Name = input.label;
-            data.Uri = new Uri($"https://app.hubspot.com/sales-products-settings/{input.portalId}/deals/{input.pipelineId}");
+            data.Uri = new Uri($"https://app.hubspot.com/sales-products-settings/{input.portalId}/deals/{input.pipelineId}");  // TODO take from configuration
 
             data.Properties[HubSpotVocabulary.DealPipeline.Active] = input.active.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.DealPipeline.DisplayOrder] = input.displayOrder.PrintIfAvailable();

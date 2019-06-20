@@ -63,7 +63,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                 if (input.engagement.portalId != null && input.engagement.id != null && input.engagement.ownerId != null)
                 {
-                    string url = string.Format("https://app.hubspot.com/sales/{0}/tasks?taskId={1}&ownerId={2}", input.engagement.portalId, input.engagement.id, input.engagement.ownerId);
+                    var url =
+                        $"https://app.hubspot.com/sales/{input.engagement.portalId}/tasks?taskId={input.engagement.id}&ownerId={input.engagement.ownerId}";  // TODO take from configuration
                     data.Uri = new Uri(url);
                 }
                 if (input.engagement.createdAt != null)

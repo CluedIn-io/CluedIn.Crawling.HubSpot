@@ -24,7 +24,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
         protected override Clue MakeClueImpl(Row input, Guid accountId)
         {
             if (input == null)
+            {
                 throw new ArgumentNullException(nameof(input));
+            }
+
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             var clue = _factory.Create(EntityType.List.Item, input.Id.ToString(), accountId);
 
@@ -39,7 +46,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input.CreatedAt != null && long.TryParse(input.CreatedAt.ToString(), out long date))
                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);
 
-            data.Uri = new Uri("http://app.hubspot.com/l/hubdb");
+            data.Uri = new Uri("http://app.hubspot.com/l/hubdb");  // TODO take from configuration
 
             data.Properties[HubSpotVocabulary.Row.Name] = input.Name.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Row.Id] = input.Id.PrintIfAvailable();
