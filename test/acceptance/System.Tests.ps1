@@ -287,6 +287,11 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }   
 
+            It "Table Rows" {
+
+                { Invoke-WebRequest "$mockServer/hubdb/api/v2/tables/300081/rows?portalId=62515" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }   
             It "Templates" {
 
                 { Invoke-WebRequest "$mockServer/content/api/v2/templates" -UseBasicParsing } | 
