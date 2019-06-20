@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}</ProjectGuid>
+    <ProjectGuid>{D5313469-60EA-4B41-9D76-347F5D4101E8}</ProjectGuid>
     <TargetFramework>net452</TargetFramework>
-    <AssemblyTitle>Provider.HubSpot.Test</AssemblyTitle>
-    <Product>Provider.HubSpot.Test</Product>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AssemblyTitle>Crawling.HubSpot.Unit.Test</AssemblyTitle>
+    <Product>Crawling.HubSpot.Unit.Test</Product>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -21,8 +21,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Crawling\Crawling.HubSpot.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

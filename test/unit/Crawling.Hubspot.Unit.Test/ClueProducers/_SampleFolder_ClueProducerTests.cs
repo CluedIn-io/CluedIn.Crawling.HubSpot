@@ -1,4 +1,4 @@
-namespace Crawling.HubSpot.Test.ClueProducers
+namespace Crawling.Hubspot.Unit.Test.ClueProducers
 {
     //public class _SampleFolder_ClueProducerTests : BaseClueProducerTest<_SampleFolder_>
     //{

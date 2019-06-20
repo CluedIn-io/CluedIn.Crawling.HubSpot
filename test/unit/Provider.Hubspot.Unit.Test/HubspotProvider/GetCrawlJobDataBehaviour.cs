@@ -1,11 +1,10 @@
-using AutoFixture.Xunit2;
-using Should;
 using System;
 using System.Collections.Generic;
-
+using AutoFixture.Xunit2;
+using Should;
 using Xunit;
 
-namespace Provider.HubSpot.Test.HubSpotProvider
+namespace Provider.Hubspot.Unit.Test.HubspotProvider
 {
   public class GetCrawlJobDataBehaviour : HubSpotProviderTest
   {

@@ -6,7 +6,7 @@ using Moq;
 using Should;
 using Xunit;
 
-namespace Crawling.HubSpot.Test
+namespace Crawling.Hubspot.Unit.Test
 {
   public class HubSpotCrawlerBehaviour
   {

@@ -4,7 +4,7 @@ using CluedIn.Core.Providers;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using Moq;
 
-namespace Provider.HubSpot.Test.HubSpotProvider
+namespace Provider.Hubspot.Unit.Test.HubspotProvider
 {
   public abstract class HubSpotProviderTest
   {
