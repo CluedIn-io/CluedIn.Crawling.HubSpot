@@ -91,7 +91,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task ProductsAreAvailable(List<string> properties)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 (await _sut.GetProductsAsync(properties)).Objects);
         }
 
@@ -99,7 +99,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task LineItemPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 await _sut.GetLineItemPropertiesAsync(settings));
         }
 
@@ -107,7 +107,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task LineItemsAreAvailable(List<string> properties)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 (await _sut.GetLineItemsAsync(properties)).Objects);
         }
 
@@ -115,7 +115,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task TicketPropertiesAreAvailable(Settings settings)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 await _sut.GetTicketPropertiesAsync(settings));
         }
 
@@ -170,7 +170,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task FilesAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 (await _sut.GetFilesAsync(greaterThanEpoch)).objects);
         }
 
@@ -195,7 +195,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task RecentDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 (await _sut.GetRecentDealsAsync(greaterThanEpoch)).results);
         }
 
@@ -203,7 +203,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         [InlineAutoData]
         public async Task RecentlyCreatedDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
-            Assert.NotEmpty(
+            Assert.NotNull(
                 (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).results);
         }
 
