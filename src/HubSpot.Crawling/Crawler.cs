@@ -19,6 +19,11 @@ namespace CluedIn.Crawling.HubSpot
 
         public IEnumerable<object> GetData(CrawlJobData jobData)
         {
+            if (jobData == null)
+            {
+                throw new ArgumentNullException(nameof(jobData));
+            }
+
             if (!(jobData is HubSpotCrawlJobData crawlerJobData))
             {
                 return Enumerable.Empty<object>();
