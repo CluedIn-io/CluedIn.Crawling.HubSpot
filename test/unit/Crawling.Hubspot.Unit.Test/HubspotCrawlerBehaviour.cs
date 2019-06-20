@@ -16,7 +16,7 @@ namespace Crawling.Hubspot.Unit.Test
     {
         var nameClientFactory = new Mock<IHubSpotClientFactory>();
 
-        _sut = new HubSpotCrawler(nameClientFactory.Object);
+        _sut = new Crawler(nameClientFactory.Object);
     }
 
     [Fact]

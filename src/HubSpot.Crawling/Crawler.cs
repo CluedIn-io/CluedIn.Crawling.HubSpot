@@ -8,11 +8,11 @@ using CluedIn.Crawling.HubSpot.Iterators;
 
 namespace CluedIn.Crawling.HubSpot
 {
-    public class HubSpotCrawler : ICrawlerDataGenerator
+    public class Crawler : ICrawlerDataGenerator
     {
         private readonly IHubSpotClientFactory _clientFactory;
 
-        public HubSpotCrawler(IHubSpotClientFactory clientFactory)
+        public Crawler(IHubSpotClientFactory clientFactory)
         {
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
         }

@@ -6,9 +6,9 @@ using ComponentHost;
 namespace CluedIn.Crawling.HubSpot
 {
     [Component(HubSpotConstants.CrawlerComponentName, "Crawlers", ComponentType.Service, Components.Server, Components.ContentExtractors, Isolation = ComponentIsolation.NotIsolated)]
-    public class HubSpotCrawlerComponent : CrawlerComponentBase
+    public class CrawlerComponent : CrawlerComponentBase
     {
-        public HubSpotCrawlerComponent([NotNull] ComponentInfo componentInfo)
+        public CrawlerComponent([NotNull] ComponentInfo componentInfo)
             : base(componentInfo)
         {
         }
