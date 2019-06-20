@@ -189,7 +189,13 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                 { Invoke-WebRequest "$mockServer/content/api/v4/domains" -UseBasicParsing } | 
                     Should -Not -Throw
             } 
-                
+
+            It "Email SMTP Tokens" {
+
+                { Invoke-WebRequest "$mockServer/email/public/v1/smtpapi/tokens" -UseBasicParsing } | 
+                    Should -Not -Throw
+            } 
+
             It "Engagement Associated Company Paged" {
 
                 { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/COMPANY/686724251/paged" -UseBasicParsing } | 
