@@ -1,0 +1,162 @@
+{
+    "total_count": 2,
+    "objects": [
+        {
+            "archived": false,
+            "author_user_id": 100307,
+            "blog_author": {
+                "avatar": "",
+                "bio": "",
+                "body": {},
+                "created": 1377856983000,
+                "deleted_at": 0,
+                "email": "testapi@hubspot.com",
+                "facebook": "",
+                "full_name": "Hub Spot",
+                "google_plus": "",
+                "gravatar_url": "https://app.hubspot.com/settings/avatar/bb23f3ae97b9698d130c02d2841e86a4",
+                "id": 284839243,
+                "linkedin": "",
+                "portal_id": 62515,
+                "slug": "hub-spot",
+                "twitter": "",
+                "updated": 1377856983000,
+                "user_id": 215482,
+                "username": "testapi@hubspot.com",
+                "website": ""
+            },
+            "blog_author_id": 284839243,
+            "campaign": null,
+            "campaign_name": null,
+            "cloned_from": null,
+            "comment_count": 0,
+            "content_group_id": 351076997,
+            "created": 1381896118000,
+            "deleted_at": 0,
+            "featured_image": "",
+            "footer_html": "",
+            "freeze_date": 1381896118000,
+            "has_user_changes": true,
+            "head_html": "",
+            "html_title": "Demonstration Blog Post",
+            "id": 348109414,
+            "is_draft": true,
+            "meta_description": "This is the meta description of your first post.",
+            "name": "Demonstration Blog Post",
+            "performable_url": null,
+            "portal_id": 62515,
+            "post_body":"
+ <p>This is an example blog post.  You can delete this blog post by going to the blog dashboard.</p>
+ <p>We hope you enjoy your HubSpot!</p>
+ ",
+          "post_summary":"
+ <p>This is an example blog post.  You can delete this blog post by going to the blog dashboard.</p>
+ ",
+          "preview_key": "AhbF8tzV",
+            "processing_status": "",
+            "publish_date": 1381896118000,
+            "publish_immediately": null,
+            "published_url": "http://62515.sites.hubspot.com/blog/your-first-blog-post",
+            "rss_body":"
+ <p>This is an example blog post.  You can delete this blog post by going to the blog dashboard.</p>
+ <p>We hope you enjoy your HubSpot!</p>
+ ",
+          "rss_summary":"
+ <p>This is an example blog post.  You can delete this blog post by going to the blog dashboard.</p>
+ ",
+          "slug": "blog/your-first-blog-post",
+            "state": "PUBLISHED",
+            "style_override_id": null,
+            "subcategory": "normal_blog_post",
+            "topic_ids": [],
+            "updated": 1381896118000,
+            "url": "http://62515.sites.hubspot.com/blog/your-first-blog-post",
+            "widget_containers": {},
+            "widgetcontainers": {},
+            "widgets": {}
+        },
+        {
+            "archived": false,
+            "author_user_id": 100307,
+            "blog_author": {
+                "avatar": "",
+                "bio": "",
+                "body": {},
+                "created": 1377856983000,
+                "deleted_at": 0,
+                "email": "testapi@hubspot.com",
+                "facebook": "",
+                "full_name": "Hub Spot",
+                "google_plus": "",
+                "gravatar_url": "https://app.hubspot.com/settings/avatar/bb23f3ae97b9698d130c02d2841e86a4",
+                "id": 284839243,
+                "linkedin": "",
+                "portal_id": 62515,
+                "slug": "hub-spot",
+                "twitter": "",
+                "updated": 1377856983000,
+                "user_id": 215482,
+                "username": "testapi@hubspot.com",
+                "website": ""
+            },
+            "blog_author_id": 284839243,
+            "campaign": "d4c2ff5a-257d-4c4c-84a1-15e7197258fc",
+            "campaign_name": "market",
+            "cloned_from": null,
+            "comment_count": 0,
+            "content_group_id": 351076997,
+            "created": 1381896164000,
+            "deleted_at": 0,
+            "featured_image": "",
+            "footer_html": "",
+            "freeze_date": 1381896282000,
+            "has_user_changes": true,
+            "head_html": "",
+            "html_title": "Demonstrating the Blog Post API",
+            "id": 352531735,
+            "is_draft": true,
+            "meta_description": "A test blog post demonstrating the API.",
+            "name": "Demonstrating the Blog Post API",
+            "performable_url": null,
+            "portal_id": 62515,
+            "post_body":"<p>This blog post is meant to demonstrate the capabilities of the COS API.</p>
+ <p><span>Part content system, part personalization engine. HubSpot's COS is the first integrated website, blog and landing page system to be optimized for mobile right out-of-the-box. Fully integrated with every marketing channel, it adapts to each viewer's unique context.</span></p>
+ <p><span><span>HubSpot is a complete inbound marketing platform. So not only are all of the tools you use in one place, your customers get a seamless experience from email to social to web. Brilliant.</span></span></p>",
+          "post_summary":"<p>This blog post is meant to demonstrate the capabilities of the COS API.</p>
+ ",
+          "preview_key": "Bw3HHMW_",
+            "processing_status": "published",
+            "publish_date": 1381896282000,
+            "publish_immediately": true,
+            "published_url": "http://62515.sites.hubspot.com/blog/demonstrating-the-blog-post-api",
+            "rss_body":"<p>This blog post is meant to demonstrate the capabilities of the COS API.</p>
+ <p><span>Part content system, part personalization engine. HubSpot's COS is the first integrated website, blog and landing page system to be optimized for mobile right out-of-the-box. Fully integrated with every marketing channel, it adapts to each viewer's unique context.</span></p>
+ <p><span><span>HubSpot is a complete inbound marketing platform. So not only are all of the tools you use in one place, your customers get a seamless experience from email to social to web. Brilliant.</span></span></p>",
+          "rss_summary":"<p>This blog post is meant to demonstrate the capabilities of the COS API.</p>
+ ",
+          "slug": "blog/demonstrating-the-blog-post-api",
+            "state": "PUBLISHED",
+            "style_override_id": null,
+            "subcategory": "normal_blog_post",
+            "topic_ids": [
+                349001328
+            ],
+            "updated": 1381896283000,
+            "url": "http://62515.sites.hubspot.com/blog/demonstrating-the-blog-post-api",
+            "widget_containers": {},
+            "widgetcontainers": {},
+            "widgets": {
+                "blog_comments": {
+                    "body": {},
+                    "name": "blog_comments",
+                    "meta": {},
+                    "type": "blog_comments",
+                    "id": "blog_comments",
+                    "css": {}
+                }
+            }
+        }
+    ],
+    "limit": 20,
+    "offset": 0
+}

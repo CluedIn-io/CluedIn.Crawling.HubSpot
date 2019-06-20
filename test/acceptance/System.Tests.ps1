@@ -70,6 +70,24 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
                     Should -Not -Throw
             }  
 
+            It "Blog Posts" {
+
+                { Invoke-WebRequest "$mockServer/content/api/v2/blog-posts" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+
+            It "Blog Topics" {
+
+                { Invoke-WebRequest "$mockServer/blogs/v3/topics" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+
+            It "Calendar Events" {
+
+                { Invoke-WebRequest "$mockServer/calendar/v1/events/task" -UseBasicParsing } | 
+                    Should -Not -Throw
+            }  
+            
             It "Companies Paged" {
 
                 { Invoke-WebRequest "$mockServer/companies/v2/companies/paged" -UseBasicParsing } | 

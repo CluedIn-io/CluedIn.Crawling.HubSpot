@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/blogs/v3/topics(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "blog-topics.json"
+    }
+}
