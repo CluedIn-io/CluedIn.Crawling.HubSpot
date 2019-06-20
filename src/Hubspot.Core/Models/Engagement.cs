@@ -20,7 +20,7 @@
     //    public List<object> ownerIds { get; set; }
     //}
 
-    public class Metadata
+    public class Metadata  // TODO there is a MetaData class already in this namespace, bug ?
     {
         public string body { get; set; }
     }
