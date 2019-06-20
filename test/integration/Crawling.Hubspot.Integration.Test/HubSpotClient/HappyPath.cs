@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using CluedIn.Core;
@@ -276,8 +276,8 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         }
 
         [Theory]
-        [InlineAutoData]
-        public async Task TableRowsAreAvailable(long tableId, Column dateColumn, long portalId)
+        [InlineAutoData(300081, 62515)]
+        public async Task TableRowsAreAvailable(long tableId, long portalId, Column dateColumn)
         {
             Assert.NotEmpty(
                 (await _sut.GetTableRowsAsync(DateTimeOffset.MaxValue, tableId, dateColumn, portalId)).Objects);
