@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
@@ -240,11 +240,10 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
         }
 
         [Fact]
-        public async Task UpTo20TemplatesAreAvailable()
+        public async Task TemplatesAreAvailable()
         {
-            Assert.InRange(
-                (await _sut.GetTemplatesAsync()).objects.Count,
-                0, 20);
+            Assert.NotEmpty(
+                (await _sut.GetTemplatesAsync()).objects);
         }
 
         [Fact]
