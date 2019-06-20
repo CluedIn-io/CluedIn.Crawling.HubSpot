@@ -21,107 +21,107 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
         /// </summary>
         public HubSpotCompanyVocabulary()
         {
-            this.VocabularyName = "HubSpot Company";
-            this.KeyPrefix      = "hubspot.company";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Organization;
+            VocabularyName = "HubSpot Company";
+            KeyPrefix      = "hubspot.company";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Organization;
 
-            this.CompanyId               = this.Add(new VocabularyKey("CompanyId", VocabularyKeyVisiblity.Hidden));
-            this.IsDeleted               = this.Add(new VocabularyKey("IsDeleted"));
-            this.PortalId                = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.Zip                     = this.Add(new VocabularyKey("Zip"));
-            this.Country                 = this.Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));
-            this.Website                 = this.Add(new VocabularyKey("Website", VocabularyKeyDataType.Uri));
-            this.Address                 = this.Add(new VocabularyKey("Address"));
-            this.City                    = this.Add(new VocabularyKey("City", VocabularyKeyDataType.GeographyCity));
-            this.Phone                   = this.Add(new VocabularyKey("Phone", VocabularyKeyDataType.PhoneNumber));
-            this.State                   = this.Add(new VocabularyKey("State"));
-            this.FirstName               = this.Add(new VocabularyKey("FirstName"));
-            this.LastName                = this.Add(new VocabularyKey("LastName"));
-            this.Company                 = this.Add(new VocabularyKey("Company"));
-            this.Salutation              = this.Add(new VocabularyKey("Salutation"));
-            this.IpAddress               = this.Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress, VocabularyKeyVisiblity.Hidden));
-            this.Fax                     = this.Add(new VocabularyKey("Fax", VocabularyKeyDataType.PhoneNumber));
-            this.OwnerName               = this.Add(new VocabularyKey("OwnerName"));
-            this.OwnerEmail              = this.Add(new VocabularyKey("OwnerEmail", VocabularyKeyDataType.Email));
-            this.Message                 = this.Add(new VocabularyKey("Message"));
-            this.JobTitle                = this.Add(new VocabularyKey("JobTitle"));
-            this.AnalyticsSource         = this.Add(new VocabularyKey("AnalyticsSource"));
-            this.Integrations            = this.Add(new VocabularyKey("Integrations"));
-            this.EmailDomain             = this.Add(new VocabularyKey("EmailDomain"));
-            this.IsPublic                = this.Add(new VocabularyKey("IsPublic"));
-            this.AssociateContactsCounts = this.Add(new VocabularyKey("AssociateContactsCounts"));
-            this.Notes                   = this.Add(new VocabularyKey("Notes"));
+            CompanyId               = Add(new VocabularyKey("CompanyId", VocabularyKeyVisiblity.Hidden));
+            IsDeleted               = Add(new VocabularyKey("IsDeleted"));
+            PortalId                = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            Zip                     = Add(new VocabularyKey("Zip"));
+            Country                 = Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));
+            Website                 = Add(new VocabularyKey("Website", VocabularyKeyDataType.Uri));
+            Address                 = Add(new VocabularyKey("Address"));
+            City                    = Add(new VocabularyKey("City", VocabularyKeyDataType.GeographyCity));
+            Phone                   = Add(new VocabularyKey("Phone", VocabularyKeyDataType.PhoneNumber));
+            State                   = Add(new VocabularyKey("State"));
+            FirstName               = Add(new VocabularyKey("FirstName"));
+            LastName                = Add(new VocabularyKey("LastName"));
+            Company                 = Add(new VocabularyKey("Company"));
+            Salutation              = Add(new VocabularyKey("Salutation"));
+            IpAddress               = Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress, VocabularyKeyVisiblity.Hidden));
+            Fax                     = Add(new VocabularyKey("Fax", VocabularyKeyDataType.PhoneNumber));
+            OwnerName               = Add(new VocabularyKey("OwnerName"));
+            OwnerEmail              = Add(new VocabularyKey("OwnerEmail", VocabularyKeyDataType.Email));
+            Message                 = Add(new VocabularyKey("Message"));
+            JobTitle                = Add(new VocabularyKey("JobTitle"));
+            AnalyticsSource         = Add(new VocabularyKey("AnalyticsSource"));
+            Integrations            = Add(new VocabularyKey("Integrations"));
+            EmailDomain             = Add(new VocabularyKey("EmailDomain"));
+            IsPublic                = Add(new VocabularyKey("IsPublic"));
+            AssociateContactsCounts = Add(new VocabularyKey("AssociateContactsCounts"));
+            Notes                   = Add(new VocabularyKey("Notes"));
 
-            this.Properties              = this.Add(new VocabularyKey("Properties", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Properties              = Add(new VocabularyKey("Properties", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
 
-            this.AddMapping(this.EmailDomain, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.EmailDomainNames);   
+            AddMapping(EmailDomain, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.EmailDomainNames);   
 
-            this.AddMapping(this.Fax, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Fax);
-            this.AddMapping(this.JobTitle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.JobTitle);
+            AddMapping(Fax, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Fax);
+            AddMapping(JobTitle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.JobTitle);
 
-            this.AddMapping(this.FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.FirstName);
-            this.AddMapping(this.LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.LastName);
-            this.AddMapping(this.Salutation, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Title);
-            this.AddMapping(this.Zip, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressZipCode);
-            this.AddMapping(this.Country, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressCountryCode);
-            this.AddMapping(this.Website, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Website);
-            this.AddMapping(this.Address, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Address);
-            this.AddMapping(this.City, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressCity);
+            AddMapping(FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.FirstName);
+            AddMapping(LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.LastName);
+            AddMapping(Salutation, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Title);
+            AddMapping(Zip, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressZipCode);
+            AddMapping(Country, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressCountryCode);
+            AddMapping(Website, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Website);
+            AddMapping(Address, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Address);
+            AddMapping(City, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressCity);
           
-            this.AddMapping(this.Phone, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.PhoneNumber);
-            this.AddMapping(this.State, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressState);
+            AddMapping(Phone, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.PhoneNumber);
+            AddMapping(State, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressState);
             //this.AddMapping(this.LinkedInBio, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AddressZipCode);
             // TODO: map keys to CluedIn vocabulary
 
-            this.LastMeetingBooked                         = this.Add(new VocabularyKey("LastMeetingBooked"));
-            this.LastMeetingBookedCampaign                 = this.Add(new VocabularyKey("LastMeetingBookedCampaign"));
-            this.LastMeetingBookedMedium                   = this.Add(new VocabularyKey("LastMeetingBookedMedium"));
-            this.LastMeetingBookedSource                   = this.Add(new VocabularyKey("LastMeetingBookedSource"));
+            LastMeetingBooked                         = Add(new VocabularyKey("LastMeetingBooked"));
+            LastMeetingBookedCampaign                 = Add(new VocabularyKey("LastMeetingBookedCampaign"));
+            LastMeetingBookedMedium                   = Add(new VocabularyKey("LastMeetingBookedMedium"));
+            LastMeetingBookedSource                   = Add(new VocabularyKey("LastMeetingBookedSource"));
 
-            this.CompanyInformationAboutUs                 = this.Add(new VocabularyKey("AboutUs"));
-            this.CompanyInformationFirstDealCreatedDate    = this.Add(new VocabularyKey("FirstDealCreatedDate"));
-            this.CompanyInformationYearFounded             = this.Add(new VocabularyKey("YearFounded"));
-            this.CompanyInformationAvatarFileManagerkey    = this.Add(new VocabularyKey("AvatarFileManagerkey"));
-            this.CompanyInformationLastModifiedDate        = this.Add(new VocabularyKey("LastModifiedDate"));
-            this.CompanyInformationOwnerAssignedDate       = this.Add(new VocabularyKey("OwnerAssignedDate"));
-            this.CompanyInformationAssociatedContacts      = this.Add(new VocabularyKey("AssociatedContacts"));
-            this.CompanyInformationAssociatedDeals         = this.Add(new VocabularyKey("AssociatedDeals"));
-            this.CompanyInformationRecentDealAmount        = this.Add(new VocabularyKey("RecentDealAmount"));
-            this.CompanyInformationRecentDealCloseDate     = this.Add(new VocabularyKey("RecentDealCloseDate"));
-            this.CompanyInformationTimeZone                = this.Add(new VocabularyKey("TimeZone"));
-            this.CompanyInformationTotalMoneyRaised        = this.Add(new VocabularyKey("TotalMoneyRaised"));
-            this.CompanyInformationTotalRevenue            = this.Add(new VocabularyKey("TotalRevenue"));
-            this.CompanyInformationStreetAddress           = this.Add(new VocabularyKey("StreetAddress"));
-            this.CompanyInformationStreetAddress2          = this.Add(new VocabularyKey("StreetAddress2"));
-            this.CompanyInformationStateRegion             = this.Add(new VocabularyKey("State/Region"));
-            this.CompanyInformationHubSpotOwner            = this.Add(new VocabularyKey("HubSpotOwner"));
-            this.CompanyInformationLastContacted           = this.Add(new VocabularyKey("LastContacted"));
-            this.CompanyInformationLastActivityDate        = this.Add(new VocabularyKey("LastActivityDate"));
-            this.CompanyInformationNextActivityDate        = this.Add(new VocabularyKey("NextActivityDate"));
-            this.CompanyInformationNumberoftimescontacted  = this.Add(new VocabularyKey("Numberoftimescontacted"));
-            this.CompanyInformationNumberofSalesActivities = this.Add(new VocabularyKey("NumberofSalesActivities"));
-            this.CompanyInformationPostalCode              = this.Add(new VocabularyKey("PostalCode"));
-            this.CompanyInformationHubSpotTeam             = this.Add(new VocabularyKey("HubSpotTeam"));
-            this.CompanyInformationWebsiteURL              = this.Add(new VocabularyKey("WebsiteURL"));
-            this.CompanyInformationCompanyDomainName       = this.Add(new VocabularyKey("CompanyDomainName"));
-            this.CompanyInformationNumberofEmployees       = this.Add(new VocabularyKey("NumberofEmployees"));
-            this.CompanyInformationIndustry                = this.Add(new VocabularyKey("Industry"));
-            this.CompanyInformationAnnualRevenue           = this.Add(new VocabularyKey("AnnualRevenue"));
-            this.CompanyInformationLifecycleStage          = this.Add(new VocabularyKey("LifecycleStage"));
-            this.CompanyInformationLeadStatus              = this.Add(new VocabularyKey("LeadStatus"));
-            this.CompanyInformationParentCompany           = this.Add(new VocabularyKey("ParentCompany"));
-            this.CompanyInformationType                    = this.Add(new VocabularyKey("Type"));
-            this.CompanyInformationNumberOfChildCompanies  = this.Add(new VocabularyKey("Numberofchildcompanies"));
-            this.CompanyInformationCreateDate              = this.Add(new VocabularyKey("CreateDate"));
-            this.CompanyInformationCloseDate               = this.Add(new VocabularyKey("CloseDate"));
-            this.CompanyInformationFirstContactCreateDate  = this.Add(new VocabularyKey("FirstContactCreateDate"));
-            this.CompanyInformationWebTechnologies         = this.Add(new VocabularyKey("WebTechnologies"));
-            this.CompanyInformationCity                    = this.Add(new VocabularyKey("Information.City"));
+            CompanyInformationAboutUs                 = Add(new VocabularyKey("AboutUs"));
+            CompanyInformationFirstDealCreatedDate    = Add(new VocabularyKey("FirstDealCreatedDate"));
+            CompanyInformationYearFounded             = Add(new VocabularyKey("YearFounded"));
+            CompanyInformationAvatarFileManagerkey    = Add(new VocabularyKey("AvatarFileManagerkey"));
+            CompanyInformationLastModifiedDate        = Add(new VocabularyKey("LastModifiedDate"));
+            CompanyInformationOwnerAssignedDate       = Add(new VocabularyKey("OwnerAssignedDate"));
+            CompanyInformationAssociatedContacts      = Add(new VocabularyKey("AssociatedContacts"));
+            CompanyInformationAssociatedDeals         = Add(new VocabularyKey("AssociatedDeals"));
+            CompanyInformationRecentDealAmount        = Add(new VocabularyKey("RecentDealAmount"));
+            CompanyInformationRecentDealCloseDate     = Add(new VocabularyKey("RecentDealCloseDate"));
+            CompanyInformationTimeZone                = Add(new VocabularyKey("TimeZone"));
+            CompanyInformationTotalMoneyRaised        = Add(new VocabularyKey("TotalMoneyRaised"));
+            CompanyInformationTotalRevenue            = Add(new VocabularyKey("TotalRevenue"));
+            CompanyInformationStreetAddress           = Add(new VocabularyKey("StreetAddress"));
+            CompanyInformationStreetAddress2          = Add(new VocabularyKey("StreetAddress2"));
+            CompanyInformationStateRegion             = Add(new VocabularyKey("State/Region"));
+            CompanyInformationHubSpotOwner            = Add(new VocabularyKey("HubSpotOwner"));
+            CompanyInformationLastContacted           = Add(new VocabularyKey("LastContacted"));
+            CompanyInformationLastActivityDate        = Add(new VocabularyKey("LastActivityDate"));
+            CompanyInformationNextActivityDate        = Add(new VocabularyKey("NextActivityDate"));
+            CompanyInformationNumberoftimescontacted  = Add(new VocabularyKey("Numberoftimescontacted"));
+            CompanyInformationNumberofSalesActivities = Add(new VocabularyKey("NumberofSalesActivities"));
+            CompanyInformationPostalCode              = Add(new VocabularyKey("PostalCode"));
+            CompanyInformationHubSpotTeam             = Add(new VocabularyKey("HubSpotTeam"));
+            CompanyInformationWebsiteURL              = Add(new VocabularyKey("WebsiteURL"));
+            CompanyInformationCompanyDomainName       = Add(new VocabularyKey("CompanyDomainName"));
+            CompanyInformationNumberofEmployees       = Add(new VocabularyKey("NumberofEmployees"));
+            CompanyInformationIndustry                = Add(new VocabularyKey("Industry"));
+            CompanyInformationAnnualRevenue           = Add(new VocabularyKey("AnnualRevenue"));
+            CompanyInformationLifecycleStage          = Add(new VocabularyKey("LifecycleStage"));
+            CompanyInformationLeadStatus              = Add(new VocabularyKey("LeadStatus"));
+            CompanyInformationParentCompany           = Add(new VocabularyKey("ParentCompany"));
+            CompanyInformationType                    = Add(new VocabularyKey("Type"));
+            CompanyInformationNumberOfChildCompanies  = Add(new VocabularyKey("Numberofchildcompanies"));
+            CompanyInformationCreateDate              = Add(new VocabularyKey("CreateDate"));
+            CompanyInformationCloseDate               = Add(new VocabularyKey("CloseDate"));
+            CompanyInformationFirstContactCreateDate  = Add(new VocabularyKey("FirstContactCreateDate"));
+            CompanyInformationWebTechnologies         = Add(new VocabularyKey("WebTechnologies"));
+            CompanyInformationCity                    = Add(new VocabularyKey("Information.City"));
 
-            this.AddMapping(this.CompanyInformationTimeZone, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.TimeZone);
-            this.AddMapping(this.CompanyInformationIndustry, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Industry);
-            this.AddMapping(this.CompanyInformationAnnualRevenue, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AnnualRevenue);
+            AddMapping(CompanyInformationTimeZone, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.TimeZone);
+            AddMapping(CompanyInformationIndustry, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Industry);
+            AddMapping(CompanyInformationAnnualRevenue, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.AnnualRevenue);
 
             AddGroup("HubSpot Company Analytics Information Details", group =>
             {
@@ -151,9 +151,9 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                 SocialMediaInformationGooglePlusPage      = group.Add(new VocabularyKey("GooglePlusPage"));
             });
 
-            this.AddMapping(this.SocialMediaInformationTwitterHandle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Social.Twitter);
-            this.AddMapping(this.SocialMediaInformationFacebookCompanyPage, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialFacebook);
-            this.AddMapping(this.SocialMediaInformationLinkedInCompanyPage, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialLinkedIn);
+            AddMapping(SocialMediaInformationTwitterHandle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.Social.Twitter);
+            AddMapping(SocialMediaInformationFacebookCompanyPage, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialFacebook);
+            AddMapping(SocialMediaInformationLinkedInCompanyPage, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialLinkedIn);
 
         }
 

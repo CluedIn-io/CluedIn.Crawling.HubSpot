@@ -18,20 +18,20 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotSiteMapVocabulary()
         {
-            this.VocabularyName = "HubSpot Sitemap";
-            this.KeyPrefix      = "hubspot.sitemap";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.News;
+            VocabularyName = "HubSpot Sitemap";
+            KeyPrefix      = "hubspot.sitemap";
+            KeySeparator   = ".";
+            Grouping       = EntityType.News;
 
-            this.Created   = this.Add(new VocabularyKey("Created"));
-            this.DeletedAt = this.Add(new VocabularyKey("DeletedAt", VocabularyKeyDataType.DateTime));
-            this.PagesTree = this.Add(new VocabularyKey("PagesTree", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.PortalId  = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.Updated   = this.Add(new VocabularyKey("Updated"));
+            Created   = Add(new VocabularyKey("Created"));
+            DeletedAt = Add(new VocabularyKey("DeletedAt", VocabularyKeyDataType.DateTime));
+            PagesTree = Add(new VocabularyKey("PagesTree", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            Updated   = Add(new VocabularyKey("Updated"));
 
             // TODO: map keys to CluedIn vocabulary
-            this.AddMapping(this.Created, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
-            this.AddMapping(this.Updated, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.ModifiedDate);
+            AddMapping(Created, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
+            AddMapping(Updated, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.ModifiedDate);
         }
 
         public VocabularyKey Created { get; private set; }

@@ -18,22 +18,22 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotCallVocabulary()
         {
-            this.VocabularyName = "HubSpot Call";
-            this.KeyPrefix      = "hubspot.call";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.PhoneCall;
+            VocabularyName = "HubSpot Call";
+            KeyPrefix      = "hubspot.call";
+            KeySeparator   = ".";
+            Grouping       = EntityType.PhoneCall;
 
-            this.FromNumber         = this.Add(new VocabularyKey("FromNumber", VocabularyKeyDataType.PhoneNumber));
-            this.ToNumber           = this.Add(new VocabularyKey("ToNumber", VocabularyKeyDataType.PhoneNumber));
-            this.Duration           = this.Add(new VocabularyKey("Duration", VocabularyKeyDataType.Time));
-            this.Status             = this.Add(new VocabularyKey("Status", VocabularyKeyDataType.Text));
-            this.Body               = this.Add(new VocabularyKey("Notes", VocabularyKeyDataType.Text));
-            this.Disposition        = this.Add(new VocabularyKey("Disposition", VocabularyKeyVisiblity.HiddenInFrontendUI));
-            this.ExternalAccountId  = this.Add(new VocabularyKey("ExternalAccountId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
-            this.ExternalId         = this.Add(new VocabularyKey("ExternalId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
-            this.RecordingUrl       = this.Add(new VocabularyKey("RecordingUrl", VocabularyKeyDataType.Uri));
+            FromNumber         = Add(new VocabularyKey("FromNumber", VocabularyKeyDataType.PhoneNumber));
+            ToNumber           = Add(new VocabularyKey("ToNumber", VocabularyKeyDataType.PhoneNumber));
+            Duration           = Add(new VocabularyKey("Duration", VocabularyKeyDataType.Time));
+            Status             = Add(new VocabularyKey("Status", VocabularyKeyDataType.Text));
+            Body               = Add(new VocabularyKey("Notes", VocabularyKeyDataType.Text));
+            Disposition        = Add(new VocabularyKey("Disposition", VocabularyKeyVisiblity.HiddenInFrontendUI));
+            ExternalAccountId  = Add(new VocabularyKey("ExternalAccountId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
+            ExternalId         = Add(new VocabularyKey("ExternalId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
+            RecordingUrl       = Add(new VocabularyKey("RecordingUrl", VocabularyKeyDataType.Uri));
 
-            AddMapping(this.Duration, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInAudio.Duration);
+            AddMapping(Duration, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInAudio.Duration);
          
         }
 

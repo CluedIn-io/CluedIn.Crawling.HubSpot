@@ -18,47 +18,47 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotBlogPostVocabulary()
         {
-            this.VocabularyName = "HubSpot Blog Post";
-            this.KeyPrefix      = "hubspot.blog.post";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.News;
+            VocabularyName = "HubSpot Blog Post";
+            KeyPrefix      = "hubspot.blog.post";
+            KeySeparator   = ".";
+            Grouping       = EntityType.News;
 
-            this.AddGroup("Hubspot Blog Details", group =>
+            AddGroup("Hubspot Blog Details", group =>
             {
-                this.Archived           = group.Add(new VocabularyKey("Archived", VocabularyKeyDataType.Boolean));
-                this.BlogAuthor         = group.Add(new VocabularyKey("BlogAuthor", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Campaign           = group.Add(new VocabularyKey("Campaign", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.CampaignName       = group.Add(new VocabularyKey("CampaignName"));
-                this.ClonedFrom         = group.Add(new VocabularyKey("ClonedFrom", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.CommentCount       = group.Add(new VocabularyKey("CommentCount", VocabularyKeyDataType.Integer));
-                this.DeletedAt          = group.Add(new VocabularyKey("DeletedAt", VocabularyKeyDataType.DateTime));
-                this.FeaturedImage      = group.Add(new VocabularyKey("FeaturedImage"));
-                this.FooterHtml = group.Add(new VocabularyKey("FooterHtml", VocabularyKeyVisiblity.Hidden));
-                this.FreezeDate         = group.Add(new VocabularyKey("FreezeDate", VocabularyKeyDataType.DateTime));
-                this.HasUserChanges     = group.Add(new VocabularyKey("HasUserChanges", VocabularyKeyDataType.Boolean));
-                this.HeadHtml = group.Add(new VocabularyKey("HeadHtml", VocabularyKeyVisiblity.Hidden));
-                this.HtmlTitle          = group.Add(new VocabularyKey("HtmlTitle"));
-                this.IsDraft            = group.Add(new VocabularyKey("IsDraft", VocabularyKeyDataType.Boolean));
-                this.MetaDescription    = group.Add(new VocabularyKey("MetaDescription"));
-                this.MetaKeywords       = group.Add(new VocabularyKey("MetaKeywords", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.PerformableUrl     = group.Add(new VocabularyKey("PerformableUrl", VocabularyKeyDataType.Uri));
-                this.PostBody           = group.Add(new VocabularyKey("PostBody"));
-                this.PreviewImageSrc    = group.Add(new VocabularyKey("PreviewImageSrc"));
-                this.PreviewKey = group.Add(new VocabularyKey("PreviewKey", VocabularyKeyVisiblity.Hidden));
-                this.ProcessingStatus   = group.Add(new VocabularyKey("ProcessingStatus"));
-                this.PublishDate        = group.Add(new VocabularyKey("PublishDate", VocabularyKeyDataType.DateTime));
-                this.PublishImmediately = group.Add(new VocabularyKey("PublishImmediately", VocabularyKeyDataType.Boolean));
-                this.PublishedUrl       = group.Add(new VocabularyKey("PublishedUrl", VocabularyKeyDataType.Uri));
-                this.RssBody = group.Add(new VocabularyKey("RssBody", VocabularyKeyVisiblity.Hidden));
-                this.RssSummary = group.Add(new VocabularyKey("RssSummary", VocabularyKeyVisiblity.Hidden));
-                this.Slug = group.Add(new VocabularyKey("Slug", VocabularyKeyVisiblity.Hidden));
-                this.State              = group.Add(new VocabularyKey("State"));
-                this.StyleOverrideId    = group.Add(new VocabularyKey("StyleOverrideId", VocabularyKeyVisiblity.Hidden));
-                this.Subcategory        = group.Add(new VocabularyKey("Subcategory"));
-                this.TopicsIds          = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Url                = group.Add(new VocabularyKey("Url", VocabularyKeyDataType.Uri));
-                this.WidgetContainers   = group.Add(new VocabularyKey("WidgetContainers", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Widgets            = group.Add(new VocabularyKey("Widgets"));
+                Archived           = group.Add(new VocabularyKey("Archived", VocabularyKeyDataType.Boolean));
+                BlogAuthor         = group.Add(new VocabularyKey("BlogAuthor", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Campaign           = group.Add(new VocabularyKey("Campaign", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                CampaignName       = group.Add(new VocabularyKey("CampaignName"));
+                ClonedFrom         = group.Add(new VocabularyKey("ClonedFrom", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                CommentCount       = group.Add(new VocabularyKey("CommentCount", VocabularyKeyDataType.Integer));
+                DeletedAt          = group.Add(new VocabularyKey("DeletedAt", VocabularyKeyDataType.DateTime));
+                FeaturedImage      = group.Add(new VocabularyKey("FeaturedImage"));
+                FooterHtml = group.Add(new VocabularyKey("FooterHtml", VocabularyKeyVisiblity.Hidden));
+                FreezeDate         = group.Add(new VocabularyKey("FreezeDate", VocabularyKeyDataType.DateTime));
+                HasUserChanges     = group.Add(new VocabularyKey("HasUserChanges", VocabularyKeyDataType.Boolean));
+                HeadHtml = group.Add(new VocabularyKey("HeadHtml", VocabularyKeyVisiblity.Hidden));
+                HtmlTitle          = group.Add(new VocabularyKey("HtmlTitle"));
+                IsDraft            = group.Add(new VocabularyKey("IsDraft", VocabularyKeyDataType.Boolean));
+                MetaDescription    = group.Add(new VocabularyKey("MetaDescription"));
+                MetaKeywords       = group.Add(new VocabularyKey("MetaKeywords", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                PerformableUrl     = group.Add(new VocabularyKey("PerformableUrl", VocabularyKeyDataType.Uri));
+                PostBody           = group.Add(new VocabularyKey("PostBody"));
+                PreviewImageSrc    = group.Add(new VocabularyKey("PreviewImageSrc"));
+                PreviewKey = group.Add(new VocabularyKey("PreviewKey", VocabularyKeyVisiblity.Hidden));
+                ProcessingStatus   = group.Add(new VocabularyKey("ProcessingStatus"));
+                PublishDate        = group.Add(new VocabularyKey("PublishDate", VocabularyKeyDataType.DateTime));
+                PublishImmediately = group.Add(new VocabularyKey("PublishImmediately", VocabularyKeyDataType.Boolean));
+                PublishedUrl       = group.Add(new VocabularyKey("PublishedUrl", VocabularyKeyDataType.Uri));
+                RssBody = group.Add(new VocabularyKey("RssBody", VocabularyKeyVisiblity.Hidden));
+                RssSummary = group.Add(new VocabularyKey("RssSummary", VocabularyKeyVisiblity.Hidden));
+                Slug = group.Add(new VocabularyKey("Slug", VocabularyKeyVisiblity.Hidden));
+                State              = group.Add(new VocabularyKey("State"));
+                StyleOverrideId    = group.Add(new VocabularyKey("StyleOverrideId", VocabularyKeyVisiblity.Hidden));
+                Subcategory        = group.Add(new VocabularyKey("Subcategory"));
+                TopicsIds          = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Url                = group.Add(new VocabularyKey("Url", VocabularyKeyDataType.Uri));
+                WidgetContainers   = group.Add(new VocabularyKey("WidgetContainers", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Widgets            = group.Add(new VocabularyKey("Widgets"));
             });
 
             // TODO: map keys to CluedIn vocabulary

@@ -18,15 +18,15 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotRowVocabulary()
         {
-            this.VocabularyName = "HubSpot Row";
-            this.KeyPrefix      = "hubspot.row";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.List.Item;
+            VocabularyName = "HubSpot Row";
+            KeyPrefix      = "hubspot.row";
+            KeySeparator   = ".";
+            Grouping       = EntityType.List.Item;
 
-            this.Id          = this.Add(new VocabularyKey("Id"));
-            this.Name        = this.Add(new VocabularyKey("Name"));
-            this.CreatedAt   = this.Add(new VocabularyKey("CreatedAt", VocabularyKeyDataType.DateTime));
-            this.Path        = this.Add(new VocabularyKey("Path"));
+            Id          = Add(new VocabularyKey("Id"));
+            Name        = Add(new VocabularyKey("Name"));
+            CreatedAt   = Add(new VocabularyKey("CreatedAt", VocabularyKeyDataType.DateTime));
+            Path        = Add(new VocabularyKey("Path"));
         }
 
         public VocabularyKey Id { get; private set; }

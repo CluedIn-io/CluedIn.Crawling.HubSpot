@@ -18,17 +18,17 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotContactListVocabulary()
         {
-            this.VocabularyName = "HubSpot Contact List";
-            this.KeyPrefix      = "hubspot.contact.list";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.List;
+            VocabularyName = "HubSpot Contact List";
+            KeyPrefix      = "hubspot.contact.list";
+            KeySeparator   = ".";
+            Grouping       = EntityType.List;
 
-            this.Deleted        = this.Add(new VocabularyKey("Deleted"));
-            this.Dynamic        = this.Add(new VocabularyKey("Dynamic"));
-            this.Filters        = this.Add(new VocabularyKey("Filters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.InternalListId = this.Add(new VocabularyKey("InternalListId", VocabularyKeyVisiblity.Hidden));
-            this.ListId         = this.Add(new VocabularyKey("ListId", VocabularyKeyVisiblity.Hidden));
-            this.MetaData       = this.Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Deleted        = Add(new VocabularyKey("Deleted"));
+            Dynamic        = Add(new VocabularyKey("Dynamic"));
+            Filters        = Add(new VocabularyKey("Filters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            InternalListId = Add(new VocabularyKey("InternalListId", VocabularyKeyVisiblity.Hidden));
+            ListId         = Add(new VocabularyKey("ListId", VocabularyKeyVisiblity.Hidden));
+            MetaData       = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
 
             // TODO: map keys to CluedIn vocabulary
         }

@@ -18,44 +18,44 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotPropertyDefinitionVocabulary()
         {
-            this.VocabularyName = "HubSpot Property Definition";
-            this.KeyPrefix      = "hubspot.propertydefinition";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Note;
+            VocabularyName = "HubSpot Property Definition";
+            KeyPrefix      = "hubspot.propertydefinition";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Note;
 
-            this.AddGroup("Hubspot Ticket Details", group =>
+            AddGroup("Hubspot Ticket Details", group =>
             {
 
-                this.Name                          = group.Add(new VocabularyKey("Name"));
-                this.Label                         = group.Add(new VocabularyKey("Label"));
-                this.Description                   = group.Add(new VocabularyKey("Description"));
-                this.GroupName                     = group.Add(new VocabularyKey("GroupName"));
-                this.Type                          = group.Add(new VocabularyKey("Type"));
-                this.FieldType                     = group.Add(new VocabularyKey("FieldType"));
-                this.Hidden                        = group.Add(new VocabularyKey("Hidden"));
-                this.Options                       = group.Add(new VocabularyKey("Options", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Calculated                    = group.Add(new VocabularyKey("Calculated"));
-                this.ExternalOptions               = group.Add(new VocabularyKey("ExternalOptions"));
-                this.HubspotDefined                = group.Add(new VocabularyKey("HubspotDefined"));
-                this.FormField                     = group.Add(new VocabularyKey("FormField"));
-                this.DisplayOrder                  = group.Add(new VocabularyKey("DisplayOrder"));
-                this.ReadonlyValue                 = group.Add(new VocabularyKey("ReadonlyValue"));
-                this.ReadonlyDefinition            = group.Add(new VocabularyKey("ReadonlyDefinition"));
-                this.Deleted                       = group.Add(new VocabularyKey("Deleted"));
-                this.MutableDefinitionNotDeletable = group.Add(new VocabularyKey("MutableDefinitionNotDeletable"));
-                this.Favorited                     = group.Add(new VocabularyKey("Favorited"));
-                this.FavoritedOrder                = group.Add(new VocabularyKey("FavoritedOrder"));
-                this.DisplayMode                   = group.Add(new VocabularyKey("DisplayMode"));
-                this.ShowCurrencySymbol            = group.Add(new VocabularyKey("ShowCurrencySymbol"));
-                this.CreatedUserId                 = group.Add(new VocabularyKey("CreatedUserId"));
-                this.TextDisplayHint               = group.Add(new VocabularyKey("TextDisplayHint"));
-                this.NumberDisplayHint             = group.Add(new VocabularyKey("NumberDisplayHint"));
-                this.OptionsAreMutable             = group.Add(new VocabularyKey("OptionsAreMutable"));
-                this.ReferencedObjectType          = group.Add(new VocabularyKey("ReferencedObjectType"));
-                this.IsCustomizedDefault           = group.Add(new VocabularyKey("IsCustomizedDefault"));
-                this.CreatedAt                     = group.Add(new VocabularyKey("CreatedAt"));
-                this.UpdatedAt                     = group.Add(new VocabularyKey("UpdatedAt"));
-                this.UpdatedUserId                 = group.Add(new VocabularyKey("UpdatedUserId"));
+                Name                          = group.Add(new VocabularyKey("Name"));
+                Label                         = group.Add(new VocabularyKey("Label"));
+                Description                   = group.Add(new VocabularyKey("Description"));
+                GroupName                     = group.Add(new VocabularyKey("GroupName"));
+                Type                          = group.Add(new VocabularyKey("Type"));
+                FieldType                     = group.Add(new VocabularyKey("FieldType"));
+                Hidden                        = group.Add(new VocabularyKey("Hidden"));
+                Options                       = group.Add(new VocabularyKey("Options", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Calculated                    = group.Add(new VocabularyKey("Calculated"));
+                ExternalOptions               = group.Add(new VocabularyKey("ExternalOptions"));
+                HubspotDefined                = group.Add(new VocabularyKey("HubspotDefined"));
+                FormField                     = group.Add(new VocabularyKey("FormField"));
+                DisplayOrder                  = group.Add(new VocabularyKey("DisplayOrder"));
+                ReadonlyValue                 = group.Add(new VocabularyKey("ReadonlyValue"));
+                ReadonlyDefinition            = group.Add(new VocabularyKey("ReadonlyDefinition"));
+                Deleted                       = group.Add(new VocabularyKey("Deleted"));
+                MutableDefinitionNotDeletable = group.Add(new VocabularyKey("MutableDefinitionNotDeletable"));
+                Favorited                     = group.Add(new VocabularyKey("Favorited"));
+                FavoritedOrder                = group.Add(new VocabularyKey("FavoritedOrder"));
+                DisplayMode                   = group.Add(new VocabularyKey("DisplayMode"));
+                ShowCurrencySymbol            = group.Add(new VocabularyKey("ShowCurrencySymbol"));
+                CreatedUserId                 = group.Add(new VocabularyKey("CreatedUserId"));
+                TextDisplayHint               = group.Add(new VocabularyKey("TextDisplayHint"));
+                NumberDisplayHint             = group.Add(new VocabularyKey("NumberDisplayHint"));
+                OptionsAreMutable             = group.Add(new VocabularyKey("OptionsAreMutable"));
+                ReferencedObjectType          = group.Add(new VocabularyKey("ReferencedObjectType"));
+                IsCustomizedDefault           = group.Add(new VocabularyKey("IsCustomizedDefault"));
+                CreatedAt                     = group.Add(new VocabularyKey("CreatedAt"));
+                UpdatedAt                     = group.Add(new VocabularyKey("UpdatedAt"));
+                UpdatedUserId                 = group.Add(new VocabularyKey("UpdatedUserId"));
             });
         }
 

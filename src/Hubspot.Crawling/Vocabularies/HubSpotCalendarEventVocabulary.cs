@@ -18,28 +18,28 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotCalendarEventVocabulary()
         {
-            this.VocabularyName = "HubSpot Calendar Event";
-            this.KeyPrefix      = "hubspot.calendar.event";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Calendar.Event;
+            VocabularyName = "HubSpot Calendar Event";
+            KeyPrefix      = "hubspot.calendar.event";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Calendar.Event;
 
-            this.AddGroup("Hubspot Calendar Event Details", group =>
+            AddGroup("Hubspot Calendar Event Details", group =>
             {
-                this.AvatarUrl         = group.Add(new VocabularyKey("AvatarUrl", VocabularyKeyDataType.Uri));
-                this.Category          = group.Add(new VocabularyKey("Category"));
-                this.CreatedById       = group.Add(new VocabularyKey("CreatedById", VocabularyKeyVisiblity.Hidden));
-                this.EventDate         = group.Add(new VocabularyKey("EventDate", VocabularyKeyDataType.DateTime));
-                this.EventType         = group.Add(new VocabularyKey("EventType"));
-                this.PreviewKey        = group.Add(new VocabularyKey("PreviewKey"));
-                this.Recurring         = group.Add(new VocabularyKey("Recurring"));
-                this.SocialDisplayName = group.Add(new VocabularyKey("SocialDisplayName"));
-                this.SocialUserName    = group.Add(new VocabularyKey("SocialUserName"));
-                this.State             = group.Add(new VocabularyKey("State"));
-                this.TopicsIds         = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyVisiblity.Hidden));
+                AvatarUrl         = group.Add(new VocabularyKey("AvatarUrl", VocabularyKeyDataType.Uri));
+                Category          = group.Add(new VocabularyKey("Category"));
+                CreatedById       = group.Add(new VocabularyKey("CreatedById", VocabularyKeyVisiblity.Hidden));
+                EventDate         = group.Add(new VocabularyKey("EventDate", VocabularyKeyDataType.DateTime));
+                EventType         = group.Add(new VocabularyKey("EventType"));
+                PreviewKey        = group.Add(new VocabularyKey("PreviewKey"));
+                Recurring         = group.Add(new VocabularyKey("Recurring"));
+                SocialDisplayName = group.Add(new VocabularyKey("SocialDisplayName"));
+                SocialUserName    = group.Add(new VocabularyKey("SocialUserName"));
+                State             = group.Add(new VocabularyKey("State"));
+                TopicsIds         = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyVisiblity.Hidden));
             });
 
-            this.DayOfWeek = this.Add(new VocabularyKey("DayOfWeek", VocabularyKeyVisiblity.Hidden));
-            this.AddMapping(this.DayOfWeek, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.DayOfWeek);
+            DayOfWeek = Add(new VocabularyKey("DayOfWeek", VocabularyKeyVisiblity.Hidden));
+            AddMapping(DayOfWeek, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.DayOfWeek);
             // TODO: map keys to CluedIn vocabulary
         }
 

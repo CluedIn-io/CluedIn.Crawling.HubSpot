@@ -18,16 +18,16 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotStageMapVocabulary()
         {
-            this.VocabularyName = "HubSpot Stage";
-            this.KeyPrefix      = "hubspot.stage";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.ProcessStage;
+            VocabularyName = "HubSpot Stage";
+            KeyPrefix      = "hubspot.stage";
+            KeySeparator   = ".";
+            Grouping       = EntityType.ProcessStage;
 
-            this.Active       = this.Add(new VocabularyKey("Active"));
-            this.DisplayOrder = this.Add(new VocabularyKey("DisplayOrder"));
-            this.Label        = this.Add(new VocabularyKey("Label"));
-            this.Probability  = this.Add(new VocabularyKey("Probability"));
-            this.ClosedWon    = this.Add(new VocabularyKey("ClosedWon"));
+            Active       = Add(new VocabularyKey("Active"));
+            DisplayOrder = Add(new VocabularyKey("DisplayOrder"));
+            Label        = Add(new VocabularyKey("Label"));
+            Probability  = Add(new VocabularyKey("Probability"));
+            ClosedWon    = Add(new VocabularyKey("ClosedWon"));
 
             // TODO: map keys to CluedIn vocabulary
         }

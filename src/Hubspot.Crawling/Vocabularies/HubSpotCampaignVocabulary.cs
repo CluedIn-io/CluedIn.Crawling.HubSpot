@@ -18,24 +18,24 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotCampaignVocabulary()
         {
-            this.VocabularyName = "HubSpot Campaign";
-            this.KeyPrefix      = "hubspot.campaign";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Marketing.Campaign;
+            VocabularyName = "HubSpot Campaign";
+            KeyPrefix      = "hubspot.campaign";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Marketing.Campaign;
 
-            this.AddGroup("Hubspot Campaign Details", group =>
+            AddGroup("Hubspot Campaign Details", group =>
             {
-                this.AppName     = group.Add(new VocabularyKey("AppName"));
-                this.ContentId   = group.Add(new VocabularyKey("ContentId", VocabularyKeyVisiblity.Hidden));
-                this.Counters    = group.Add(new VocabularyKey("Counters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.NumIncluded = group.Add(new VocabularyKey("NumIncluded", VocabularyKeyDataType.Number));
-                this.NumQueued   = group.Add(new VocabularyKey("NumQueued", VocabularyKeyDataType.Number));
-                this.SubType     = group.Add(new VocabularyKey("SubType"));
-                this.Type        = group.Add(new VocabularyKey("Type"));
-                this.Delivered = group.Add(new VocabularyKey("Delivered"));
-                this.Open = group.Add(new VocabularyKey("Open"));
-                this.Processed = group.Add(new VocabularyKey("Processed"));
-                this.Sent = group.Add(new VocabularyKey("Sent"));
+                AppName     = group.Add(new VocabularyKey("AppName"));
+                ContentId   = group.Add(new VocabularyKey("ContentId", VocabularyKeyVisiblity.Hidden));
+                Counters    = group.Add(new VocabularyKey("Counters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                NumIncluded = group.Add(new VocabularyKey("NumIncluded", VocabularyKeyDataType.Number));
+                NumQueued   = group.Add(new VocabularyKey("NumQueued", VocabularyKeyDataType.Number));
+                SubType     = group.Add(new VocabularyKey("SubType"));
+                Type        = group.Add(new VocabularyKey("Type"));
+                Delivered = group.Add(new VocabularyKey("Delivered"));
+                Open = group.Add(new VocabularyKey("Open"));
+                Processed = group.Add(new VocabularyKey("Processed"));
+                Sent = group.Add(new VocabularyKey("Sent"));
             });
             // TODO: map keys to CluedIn vocabulary
         }

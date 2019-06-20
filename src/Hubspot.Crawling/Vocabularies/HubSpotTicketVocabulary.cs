@@ -18,47 +18,47 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotTicketVocabulary()
         {
-            this.VocabularyName = "HubSpot Ticket";
-            this.KeyPrefix      = "hubspot.ticket";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Support.Ticket;
+            VocabularyName = "HubSpot Ticket";
+            KeyPrefix      = "hubspot.ticket";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Support.Ticket;
 
-            this.AddGroup("Hubspot Ticket Details", group =>
+            AddGroup("Hubspot Ticket Details", group =>
             {
-                this.TicketName                      = group.Add(new VocabularyKey("TicketName"));
-                this.TicketDescription               = group.Add(new VocabularyKey("TicketDescription"));
-                this.ClosedDate                      = group.Add(new VocabularyKey("ClosedDate", VocabularyKeyDataType.DateTime));
-                this.CreatedBy                       = group.Add(new VocabularyKey("CreatedBy"));
-                this.CreatedDate                     = group.Add(new VocabularyKey("CreatedDate", VocabularyKeyDataType.DateTime));
-                this.FirstAgentResponseDate          = group.Add(new VocabularyKey("FirstAgentResponseDate", VocabularyKeyDataType.DateTime));
-                this.CustomInboxID                   = group.Add(new VocabularyKey("CustomInboxID"));
-                this.LastActivityDate                = group.Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
-                this.LastContactedDate               = group.Add(new VocabularyKey("LastContactedDate", VocabularyKeyDataType.DateTime));
-                this.LastModifiedDate                = group.Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
-                this.NextActivityDate                = group.Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
-                this.NumberOfTimesContacted          = group.Add(new VocabularyKey("NumberOfTimesContacted", VocabularyKeyDataType.Integer));
-                this.Pipeline                        = group.Add(new VocabularyKey("Pipeline"));
-                this.TicketStatus                    = group.Add(new VocabularyKey("TicketStatus"));
-                this.Resolution                      = group.Add(new VocabularyKey("Resolution"));
-                this.Category                        = group.Add(new VocabularyKey("Category"));
-                this.TicketId                        = group.Add(new VocabularyKey("TicketId"));
-                this.Priority                        = group.Add(new VocabularyKey("Priority"));
-                this.OwnerAssignedDate               = group.Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.DateTime));
-                this.DateOfLastEngagement            = group.Add(new VocabularyKey("DateOfLastEngagement", VocabularyKeyDataType.DateTime));
-                this.LastCustomerReplyDate           = group.Add(new VocabularyKey("LastCustomerReplyDate", VocabularyKeyDataType.DateTime));
-                this.NPSfollowup                     = group.Add(new VocabularyKey("NPSfollowp"));
-                this.NPSfollowupQuestion             = group.Add(new VocabularyKey("NPSfollowupQuestion"));
-                this.ConversationNPSscore            = group.Add(new VocabularyKey("ConversationNPSscore"));
-                this.ReferenceToeEmailThread         = group.Add(new VocabularyKey("ReferenceToeEmailThread"));
-                this.TimeToClose                     = group.Add(new VocabularyKey("TimeToClose"));
-                this.TimeToFirstAgentReply           = group.Add(new VocabularyKey("TimeToFirstAgentReply"));
-                this.Source                          = group.Add(new VocabularyKey("Source"));
-                this.ReferenceToSourceSpecificObject = group.Add(new VocabularyKey("ReferenceToSourceSpecificObject"));
-                this.Tags                            = group.Add(new VocabularyKey("Tags"));
-                this.TicketOwner                     = group.Add(new VocabularyKey("TicketOwner"));
-                this.HubSpotTeam                     = group.Add(new VocabularyKey("HubSpotTeam"));
-                this.AllOwnerIds                     = group.Add(new VocabularyKey("AllOwnerIds"));
-                this.AllTeamIds                      = group.Add(new VocabularyKey("AllTeamIds"));
+                TicketName                      = group.Add(new VocabularyKey("TicketName"));
+                TicketDescription               = group.Add(new VocabularyKey("TicketDescription"));
+                ClosedDate                      = group.Add(new VocabularyKey("ClosedDate", VocabularyKeyDataType.DateTime));
+                CreatedBy                       = group.Add(new VocabularyKey("CreatedBy"));
+                CreatedDate                     = group.Add(new VocabularyKey("CreatedDate", VocabularyKeyDataType.DateTime));
+                FirstAgentResponseDate          = group.Add(new VocabularyKey("FirstAgentResponseDate", VocabularyKeyDataType.DateTime));
+                CustomInboxID                   = group.Add(new VocabularyKey("CustomInboxID"));
+                LastActivityDate                = group.Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
+                LastContactedDate               = group.Add(new VocabularyKey("LastContactedDate", VocabularyKeyDataType.DateTime));
+                LastModifiedDate                = group.Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
+                NextActivityDate                = group.Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
+                NumberOfTimesContacted          = group.Add(new VocabularyKey("NumberOfTimesContacted", VocabularyKeyDataType.Integer));
+                Pipeline                        = group.Add(new VocabularyKey("Pipeline"));
+                TicketStatus                    = group.Add(new VocabularyKey("TicketStatus"));
+                Resolution                      = group.Add(new VocabularyKey("Resolution"));
+                Category                        = group.Add(new VocabularyKey("Category"));
+                TicketId                        = group.Add(new VocabularyKey("TicketId"));
+                Priority                        = group.Add(new VocabularyKey("Priority"));
+                OwnerAssignedDate               = group.Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.DateTime));
+                DateOfLastEngagement            = group.Add(new VocabularyKey("DateOfLastEngagement", VocabularyKeyDataType.DateTime));
+                LastCustomerReplyDate           = group.Add(new VocabularyKey("LastCustomerReplyDate", VocabularyKeyDataType.DateTime));
+                NPSfollowup                     = group.Add(new VocabularyKey("NPSfollowp"));
+                NPSfollowupQuestion             = group.Add(new VocabularyKey("NPSfollowupQuestion"));
+                ConversationNPSscore            = group.Add(new VocabularyKey("ConversationNPSscore"));
+                ReferenceToeEmailThread         = group.Add(new VocabularyKey("ReferenceToeEmailThread"));
+                TimeToClose                     = group.Add(new VocabularyKey("TimeToClose"));
+                TimeToFirstAgentReply           = group.Add(new VocabularyKey("TimeToFirstAgentReply"));
+                Source                          = group.Add(new VocabularyKey("Source"));
+                ReferenceToSourceSpecificObject = group.Add(new VocabularyKey("ReferenceToSourceSpecificObject"));
+                Tags                            = group.Add(new VocabularyKey("Tags"));
+                TicketOwner                     = group.Add(new VocabularyKey("TicketOwner"));
+                HubSpotTeam                     = group.Add(new VocabularyKey("HubSpotTeam"));
+                AllOwnerIds                     = group.Add(new VocabularyKey("AllOwnerIds"));
+                AllTeamIds                      = group.Add(new VocabularyKey("AllTeamIds"));
             });
         }
 

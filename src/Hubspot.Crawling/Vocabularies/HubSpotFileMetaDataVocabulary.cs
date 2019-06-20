@@ -18,33 +18,33 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotFileMetaDataVocabulary()
         {
-            this.VocabularyName = "HubSpot File Meta Data";
-            this.KeyPrefix      = "hubspot.file.metadata";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Files.File;
+            VocabularyName = "HubSpot File Meta Data";
+            KeyPrefix      = "hubspot.file.metadata";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Files.File;
 
-            this.AltKey     = this.Add(new VocabularyKey("AltKey"));
-            this.AltKeyHash = this.Add(new VocabularyKey("AltKeyHash", VocabularyKeyVisiblity.Hidden));
-            this.AltUrl     = this.Add(new VocabularyKey("AltUrl"));
-            this.Archived   = this.Add(new VocabularyKey("Archived"));
-            this.DeletedAt  = this.Add(new VocabularyKey("DeletedAt"));
-            this.Extension  = this.Add(new VocabularyKey("Extension"));
-            this.FolderId   = this.Add(new VocabularyKey("FolderId", VocabularyKeyVisiblity.Hidden));
-            this.Height     = this.Add(new VocabularyKey("Height"));
-            this.IsCtaImage = this.Add(new VocabularyKey("IsCtaImage", VocabularyKeyVisiblity.Hidden));
-            this.Meta       = this.Add(new VocabularyKey("Meta", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.PortalId   = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.Title      = this.Add(new VocabularyKey("Title"));
-            this.Type       = this.Add(new VocabularyKey("Type"));
-            this.Updated    = this.Add(new VocabularyKey("Updated"));
-            this.Version    = this.Add(new VocabularyKey("Version"));
-            this.Width      = this.Add(new VocabularyKey("Width"));
-            this.EmbedUrl = this.Add(new VocabularyKey("EmbedUrl"));
-            this.EditUrl = this.Add(new VocabularyKey("EditUrl"));
+            AltKey     = Add(new VocabularyKey("AltKey"));
+            AltKeyHash = Add(new VocabularyKey("AltKeyHash", VocabularyKeyVisiblity.Hidden));
+            AltUrl     = Add(new VocabularyKey("AltUrl"));
+            Archived   = Add(new VocabularyKey("Archived"));
+            DeletedAt  = Add(new VocabularyKey("DeletedAt"));
+            Extension  = Add(new VocabularyKey("Extension"));
+            FolderId   = Add(new VocabularyKey("FolderId", VocabularyKeyVisiblity.Hidden));
+            Height     = Add(new VocabularyKey("Height"));
+            IsCtaImage = Add(new VocabularyKey("IsCtaImage", VocabularyKeyVisiblity.Hidden));
+            Meta       = Add(new VocabularyKey("Meta", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            PortalId   = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            Title      = Add(new VocabularyKey("Title"));
+            Type       = Add(new VocabularyKey("Type"));
+            Updated    = Add(new VocabularyKey("Updated"));
+            Version    = Add(new VocabularyKey("Version"));
+            Width      = Add(new VocabularyKey("Width"));
+            EmbedUrl = Add(new VocabularyKey("EmbedUrl"));
+            EditUrl = Add(new VocabularyKey("EditUrl"));
 
             // TODO: map keys to CluedIn vocabulary
-            this.AddMapping(this.EmbedUrl, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInFile.EmbedUrl);
-            this.AddMapping(this.EditUrl, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInFile.EditUrl);
+            AddMapping(EmbedUrl, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInFile.EmbedUrl);
+            AddMapping(EditUrl, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInFile.EditUrl);
         }
 
         public VocabularyKey EditUrl { get; private set; }

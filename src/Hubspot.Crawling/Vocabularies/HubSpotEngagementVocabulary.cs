@@ -18,18 +18,18 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotEngagementVocabulary()
         {
-            this.VocabularyName = "HubSpot Engagement";
-            this.KeyPrefix      = "hubspot.engagement";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Activity;
+            VocabularyName = "HubSpot Engagement";
+            KeyPrefix      = "hubspot.engagement";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Activity;
 
-            this.Active    = this.Add(new VocabularyKey("Active"));
-            this.TimeStamp = this.Add(new VocabularyKey("TimeStamp"));
-            this.Type      = this.Add(new VocabularyKey("Type"));
-            this.Duration = this.Add(new VocabularyKey("Duration"));
-            this.ObjectType = this.Add(new VocabularyKey("ObjectType"));
-            this.Status = this.Add(new VocabularyKey("Status"));
-            this.Remidners = this.Add(new VocabularyKey("Reminders"));
+            Active    = Add(new VocabularyKey("Active"));
+            TimeStamp = Add(new VocabularyKey("TimeStamp"));
+            Type      = Add(new VocabularyKey("Type"));
+            Duration = Add(new VocabularyKey("Duration"));
+            ObjectType = Add(new VocabularyKey("ObjectType"));
+            Status = Add(new VocabularyKey("Status"));
+            Remidners = Add(new VocabularyKey("Reminders"));
 
             // TODO: map keys to CluedIn vocabulary
         }

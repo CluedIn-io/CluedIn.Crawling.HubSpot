@@ -18,31 +18,31 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotEmailVocabulary()
         {
-            this.VocabularyName = "HubSpot Email";
-            this.KeyPrefix      = "hubspot.email";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Mail.Task;
+            VocabularyName = "HubSpot Email";
+            KeyPrefix      = "hubspot.email";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Mail.Task;
 
-            this.FromEmail                     = this.Add(new VocabularyKey("FromEmail", VocabularyKeyDataType.Email));
-            this.FromFirstName                 = this.Add(new VocabularyKey("FromFirstName", VocabularyKeyDataType.PersonName));
-            this.FromLastName                  = this.Add(new VocabularyKey("FromLastName", VocabularyKeyDataType.PersonName));
-            this.ToEmail                       = this.Add(new VocabularyKey("ToEmail", VocabularyKeyDataType.Email));
-            this.Cc                            = this.Add(new VocabularyKey("Cc"));
-            this.Bcc                           = this.Add(new VocabularyKey("Bcc"));
-            this.Body                          = this.Add(new VocabularyKey("Body", VocabularyKeyDataType.Html));
-            this.Active                        = this.Add(new VocabularyKey("Active", VocabularyKeyDataType.Boolean));
-            this.HtmlBody                      = this.Add(new VocabularyKey("HtmlBody"));
-            this.Text                          = this.Add(new VocabularyKey("Text"));
-            this.SentVia                       = this.Add(new VocabularyKey("SentVia"));
+            FromEmail                     = Add(new VocabularyKey("FromEmail", VocabularyKeyDataType.Email));
+            FromFirstName                 = Add(new VocabularyKey("FromFirstName", VocabularyKeyDataType.PersonName));
+            FromLastName                  = Add(new VocabularyKey("FromLastName", VocabularyKeyDataType.PersonName));
+            ToEmail                       = Add(new VocabularyKey("ToEmail", VocabularyKeyDataType.Email));
+            Cc                            = Add(new VocabularyKey("Cc"));
+            Bcc                           = Add(new VocabularyKey("Bcc"));
+            Body                          = Add(new VocabularyKey("Body", VocabularyKeyDataType.Html));
+            Active                        = Add(new VocabularyKey("Active", VocabularyKeyDataType.Boolean));
+            HtmlBody                      = Add(new VocabularyKey("HtmlBody"));
+            Text                          = Add(new VocabularyKey("Text"));
+            SentVia                       = Add(new VocabularyKey("SentVia"));
 
-            this.ToFirstName = this.Add(new VocabularyKey("ToFirstName"));
-            this.ToLastName = this.Add(new VocabularyKey("ToLastName"));
+            ToFirstName = Add(new VocabularyKey("ToFirstName"));
+            ToLastName = Add(new VocabularyKey("ToLastName"));
 
-            AddMapping(this.Body, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Body);
-            AddMapping(this.Cc, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Cc);
-            AddMapping(this.Bcc, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Bcc);
-            AddMapping(this.FromEmail, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.From);
-            AddMapping(this.ToEmail, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.To);
+            AddMapping(Body, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Body);
+            AddMapping(Cc, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Cc);
+            AddMapping(Bcc, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.Bcc);
+            AddMapping(FromEmail, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.From);
+            AddMapping(ToEmail, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInMail.To);
         }
 
         public VocabularyKey Body { get; private set; }

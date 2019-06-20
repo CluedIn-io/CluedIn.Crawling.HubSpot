@@ -18,15 +18,15 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotKeywordVocabulary()
         {
-            this.VocabularyName = "HubSpot Keyword";
-            this.KeyPrefix      = "hubspot.keyword";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Tag;
+            VocabularyName = "HubSpot Keyword";
+            KeyPrefix      = "hubspot.keyword";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Tag;
 
-            this.Contacts = this.Add(new VocabularyKey("Contacts"));
-            this.Country  = this.Add(new VocabularyKey("Country"));
-            this.Leads    = this.Add(new VocabularyKey("Leads"));
-            this.Visits   = this.Add(new VocabularyKey("Visits"));
+            Contacts = Add(new VocabularyKey("Contacts"));
+            Country  = Add(new VocabularyKey("Country"));
+            Leads    = Add(new VocabularyKey("Leads"));
+            Visits   = Add(new VocabularyKey("Visits"));
 
             // TODO: map keys to CluedIn vocabulary
         }

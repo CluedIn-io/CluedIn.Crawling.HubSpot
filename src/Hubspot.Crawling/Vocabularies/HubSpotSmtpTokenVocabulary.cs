@@ -18,19 +18,19 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotSmtpTokenVocabulary()
         {
-            this.VocabularyName = "HubSpot Token";
-            this.KeyPrefix      = "hubspot.token";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Activity;
+            VocabularyName = "HubSpot Token";
+            KeyPrefix      = "hubspot.token";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Activity;
 
-            this.AppId           = this.Add(new VocabularyKey("AppId", VocabularyKeyVisiblity.Hidden));
-            this.CampaignName    = this.Add(new VocabularyKey("CampaignName"));
-            this.CreatedAt       = this.Add(new VocabularyKey("CreatedAt"));
-            this.CreatedBy       = this.Add(new VocabularyKey("CreatedBy"));
-            this.Deleted         = this.Add(new VocabularyKey("Deleted"));
-            this.EmailCampaignId = this.Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
-            this.PortalId        = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.UserName        = this.Add(new VocabularyKey("UserName"));
+            AppId           = Add(new VocabularyKey("AppId", VocabularyKeyVisiblity.Hidden));
+            CampaignName    = Add(new VocabularyKey("CampaignName"));
+            CreatedAt       = Add(new VocabularyKey("CreatedAt"));
+            CreatedBy       = Add(new VocabularyKey("CreatedBy"));
+            Deleted         = Add(new VocabularyKey("Deleted"));
+            EmailCampaignId = Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
+            PortalId        = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            UserName        = Add(new VocabularyKey("UserName"));
 
             // TODO: map keys to CluedIn vocabulary
         }

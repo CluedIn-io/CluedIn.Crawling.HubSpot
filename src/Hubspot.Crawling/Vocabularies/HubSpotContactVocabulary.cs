@@ -18,19 +18,19 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotContactVocabulary()
         {
-            this.VocabularyName = "HubSpot Contact";
-            this.KeyPrefix      = "hubspot.contact";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Infrastructure.Contact;
+            VocabularyName = "HubSpot Contact";
+            KeyPrefix      = "hubspot.contact";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Infrastructure.Contact;
 
-            this.CanonicalVid     = this.Add(new VocabularyKey("CanonicalVid",                                  VocabularyKeyVisiblity.Hidden));
-            this.FormSubmissions  = this.Add(new VocabularyKey("FormSubmissions",   VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            CanonicalVid     = Add(new VocabularyKey("CanonicalVid",                                  VocabularyKeyVisiblity.Hidden));
+            FormSubmissions  = Add(new VocabularyKey("FormSubmissions",   VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
        
-            this.MergeAudits      = this.Add(new VocabularyKey("MergeAudits",       VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.IsContact        = this.Add(new VocabularyKey("IsContact",                                     VocabularyKeyVisiblity.Hidden));
-            this.ProfileUrl       = this.Add(new VocabularyKey("ProfileUrl",                                    VocabularyKeyVisiblity.Hidden));
-            this.Vid              = this.Add(new VocabularyKey("Vid",                                           VocabularyKeyVisiblity.Hidden));
-            this.Email            = this.Add(new VocabularyKey("Email").WithDataAnnotations(
+            MergeAudits      = Add(new VocabularyKey("MergeAudits",       VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            IsContact        = Add(new VocabularyKey("IsContact",                                     VocabularyKeyVisiblity.Hidden));
+            ProfileUrl       = Add(new VocabularyKey("ProfileUrl",                                    VocabularyKeyVisiblity.Hidden));
+            Vid              = Add(new VocabularyKey("Vid",                                           VocabularyKeyVisiblity.Hidden));
+            Email            = Add(new VocabularyKey("Email").WithDataAnnotations(
                                                                 k => k.PrimaryKey()
                                                               , k => k.CanEdit()
                                                               , k => k.Nullable()
@@ -41,89 +41,89 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                                                             .ModelDictionary("Properties", "email")
                                                             .ContainsIdentifiableData(IdentifiableDataTypes.EmailAddress));
 
-            this.AddMapping(this.Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.Email);
+            AddMapping(Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.Email);
 
             // TODO: map keys to CluedIn vocabulary
 
 
-            this.ContactInformationDaysToClose                                 = this.Add(new VocabularyKey("DaysToClose", VocabularyKeyDataType.Text));
-            this.ContactInformationFirstDealCreatedDate                        = this.Add(new VocabularyKey("FirstDealCreatedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationAdditionalemailaddresses                    = this.Add(new VocabularyKey("Additionalemailaddresses", VocabularyKeyDataType.Text));
-            this.ContactInformationAvatarFileManagerkey                        = this.Add(new VocabularyKey("AvatarFileManagerkey", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedMobileNumberinInternationalFormat = this.Add(new VocabularyKey("CalculatedMobileNumberinInternationalFormat", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberinInternationalFormat  = this.Add(new VocabularyKey("CalculatedPhoneNumberinInternationalFormat", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberAreaCode               = this.Add(new VocabularyKey("CalculatedPhoneNumberAreaCode", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberCountryCode            = this.Add(new VocabularyKey("CalculatedPhoneNumberCountryCode", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberRegion                 = this.Add(new VocabularyKey("CalculatedPhoneNumberRegion", VocabularyKeyDataType.Text));
-            this.ContactInformationEmailDomain                                 = this.Add(new VocabularyKey("EmailDomain", VocabularyKeyDataType.Text));
-            this.ContactInformationLeadStatus                                  = this.Add(new VocabularyKey("LeadStatus", VocabularyKeyDataType.Text));
-            this.ContactInformationRecentSalesEmailClickedDate                 = this.Add(new VocabularyKey("RecentSalesEmailClickedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationRecentSalesEmailOpenedDate                  = this.Add(new VocabularyKey("RecentSalesEmailOpenedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationRecentSalesEmailRepliedDate                 = this.Add(new VocabularyKey("RecentSalesEmailRepliedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedMobileNumberwithcountrycode       = this.Add(new VocabularyKey("CalculatedMobileNumberwithcountrycode", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberwithcountrycode        = this.Add(new VocabularyKey("CalculatedPhoneNumberwithcountrycode", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedMobileNumberwithoutcountrycode    = this.Add(new VocabularyKey("CalculatedMobileNumberwithoutcountrycode", VocabularyKeyDataType.Text));
-            this.ContactInformationCalculatedPhoneNumberwithoutcountrycode     = this.Add(new VocabularyKey("CalculatedPhoneNumberwithoutcountrycode", VocabularyKeyDataType.Text));
-            this.ContactInformationCurrentlyinSequence                         = this.Add(new VocabularyKey("CurrentlyinSequence", VocabularyKeyDataType.Text));
-            this.ContactInformationOwnerAssignedDate                           = this.Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationLastModifiedDate                            = this.Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.Text));
-            this.ContactInformationAssociatedDeals                             = this.Add(new VocabularyKey("AssociatedDeals", VocabularyKeyDataType.Text));
-            this.ContactInformationRecentDealAmount                            = this.Add(new VocabularyKey("RecentDealAmount", VocabularyKeyDataType.Text));
-            this.ContactInformationRecentDealCloseDate                         = this.Add(new VocabularyKey("RecentDealCloseDate", VocabularyKeyDataType.Text));
-            this.ContactInformationTotalRevenue                                = this.Add(new VocabularyKey("TotalRevenue", VocabularyKeyDataType.Number));
-            this.ContactInformationFirstName                                   = this.Add(new VocabularyKey("FirstName", VocabularyKeyDataType.PersonName));
-            this.ContactInformationLastName                                    = this.Add(new VocabularyKey("LastName", VocabularyKeyDataType.PersonName));
-            this.ContactInformationSalutation                                  = this.Add(new VocabularyKey("Salutation", VocabularyKeyDataType.Text));
-            this.ContactInformationPersona                                     = this.Add(new VocabularyKey("Persona", VocabularyKeyDataType.Text));
-            this.ContactInformationMobilePhoneNumber                           = this.Add(new VocabularyKey("MobilePhoneNumber", VocabularyKeyDataType.PhoneNumber));
-            this.ContactInformationPhoneNumber                                 = this.Add(new VocabularyKey("PhoneNumber", VocabularyKeyDataType.Text));
-            this.ContactInformationFaxNumber                                   = this.Add(new VocabularyKey("FaxNumber", VocabularyKeyDataType.Text));
-            this.ContactInformationStreetAddress                               = this.Add(new VocabularyKey("StreetAddress", VocabularyKeyDataType.Text));
-            this.ContactInformationLastMeetingBooked                           = this.Add(new VocabularyKey("LastMeetingBooked", VocabularyKeyDataType.Text));
-            this.ContactInformationLastMeetingBookedCampaign                   = this.Add(new VocabularyKey("LastMeetingBookedCampaign", VocabularyKeyDataType.Text));
-            this.ContactInformationLastMeetingBookedMedium                     = this.Add(new VocabularyKey("LastMeetingBookedMedium", VocabularyKeyDataType.Text));
-            this.ContactInformationLastMeetingBookedSource                     = this.Add(new VocabularyKey("LastMeetingBookedSource", VocabularyKeyDataType.Text));
-            this.ContactInformationHubSpotOwner                                = this.Add(new VocabularyKey("HubSpotOwner", VocabularyKeyDataType.Text));
-            this.ContactInformationLastContacted                               = this.Add(new VocabularyKey("LastContacted", VocabularyKeyDataType.Text));
-            this.ContactInformationLastActivityDate                            = this.Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
-            this.ContactInformationNextActivityDate                            = this.Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
-            this.ContactInformationNumberoftimescontacted                      = this.Add(new VocabularyKey("Numberoftimescontacted", VocabularyKeyDataType.Text));
-            this.ContactInformationNumberofSalesActivities                     = this.Add(new VocabularyKey("NumberofSalesActivities", VocabularyKeyDataType.Text));
-            this.ContactInformationSurveyMonkeyEventLastUpdated                = this.Add(new VocabularyKey("SurveyMonkeyEventLastUpdated", VocabularyKeyDataType.Text));
-            this.ContactInformationWebinarEventLastUpdated                     = this.Add(new VocabularyKey("WebinarEventLastUpdated", VocabularyKeyDataType.Text));
-            this.ContactInformationCity                                        = this.Add(new VocabularyKey("City", VocabularyKeyDataType.Text));
-            this.ContactInformationHubSpotTeam                                 = this.Add(new VocabularyKey("HubSpotTeam", VocabularyKeyDataType.Text));
-            this.ContactInformationStateRegion                                 = this.Add(new VocabularyKey("State/Region", VocabularyKeyDataType.Text));
-            this.ContactInformationPostalCode                                  = this.Add(new VocabularyKey("PostalCode", VocabularyKeyDataType.Text));
-            this.ContactInformationCountry                                     = this.Add(new VocabularyKey("Country", VocabularyKeyDataType.Text));
-            this.ContactInformationJobTitle                                    = this.Add(new VocabularyKey("JobTitle", VocabularyKeyDataType.Text));
-            this.ContactInformationMessage                                     = this.Add(new VocabularyKey("Message", VocabularyKeyDataType.Text));
-            this.ContactInformationCloseDate                                   = this.Add(new VocabularyKey("CloseDate", VocabularyKeyDataType.DateTime));
-            this.ContactInformationLifecycleStage                              = this.Add(new VocabularyKey("LifecycleStage", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameaLeadDate                             = this.Add(new VocabularyKey("BecameaLeadDate", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameaMarketingQualifiedLeadDate           = this.Add(new VocabularyKey("BecameaMarketingQualifiedLeadDate", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameanOpportunityDate                     = this.Add(new VocabularyKey("BecameanOpportunityDate", VocabularyKeyDataType.Text));
-            this.ContactInformationIPAddress                                   = this.Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress));
-            this.ContactInformationCreateDate                                  = this.Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
-            this.ContactInformationBecameaSalesQualifiedLeadDate               = this.Add(new VocabularyKey("BecameaSalesQualifiedLeadDate", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameanEvangelistDate                      = this.Add(new VocabularyKey("BecameanEvangelistDate", VocabularyKeyDataType.Text));
-            this.ContactInformationHubSpotScore                                = this.Add(new VocabularyKey("HubSpotScore", VocabularyKeyDataType.Text));
-            this.ContactInformationCompanyName                                 = this.Add(new VocabularyKey("CompanyName", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameaCustomerDate                         = this.Add(new VocabularyKey("BecameaCustomerDate", VocabularyKeyDataType.Text));
-            this.ContactInformationBecameaSubscriberDate                       = this.Add(new VocabularyKey("BecameaSubscriberDate", VocabularyKeyDataType.Text));
-            this.ContactInformationWebsiteURL                                  = this.Add(new VocabularyKey("WebsiteURL", VocabularyKeyDataType.Uri));
-            this.ContactInformationBecameanOtherLifecycleDate                  = this.Add(new VocabularyKey("BecameanOtherLifecycleDate", VocabularyKeyDataType.Text));
-            this.ContactInformationNumberofEmployees                           = this.Add(new VocabularyKey("NumberOfEmployees", VocabularyKeyDataType.Text));
-            this.ContactInformationAnnualRevenue                               = this.Add(new VocabularyKey("AnnualRevenue", VocabularyKeyDataType.Text));
-            this.ContactInformationIndustry                                    = this.Add(new VocabularyKey("Industry", VocabularyKeyDataType.Text));
-            this.ContactInformationAssociatedCompanyLastUpdated                = this.Add(new VocabularyKey("AssociatedCompanyLastUpdated", VocabularyKeyDataType.Text));
+            ContactInformationDaysToClose                                 = Add(new VocabularyKey("DaysToClose", VocabularyKeyDataType.Text));
+            ContactInformationFirstDealCreatedDate                        = Add(new VocabularyKey("FirstDealCreatedDate", VocabularyKeyDataType.Text));
+            ContactInformationAdditionalemailaddresses                    = Add(new VocabularyKey("Additionalemailaddresses", VocabularyKeyDataType.Text));
+            ContactInformationAvatarFileManagerkey                        = Add(new VocabularyKey("AvatarFileManagerkey", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedMobileNumberinInternationalFormat = Add(new VocabularyKey("CalculatedMobileNumberinInternationalFormat", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberinInternationalFormat  = Add(new VocabularyKey("CalculatedPhoneNumberinInternationalFormat", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberAreaCode               = Add(new VocabularyKey("CalculatedPhoneNumberAreaCode", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberCountryCode            = Add(new VocabularyKey("CalculatedPhoneNumberCountryCode", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberRegion                 = Add(new VocabularyKey("CalculatedPhoneNumberRegion", VocabularyKeyDataType.Text));
+            ContactInformationEmailDomain                                 = Add(new VocabularyKey("EmailDomain", VocabularyKeyDataType.Text));
+            ContactInformationLeadStatus                                  = Add(new VocabularyKey("LeadStatus", VocabularyKeyDataType.Text));
+            ContactInformationRecentSalesEmailClickedDate                 = Add(new VocabularyKey("RecentSalesEmailClickedDate", VocabularyKeyDataType.Text));
+            ContactInformationRecentSalesEmailOpenedDate                  = Add(new VocabularyKey("RecentSalesEmailOpenedDate", VocabularyKeyDataType.Text));
+            ContactInformationRecentSalesEmailRepliedDate                 = Add(new VocabularyKey("RecentSalesEmailRepliedDate", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedMobileNumberwithcountrycode       = Add(new VocabularyKey("CalculatedMobileNumberwithcountrycode", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberwithcountrycode        = Add(new VocabularyKey("CalculatedPhoneNumberwithcountrycode", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedMobileNumberwithoutcountrycode    = Add(new VocabularyKey("CalculatedMobileNumberwithoutcountrycode", VocabularyKeyDataType.Text));
+            ContactInformationCalculatedPhoneNumberwithoutcountrycode     = Add(new VocabularyKey("CalculatedPhoneNumberwithoutcountrycode", VocabularyKeyDataType.Text));
+            ContactInformationCurrentlyinSequence                         = Add(new VocabularyKey("CurrentlyinSequence", VocabularyKeyDataType.Text));
+            ContactInformationOwnerAssignedDate                           = Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.Text));
+            ContactInformationLastModifiedDate                            = Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.Text));
+            ContactInformationAssociatedDeals                             = Add(new VocabularyKey("AssociatedDeals", VocabularyKeyDataType.Text));
+            ContactInformationRecentDealAmount                            = Add(new VocabularyKey("RecentDealAmount", VocabularyKeyDataType.Text));
+            ContactInformationRecentDealCloseDate                         = Add(new VocabularyKey("RecentDealCloseDate", VocabularyKeyDataType.Text));
+            ContactInformationTotalRevenue                                = Add(new VocabularyKey("TotalRevenue", VocabularyKeyDataType.Number));
+            ContactInformationFirstName                                   = Add(new VocabularyKey("FirstName", VocabularyKeyDataType.PersonName));
+            ContactInformationLastName                                    = Add(new VocabularyKey("LastName", VocabularyKeyDataType.PersonName));
+            ContactInformationSalutation                                  = Add(new VocabularyKey("Salutation", VocabularyKeyDataType.Text));
+            ContactInformationPersona                                     = Add(new VocabularyKey("Persona", VocabularyKeyDataType.Text));
+            ContactInformationMobilePhoneNumber                           = Add(new VocabularyKey("MobilePhoneNumber", VocabularyKeyDataType.PhoneNumber));
+            ContactInformationPhoneNumber                                 = Add(new VocabularyKey("PhoneNumber", VocabularyKeyDataType.Text));
+            ContactInformationFaxNumber                                   = Add(new VocabularyKey("FaxNumber", VocabularyKeyDataType.Text));
+            ContactInformationStreetAddress                               = Add(new VocabularyKey("StreetAddress", VocabularyKeyDataType.Text));
+            ContactInformationLastMeetingBooked                           = Add(new VocabularyKey("LastMeetingBooked", VocabularyKeyDataType.Text));
+            ContactInformationLastMeetingBookedCampaign                   = Add(new VocabularyKey("LastMeetingBookedCampaign", VocabularyKeyDataType.Text));
+            ContactInformationLastMeetingBookedMedium                     = Add(new VocabularyKey("LastMeetingBookedMedium", VocabularyKeyDataType.Text));
+            ContactInformationLastMeetingBookedSource                     = Add(new VocabularyKey("LastMeetingBookedSource", VocabularyKeyDataType.Text));
+            ContactInformationHubSpotOwner                                = Add(new VocabularyKey("HubSpotOwner", VocabularyKeyDataType.Text));
+            ContactInformationLastContacted                               = Add(new VocabularyKey("LastContacted", VocabularyKeyDataType.Text));
+            ContactInformationLastActivityDate                            = Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
+            ContactInformationNextActivityDate                            = Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
+            ContactInformationNumberoftimescontacted                      = Add(new VocabularyKey("Numberoftimescontacted", VocabularyKeyDataType.Text));
+            ContactInformationNumberofSalesActivities                     = Add(new VocabularyKey("NumberofSalesActivities", VocabularyKeyDataType.Text));
+            ContactInformationSurveyMonkeyEventLastUpdated                = Add(new VocabularyKey("SurveyMonkeyEventLastUpdated", VocabularyKeyDataType.Text));
+            ContactInformationWebinarEventLastUpdated                     = Add(new VocabularyKey("WebinarEventLastUpdated", VocabularyKeyDataType.Text));
+            ContactInformationCity                                        = Add(new VocabularyKey("City", VocabularyKeyDataType.Text));
+            ContactInformationHubSpotTeam                                 = Add(new VocabularyKey("HubSpotTeam", VocabularyKeyDataType.Text));
+            ContactInformationStateRegion                                 = Add(new VocabularyKey("State/Region", VocabularyKeyDataType.Text));
+            ContactInformationPostalCode                                  = Add(new VocabularyKey("PostalCode", VocabularyKeyDataType.Text));
+            ContactInformationCountry                                     = Add(new VocabularyKey("Country", VocabularyKeyDataType.Text));
+            ContactInformationJobTitle                                    = Add(new VocabularyKey("JobTitle", VocabularyKeyDataType.Text));
+            ContactInformationMessage                                     = Add(new VocabularyKey("Message", VocabularyKeyDataType.Text));
+            ContactInformationCloseDate                                   = Add(new VocabularyKey("CloseDate", VocabularyKeyDataType.DateTime));
+            ContactInformationLifecycleStage                              = Add(new VocabularyKey("LifecycleStage", VocabularyKeyDataType.Text));
+            ContactInformationBecameaLeadDate                             = Add(new VocabularyKey("BecameaLeadDate", VocabularyKeyDataType.Text));
+            ContactInformationBecameaMarketingQualifiedLeadDate           = Add(new VocabularyKey("BecameaMarketingQualifiedLeadDate", VocabularyKeyDataType.Text));
+            ContactInformationBecameanOpportunityDate                     = Add(new VocabularyKey("BecameanOpportunityDate", VocabularyKeyDataType.Text));
+            ContactInformationIPAddress                                   = Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress));
+            ContactInformationCreateDate                                  = Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
+            ContactInformationBecameaSalesQualifiedLeadDate               = Add(new VocabularyKey("BecameaSalesQualifiedLeadDate", VocabularyKeyDataType.Text));
+            ContactInformationBecameanEvangelistDate                      = Add(new VocabularyKey("BecameanEvangelistDate", VocabularyKeyDataType.Text));
+            ContactInformationHubSpotScore                                = Add(new VocabularyKey("HubSpotScore", VocabularyKeyDataType.Text));
+            ContactInformationCompanyName                                 = Add(new VocabularyKey("CompanyName", VocabularyKeyDataType.Text));
+            ContactInformationBecameaCustomerDate                         = Add(new VocabularyKey("BecameaCustomerDate", VocabularyKeyDataType.Text));
+            ContactInformationBecameaSubscriberDate                       = Add(new VocabularyKey("BecameaSubscriberDate", VocabularyKeyDataType.Text));
+            ContactInformationWebsiteURL                                  = Add(new VocabularyKey("WebsiteURL", VocabularyKeyDataType.Uri));
+            ContactInformationBecameanOtherLifecycleDate                  = Add(new VocabularyKey("BecameanOtherLifecycleDate", VocabularyKeyDataType.Text));
+            ContactInformationNumberofEmployees                           = Add(new VocabularyKey("NumberOfEmployees", VocabularyKeyDataType.Text));
+            ContactInformationAnnualRevenue                               = Add(new VocabularyKey("AnnualRevenue", VocabularyKeyDataType.Text));
+            ContactInformationIndustry                                    = Add(new VocabularyKey("Industry", VocabularyKeyDataType.Text));
+            ContactInformationAssociatedCompanyLastUpdated                = Add(new VocabularyKey("AssociatedCompanyLastUpdated", VocabularyKeyDataType.Text));
 
-            this.AddMapping(this.ContactInformationPhoneNumber, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.PhoneNumber);
-            this.AddMapping(this.ContactInformationMobilePhoneNumber, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.MobileNumber);
-            this.AddMapping(this.ContactInformationStreetAddress, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.HomeAddress);
-            this.AddMapping(this.ContactInformationJobTitle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.JobTitle);
-            this.AddMapping(this.ContactInformationFirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.FirstName);
-            this.AddMapping(this.ContactInformationLastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.LastName);
+            AddMapping(ContactInformationPhoneNumber, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.PhoneNumber);
+            AddMapping(ContactInformationMobilePhoneNumber, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.MobileNumber);
+            AddMapping(ContactInformationStreetAddress, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.HomeAddress);
+            AddMapping(ContactInformationJobTitle, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.JobTitle);
+            AddMapping(ContactInformationFirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.FirstName);
+            AddMapping(ContactInformationLastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.LastName);
 
             AddGroup("HubSpot Contact Email Information Details", group =>
             {
@@ -148,10 +148,10 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                 SocialMediaInformationPhoto               = group.Add(new VocabularyKey("Photo", VocabularyKeyDataType.Text));
             });
 
-            this.AddMapping(this.SocialMediaInformationFacebookID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialFacebook);
-            this.AddMapping(this.SocialMediaInformationgoogleplusID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialGooglePlus);
-            this.AddMapping(this.SocialMediaInformationLinkedinID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialLinkedIn);
-            this.AddMapping(this.SocialMediaInformationTwitterUsername, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialTwitter);
+            AddMapping(SocialMediaInformationFacebookID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialFacebook);
+            AddMapping(SocialMediaInformationgoogleplusID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialGooglePlus);
+            AddMapping(SocialMediaInformationLinkedinID, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialLinkedIn);
+            AddMapping(SocialMediaInformationTwitterUsername, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.SocialTwitter);
 
             AddGroup("HubSpot Contact Analytics Information Details", group =>
             {

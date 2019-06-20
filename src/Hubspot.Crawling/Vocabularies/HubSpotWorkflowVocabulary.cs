@@ -18,24 +18,24 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotWorkflowVocabulary()
         {
-            this.VocabularyName = "HubSpot Workflow";
-            this.KeyPrefix      = "hubspot.workflow";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Process;
+            VocabularyName = "HubSpot Workflow";
+            KeyPrefix      = "hubspot.workflow";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Process;
 
-            this.Actions                            = this.Add(new VocabularyKey("Actions", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.AllowContactToTriggerMultipleTimes = this.Add(new VocabularyKey("AllowContactToTriggerMultipleTimes"));
-            this.Enabled                            = this.Add(new VocabularyKey("Enabled"));
-            this.GoalListIds                        = this.Add(new VocabularyKey("GoalListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.InsertingAt                        = this.Add(new VocabularyKey("InsertingAt"));
-            this.Listening                          = this.Add(new VocabularyKey("Listening"));
-            this.NutureTimeRange                    = this.Add(new VocabularyKey("NutureTimeRange", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.OnlyExecOnBizDays                  = this.Add(new VocabularyKey("OnlyExecOnBizDays"));
-            this.RecurringSetting                   = this.Add(new VocabularyKey("RecurringSetting", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.SuppressionListIds                 = this.Add(new VocabularyKey("SuppressionListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.TriggerSets                        = this.Add(new VocabularyKey("TriggerSets", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.Type                               = this.Add(new VocabularyKey("Type"));
-            this.UnEnrollmentSetting                = this.Add(new VocabularyKey("UnEnrollmentSetting"));
+            Actions                            = Add(new VocabularyKey("Actions", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            AllowContactToTriggerMultipleTimes = Add(new VocabularyKey("AllowContactToTriggerMultipleTimes"));
+            Enabled                            = Add(new VocabularyKey("Enabled"));
+            GoalListIds                        = Add(new VocabularyKey("GoalListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            InsertingAt                        = Add(new VocabularyKey("InsertingAt"));
+            Listening                          = Add(new VocabularyKey("Listening"));
+            NutureTimeRange                    = Add(new VocabularyKey("NutureTimeRange", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            OnlyExecOnBizDays                  = Add(new VocabularyKey("OnlyExecOnBizDays"));
+            RecurringSetting                   = Add(new VocabularyKey("RecurringSetting", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            SuppressionListIds                 = Add(new VocabularyKey("SuppressionListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            TriggerSets                        = Add(new VocabularyKey("TriggerSets", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Type                               = Add(new VocabularyKey("Type"));
+            UnEnrollmentSetting                = Add(new VocabularyKey("UnEnrollmentSetting"));
 
             // TODO: map keys to CluedIn vocabulary
         }

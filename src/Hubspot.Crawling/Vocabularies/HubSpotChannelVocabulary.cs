@@ -18,27 +18,27 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotChannelVocabulary()
         {
-            this.VocabularyName = "HubSpot Channel";
-            this.KeyPrefix      = "hubspot.channel";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Channel;
+            VocabularyName = "HubSpot Channel";
+            KeyPrefix      = "hubspot.channel";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Channel;
 
-            this.AddGroup("Hubspot Channel Details", group =>
+            AddGroup("Hubspot Channel Details", group =>
             {
-                this.AccountId = group.Add(new VocabularyKey("AccountId", VocabularyKeyVisiblity.Hidden));
-                this.ChannelId = group.Add(new VocabularyKey("ChannelId", VocabularyKeyVisiblity.Hidden));
-                this.DataMap   = group.Add(new VocabularyKey("DataMap", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Type      = group.Add(new VocabularyKey("Type"));
-                this.Email = group.Add(new VocabularyKey("Email"));
-                this.FirstName = group.Add(new VocabularyKey("FirstName"));
-                this.FullName = group.Add(new VocabularyKey("FullName"));
-                this.LastName = group.Add(new VocabularyKey("LastName"));
-                this.PageCategory = group.Add(new VocabularyKey("PageCategory"));
-                this.PageId = group.Add(new VocabularyKey("PageId", VocabularyKeyVisiblity.Hidden));
-                this.PageName = group.Add(new VocabularyKey("PageName"));
-                this.Picture = group.Add(new VocabularyKey("Picture"));
-                this.ProfileUrl = group.Add(new VocabularyKey("ProfileUrl"));
-                this.UserId = group.Add(new VocabularyKey("UserId", VocabularyKeyVisiblity.Hidden));
+                AccountId = group.Add(new VocabularyKey("AccountId", VocabularyKeyVisiblity.Hidden));
+                ChannelId = group.Add(new VocabularyKey("ChannelId", VocabularyKeyVisiblity.Hidden));
+                DataMap   = group.Add(new VocabularyKey("DataMap", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Type      = group.Add(new VocabularyKey("Type"));
+                Email = group.Add(new VocabularyKey("Email"));
+                FirstName = group.Add(new VocabularyKey("FirstName"));
+                FullName = group.Add(new VocabularyKey("FullName"));
+                LastName = group.Add(new VocabularyKey("LastName"));
+                PageCategory = group.Add(new VocabularyKey("PageCategory"));
+                PageId = group.Add(new VocabularyKey("PageId", VocabularyKeyVisiblity.Hidden));
+                PageName = group.Add(new VocabularyKey("PageName"));
+                Picture = group.Add(new VocabularyKey("Picture"));
+                ProfileUrl = group.Add(new VocabularyKey("ProfileUrl"));
+                UserId = group.Add(new VocabularyKey("UserId", VocabularyKeyVisiblity.Hidden));
             });
 
             // TODO: map keys to CluedIn vocabulary

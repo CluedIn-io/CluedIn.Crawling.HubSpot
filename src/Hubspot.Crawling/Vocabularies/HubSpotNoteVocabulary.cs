@@ -18,12 +18,12 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotNoteVocabulary()
         {
-            this.VocabularyName = "HubSpot Note";
-            this.KeyPrefix      = "hubspot.note";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Note;
+            VocabularyName = "HubSpot Note";
+            KeyPrefix      = "hubspot.note";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Note;
 
-            this.Body = this.Add(new VocabularyKey("Note"));
+            Body = Add(new VocabularyKey("Note"));
 
         }
 

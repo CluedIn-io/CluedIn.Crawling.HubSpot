@@ -18,22 +18,22 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotMeetingVocabulary()
         {
-            this.VocabularyName = "HubSpot Meeting";
-            this.KeyPrefix      = "hubspot.meeting";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Calendar.Meeting;
+            VocabularyName = "HubSpot Meeting";
+            KeyPrefix      = "hubspot.meeting";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Calendar.Meeting;
 
-            this.Title       = this.Add(new VocabularyKey("Title", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.HiddenInFrontendUI));
-            this.Description = this.Add(new VocabularyKey("Description", VocabularyKeyVisiblity.HiddenInFrontendUI));
-            this.StartTime   = this.Add(new VocabularyKey("StartTime", VocabularyKeyDataType.DateTime));
-            this.EndTime     = this.Add(new VocabularyKey("EndTime", VocabularyKeyDataType.DateTime));
-            this.Reminder     = this.Add(new VocabularyKey("Reminder", VocabularyKeyDataType.DateTime));
+            Title       = Add(new VocabularyKey("Title", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.HiddenInFrontendUI));
+            Description = Add(new VocabularyKey("Description", VocabularyKeyVisiblity.HiddenInFrontendUI));
+            StartTime   = Add(new VocabularyKey("StartTime", VocabularyKeyDataType.DateTime));
+            EndTime     = Add(new VocabularyKey("EndTime", VocabularyKeyDataType.DateTime));
+            Reminder     = Add(new VocabularyKey("Reminder", VocabularyKeyDataType.DateTime));
 
-            AddMapping(this.StartTime, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Start);
-            AddMapping(this.EndTime, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.End);
-            AddMapping(this.Title, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Name);
-            AddMapping(this.Description, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Description);
-            AddMapping(this.Reminder, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Reminder);
+            AddMapping(StartTime, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Start);
+            AddMapping(EndTime, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.End);
+            AddMapping(Title, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Name);
+            AddMapping(Description, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Description);
+            AddMapping(Reminder, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.Reminder);
         }
 
         public VocabularyKey StartTime { get; private set; }

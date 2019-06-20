@@ -18,18 +18,18 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotEmailPersonVocabulary()
         {
-            this.VocabularyName = "HubSpot EmailPerson";
-            this.KeyPrefix      = "hubspot.emailperson";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Person;
+            VocabularyName = "HubSpot EmailPerson";
+            KeyPrefix      = "hubspot.emailperson";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Person;
 
-            this.Email     = this.Add(new VocabularyKey("Email", VocabularyKeyDataType.Email));
-            this.FirstName = this.Add(new VocabularyKey("FirstName", VocabularyKeyDataType.PersonName));
-            this.LastName  = this.Add(new VocabularyKey("LastName", VocabularyKeyDataType.PersonName));
+            Email     = Add(new VocabularyKey("Email", VocabularyKeyDataType.Email));
+            FirstName = Add(new VocabularyKey("FirstName", VocabularyKeyDataType.PersonName));
+            LastName  = Add(new VocabularyKey("LastName", VocabularyKeyDataType.PersonName));
 
-            this.AddMapping(this.Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email);
-            this.AddMapping(this.FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.FirstName);
-            this.AddMapping(this.LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.LastName);
+            AddMapping(Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email);
+            AddMapping(FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.FirstName);
+            AddMapping(LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.LastName);
         }
 
         public VocabularyKey Email { get; private set; }

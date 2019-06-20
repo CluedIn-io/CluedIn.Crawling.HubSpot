@@ -18,27 +18,27 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotTemplateVocabulary()
         {
-            this.VocabularyName = "HubSpot Template";
-            this.KeyPrefix      = "hubspot.template";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Template;
+            VocabularyName = "HubSpot Template";
+            KeyPrefix      = "hubspot.template";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Template;
 
-            this.CategoryId               = this.Add(new VocabularyKey("CategoryId", VocabularyKeyVisiblity.Hidden));
-            this.CdnMinifiedUrl           = this.Add(new VocabularyKey("CdnMinifiedUrl"));
-            this.CdnUrl                   = this.Add(new VocabularyKey("CdnUrl"));
-            this.DeletedAt                = this.Add(new VocabularyKey("DeletedAt"));
-            this.Folder                   = this.Add(new VocabularyKey("Folder"));
-            this.GeneratedFromLayoutId    = this.Add(new VocabularyKey("GeneratedFromLayoutId", VocabularyKeyVisiblity.Hidden));
-            this.IsAvailableForNewContent = this.Add(new VocabularyKey("IsAvailableForNewContent"));
-            this.IsFromLayout = this.Add(new VocabularyKey("IsFromLayout", VocabularyKeyVisiblity.Hidden));
-            this.IsReadOnly               = this.Add(new VocabularyKey("IsReadOnly"));
-            this.LinkedInStyleLayout      = this.Add(new VocabularyKey("LinkedInStyleLayout"));
-            this.Path                     = this.Add(new VocabularyKey("Path"));
-            this.PortalId                 = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.TemplateType             = this.Add(new VocabularyKey("TemplateType"));
-            this.ThumbnailWidth           = this.Add(new VocabularyKey("ThumbnailWidth"));
-            this.Type                     = this.Add(new VocabularyKey("Type"));
-            this.UpdatedBy                = this.Add(new VocabularyKey("UpdatedBy"));
+            CategoryId               = Add(new VocabularyKey("CategoryId", VocabularyKeyVisiblity.Hidden));
+            CdnMinifiedUrl           = Add(new VocabularyKey("CdnMinifiedUrl"));
+            CdnUrl                   = Add(new VocabularyKey("CdnUrl"));
+            DeletedAt                = Add(new VocabularyKey("DeletedAt"));
+            Folder                   = Add(new VocabularyKey("Folder"));
+            GeneratedFromLayoutId    = Add(new VocabularyKey("GeneratedFromLayoutId", VocabularyKeyVisiblity.Hidden));
+            IsAvailableForNewContent = Add(new VocabularyKey("IsAvailableForNewContent"));
+            IsFromLayout = Add(new VocabularyKey("IsFromLayout", VocabularyKeyVisiblity.Hidden));
+            IsReadOnly               = Add(new VocabularyKey("IsReadOnly"));
+            LinkedInStyleLayout      = Add(new VocabularyKey("LinkedInStyleLayout"));
+            Path                     = Add(new VocabularyKey("Path"));
+            PortalId                 = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            TemplateType             = Add(new VocabularyKey("TemplateType"));
+            ThumbnailWidth           = Add(new VocabularyKey("ThumbnailWidth"));
+            Type                     = Add(new VocabularyKey("Type"));
+            UpdatedBy                = Add(new VocabularyKey("UpdatedBy"));
 
             // TODO: map keys to CluedIn vocabulary
         }

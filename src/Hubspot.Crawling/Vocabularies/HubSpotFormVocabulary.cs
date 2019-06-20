@@ -18,26 +18,26 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotFormVocabulary()
         {
-            this.VocabularyName = "HubSpot Form";
-            this.KeyPrefix      = "hubspot.form";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Form;
+            VocabularyName = "HubSpot Form";
+            KeyPrefix      = "hubspot.form";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Form;
 
-            this.Action                 = this.Add(new VocabularyKey("Action"));
-            this.CssClass               = this.Add(new VocabularyKey("CssClass"));
-            this.Deletable              = this.Add(new VocabularyKey("Deletable"));
-            this.FollowUpId             = this.Add(new VocabularyKey("FollowUpId", VocabularyKeyVisiblity.Hidden));
-            this.FormFieldGroups        = this.Add(new VocabularyKey("FormFieldGroups", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.Guid                   = this.Add(new VocabularyKey("Guid", VocabularyKeyVisiblity.Hidden));
-            this.IgnoreCurrentValues    = this.Add(new VocabularyKey("IgnoreCurrentValues"));
-            this.LeadNuturingCampaignId = this.Add(new VocabularyKey("LeadNuturingCampaignId"));
-            this.MetaData               = this.Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.Method                 = this.Add(new VocabularyKey("Method"));
-            this.MigratedFrom           = this.Add(new VocabularyKey("MigratedFrom"));
-            this.NotifyRecipients       = this.Add(new VocabularyKey("NotifyRecipients"));
-            this.PerformableHtml        = this.Add(new VocabularyKey("PerformableHtml"));
-            this.Redirect               = this.Add(new VocabularyKey("Redirect"));
-            this.SubmitText             = this.Add(new VocabularyKey("SubmitText"));
+            Action                 = Add(new VocabularyKey("Action"));
+            CssClass               = Add(new VocabularyKey("CssClass"));
+            Deletable              = Add(new VocabularyKey("Deletable"));
+            FollowUpId             = Add(new VocabularyKey("FollowUpId", VocabularyKeyVisiblity.Hidden));
+            FormFieldGroups        = Add(new VocabularyKey("FormFieldGroups", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Guid                   = Add(new VocabularyKey("Guid", VocabularyKeyVisiblity.Hidden));
+            IgnoreCurrentValues    = Add(new VocabularyKey("IgnoreCurrentValues"));
+            LeadNuturingCampaignId = Add(new VocabularyKey("LeadNuturingCampaignId"));
+            MetaData               = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Method                 = Add(new VocabularyKey("Method"));
+            MigratedFrom           = Add(new VocabularyKey("MigratedFrom"));
+            NotifyRecipients       = Add(new VocabularyKey("NotifyRecipients"));
+            PerformableHtml        = Add(new VocabularyKey("PerformableHtml"));
+            Redirect               = Add(new VocabularyKey("Redirect"));
+            SubmitText             = Add(new VocabularyKey("SubmitText"));
 
             // TODO: map keys to CluedIn vocabulary
         }

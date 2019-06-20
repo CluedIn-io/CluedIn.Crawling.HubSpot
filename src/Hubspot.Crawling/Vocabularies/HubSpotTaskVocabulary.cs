@@ -18,19 +18,19 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotTaskVocabulary()
         {
-            this.VocabularyName = "HubSpot Task";
-            this.KeyPrefix      = "hubspot.task";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Task;
+            VocabularyName = "HubSpot Task";
+            KeyPrefix      = "hubspot.task";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Task;
 
-            this.Status                       = this.Add(new VocabularyKey("Status"));
-            this.DueDate                      = this.Add(new VocabularyKey("DueDate"));
-            this.Description                  = this.Add(new VocabularyKey("Description", VocabularyKeyDataType.Html));
-            this.ForObjectType                = this.Add(new VocabularyKey("ForObjectType"));
-            this.Reminders                    = this.Add(new VocabularyKey("Reminders"));
+            Status                       = Add(new VocabularyKey("Status"));
+            DueDate                      = Add(new VocabularyKey("DueDate"));
+            Description                  = Add(new VocabularyKey("Description", VocabularyKeyDataType.Html));
+            ForObjectType                = Add(new VocabularyKey("ForObjectType"));
+            Reminders                    = Add(new VocabularyKey("Reminders"));
 
-            AddMapping(this.Status, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInTask.State);
-            AddMapping(this.DueDate, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInTask.DueDate);
+            AddMapping(Status, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInTask.State);
+            AddMapping(DueDate, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInTask.DueDate);
         }
 
         public VocabularyKey Status { get; private set; }

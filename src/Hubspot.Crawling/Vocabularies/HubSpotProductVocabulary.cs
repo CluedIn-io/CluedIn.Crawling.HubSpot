@@ -18,28 +18,28 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotProductVocabulary()
         {
-            this.VocabularyName = "HubSpot Product";
-            this.KeyPrefix      = "hubspot.product";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Product;
+            VocabularyName = "HubSpot Product";
+            KeyPrefix      = "hubspot.product";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Product;
 
-            this.Name                        = this.Add(new VocabularyKey("Name"));
-            this.Productdescription          = this.Add(new VocabularyKey("ProductDescription"));
-            this.StartDate                   = this.Add(new VocabularyKey("StartDate", VocabularyKeyDataType.DateTime));
-            this.CreateDate                  = this.Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
-            this.LastModifiedDate            = this.Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
-            this.IsDeleted                   = this.Add(new VocabularyKey("IsDeleted", VocabularyKeyDataType.Boolean));
-            this.Version                     = this.Add(new VocabularyKey("Version"));
-            this.AvatarFileManagerkey        = this.Add(new VocabularyKey("AvatarFileManagerKey"));
-            this.Productprice                = this.Add(new VocabularyKey("ProductPrice", VocabularyKeyDataType.Money));
-            this.Recurringbillingfrequency   = this.Add(new VocabularyKey("RecurringBillingFrequency"));
-            this.DiscountAmount              = this.Add(new VocabularyKey("DiscountAmount"));
-            this.DiscountPercentage          = this.Add(new VocabularyKey("DiscountPercentage"));
-            this.Tax                         = this.Add(new VocabularyKey("Tax"));
-            this.Term                        = this.Add(new VocabularyKey("Term"));
-            this.Costofgoodssold             = this.Add(new VocabularyKey("CostOfGoodsSold", VocabularyKeyDataType.Money));
+            Name                        = Add(new VocabularyKey("Name"));
+            Productdescription          = Add(new VocabularyKey("ProductDescription"));
+            StartDate                   = Add(new VocabularyKey("StartDate", VocabularyKeyDataType.DateTime));
+            CreateDate                  = Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
+            LastModifiedDate            = Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
+            IsDeleted                   = Add(new VocabularyKey("IsDeleted", VocabularyKeyDataType.Boolean));
+            Version                     = Add(new VocabularyKey("Version"));
+            AvatarFileManagerkey        = Add(new VocabularyKey("AvatarFileManagerKey"));
+            Productprice                = Add(new VocabularyKey("ProductPrice", VocabularyKeyDataType.Money));
+            Recurringbillingfrequency   = Add(new VocabularyKey("RecurringBillingFrequency"));
+            DiscountAmount              = Add(new VocabularyKey("DiscountAmount"));
+            DiscountPercentage          = Add(new VocabularyKey("DiscountPercentage"));
+            Tax                         = Add(new VocabularyKey("Tax"));
+            Term                        = Add(new VocabularyKey("Term"));
+            Costofgoodssold             = Add(new VocabularyKey("CostOfGoodsSold", VocabularyKeyDataType.Money));
 
-            this.AddMapping(this.Version, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInProduct.VersionNumber);
+            AddMapping(Version, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInProduct.VersionNumber);
         }
 
         public VocabularyKey IsDeleted { get; private set; }

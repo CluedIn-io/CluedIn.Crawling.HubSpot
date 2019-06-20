@@ -18,26 +18,26 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotCampaignEventVocabulary()
         {
-            this.VocabularyName = "HubSpot Campaign Event";
-            this.KeyPrefix      = "hubspot.campaign.event";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Calendar.Event;
+            VocabularyName = "HubSpot Campaign Event";
+            KeyPrefix      = "hubspot.campaign.event";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Calendar.Event;
 
-            this.AddGroup("Hubspot Campaign Event Details", group =>
+            AddGroup("Hubspot Campaign Event Details", group =>
             {
-                this.AppName         = group.Add(new VocabularyKey("AppName"));
-                this.Browser         = group.Add(new VocabularyKey("Browser", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.EmailCampaignId = group.Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
-                this.Hmid            = group.Add(new VocabularyKey("Hmid", VocabularyKeyVisiblity.Hidden));
-                this.IpAddress = group.Add(new VocabularyKey("IpAddress", VocabularyKeyVisiblity.Hidden));
-                this.Location        = group.Add(new VocabularyKey("Location", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.Recipient       = group.Add(new VocabularyKey("Recipient"));
-                this.Type            = group.Add(new VocabularyKey("Type"));
-                this.UserAgent = group.Add(new VocabularyKey("UserAgent", VocabularyKeyVisiblity.Hidden));
+                AppName         = group.Add(new VocabularyKey("AppName"));
+                Browser         = group.Add(new VocabularyKey("Browser", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                EmailCampaignId = group.Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
+                Hmid            = group.Add(new VocabularyKey("Hmid", VocabularyKeyVisiblity.Hidden));
+                IpAddress = group.Add(new VocabularyKey("IpAddress", VocabularyKeyVisiblity.Hidden));
+                Location        = group.Add(new VocabularyKey("Location", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Recipient       = group.Add(new VocabularyKey("Recipient"));
+                Type            = group.Add(new VocabularyKey("Type"));
+                UserAgent = group.Add(new VocabularyKey("UserAgent", VocabularyKeyVisiblity.Hidden));
 
-                this.City = group.Add(new VocabularyKey("City", VocabularyKeyDataType.GeographyCity));
-                this.Country = group.Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));
-                this.State = group.Add(new VocabularyKey("State", VocabularyKeyDataType.GeographyLocation));
+                City = group.Add(new VocabularyKey("City", VocabularyKeyDataType.GeographyCity));
+                Country = group.Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));
+                State = group.Add(new VocabularyKey("State", VocabularyKeyDataType.GeographyLocation));
             });
 
             // TODO: map keys to CluedIn vocabulary

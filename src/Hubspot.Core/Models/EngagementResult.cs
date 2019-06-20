@@ -19,14 +19,14 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
             var r = new List<object>();
             var result = new Email
             {
-                associations = this.associations,
-                attachments = this.attachments,
-                engagement = this.engagement,
-                scheduledTasks = this.scheduledTasks
+                associations = associations,
+                attachments = attachments,
+                engagement = engagement,
+                scheduledTasks = scheduledTasks
             };
             try
             {
-                result.metadata = JsonConvert.DeserializeObject<EmailMetadata>(JsonUtility.Serialize(this.metadata));
+                result.metadata = JsonConvert.DeserializeObject<EmailMetadata>(JsonUtility.Serialize(metadata));
 
                 if (result?.metadata != null)
                 {
@@ -48,52 +48,52 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
 
         public IEnumerable<object> Converttospecific()
         {
-            if (this.engagement?.type != null)
+            if (engagement?.type != null)
             {
-                if (this.engagement.type == "INCOMING_EMAIL")
-                    foreach (var g in this.Converttomail())
+                if (engagement.type == "INCOMING_EMAIL")
+                    foreach (var g in Converttomail())
                         yield return g;
-                else if (this.engagement.type == "EMAIL")
-                    foreach (var e in this.Converttomail())
+                else if (engagement.type == "EMAIL")
+                    foreach (var e in Converttomail())
                         yield return e;
-                else if (this.engagement.type == "NOTE")
+                else if (engagement.type == "NOTE")
                 {
                     var result = new Note
                     {
-                        associations = this.associations,
-                        attachments = this.attachments,
-                        engagement = this.engagement,
-                        scheduledTasks = this.scheduledTasks,
-                        metadata = this.metadata
+                        associations = associations,
+                        attachments = attachments,
+                        engagement = engagement,
+                        scheduledTasks = scheduledTasks,
+                        metadata = metadata
                     };
                     yield return result;
                 }
-                else if (this.engagement.type == "CALL")
+                else if (engagement.type == "CALL")
                 {
                     var result = new Call
                     {
-                        associations = this.associations,
-                        attachments = this.attachments,
-                        engagement = this.engagement,
-                        scheduledTasks = this.scheduledTasks,
-                        metadata = this.metadata
+                        associations = associations,
+                        attachments = attachments,
+                        engagement = engagement,
+                        scheduledTasks = scheduledTasks,
+                        metadata = metadata
                     };
                     yield return result;
                 }
-                else if (this.engagement.type == "TASK")
+                else if (engagement.type == "TASK")
                 {
                     var result = new Task
                     {
-                        associations = this.associations,
-                        attachments = this.attachments,
-                        engagement = this.engagement,
-                        scheduledTasks = this.scheduledTasks,
-                        metadata = this.metadata
+                        associations = associations,
+                        attachments = attachments,
+                        engagement = engagement,
+                        scheduledTasks = scheduledTasks,
+                        metadata = metadata
                     };
                     var r = new List<long>();
                     try
                     {
-                        var jobject = JObject.Parse(this.metadata.ToString());
+                        var jobject = JObject.Parse(metadata.ToString());
                         if (jobject["reminders"] != null)
                         {
                             r = JsonUtility.Deserialize<List<long>>(jobject["reminders"].ToString());
@@ -108,20 +108,20 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
                         yield return c;
                     }
                 }
-                else if (this.engagement.type == "MEETING")
+                else if (engagement.type == "MEETING")
                 {
                     var result = new Meeting
                     {
-                        associations = this.associations,
-                        attachments = this.attachments,
-                        engagement = this.engagement,
-                        scheduledTasks = this.scheduledTasks,
-                        metadata = this.metadata
+                        associations = associations,
+                        attachments = attachments,
+                        engagement = engagement,
+                        scheduledTasks = scheduledTasks,
+                        metadata = metadata
                     };
                     var r = new List<long>();
                     try
                     {
-                        var jobject = JObject.Parse(this.metadata.ToString());
+                        var jobject = JObject.Parse(metadata.ToString());
                         if (jobject["preMeetingProspectReminders"] != null)
                         {
                             r = JsonUtility.Deserialize<List<long>>(jobject["preMeetingProspectReminders"].ToString());
@@ -140,7 +140,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
                 {
                     try
                     {
-                        this.metadata = JsonUtility.Deserialize<EngagementMetadata>(JsonUtility.Serialize(this.metadata));
+                        metadata = JsonUtility.Deserialize<EngagementMetadata>(JsonUtility.Serialize(metadata));
                     }
                     catch { }
                     yield return this;

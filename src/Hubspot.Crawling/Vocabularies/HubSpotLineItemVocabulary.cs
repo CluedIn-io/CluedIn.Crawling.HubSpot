@@ -18,30 +18,30 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotLineItemVocabulary()
         {
-            this.VocabularyName = "HubSpot Line Item";
-            this.KeyPrefix      = "hubspot.lineitem";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Sales.Order;
+            VocabularyName = "HubSpot Line Item";
+            KeyPrefix      = "hubspot.lineitem";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Sales.Order;
 
-            this.Name                        = this.Add(new VocabularyKey("Name"));
-            this.Productdescription          = this.Add(new VocabularyKey("ProductDescription"));
-            this.IsDeleted                   = this.Add(new VocabularyKey("IsDeleted", VocabularyKeyDataType.Boolean));
-            this.Version                     = this.Add(new VocabularyKey("Version"));
-            this.CreateDate                  = this.Add(new VocabularyKey("CreateDate"));
-            this.LastModifiedDate            = this.Add(new VocabularyKey("LastModifiedDate"));
-            this.Amount                      = this.Add(new VocabularyKey("Amount"));
-            this.ProductID                   = this.Add(new VocabularyKey("ProductID"));
-            this.Productprice                = this.Add(new VocabularyKey("Productprice"));
-            this.Quantity                    = this.Add(new VocabularyKey("Quantity"));
-            this.Dealclosedwondate           = this.Add(new VocabularyKey("DealClosedWonDate"));
-            this.StartDate                   = this.Add(new VocabularyKey("StartDate"));
-            this.EndDate                     = this.Add(new VocabularyKey("EndDate"));
-            this.Recurringbillingfrequency   = this.Add(new VocabularyKey("RecurringBillingFrequency"));
-            this.DiscountAmount              = this.Add(new VocabularyKey("DiscountAmount"));
-            this.DiscountPercentage          = this.Add(new VocabularyKey("DiscountPercentage"));
-            this.Tax                         = this.Add(new VocabularyKey("Tax"));
-            this.Term                        = this.Add(new VocabularyKey("Term"));
-            this.Costofgoodssold             = this.Add(new VocabularyKey("CostOfGoodsSold"));
+            Name                        = Add(new VocabularyKey("Name"));
+            Productdescription          = Add(new VocabularyKey("ProductDescription"));
+            IsDeleted                   = Add(new VocabularyKey("IsDeleted", VocabularyKeyDataType.Boolean));
+            Version                     = Add(new VocabularyKey("Version"));
+            CreateDate                  = Add(new VocabularyKey("CreateDate"));
+            LastModifiedDate            = Add(new VocabularyKey("LastModifiedDate"));
+            Amount                      = Add(new VocabularyKey("Amount"));
+            ProductID                   = Add(new VocabularyKey("ProductID"));
+            Productprice                = Add(new VocabularyKey("Productprice"));
+            Quantity                    = Add(new VocabularyKey("Quantity"));
+            Dealclosedwondate           = Add(new VocabularyKey("DealClosedWonDate"));
+            StartDate                   = Add(new VocabularyKey("StartDate"));
+            EndDate                     = Add(new VocabularyKey("EndDate"));
+            Recurringbillingfrequency   = Add(new VocabularyKey("RecurringBillingFrequency"));
+            DiscountAmount              = Add(new VocabularyKey("DiscountAmount"));
+            DiscountPercentage          = Add(new VocabularyKey("DiscountPercentage"));
+            Tax                         = Add(new VocabularyKey("Tax"));
+            Term                        = Add(new VocabularyKey("Term"));
+            Costofgoodssold             = Add(new VocabularyKey("CostOfGoodsSold"));
         }
 
         public VocabularyKey IsDeleted { get; private set; }

@@ -18,25 +18,25 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotUrlMappingVocabulary()
         {
-            this.VocabularyName = "HubSpot Url Mapping";
-            this.KeyPrefix      = "hubspot.url.mapping";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Note;
+            VocabularyName = "HubSpot Url Mapping";
+            KeyPrefix      = "hubspot.url.mapping";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Note;
 
-            this.ContentGroupId      = this.Add(new VocabularyKey("ContentGroupId", VocabularyKeyVisiblity.Hidden));
-            this.Created             = this.Add(new VocabularyKey("Created"));
-            this.DeletedAt           = this.Add(new VocabularyKey("DeletedAt"));
-            this.Destination         = this.Add(new VocabularyKey("Destination"));
-            this.IsMatchFullUrl      = this.Add(new VocabularyKey("IsMatchFullUrl"));
-            this.IsMatchQueryString  = this.Add(new VocabularyKey("IsMatchQueryString"));
-            this.IsOnlyAfterNotFound = this.Add(new VocabularyKey("IsOnlyAfterNotFound"));
-            this.IsPattern           = this.Add(new VocabularyKey("IsPattern"));
-            this.IsRegex             = this.Add(new VocabularyKey("IsRegex"));
-            this.PortalId            = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.Precedence          = this.Add(new VocabularyKey("Precedence"));
-            this.RedirectStyle       = this.Add(new VocabularyKey("RedirectStyle"));
-            this.RoutePrefix         = this.Add(new VocabularyKey("RoutePrefix"));
-            this.Updated             = this.Add(new VocabularyKey("Updated"));
+            ContentGroupId      = Add(new VocabularyKey("ContentGroupId", VocabularyKeyVisiblity.Hidden));
+            Created             = Add(new VocabularyKey("Created"));
+            DeletedAt           = Add(new VocabularyKey("DeletedAt"));
+            Destination         = Add(new VocabularyKey("Destination"));
+            IsMatchFullUrl      = Add(new VocabularyKey("IsMatchFullUrl"));
+            IsMatchQueryString  = Add(new VocabularyKey("IsMatchQueryString"));
+            IsOnlyAfterNotFound = Add(new VocabularyKey("IsOnlyAfterNotFound"));
+            IsPattern           = Add(new VocabularyKey("IsPattern"));
+            IsRegex             = Add(new VocabularyKey("IsRegex"));
+            PortalId            = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            Precedence          = Add(new VocabularyKey("Precedence"));
+            RedirectStyle       = Add(new VocabularyKey("RedirectStyle"));
+            RoutePrefix         = Add(new VocabularyKey("RoutePrefix"));
+            Updated             = Add(new VocabularyKey("Updated"));
 
             // TODO: map keys to CluedIn vocabulary
         }

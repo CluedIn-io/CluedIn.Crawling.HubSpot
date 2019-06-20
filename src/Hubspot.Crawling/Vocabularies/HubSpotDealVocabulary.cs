@@ -18,37 +18,37 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotDealVocabulary()
         {
-            this.VocabularyName = "HubSpot Deal";
-            this.KeyPrefix      = "hubspot.deal";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Sales.Deal;
+            VocabularyName = "HubSpot Deal";
+            KeyPrefix      = "hubspot.deal";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Sales.Deal;
 
-            this.Associations                           = this.Add(new VocabularyKey("Associations", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.LastMeetingBooked                      = this.Add(new VocabularyKey("LastMeetingBooked", VocabularyKeyDataType.Text));
-            this.LastMeetingBookedCampaign              = this.Add(new VocabularyKey("LastMeetingBookedCampaign", VocabularyKeyDataType.Text));
-            this.LastMeetingBookedMedium                = this.Add(new VocabularyKey("LastMeetingBookedMedium", VocabularyKeyDataType.Text));
-            this.LastMeetingBookedSource                = this.Add(new VocabularyKey("LastMeetingBookedSource", VocabularyKeyDataType.Text));
-            this.DealInformationHubSpotOwner            = this.Add(new VocabularyKey("HubSpotOwner", VocabularyKeyDataType.Text));
-            this.DealInformationLastContacted           = this.Add(new VocabularyKey("LastContacted", VocabularyKeyDataType.DateTime));
-            this.DealInformationLastActivityDate        = this.Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
-            this.DealInformationNextActivityDate        = this.Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
-            this.DealInformationNumberoftimescontacted  = this.Add(new VocabularyKey("NumberOfTimesContacted", VocabularyKeyDataType.Integer));
-            this.DealInformationNumberofSalesActivities = this.Add(new VocabularyKey("NumberOfSalesActivities", VocabularyKeyDataType.Integer));
-            this.DealInformationHubSpotCreateDate       = this.Add(new VocabularyKey("HubSpotCreateDate", VocabularyKeyDataType.DateTime));
-            this.DealInformationHubSpotTeam             = this.Add(new VocabularyKey("HubSpotTeam", VocabularyKeyDataType.Text));
-            this.DealInformationDealType                = this.Add(new VocabularyKey("DealType", VocabularyKeyDataType.Text));
-            this.DealInformationDealDescription         = this.Add(new VocabularyKey("DealDescription", VocabularyKeyDataType.Text));
-            this.DealInformationNumberofContacts        = this.Add(new VocabularyKey("NumberofContacts", VocabularyKeyDataType.Integer));
-            this.DealInformationClosedLostReason        = this.Add(new VocabularyKey("ClosedLostReason", VocabularyKeyDataType.Text));
-            this.DealInformationClosedWonReason         = this.Add(new VocabularyKey("ClosedWonReason", VocabularyKeyDataType.Text));
-            this.DealInformationLastModifiedDate        = this.Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
-            this.DealInformationOwnerAssignedDate       = this.Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.Text));
-            this.DealInformationDealName                = this.Add(new VocabularyKey("DealName", VocabularyKeyDataType.Text));
-            this.DealInformationAmount                  = this.Add(new VocabularyKey("Amount", VocabularyKeyDataType.Text));
-            this.DealInformationDealStage               = this.Add(new VocabularyKey("DealStage", VocabularyKeyDataType.Text));
-            this.DealInformationPipeline                = this.Add(new VocabularyKey("Pipeline", VocabularyKeyDataType.Text));
-            this.DealInformationCloseDate               = this.Add(new VocabularyKey("CloseDate", VocabularyKeyDataType.DateTime));
-            this.DealInformationCreateDate              = this.Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
+            Associations                           = Add(new VocabularyKey("Associations", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            LastMeetingBooked                      = Add(new VocabularyKey("LastMeetingBooked", VocabularyKeyDataType.Text));
+            LastMeetingBookedCampaign              = Add(new VocabularyKey("LastMeetingBookedCampaign", VocabularyKeyDataType.Text));
+            LastMeetingBookedMedium                = Add(new VocabularyKey("LastMeetingBookedMedium", VocabularyKeyDataType.Text));
+            LastMeetingBookedSource                = Add(new VocabularyKey("LastMeetingBookedSource", VocabularyKeyDataType.Text));
+            DealInformationHubSpotOwner            = Add(new VocabularyKey("HubSpotOwner", VocabularyKeyDataType.Text));
+            DealInformationLastContacted           = Add(new VocabularyKey("LastContacted", VocabularyKeyDataType.DateTime));
+            DealInformationLastActivityDate        = Add(new VocabularyKey("LastActivityDate", VocabularyKeyDataType.DateTime));
+            DealInformationNextActivityDate        = Add(new VocabularyKey("NextActivityDate", VocabularyKeyDataType.DateTime));
+            DealInformationNumberoftimescontacted  = Add(new VocabularyKey("NumberOfTimesContacted", VocabularyKeyDataType.Integer));
+            DealInformationNumberofSalesActivities = Add(new VocabularyKey("NumberOfSalesActivities", VocabularyKeyDataType.Integer));
+            DealInformationHubSpotCreateDate       = Add(new VocabularyKey("HubSpotCreateDate", VocabularyKeyDataType.DateTime));
+            DealInformationHubSpotTeam             = Add(new VocabularyKey("HubSpotTeam", VocabularyKeyDataType.Text));
+            DealInformationDealType                = Add(new VocabularyKey("DealType", VocabularyKeyDataType.Text));
+            DealInformationDealDescription         = Add(new VocabularyKey("DealDescription", VocabularyKeyDataType.Text));
+            DealInformationNumberofContacts        = Add(new VocabularyKey("NumberofContacts", VocabularyKeyDataType.Integer));
+            DealInformationClosedLostReason        = Add(new VocabularyKey("ClosedLostReason", VocabularyKeyDataType.Text));
+            DealInformationClosedWonReason         = Add(new VocabularyKey("ClosedWonReason", VocabularyKeyDataType.Text));
+            DealInformationLastModifiedDate        = Add(new VocabularyKey("LastModifiedDate", VocabularyKeyDataType.DateTime));
+            DealInformationOwnerAssignedDate       = Add(new VocabularyKey("OwnerAssignedDate", VocabularyKeyDataType.Text));
+            DealInformationDealName                = Add(new VocabularyKey("DealName", VocabularyKeyDataType.Text));
+            DealInformationAmount                  = Add(new VocabularyKey("Amount", VocabularyKeyDataType.Text));
+            DealInformationDealStage               = Add(new VocabularyKey("DealStage", VocabularyKeyDataType.Text));
+            DealInformationPipeline                = Add(new VocabularyKey("Pipeline", VocabularyKeyDataType.Text));
+            DealInformationCloseDate               = Add(new VocabularyKey("CloseDate", VocabularyKeyDataType.DateTime));
+            DealInformationCreateDate              = Add(new VocabularyKey("CreateDate", VocabularyKeyDataType.DateTime));
 
             AddGroup("HubSpot Deal Analytics Information Details", group =>
             {

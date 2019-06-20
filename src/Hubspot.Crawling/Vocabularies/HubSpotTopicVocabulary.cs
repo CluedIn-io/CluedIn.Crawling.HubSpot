@@ -18,20 +18,20 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotTopicVocabulary()
         {
-            this.VocabularyName = "HubSpot Topic";
-            this.KeyPrefix      = "hubspot.topic";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Topic;
+            VocabularyName = "HubSpot Topic";
+            KeyPrefix      = "hubspot.topic";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Topic;
 
-            this.Created   = this.Add(new VocabularyKey("Created"));
-            this.DeletedAt = this.Add(new VocabularyKey("DeletedAt"));
-            this.PortalId  = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.Slug      = this.Add(new VocabularyKey("Slug", VocabularyKeyVisiblity.Hidden));
-            this.Updated   = this.Add(new VocabularyKey("Updated"));
+            Created   = Add(new VocabularyKey("Created"));
+            DeletedAt = Add(new VocabularyKey("DeletedAt"));
+            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            Slug      = Add(new VocabularyKey("Slug", VocabularyKeyVisiblity.Hidden));
+            Updated   = Add(new VocabularyKey("Updated"));
 
-            this.AddMapping(this.Created, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
-            this.AddMapping(this.Updated, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.ModifiedDate);
-            this.AddMapping(this.DeletedAt, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.DeletedDate);
+            AddMapping(Created, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
+            AddMapping(Updated, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.ModifiedDate);
+            AddMapping(DeletedAt, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.DeletedDate);
         }
 
         public VocabularyKey Created { get; private set; }

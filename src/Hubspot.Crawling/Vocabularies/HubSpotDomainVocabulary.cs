@@ -18,31 +18,31 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotDomainVocabulary()
         {
-            this.VocabularyName = "HubSpot Domain";
-            this.KeyPrefix      = "hubspot.domain";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Note;
+            VocabularyName = "HubSpot Domain";
+            KeyPrefix      = "hubspot.domain";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Note;
 
-            this.ActualCName                  = this.Add(new VocabularyKey("ActualCName"));
-            this.ActualIp = this.Add(new VocabularyKey("ActualIp", VocabularyKeyVisiblity.Hidden));
-            this.ConsecutiveNonResolvingCount = this.Add(new VocabularyKey("ConsecutiveNonResolvingCount"));
-            this.Domain                       = this.Add(new VocabularyKey("Domain"));
-            this.FullCategoryKey              = this.Add(new VocabularyKey("FullCategoryKey"));
-            this.IsAnyPrimary = this.Add(new VocabularyKey("IsAnyPrimary", VocabularyKeyVisiblity.Hidden));
-            this.IsDnsCorrect = this.Add(new VocabularyKey("IsDnsCorrect", VocabularyKeyVisiblity.Hidden));
-            this.IsInternalDomain             = this.Add(new VocabularyKey("IsInternalDomain"));
-            this.IsLegacy = this.Add(new VocabularyKey("IsLegacy", VocabularyKeyVisiblity.Hidden));
-            this.IsLegacyDomain = this.Add(new VocabularyKey("IsLegacyDomain", VocabularyKeyVisiblity.Hidden));
-            this.IsResolving = this.Add(new VocabularyKey("IsResolving", VocabularyKeyVisiblity.Hidden));
-            this.ManuallyMarkedAsResolving = this.Add(new VocabularyKey("ManuallyMarkedAsResolving", VocabularyKeyVisiblity.Hidden));
-            this.PortalId                     = this.Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            this.PrimaryBlogPost              = this.Add(new VocabularyKey("PrimaryBlogPost"));
-            this.PrimaryEmail                 = this.Add(new VocabularyKey("PrimaryEmail"));
-            this.PrimaryLandingPage           = this.Add(new VocabularyKey("PrimaryLandingPage"));
-            this.PrimaryLegacyPage            = this.Add(new VocabularyKey("PrimaryLegacyPage"));
-            this.SecondaryToDomain            = this.Add(new VocabularyKey("SecondaryToDomain"));
-            this.Updated                      = this.Add(new VocabularyKey("Updated"));
-            this.PrimarySitePage              = this.Add(new VocabularyKey("PrimarySitePage"));
+            ActualCName                  = Add(new VocabularyKey("ActualCName"));
+            ActualIp = Add(new VocabularyKey("ActualIp", VocabularyKeyVisiblity.Hidden));
+            ConsecutiveNonResolvingCount = Add(new VocabularyKey("ConsecutiveNonResolvingCount"));
+            Domain                       = Add(new VocabularyKey("Domain"));
+            FullCategoryKey              = Add(new VocabularyKey("FullCategoryKey"));
+            IsAnyPrimary = Add(new VocabularyKey("IsAnyPrimary", VocabularyKeyVisiblity.Hidden));
+            IsDnsCorrect = Add(new VocabularyKey("IsDnsCorrect", VocabularyKeyVisiblity.Hidden));
+            IsInternalDomain             = Add(new VocabularyKey("IsInternalDomain"));
+            IsLegacy = Add(new VocabularyKey("IsLegacy", VocabularyKeyVisiblity.Hidden));
+            IsLegacyDomain = Add(new VocabularyKey("IsLegacyDomain", VocabularyKeyVisiblity.Hidden));
+            IsResolving = Add(new VocabularyKey("IsResolving", VocabularyKeyVisiblity.Hidden));
+            ManuallyMarkedAsResolving = Add(new VocabularyKey("ManuallyMarkedAsResolving", VocabularyKeyVisiblity.Hidden));
+            PortalId                     = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            PrimaryBlogPost              = Add(new VocabularyKey("PrimaryBlogPost"));
+            PrimaryEmail                 = Add(new VocabularyKey("PrimaryEmail"));
+            PrimaryLandingPage           = Add(new VocabularyKey("PrimaryLandingPage"));
+            PrimaryLegacyPage            = Add(new VocabularyKey("PrimaryLegacyPage"));
+            SecondaryToDomain            = Add(new VocabularyKey("SecondaryToDomain"));
+            Updated                      = Add(new VocabularyKey("Updated"));
+            PrimarySitePage              = Add(new VocabularyKey("PrimarySitePage"));
 
             // TODO: map keys to CluedIn vocabulary
         }

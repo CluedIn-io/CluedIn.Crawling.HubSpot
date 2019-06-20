@@ -18,24 +18,24 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotOwnerVocabulary()
         {
-            this.VocabularyName = "HubSpot Owner";
-            this.KeyPrefix      = "hubspot.owner";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Person;
+            VocabularyName = "HubSpot Owner";
+            KeyPrefix      = "hubspot.owner";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Person;
 
-            this.CreatedAt      = this.Add(new VocabularyKey("CreatedAt"));
-            this.RemoteList     = this.Add(new VocabularyKey("RemoteList", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            this.Type           = this.Add(new VocabularyKey("Type"));
-            this.Email          = this.Add(new VocabularyKey("Email"));
-            this.FirstName      = this.Add(new VocabularyKey("FirstName"));
-            this.LastName       = this.Add(new VocabularyKey("LastName"));
+            CreatedAt      = Add(new VocabularyKey("CreatedAt"));
+            RemoteList     = Add(new VocabularyKey("RemoteList", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Type           = Add(new VocabularyKey("Type"));
+            Email          = Add(new VocabularyKey("Email"));
+            FirstName      = Add(new VocabularyKey("FirstName"));
+            LastName       = Add(new VocabularyKey("LastName"));
 
             // TODO: map keys to CluedIn vocabulary
-            this.AddMapping(this.Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.Email);
-            this.AddMapping(this.FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.FirstName);
-            this.AddMapping(this.LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.LastName);
+            AddMapping(Email, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.Email);
+            AddMapping(FirstName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.FirstName);
+            AddMapping(LastName, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInUser.LastName);
             
-            this.AddMapping(this.CreatedAt, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
+            AddMapping(CreatedAt, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);
         }
 
         public VocabularyKey CreatedAt { get; private set; }

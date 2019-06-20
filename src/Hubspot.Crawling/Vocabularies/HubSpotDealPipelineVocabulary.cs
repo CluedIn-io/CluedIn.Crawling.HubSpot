@@ -21,15 +21,15 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
         /// </summary>
         public HubSpotDealPipelineVocabulary()
         {
-            this.VocabularyName = "HubSpot Deal Pipeline";
-            this.KeyPrefix      = "hubspot.deal.pipeline";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Process;
+            VocabularyName = "HubSpot Deal Pipeline";
+            KeyPrefix      = "hubspot.deal.pipeline";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Process;
 
-            this.Active       = this.Add(new VocabularyKey("Active"));
-            this.DisplayOrder = this.Add(new VocabularyKey("DisplayOrder"));
-            this.Label        = this.Add(new VocabularyKey("Label"));
-            this.PipelineId   = this.Add(new VocabularyKey("PipelineId", VocabularyKeyVisiblity.Hidden));
+            Active       = Add(new VocabularyKey("Active"));
+            DisplayOrder = Add(new VocabularyKey("DisplayOrder"));
+            Label        = Add(new VocabularyKey("Label"));
+            PipelineId   = Add(new VocabularyKey("PipelineId", VocabularyKeyVisiblity.Hidden));
 
             // TODO: map keys to CluedIn vocabulary
         }

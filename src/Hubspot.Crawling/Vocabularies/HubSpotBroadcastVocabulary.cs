@@ -18,31 +18,31 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
     {
         public HubSpotBroadcastVocabulary()
         {
-            this.VocabularyName = "HubSpot Broadcast";
-            this.KeyPrefix      = "hubspot.broadcast";
-            this.KeySeparator   = ".";
-            this.Grouping       = EntityType.Announcement;
+            VocabularyName = "HubSpot Broadcast";
+            KeyPrefix      = "hubspot.broadcast";
+            KeySeparator   = ".";
+            Grouping       = EntityType.Announcement;
 
-            this.AddGroup("Hubspot Broadcast Details", group =>
+            AddGroup("Hubspot Broadcast Details", group =>
             {
-                this.BroadcastGuid     = group.Add(new VocabularyKey("BroadcastGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
-                this.CampaignGuid      = group.Add(new VocabularyKey("CampaignGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
-                this.Clicks            = group.Add(new VocabularyKey("Clicks", VocabularyKeyDataType.Integer));
-                this.ClientTag         = group.Add(new VocabularyKey("ClientTag", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                this.CreatedBy         = group.Add(new VocabularyKey("CreatedBy"));
-                this.FinishedAt        = group.Add(new VocabularyKey("FinishedAt", VocabularyKeyDataType.DateTime));
-                this.ForeignId         = group.Add(new VocabularyKey("ForeignId", VocabularyKeyVisiblity.Hidden));
-                this.GroupGuid         = group.Add(new VocabularyKey("GroupGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
-                this.InteractionCounts = group.Add(new VocabularyKey("InteractionCounts", VocabularyKeyDataType.Json));
-                this.Interactions      = group.Add(new VocabularyKey("Interactions", VocabularyKeyDataType.Json));
-                this.LinkGuid          = group.Add(new VocabularyKey("LinkGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
-                this.LinkTaskQueueId   = group.Add(new VocabularyKey("LinkTaskQueueId", VocabularyKeyVisiblity.Hidden));
-                this.RemoteContentId   = group.Add(new VocabularyKey("RemoteContentId", VocabularyKeyVisiblity.Hidden));
-                this.RemoteContentType = group.Add(new VocabularyKey("RemoteContentType", VocabularyKeyVisiblity.Hidden));
-                this.Status            = group.Add(new VocabularyKey("Status"));
-                this.TaskQueued        = group.Add(new VocabularyKey("TaskQueued", VocabularyKeyVisiblity.Hidden));
-                this.TriggerAt         = group.Add(new VocabularyKey("TriggerAt", VocabularyKeyDataType.DateTime));
-                this.UpdatedBy         = group.Add(new VocabularyKey("UpdatedBy"));
+                BroadcastGuid     = group.Add(new VocabularyKey("BroadcastGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
+                CampaignGuid      = group.Add(new VocabularyKey("CampaignGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
+                Clicks            = group.Add(new VocabularyKey("Clicks", VocabularyKeyDataType.Integer));
+                ClientTag         = group.Add(new VocabularyKey("ClientTag", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                CreatedBy         = group.Add(new VocabularyKey("CreatedBy"));
+                FinishedAt        = group.Add(new VocabularyKey("FinishedAt", VocabularyKeyDataType.DateTime));
+                ForeignId         = group.Add(new VocabularyKey("ForeignId", VocabularyKeyVisiblity.Hidden));
+                GroupGuid         = group.Add(new VocabularyKey("GroupGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
+                InteractionCounts = group.Add(new VocabularyKey("InteractionCounts", VocabularyKeyDataType.Json));
+                Interactions      = group.Add(new VocabularyKey("Interactions", VocabularyKeyDataType.Json));
+                LinkGuid          = group.Add(new VocabularyKey("LinkGuid", VocabularyKeyDataType.Guid, VocabularyKeyVisiblity.Hidden));
+                LinkTaskQueueId   = group.Add(new VocabularyKey("LinkTaskQueueId", VocabularyKeyVisiblity.Hidden));
+                RemoteContentId   = group.Add(new VocabularyKey("RemoteContentId", VocabularyKeyVisiblity.Hidden));
+                RemoteContentType = group.Add(new VocabularyKey("RemoteContentType", VocabularyKeyVisiblity.Hidden));
+                Status            = group.Add(new VocabularyKey("Status"));
+                TaskQueued        = group.Add(new VocabularyKey("TaskQueued", VocabularyKeyVisiblity.Hidden));
+                TriggerAt         = group.Add(new VocabularyKey("TriggerAt", VocabularyKeyDataType.DateTime));
+                UpdatedBy         = group.Add(new VocabularyKey("UpdatedBy"));
             });
 
             // TODO: map keys to CluedIn vocabulary
