@@ -41,11 +41,6 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
         Context "Mock Server" {
         
-            It "Root folder access is forbidden" {
-
-                { Invoke-WebRequest $mockServer } | Should -Throw 403
-            }
-
             It "Admin panel is available" {
 
                 { Invoke-WebRequest "$mockServer/__admin/" -UseBasicParsing } | Should -Not -Throw
