@@ -1,5 +1,5 @@
-namespace Crawling.Hubspot.Unit.Test.ClueProducers
-{
+//namespace Crawling.HubSpot.Unit.Test.ClueProducers
+//{
     //public class _SampleFolder_ClueProducerTests : BaseClueProducerTest<_SampleFolder_>
     //{
     //    protected override BaseClueProducer<_SampleFolder_> Sut =>
@@ -17,4 +17,4 @@ namespace Crawling.Hubspot.Unit.Test.ClueProducers
     //            );
     //    }
     //}
-}
+//}
