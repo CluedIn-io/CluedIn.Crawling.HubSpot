@@ -1,4 +1,4 @@
-namespace Provider.Hubspot.Unit.Test.HubspotProvider
+namespace Provider.HubSpot.Unit.Test.HubspotProvider
 {
   //public class GetHelperConfigurationBehaviour : HubSpotProviderTest
   //{

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
-using CluedIn.Core;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
