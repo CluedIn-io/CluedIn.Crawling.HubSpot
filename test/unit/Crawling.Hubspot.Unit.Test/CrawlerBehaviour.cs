@@ -65,7 +65,7 @@ namespace Crawling.HubSpot.Unit.Test
                     _sut.GetData((CrawlJobData)instance));
             }
 
-            [Fact(Skip = "System.ArgumentNullException ... calls iterator and fails")]
+            [Fact]
             public void ReturnsEmptyDataWhenSettingsAreNotAvailable()
             {
                 _clientMock
