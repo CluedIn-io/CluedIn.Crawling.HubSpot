@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Castle.Core.Logging;
 using CluedIn.Core.Crawling;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Crawling.HubSpot.Iterators;
@@ -13,12 +13,14 @@ namespace CluedIn.Crawling.HubSpot
     public class Crawler : ICrawlerDataGenerator
     {
         private readonly IHubSpotClientFactory _clientFactory;
+        private readonly ILogger _log;
 
         private static readonly IEnumerable<object> EmptyResult = Enumerable.Empty<object>();
 
-        public Crawler(IHubSpotClientFactory clientFactory) // TODO add ILogger logger
+        public Crawler(IHubSpotClientFactory clientFactory, ILogger log)
         {
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         public IEnumerable<object> GetData(CrawlJobData jobData)
@@ -29,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot
             }
             catch (AggregateException e)
             {
-                // TODO Log.Error(e);
+                _log.Error(e.InnerExceptions.First().Message);
                 throw e.InnerExceptions.First();
             }
         }
@@ -52,7 +54,7 @@ namespace CluedIn.Crawling.HubSpot
 
             if (settings == null)
             {
-                // TODO Log the missing settings ...
+                _log.Error("Settings could not be obtained from HubSpot");
                 return EmptyResult;
             }
 
