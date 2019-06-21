@@ -58,8 +58,6 @@ namespace CluedIn.Crawling.HubSpot
 
             var companyProperties = await client.GetCompanyPropertiesAsync(settings);
 
-            crawlerJobData.LastCrawlFinishTime = new DateTimeOffset(new DateTime(2019, 6, 18, 0, 0, 0));
-
             var data = new List<object>();
             data.AddRange(new CompanyIterator(client, crawlerJobData, companyProperties, settings).Iterate());
 

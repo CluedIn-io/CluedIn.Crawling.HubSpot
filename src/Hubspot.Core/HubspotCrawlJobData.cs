@@ -16,6 +16,7 @@ namespace CluedIn.Crawling.HubSpot.Core
             BaseUri = GetValue<Uri>(configuration, HubSpotConstants.KeyName.BaseUri);
             ApiToken = GetValue<string>(configuration, HubSpotConstants.KeyName.ApiToken);
             CustomerSubDomain = GetValue<string>(configuration, HubSpotConstants.KeyName.CustomerSubDomain);
+            LastCrawlFinishTime = GetValue<DateTimeOffset>(configuration, HubSpotConstants.KeyName.LastCrawlFinishTime, LastCrawlFinishTime);
         }
 
         public IDictionary<string, object> ToDictionary()
