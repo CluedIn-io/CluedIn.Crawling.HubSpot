@@ -18,7 +18,7 @@ namespace Crawling.HubSpot.Integration.Test
             OutputClueOriginEntityCodes();
         }
 
-        [Theory(Skip = "The number entity types in incorrect at present while test instance of HubSpot is being populated")]
+        [Theory]
         [InlineData("/Provider/Root", 1)]
         [InlineData("/Organization", 48)]
         [InlineData("/Infrastructure/Contact", 46)]
