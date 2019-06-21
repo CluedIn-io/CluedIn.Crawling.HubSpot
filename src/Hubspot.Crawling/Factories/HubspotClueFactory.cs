@@ -1,6 +1,8 @@
 using System;
+using System.Configuration;
 using System.Globalization;
 using CluedIn.Core;
+using CluedIn.Core.Configuration;
 using CluedIn.Core.Data;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.FileTypes;
@@ -27,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             data.EntityData.Name = "HubSpot CRM";
             data.EntityData.Description = "HubSpot CRM is a web and mobile application for customers.";
             data.EntityData.DisplayName = "HubSpot CRM";
-            data.EntityData.Uri = new Uri("https://app.hubspot.com/login");  // TODO take from configuration
+            data.EntityData.Uri = new Uri(ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.HubSpotLoginUri, "https://app.hubspot.com/login"));  
             data.EntityData.Codes.Add(new EntityCode(EntityType.Product, "CluedIn", "HubSpot"));
 
             var iconBytes = GetIcon();
@@ -44,8 +46,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             clue.Details.RawData.Add(rawDataPart);
 
             clue.Data.EntityData.PreviewImage = new ImageReferencePart(rawDataPart, 128, 128);
-            clue.Data.EntityData.Properties.Add("Created", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)); // TODO Can remove this when validation suppresed
-
+            
             return clue;
         }
 

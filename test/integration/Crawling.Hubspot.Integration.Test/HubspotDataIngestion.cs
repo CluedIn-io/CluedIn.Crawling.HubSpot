@@ -28,7 +28,6 @@ namespace Crawling.HubSpot.Integration.Test
         [InlineData("/Task", 2)]
         [InlineData("/Process", 1)]
         [InlineData("/Sales/Deal", 3)]
-        [InlineData("/Person", 1)]
         [InlineData("/Activity", 20)]
         public void CorrectNumberOfEntityTypes(string entityType, int expectedCount)
         {

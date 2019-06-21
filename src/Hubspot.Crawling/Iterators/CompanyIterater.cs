@@ -70,6 +70,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 yield return dealPipeline;
             }
 
+            // TODO This returns permissions error
             //var tables = Client.GetTablesAsync().Result;
 
             //foreach (var table in tables)

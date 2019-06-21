@@ -12,7 +12,8 @@ namespace CluedIn.Crawling.HubSpot.Core
             public const string BaseUri = "baseUri";
             public const string ApiToken = "apiToken";
             public const string CustomerSubDomain = "customerSubDomain";
-            public const string LastCrawlFinishTime = "LastCrawlFinishTime";
+            public const string LastCrawlFinishTime = "lastCrawlFinishTime";
+            public const string HubSpotLoginUri = "hubSpotLoginUri";
         }
 
         public const string User = "User";
