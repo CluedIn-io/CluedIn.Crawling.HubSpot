@@ -29,6 +29,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.ENTITYTYPE_001_Person_MustNotBeUsedDirectly);
 
             var data = clue.Data.EntityData;
 

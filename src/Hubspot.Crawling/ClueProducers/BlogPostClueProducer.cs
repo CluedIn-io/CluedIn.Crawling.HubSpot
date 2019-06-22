@@ -32,6 +32,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_002_Uri_MustBeSet);
 
             var data = clue.Data.EntityData;
 
@@ -101,7 +102,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input.portal_id != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.ToString(), s => "HubSpot");
 
-            if (input.featured_image != null)
+            if (! String.IsNullOrWhiteSpace(input.featured_image))
             {
                 var previewImagePart = _imageFetcher.FetchAsRawDataPart(input.featured_image, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                 if (previewImagePart != null)

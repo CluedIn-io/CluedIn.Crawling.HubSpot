@@ -33,6 +33,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_001_Name_MustBeSet);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_002_Uri_MustBeSet);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_001_MustExist);
 
             var data = clue.Data.EntityData;
 
@@ -77,7 +80,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 data.Name = property.value;
                             }
-                            else if (property.type == "photo")
+                            else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
                             {
                                 var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                                 if (previewImagePart != null)
@@ -237,7 +240,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         {
                             data.Name = property.value;
                         }
-                        else if (property.type == "photo")
+                        else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
                         {
                             var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                             if (previewImagePart != null)

@@ -32,6 +32,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
 
             var data = clue.Data.EntityData;
 
@@ -165,7 +166,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         data.Properties[HubSpotVocabulary.Company.SocialMediaInformationFacebookFans] = property.Value.Value;
                     }
-                    else if (property.Key == "photo")
+                    else if (property.Key == "photo" && ! String.IsNullOrWhiteSpace(property.Value.Value))
                     {
                         var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.Value.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                         if (previewImagePart != null)
@@ -454,11 +455,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                     if (properties.TryGetValue("photo", out Property photo))
                     {
-                        var previewImagePart = _imageFetcher.FetchAsRawDataPart(photo.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(data.Name));
-                        if (previewImagePart != null)
+                        if (!string.IsNullOrWhiteSpace(photo.Value))
                         {
-                            clue.Details.RawData.Add(previewImagePart);
-                            clue.Data.EntityData.PreviewImage = new ImageReferencePart(previewImagePart, 255, 255);
+                            var previewImagePart = _imageFetcher.FetchAsRawDataPart(photo.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(data.Name));
+                            if (previewImagePart != null)
+                            {
+                                clue.Details.RawData.Add(previewImagePart);
+                                clue.Data.EntityData.PreviewImage = new ImageReferencePart(previewImagePart, 255, 255);
+                            }
                         }
                     }
                 }

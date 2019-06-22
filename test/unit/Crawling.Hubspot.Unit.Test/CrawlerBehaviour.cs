@@ -1,5 +1,6 @@
 using System;
 using CluedIn.Core.Crawling;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -20,7 +21,7 @@ namespace Crawling.HubSpot.Unit.Test
             public void ConstructorRequiresClientFactoryParameter()
             {
                 Assert.Throws<ArgumentNullException>(() =>
-                    new CluedIn.Crawling.HubSpot.Crawler(default(IHubSpotClientFactory)));
+                    new CluedIn.Crawling.HubSpot.Crawler(default(IHubSpotClientFactory), default(ILogger)));
             }
         }
 
@@ -29,6 +30,7 @@ namespace Crawling.HubSpot.Unit.Test
             private readonly ICrawlerDataGenerator _sut;
             private readonly HubSpotCrawlJobData _crawlJobData;
             private readonly Mock<IHubSpotClient> _clientMock;
+            private readonly Mock<ILogger> _logMock;
 
             public GetDataTests()
             {
@@ -40,9 +42,11 @@ namespace Crawling.HubSpot.Unit.Test
                     .Setup(x => x.GetSettingsAsync())
                     .Returns(Task.FromResult(new Settings()));
 
+                _logMock = new Mock<ILogger>();
+
                 nameClientFactory.Setup(x => x.CreateNew(It.IsAny<HubSpotCrawlJobData>())).Returns(_clientMock.Object);
 
-                _sut = new CluedIn.Crawling.HubSpot.Crawler(nameClientFactory.Object);
+                _sut = new CluedIn.Crawling.HubSpot.Crawler(nameClientFactory.Object, _logMock.Object);
 
                 _crawlJobData = new HubSpotCrawlJobData(HubSpotConfiguration.Create());
             }

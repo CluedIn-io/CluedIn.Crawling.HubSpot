@@ -1,4 +1,5 @@
 ﻿using System;
+using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -21,6 +22,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Person, input.email, accountId);
+
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.ENTITYTYPE_001_Person_MustNotBeUsedDirectly);
             
             var data = clue.Data.EntityData;
 

@@ -17,7 +17,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
                 .AddFacilityIfNotExists<TypedFactoryFacility>()
                 .Register(Component.For<IHubSpotClientFactory>().AsFactory())
                 .Register(Component.For<IHubSpotImageFetcher, HubSpotImageFetcher>())
-                .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient());
+                .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient())
+                .Register(Component.For<ISystemVocabularies>().ImplementedBy<SystemVocabularies>().LifestyleSingleton());
 
             if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
             {

@@ -26,6 +26,9 @@ namespace CluedIn.Crawling.HubSpot.Factories
             }
 
             var data = clue.Data;
+
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_001_MustExist);
+
             data.EntityData.Name = "HubSpot CRM";
             data.EntityData.Description = "HubSpot CRM is a web and mobile application for customers.";
             data.EntityData.DisplayName = "HubSpot CRM";

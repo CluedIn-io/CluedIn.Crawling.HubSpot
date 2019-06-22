@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
@@ -26,7 +27,22 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Mail, input.engagement.id?.ToString(), accountId);
-            
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_001_Name_MustBeSet);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_002_Uri_MustBeSet);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_003_Author_Name_MustBeSet);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_004_Invalid_EntityType);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_005_PreviewImage_RawData_MustBeSet);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_006_Created_Modified_Date_InFuture);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_007_Created_Modified_Date_InPast);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_008_Created_Modified_Date_UnixEpoch);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_009_Created_Modified_Date_MinDate);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_010_Created_Modified_Date_MaxDate);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_001_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
+            //clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_003_Value_ShouldNotBeQuoted);
+
             var data = clue.Data.EntityData;
 
             if (input.associations != null)

@@ -12,38 +12,31 @@ using CluedIn.Crawling.HubSpot.Vocabularies;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
-    public class TaskClueProducer : BaseClueProducer<Task>
+    public class CallClueProducer : BaseClueProducer<Call>
     {
         private readonly IClueFactory _factory;
         private readonly ILogger _log;
 
-        public TaskClueProducer(IClueFactory factory, ILogger log)
+        public CallClueProducer(IClueFactory factory, ILogger log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
-        protected override Clue MakeClueImpl(Task input, Guid accountId)
+        protected override Clue MakeClueImpl(Call input, Guid accountId)
         {
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            var clue = _factory.Create(EntityType.Task, input.engagement.id.ToString(), accountId);
+            var clue = _factory.Create(EntityType.PhoneCall, input.engagement.id.ToString(), accountId);
             
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_002_Uri_MustBeSet);
+            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
 
             var data = clue.Data.EntityData;
-
             if (input.associations != null)
             {
-                if (input.associations.companyIds != null)
-                {
-                    foreach (var companyId in input.associations.companyIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
-                }
                 if (input.associations.contactIds != null)
                 {
                     foreach (var contactId in input.associations.contactIds)
@@ -64,19 +57,20 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     foreach (var workflowId in input.associations.workflowIds)
                         _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, selector => workflowId.ToString());
                 }
-            }
-
-            if (input.Reminder != null)
-            {
-                data.Properties[HubSpotVocabulary.Task.DueDate] = DateUtilities.EpochRef.AddMilliseconds(input.Reminder.Value).ToString();
+                if (input.associations.companyIds != null)
+                {
+                    if (data.OutgoingEdges.Count == 0)
+                        foreach (var companyId in input.associations.companyIds)
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
+                }
             }
 
             if (input.engagement != null)
             {
+
                 if (input.engagement.portalId != null && input.engagement.id != null && input.engagement.ownerId != null)
                 {
-                    string url =
-                        $"https://app.hubspot.com/sales/{input.engagement.portalId}/tasks?taskId={input.engagement.id}&ownerId={input.engagement.ownerId}";  // TODO take from configuration
+                    string url = string.Format("https://app.hubspot.com/sales/{0}/tasks?taskId={1}&ownerId={2}", input.engagement.portalId, input.engagement.id, input.engagement.ownerId);
                     data.Uri = new Uri(url);
                 }
                 if (input.engagement.createdAt != null)
@@ -97,6 +91,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                     }
                 }
+                if (data.CreatedDate != null)
+                    data.Name = "Call at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);
                 if (input.engagement.active != null)
                 {
                     data.Properties[HubSpotVocabulary.Email.Active] = input.engagement.active.Value.ToString();
@@ -115,7 +111,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.portalId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
+                    if (data.OutgoingEdges.Count == 0)
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
                 }
             }
 
@@ -127,74 +124,58 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 {
                     foreach (var property in metadata)
                     {
-                        if (property.Key == "subject" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        if (property.Key == "toNumber" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            data.Name = property.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Call.ToNumber] = property.Value.ToString();
                         }
-                        else if (property.Key == "body" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        else if (property.Key == "fromNumber" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            data.Description = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
-                            if (property.Value.ToString().Length > 200)
-                                data.Properties[HubSpotVocabulary.Task.Status] = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
-                            if (data.Name == null)
-                                data.Name = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
+                            data.Properties[HubSpotVocabulary.Call.FromNumber] = property.Value.ToString();
                         }
                         else if (property.Key == "status" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            data.Properties[HubSpotVocabulary.Task.Status] = property.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Call.Status] = property.Value.ToString();
                         }
-                        else if (property.Key == "forObjectType" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        else if (property.Key == "externalId" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            data.Properties[HubSpotVocabulary.Task.ForObjectType] = property.Value.ToString();
-
-                            //if (property.Value.ToString() == "COMPANY")
-                            //{
-
-                            //}
-                            //else if (property.Value.ToString() == "CONTACT")
-                            //{
-
-                            //}
+                            data.Properties[HubSpotVocabulary.Call.ExternalId] = property.Value.ToString();
                         }
-                        else if (property.Key == "reminders" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        else if (property.Key == "durationMilliseconds" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            if (input.Reminder == null)
-                            {
-                                {
-                                    List<long> reminders = JsonUtility.Deserialize<List<long>>(JsonUtility.Serialize(property.Value));
-
-                                    if (reminders != null)
-                                    {
-                                        string times = "";
-                                        foreach (long reminder in reminders)
-                                        {
-                                            DateTimeOffset r = DateUtilities.EpochRef.AddMilliseconds(reminder);
-                                            times.Insert(times.Length, r.ToString() + '\n');
-                                        }
-
-                                        data.Properties[HubSpotVocabulary.Task.Reminders] = times;
-                                    }
-
-                                }
-                            }
+                            data.Properties[HubSpotVocabulary.Call.Duration] = property.Value.ToString();
+                        }
+                        else if (property.Key == "externalAccountId" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => property.Value.ToString());
+                            data.Properties[HubSpotVocabulary.Call.ExternalAccountId] = property.Value.ToString();
+                        }
+                        else if (property.Key == "recordingUrl" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            data.Properties[HubSpotVocabulary.Call.RecordingUrl] = property.Value.ToString();
+                        }
+                        else if (property.Key == "body" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            data.Name = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
+                            data.Properties[HubSpotVocabulary.Call.Body] = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
+                        }
+                        else if (property.Key == "disposition" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            data.Properties[HubSpotVocabulary.Call.Disposition] = property.Value.ToString();
                         }
                         else
                         {
                             if (property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                                data.Properties[string.Format("hubspot.task.custom-{0}", property.Key)] = property.Value.ToString();
+                                data.Properties[string.Format("hubspot.call.custom-{0}", property.Key)] = property.Value.ToString();
                         }
                     }
-
                 }
             }
             catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse metadata for Hubspot Task", exception);
+                _log.Error(() => "Failed to parse metadata for Hubspot Call", exception);
             }
-
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);
-
 
             return clue;
         }

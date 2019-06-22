@@ -1,4 +1,5 @@
 ﻿using System;
+using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
@@ -23,7 +24,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Activity, input.engagement.id.ToString(), accountId);
-            
+
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_001_Name_MustBeSet);
+
             var data = clue.Data.EntityData;
 
             data.Name = input.metadata.body ?? $"{input.engagement.type ?? "Engagement " + input.engagement.id}";

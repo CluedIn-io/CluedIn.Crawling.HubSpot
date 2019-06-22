@@ -12,30 +12,42 @@ using CluedIn.Crawling.HubSpot.Vocabularies;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
-    public class TaskClueProducer : BaseClueProducer<Task>
+    public class NoteClueProducer : BaseClueProducer<Note>
     {
         private readonly IClueFactory _factory;
         private readonly ILogger _log;
 
-        public TaskClueProducer(IClueFactory factory, ILogger log)
+        public NoteClueProducer(IClueFactory factory, ILogger log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
-        protected override Clue MakeClueImpl(Task input, Guid accountId)
+        protected override Clue MakeClueImpl(Note input, Guid accountId)
         {
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            var clue = _factory.Create(EntityType.Task, input.engagement.id.ToString(), accountId);
+            var clue = _factory.Create(EntityType.Note, input.engagement.id.ToString(), accountId);
             
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
-            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_002_Uri_MustBeSet);
 
+
             var data = clue.Data.EntityData;
+
+            if (input.attachments != null)
+            {
+                foreach (var attachment in input.attachments)
+                {
+                    var r = JsonUtility.Deserialize<KeyValuePair<string, object>>(JsonUtility.Serialize(attachment));
+
+                    if (r.Key == "id")
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Files.File, EntityEdgeType.Parent, input, selector => r.Value.ToString());
+                }
+            }
 
             if (input.associations != null)
             {
@@ -66,19 +78,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
             }
 
-            if (input.Reminder != null)
-            {
-                data.Properties[HubSpotVocabulary.Task.DueDate] = DateUtilities.EpochRef.AddMilliseconds(input.Reminder.Value).ToString();
-            }
-
             if (input.engagement != null)
             {
-                if (input.engagement.portalId != null && input.engagement.id != null && input.engagement.ownerId != null)
-                {
-                    string url =
-                        $"https://app.hubspot.com/sales/{input.engagement.portalId}/tasks?taskId={input.engagement.id}&ownerId={input.engagement.ownerId}";  // TODO take from configuration
-                    data.Uri = new Uri(url);
-                }
                 if (input.engagement.createdAt != null)
                 {
                     if (long.TryParse(input.engagement.createdAt.ToString(), out long date))
@@ -127,71 +128,29 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 {
                     foreach (var property in metadata)
                     {
-                        if (property.Key == "subject" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
+                        if (property.Key == "body")
                         {
-                            data.Name = property.Value.ToString();
-                        }
-                        else if (property.Key == "body" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                        {
-                            data.Description = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
-                            if (property.Value.ToString().Length > 200)
-                                data.Properties[HubSpotVocabulary.Task.Status] = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
-                            if (data.Name == null)
-                                data.Name = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
-                        }
-                        else if (property.Key == "status" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                        {
-                            data.Properties[HubSpotVocabulary.Task.Status] = property.Value.ToString();
-                        }
-                        else if (property.Key == "forObjectType" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                        {
-                            data.Properties[HubSpotVocabulary.Task.ForObjectType] = property.Value.ToString();
-
-                            //if (property.Value.ToString() == "COMPANY")
-                            //{
-
-                            //}
-                            //else if (property.Value.ToString() == "CONTACT")
-                            //{
-
-                            //}
-                        }
-                        else if (property.Key == "reminders" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                        {
-                            if (input.Reminder == null)
+                            if (property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                             {
-                                {
-                                    List<long> reminders = JsonUtility.Deserialize<List<long>>(JsonUtility.Serialize(property.Value));
-
-                                    if (reminders != null)
-                                    {
-                                        string times = "";
-                                        foreach (long reminder in reminders)
-                                        {
-                                            DateTimeOffset r = DateUtilities.EpochRef.AddMilliseconds(reminder);
-                                            times.Insert(times.Length, r.ToString() + '\n');
-                                        }
-
-                                        data.Properties[HubSpotVocabulary.Task.Reminders] = times;
-                                    }
-
-                                }
+                                data.Name = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
+                                data.Description = Regex.Replace(property.Value.ToString(), "<.*?>", String.Empty);
+                                data.Properties[HubSpotVocabulary.Note.Body] = property.Value.ToString();
                             }
                         }
                         else
                         {
-                            if (property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
-                                data.Properties[string.Format("hubspot.task.custom-{0}", property.Key)] = property.Value.ToString();
+                            if (property.Value != null)
+                                data.Properties[string.Format("hubspot.note.custom-{0}", property.Key)] = property.Value.ToString();
                         }
                     }
-
                 }
+
             }
+
             catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse metadata for Hubspot Task", exception);
+               _log.Error(() => "Failed to parse metadata for Hubspot Note", exception);
             }
-
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);
 
