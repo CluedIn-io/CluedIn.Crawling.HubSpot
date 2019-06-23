@@ -4,11 +4,21 @@ Set-StrictMode -Version Latest
 
 Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
-    Context "Docker-Compose" {
+    function HttpGetRequest {
+        param (
+            $relativeUrl
+        )
 
         $sutHost = "127.0.0.1"
 
         $mockServer = "http://${sutHost}:8080"
+
+        $url = "${mockServer}/${relativeUrl}"
+        
+        Invoke-WebRequest -Uri $url -UseBasicParsing -Verbose
+    }
+
+    Context "Docker-Compose" {
         
         BeforeAll {
 
@@ -41,14 +51,16 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
         Context "Mock Server" {
         
+            $adminPanelRelativeUrl = '__admin/'
+
             It "Admin panel is available" {
 
-                { Invoke-WebRequest "$mockServer/__admin/" -UseBasicParsing } | Should -Not -Throw
+                { HttpGetRequest $adminPanelRelativeUrl } | Should -Not -Throw
             }
             
             It "Mappings have been configured" {
 
-                Invoke-WebRequest "$mockServer/__admin/" -UseBasicParsing | 
+                HttpGetRequest $adminPanelRelativeUrl | 
                     ConvertFrom-Json | 
                     Select-Object -ExpandProperty mappings | 
                     Measure-Object | 
@@ -61,258 +73,258 @@ Describe 'System Tests' -Tags 'Acceptance' , 'Quality' {
 
             It "Blogs" {
 
-                { Invoke-WebRequest "$mockServer/content/api/v2/blogs" -UseBasicParsing } | 
+                { HttpGetRequest 'content/api/v2/blogs' } | 
                     Should -Not -Throw
             }  
 
             It "Blog Posts" {
 
-                { Invoke-WebRequest "$mockServer/content/api/v2/blog-posts" -UseBasicParsing } | 
+                { HttpGetRequest 'content/api/v2/blog-posts' } | 
                     Should -Not -Throw
             }  
 
             It "Blog Topics" {
 
-                { Invoke-WebRequest "$mockServer/blogs/v3/topics" -UseBasicParsing } | 
+                { HttpGetRequest 'blogs/v3/topics' } | 
                     Should -Not -Throw
             }  
             
             It "Broadcasts" {
 
-                { Invoke-WebRequest "$mockServer/broadcast/v1/broadcasts" -UseBasicParsing } | 
+                { HttpGetRequest 'broadcast/v1/broadcasts' } | 
                     Should -Not -Throw
             } 
             
             It "Broadcast Channel Settings" {
 
-                { Invoke-WebRequest "$mockServer/broadcast/v1/channels/setting/publish/current" -UseBasicParsing } | 
+                { HttpGetRequest 'broadcast/v1/channels/setting/publish/current' } | 
                     Should -Not -Throw
             } 
 
             It "Calendar Events" {
 
-                { Invoke-WebRequest "$mockServer/calendar/v1/events/task" -UseBasicParsing } | 
+                { HttpGetRequest 'calendar/v1/events/task' } | 
                     Should -Not -Throw
             }  
             
             It "Companies Paged" {
 
-                { Invoke-WebRequest "$mockServer/companies/v2/companies/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'companies/v2/companies/paged' } | 
                     Should -Not -Throw
             }
 
             It "Company Contacts" {
 
-                { Invoke-WebRequest "$mockServer/companies/v2/companies/686724251/contacts" -UseBasicParsing } | 
+                { HttpGetRequest 'companies/v2/companies/686724251/contacts' } | 
                     Should -Not -Throw
             }
 
             It "Company Properties" {
 
-                { Invoke-WebRequest "$mockServer/properties/v1/companies/properties" -UseBasicParsing } | 
+                { HttpGetRequest 'properties/v1/companies/properties' } | 
                     Should -Not -Throw
             }
 
             It "Contacts All" {
 
-                { Invoke-WebRequest "$mockServer/contacts/v1/lists/all/contacts/all" -UseBasicParsing } | 
+                { HttpGetRequest 'contacts/v1/lists/all/contacts/all' } | 
                     Should -Not -Throw
             }        
 
             It "Contacts List Dynamic" {
 
-                { Invoke-WebRequest "$mockServer/contacts/v1/lists/dynamic" -UseBasicParsing } | 
+                { HttpGetRequest 'contacts/v1/lists/dynamic' } | 
                     Should -Not -Throw
             }
 
             It "Contacts List Static" {
 
-                { Invoke-WebRequest "$mockServer/contacts/v1/lists/static" -UseBasicParsing } | 
+                { HttpGetRequest 'contacts/v1/lists/static' } | 
                     Should -Not -Throw
             }            
 
             It "Contacts Properties" {
 
-                { Invoke-WebRequest "$mockServer/properties/v1/contacts/properties" -UseBasicParsing } | 
+                { HttpGetRequest 'properties/v1/contacts/properties' } | 
                     Should -Not -Throw
             }
 
             It "CRM Deal Associations Paged" {
 
-                { Invoke-WebRequest "$mockServer/crm-associations/v1/associations/123/SomeThing/456" -UseBasicParsing } | 
+                { HttpGetRequest 'crm-associations/v1/associations/123/SomeThing/456' } | 
                     Should -Not -Throw
             }
             
             It "CRM Line Items Paged" {
 
-                { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/line_items/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'crm-objects/v1/objects/line_items/paged' } | 
                     Should -Not -Throw
             }
 
             It "CRM Products Paged" {
 
-                { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/products/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'crm-objects/v1/objects/products/paged' } | 
                     Should -Not -Throw
             }
             
             It "CRM Tickets Paged" {
 
-                { Invoke-WebRequest "$mockServer/crm-objects/v1/objects/tickets/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'crm-objects/v1/objects/tickets/paged' } | 
                     Should -Not -Throw
             }
 
             It "Deals Paged" {
 
-                { Invoke-WebRequest "$mockServer/deals/v1/deal/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'deals/v1/deal/paged' } | 
                     Should -Not -Throw
             }
 
             It "Deals Pipelines" {
 
-                { Invoke-WebRequest "$mockServer/deals/v1/pipelines" -UseBasicParsing } | 
+                { HttpGetRequest 'deals/v1/pipelines' } | 
                     Should -Not -Throw
             }
 
             It "Deals Properties" {
 
-                { Invoke-WebRequest "$mockServer/properties/v1/deals/properties" -UseBasicParsing } | 
+                { HttpGetRequest 'properties/v1/deals/properties' } | 
                     Should -Not -Throw
             }
 
             It "Deals Recently Created" {
 
-                { Invoke-WebRequest "$mockServer/deals/v1/deal/recent/created" -UseBasicParsing } | 
+                { HttpGetRequest 'deals/v1/deal/recent/created' } | 
                     Should -Not -Throw
             }
             
             It "Deals Recently Modified" {
 
-                { Invoke-WebRequest "$mockServer/deals/v1/deal/recent/modified" -UseBasicParsing } | 
+                { HttpGetRequest 'deals/v1/deal/recent/modified' } | 
                     Should -Not -Throw
             }
 
             It "Domains" {
 
-                { Invoke-WebRequest "$mockServer/content/api/v4/domains" -UseBasicParsing } | 
+                { HttpGetRequest 'content/api/v4/domains' } | 
                     Should -Not -Throw
             } 
 
             It "Email SMTP Tokens" {
 
-                { Invoke-WebRequest "$mockServer/email/public/v1/smtpapi/tokens" -UseBasicParsing } | 
+                { HttpGetRequest 'email/public/v1/smtpapi/tokens' } | 
                     Should -Not -Throw
             } 
 
             It "Engagement Associated Company Paged" {
 
-                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/COMPANY/686724251/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'engagements/v1/engagements/associated/COMPANY/686724251/paged' } | 
                     Should -Not -Throw
             }
 
             It "Engagement Associated Contact Paged" {
 
-                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/CONTACT/123/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'engagements/v1/engagements/associated/CONTACT/123/paged' } | 
                     Should -Not -Throw
             }
 
             It "Engagement Associated Deal Paged" {
 
-                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/DEAL/12345678/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'engagements/v1/engagements/associated/DEAL/12345678/paged' } | 
                     Should -Not -Throw
             }
 
             It "Engagement Associated Object Type Paged" {
 
-                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/associated/ABC/123456/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'engagements/v1/engagements/associated/ABC/123456/paged' } | 
                     Should -Not -Throw
             }
 
             It "Engagements Paged" {
 
-                { Invoke-WebRequest "$mockServer/engagements/v1/engagements/paged" -UseBasicParsing } | 
+                { HttpGetRequest 'engagements/v1/engagements/paged' } | 
                     Should -Not -Throw
             }
 
             It "FileManager Files" {
 
-                { Invoke-WebRequest "$mockServer/filemanager/api/v2/files" -UseBasicParsing } | 
+                { HttpGetRequest 'filemanager/api/v2/files' } | 
                     Should -Not -Throw
             }
 
             It "Forms" {
 
-                { Invoke-WebRequest "$mockServer/forms/v2/forms" -UseBasicParsing } | 
+                { HttpGetRequest 'forms/v2/forms' } | 
                     Should -Not -Throw
             }
 
             It "Line Items Properties" {
 
-                { Invoke-WebRequest "$mockServer/properties/v2/line_items/properties" -UseBasicParsing } | 
+                { HttpGetRequest 'properties/v2/line_items/properties' } | 
                     Should -Not -Throw
             }
 
             It "Organization" {
 
-                { Invoke-WebRequest "$mockServer/Organization" -UseBasicParsing } | 
+                { HttpGetRequest 'Organization' } | 
                     Should -Not -Throw
             }
 
             It "Owners" {
 
-                { Invoke-WebRequest "$mockServer/owners/v2/owners" -UseBasicParsing } | 
+                { HttpGetRequest 'owners/v2/owners' } | 
                     Should -Not -Throw
             }
 
             It "Settings" {
 
-                { Invoke-WebRequest "$mockServer/integrations/v1/me" -UseBasicParsing } | 
+                { HttpGetRequest 'integrations/v1/me' } | 
                     Should -Not -Throw
             }  
             
             It "Site Maps" {
 
-                { Invoke-WebRequest "$mockServer/content/api/v2/site-maps" -UseBasicParsing } | 
+                { HttpGetRequest 'content/api/v2/site-maps' } | 
                     Should -Not -Throw
             }  
             
             It "Social Calendar Events" {
 
-                { Invoke-WebRequest "$mockServer/calendar/v1/events/social?hapikey=demo&startDate=15102018&endDate=30102018" -UseBasicParsing } | 
+                { HttpGetRequest 'calendar/v1/events/social?hapikey=demo&startDate=15102018&endDate=30102018' } | 
                     Should -Not -Throw
             }
 
             It "Tables" {
 
-                { Invoke-WebRequest "$mockServer/hubdb/api/v2/tables" -UseBasicParsing } | 
+                { HttpGetRequest 'hubdb/api/v2/tables' } | 
                     Should -Not -Throw
             }   
 
             It "Table Rows" {
 
-                { Invoke-WebRequest "$mockServer/hubdb/api/v2/tables/300081/rows?portalId=62515" -UseBasicParsing } | 
+                { HttpGetRequest 'hubdb/api/v2/tables/300081/rows?portalId=62515' } | 
                     Should -Not -Throw
             }   
             It "Templates" {
 
-                { Invoke-WebRequest "$mockServer/content/api/v2/templates" -UseBasicParsing } | 
+                { HttpGetRequest 'content/api/v2/templates' } | 
                     Should -Not -Throw
             } 
 
             It "Tickets Properties" {
 
-                { Invoke-WebRequest "$mockServer/properties/v2/tickets/properties" -UseBasicParsing } | 
+                { HttpGetRequest 'properties/v2/tickets/properties' } | 
                     Should -Not -Throw
             }  
             
             It "URL Mappings" {
 
-                { Invoke-WebRequest "$mockServer/url-mappings/v3/url-mappings" -UseBasicParsing } | 
+                { HttpGetRequest 'url-mappings/v3/url-mappings' } | 
                     Should -Not -Throw
             }  
 
             It "Workflows" {
 
-                { Invoke-WebRequest "$mockServer/automation/v3/workflows" -UseBasicParsing } | 
+                { HttpGetRequest 'automation/v3/workflows' } | 
                     Should -Not -Throw
             } 
         }
