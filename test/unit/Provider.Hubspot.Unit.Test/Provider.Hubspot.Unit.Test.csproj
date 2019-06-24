@@ -13,6 +13,9 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="HubSpotImageFetcher\CluedIn.png" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
@@ -23,6 +26,9 @@
     <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HubSpotImageFetcher\CluedIn.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
