@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Crawling\Crawling.HubSpot.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
   </ItemGroup>

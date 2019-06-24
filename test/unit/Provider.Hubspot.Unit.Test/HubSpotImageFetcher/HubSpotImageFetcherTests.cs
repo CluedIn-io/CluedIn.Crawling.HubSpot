@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Infrastructure;
-using com.sun.org.apache.xpath.@internal.functions;
 using Moq;
 using RestSharp;
 using Xunit;
@@ -54,9 +52,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
             _sut.FetchAsRawDataPart(request, type, filename);
 
             _log.Verify(n => n.Warn(It.IsAny<Func<string>>(), It.IsAny<Exception>()), Times.Once);
-           
         }
-
 
     }
 }
