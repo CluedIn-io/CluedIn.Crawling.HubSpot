@@ -1,5 +1,7 @@
 using System.Linq;
+using CluedIn.Core.Data.Serialization;
 using CrawlerIntegrationTesting.Clues;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
