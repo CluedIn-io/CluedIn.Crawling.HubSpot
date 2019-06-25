@@ -32,7 +32,7 @@ namespace Crawling.HubSpot.Integration.Test
         [InlineData("/Sales/Deal", 3)]
         [InlineData("/Activity", 6)]
         [InlineData("/News", 6)]
-        [InlineData("/Template", 72)]
+        [InlineData("/Template", 120)]
         [InlineData("/Process", 2)]
         [InlineData("/Topic", 1)]
         [InlineData("/Mail", 2)]

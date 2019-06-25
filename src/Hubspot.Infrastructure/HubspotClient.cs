@@ -508,9 +508,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
         }
 
-        public AccountInformation GetAccountInformation()
-        {
-            return new AccountInformation("", ""); //TODO
-        }
+        public async Task<List<OwnerResponse>> GetAccountInformation() =>
+            await GetAsync<List<OwnerResponse>>("/owners/v2/owners");
+
     }
 }

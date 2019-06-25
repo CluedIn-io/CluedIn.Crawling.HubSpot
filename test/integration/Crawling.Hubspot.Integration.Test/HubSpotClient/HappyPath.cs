@@ -345,5 +345,16 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
             Assert.NotNull(
                 (await _sut.GetContactsByCompanyAsync(companyId)).contacts);
         }
+
+        [Fact]
+        public async Task AccountInformationIsAvailable()
+        {
+            var info = await _sut.GetAccountInformation();
+
+            Assert.NotNull(info);
+            Assert.True(info.Count > 0);
+            Assert.NotEqual(0, info[0].ownerId);
+            Assert.NotEqual(0, info[0].portalId);
+        }
     }
 }

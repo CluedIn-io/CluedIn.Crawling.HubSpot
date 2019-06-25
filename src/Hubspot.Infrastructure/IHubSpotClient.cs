@@ -49,6 +49,6 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         Task<List<KeywordResponse>> GetKeywordsAsync();
         Task<List<DealPipeline>> GetDealPipelinesAsync();
         Task<ContactResponse> GetContactsByCompanyAsync(long companyId);
-        AccountInformation GetAccountInformation();
+        Task<List<OwnerResponse>> GetAccountInformation();
     }
 }
