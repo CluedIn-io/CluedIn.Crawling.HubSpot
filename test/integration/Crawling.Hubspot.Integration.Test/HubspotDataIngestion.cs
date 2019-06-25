@@ -24,7 +24,7 @@ namespace Crawling.HubSpot.Integration.Test
             _output = output;
 
             OutputClueOriginEntityCodes();
-            DumpCluesToDisk();
+            //DumpCluesToDisk();
         }
 
         [Theory]
