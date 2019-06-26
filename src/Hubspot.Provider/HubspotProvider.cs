@@ -11,24 +11,32 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using CluedIn.Core.Configuration;
+using CluedIn.Core.Logging;
+using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Providers.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace CluedIn.Provider.HubSpot
 {
     public class HubSpotProvider : ProviderBase
     {
         private readonly IHubSpotClientFactory _hubspotClientFactory;
+        private readonly ILogger _log;
+        private readonly ISystemNotifications _notifications;
 
         /**********************************************************************************************************
          * CONSTRUCTORS
          **********************************************************************************************************/
 
-        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory)
+        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory, ILogger log, ISystemNotifications notifications)
             : base(appContext, HubSpotConstants.CreateProviderMetadata())
         {
-            _hubspotClientFactory = hubspotClientFactory;
+            _hubspotClientFactory = hubspotClientFactory ?? throw new ArgumentNullException(nameof(hubspotClientFactory));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
+            _notifications = notifications ?? throw new ArgumentNullException(nameof(notifications));
         }
 
         /**********************************************************************************************************
@@ -67,7 +75,7 @@ namespace CluedIn.Provider.HubSpot
             }
             catch (Exception exception)
             {
-                context.Log.Warn(() => "Could not add HubSpot provider", exception);
+                _log.Warn(() => "Could not add HubSpot provider", exception);
                 return false;
             }
         }
@@ -90,22 +98,23 @@ namespace CluedIn.Provider.HubSpot
 
             if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
             {
-                //TODO add the transformations from specific CrawlJobData object to dictionary
-                // add tests to GetHelperConfigurationBehaviour.cs
+                // TODO Is this required? Very hard to mock when testing
+                _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+
                 var result = hubspotCrawlJobData.ToDictionary();
 
-                //result.Add("webhooks", new List<WebhookEventType>()
-                //{
-                //    new WebhookEventType() { DisplayName = "New Contact",       Name = "contact.creation",     Status = "ACTIVE", Description = "When a new contact is created."},
-                //    new WebhookEventType() { DisplayName = "Deleted Contact",       Name = "contact.deletion",     Status = "ACTIVE", Description = "When a contact is deleted."},
-                //    new WebhookEventType() { DisplayName = "Contact Update",       Name = "contact.propertyChange",     Status = "ACTIVE", Description = "When a contact is updated."},
-                //    new WebhookEventType() { DisplayName = "New Company",       Name = "company.creation",     Status = "ACTIVE", Description = "When a company is created."},
-                //    new WebhookEventType() { DisplayName = "Deleted Company",       Name = "company.deletion",     Status = "ACTIVE", Description = "When a company is deleted."},
-                //    new WebhookEventType() { DisplayName = "Company Update",       Name = "company.propertyChange",     Status = "ACTIVE", Description = "When a company is updated."},
-                //    new WebhookEventType() { DisplayName = "New Deal",       Name = "deal.creation",     Status = "ACTIVE", Description = "When a deal is created."},
-                //    new WebhookEventType() { DisplayName = "Deleted Deal",       Name = "deal.deletion",     Status = "ACTIVE", Description = "When a deal is deleted"},
-                //    new WebhookEventType() { DisplayName = "Deal Update",       Name = "deal.propertyChange",     Status = "ACTIVE", Description = "When a deal is updated."}
-                //});
+                result.Add("webhooks", new List<object>()
+                {
+                    new { DisplayName = "New Contact", Name = "contact.creation", Status = "ACTIVE", Description = "When a new contact is created."},
+                    new { DisplayName = "Deleted Contact", Name = "contact.deletion", Status = "ACTIVE", Description = "When a contact is deleted."},
+                    new { DisplayName = "Contact Update", Name = "contact.propertyChange", Status = "ACTIVE", Description = "When a contact is updated."},
+                    new { DisplayName = "New Company", Name = "company.creation", Status = "ACTIVE", Description = "When a company is created."},
+                    new { DisplayName = "Deleted Company", Name = "company.deletion", Status = "ACTIVE", Description = "When a company is deleted."},
+                    new { DisplayName = "Company Update", Name = "company.propertyChange", Status = "ACTIVE", Description = "When a company is updated."},
+                    new { DisplayName = "New Deal", Name = "deal.creation", Status = "ACTIVE", Description = "When a deal is created."},
+                    new { DisplayName = "Deleted Deal", Name = "deal.deletion", Status = "ACTIVE", Description = "When a deal is deleted"},
+                    new { DisplayName = "Deal Update", Name = "deal.propertyChange", Status = "ACTIVE", Description = "When a deal is updated."}
+                });
 
                 result.Add("expectedStatistics", hubspotCrawlJobData.ExpectedStatistics);
 
@@ -167,7 +176,7 @@ namespace CluedIn.Provider.HubSpot
                 : $"{relativeDateTime.Minute} 0/4 * * *";
         }
 
-        public override Task<IEnumerable<WebHookSignature>> CreateWebHook(ExecutionContext context, [NotNull] CrawlJobData jobData, [NotNull] IWebhookDefinition webhookDefinition, [NotNull] IDictionary<string, object> config)
+        public override async Task<IEnumerable<WebHookSignature>> CreateWebHook(ExecutionContext context, [NotNull] CrawlJobData jobData, [NotNull] IWebhookDefinition webhookDefinition, [NotNull] IDictionary<string, object> config)
         {
             if (jobData == null)
                 throw new ArgumentNullException(nameof(jobData));
@@ -176,7 +185,66 @@ namespace CluedIn.Provider.HubSpot
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            throw new NotImplementedException();
+            var hubSpotCrawlJobData = (HubSpotCrawlJobData)jobData;
+            var webhookSignatures = new List<WebHookSignature>();
+            try
+            {
+                var client = _hubspotClientFactory.CreateNew(hubSpotCrawlJobData);
+
+                var data = await client.GetWebHooks();
+
+                if (data == null)
+                    return webhookSignatures;
+
+                var hookTypes = new[] { "contact.creation", "contact.deletion", "contact.propertyChange", "company.creation", "company.deletion", "company.propertyChange", "deal.creation", "deal.deletion", "deal.propertyChange" };
+
+                foreach (var subscription in hookTypes)
+                {
+                    if (config.ContainsKey("webhooks"))
+                    {
+                        var enabledHooks = (List<Webhook>)config["webhooks"];
+                        var enabled = enabledHooks.Where(s => s.Status == "ACTIVE").Select(s => s.Name);
+                        if (!enabled.Contains(subscription))
+                        {
+                            continue;
+                        }
+                    }
+
+                    try
+                    {
+                        await client.CreateWebHook(subscription);
+                        webhookSignatures.Add(new WebHookSignature { Signature = webhookDefinition.ProviderDefinitionId.ToString(), ExternalVersion = "v1", ExternalId = null, EventTypes = "contact.creation,contact.deletion,contact.propertyChange,company.creation,company.deletion,company.propertyChange,deal.creation,deal.deletion,deal.propertyChange" });
+                    }
+                    catch (Exception e)
+                    {
+                        _log.Warn(() => $"Could not create HubSpot Webhook for subscription: {subscription}", e);
+                    }
+                }
+
+                webhookDefinition.Uri = new Uri(this.appContext.System.Configuration.WebhookReturnUrl.Trim('/') + ConfigurationManager.AppSettings["Providers.HubSpot.WebhookEndpoint"]);
+
+                webhookDefinition.Verified = true;
+            }
+            catch (Exception exception)
+            {
+                _log.Warn(() => "Could not create HubSpot Webhook", exception);
+            }
+
+            var organizationProviderDataStore = context.Organization.DataStores.GetDataStore<ProviderDefinition>();
+            if (organizationProviderDataStore != null)
+            {
+                if (webhookDefinition.ProviderDefinitionId != null)
+                {
+                    var webhookEnabled = organizationProviderDataStore.GetById(context, webhookDefinition.ProviderDefinitionId.Value);
+                    if (webhookEnabled != null)
+                    {
+                        webhookEnabled.WebHooks = true;
+                        organizationProviderDataStore.Update(context, webhookEnabled);
+                    }
+                }
+            }
+
+            return webhookSignatures;
         }
 
         public override async Task<IEnumerable<WebhookDefinition>> GetWebHooks(ExecutionContext context)
@@ -222,11 +290,6 @@ namespace CluedIn.Provider.HubSpot
 
         public override IEnumerable<string> WebhookManagementEndpoints([NotNull] IEnumerable<string> ids)
         {
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
-
-            // TODO should ids also be checked for being empty ?
-
             var endpoints = new List<string> { "https://hooks.cluedin.net/manage/hubspot/hooks" };
             return endpoints;
         }

@@ -4,6 +4,7 @@ using AutoFixture.Xunit2;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
+using Crawling.HubSpot.Test.Common;
 using Moq;
 using RestSharp;
 using Xunit;

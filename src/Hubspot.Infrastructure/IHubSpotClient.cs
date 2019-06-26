@@ -50,5 +50,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         Task<List<DealPipeline>> GetDealPipelinesAsync();
         Task<ContactResponse> GetContactsByCompanyAsync(long companyId);
         Task<List<OwnerResponse>> GetAccountInformation();
+        Task<WebHookResponse> GetWebHooks();
+        Task<WebHookResponse> CreateWebHook(string subscription);
     }
 }

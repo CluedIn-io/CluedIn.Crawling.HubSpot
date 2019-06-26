@@ -3,6 +3,7 @@ using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using Crawling.HubSpot.Test.Common;
 using Moq;
 using RestSharp;
 using Xunit;

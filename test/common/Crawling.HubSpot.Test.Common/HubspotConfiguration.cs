@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Core.Configuration;
+using CluedIn.Crawling.HubSpot.Core;
 
-namespace Crawling.HubSpot.Integration.Test
+namespace Crawling.HubSpot.Test.Common
 {
     public static class HubSpotConfiguration
     {

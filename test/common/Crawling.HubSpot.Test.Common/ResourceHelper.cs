@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Provider.HubSpot.Unit.Test
+namespace Crawling.HubSpot.Test.Common
 {
     public static class ResourceHelper
     {
