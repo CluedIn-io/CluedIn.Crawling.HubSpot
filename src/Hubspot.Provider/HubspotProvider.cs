@@ -150,18 +150,13 @@ namespace CluedIn.Provider.HubSpot
             {
                 var client = _hubspotClientFactory.CreateNew(hubspotCrawlJobData);
                 var result = await client.GetAccountInformation();
-                var portalId = 0;
                 if (result != null)
                 {
-                    portalId = result.First().portalId;
+                    var portalId = result.First().portalId;
+                    return new AccountInformation(portalId.ToString(CultureInfo.InvariantCulture), portalId.ToString(CultureInfo.InvariantCulture));
                 }
-
-                if (portalId == 0)
-                {
-                    return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." } } };
-                }
-
-                return new AccountInformation(portalId.ToString(CultureInfo.InvariantCulture), portalId.ToString(CultureInfo.InvariantCulture));
+                return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." } } };
+                
             }
             catch (Exception)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AutoFixture.Xunit2;
 using Castle.Windsor;
 using CluedIn.Core;
 using CluedIn.Core.Accounts;
@@ -13,6 +14,7 @@ using Crawling.HubSpot.Test.Common;
 using Moq;
 using RestSharp;
 using Xunit;
+using Owner = java.security.acl.Owner;
 using Task = System.Threading.Tasks.Task;
 
 namespace Provider.HubSpot.Unit.Test.HubSpotProvider
@@ -81,25 +83,45 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
                 Assert.NotEmpty(result["webhooks"] as List<object>);
             }
         }
+
+        public class GetAccountInformationTests : HubSpotProviderTest
+        {
+            [Theory, AutoData]
+            public async Task GetAccountInformationReturnsAccountInformationWithPortalId(int portalId)
+            {
+                Client.Setup(n => n.GetAccountInformation()).ReturnsAsync(new List<OwnerResponse> {new OwnerResponse {portalId = portalId}});
+                var result = await Sut.GetAccountInformation(null, CrawlJobData, OrganizationId, Guid.Empty, Guid.Empty);
+
+
+                Assert.NotNull(result);
+                Assert.Equal(portalId.ToString(), result.AccountId);
+                Assert.Equal(portalId.ToString(), result.AccountDisplay);
+            }
+
+            [Fact]
+            public async Task GetAccountInformationHandlesNullResult()
+            {
+                Client.Setup(n => n.GetAccountInformation()).ReturnsAsync(default(List<OwnerResponse>));
+                var result = await Sut.GetAccountInformation(null, CrawlJobData, OrganizationId, Guid.Empty, Guid.Empty);
+
+
+                Assert.NotNull(result);
+                Assert.Equal(string.Empty, result.AccountId);
+                Assert.Equal(string.Empty, result.AccountDisplay);
+                Assert.NotEmpty(result.Errors);
+            }
+
+            [Fact]
+            public async Task GetAccountInformationHandlesException()
+            {
+                Client.Setup(n => n.GetAccountInformation()).Throws(new Exception());
+                var result = await Sut.GetAccountInformation(null, CrawlJobData, OrganizationId, Guid.Empty, Guid.Empty);
+
+                Assert.NotNull(result);
+                Assert.Equal(string.Empty, result.AccountId);
+                Assert.Equal(string.Empty, result.AccountDisplay);
+                Assert.NotEmpty(result.Errors);
+            }
+        }
     }
-
-//    public class MockSystemContext : SystemContext
-//    {
-//        private readonly Mock<IWindsorContainer> _container;
-//        private ISystemNotifications _notifications;
-
-//        public MockSystemContext(Mock<IWindsorContainer> container) : base(container.Object)
-//        {
-//            _container = container;
-//            _notifications = new Mock<SystemNotifications>(_container.Object).Object;
-//        }
-
-//#pragma warning disable 108,114
-//        public virtual ISystemNotifications Notifications
-//        {
-//            get => _notifications;
-//            set => _notifications = value;
-//        }
-//#pragma warning restore 108,114
-//    }
 }
