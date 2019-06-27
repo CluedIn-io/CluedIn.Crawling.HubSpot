@@ -17,9 +17,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
         private readonly IClueFactory _factory;
         private readonly ILogger _log;
 
-        public MeetingClueProducer(IClueFactory factory)
+        public MeetingClueProducer(IClueFactory factory, ILogger log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         protected override Clue MakeClueImpl(Meeting input, Guid accountId)
@@ -29,8 +30,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             var clue = _factory.Create(EntityType.Calendar.Meeting, input.engagement.id.ToString(), accountId);
             
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
-            clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
             var data = clue.Data.EntityData;
 

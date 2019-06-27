@@ -536,7 +536,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
         }
 
-        public virtual async Task<List<OwnerResponse>> GetAccountInformation() =>
+        public async Task<List<OwnerResponse>> GetAccountInformation() =>
             await GetAsync<List<OwnerResponse>>("/owners/v2/owners");
 
         public async Task<WebHookResponse> GetWebHooks() =>

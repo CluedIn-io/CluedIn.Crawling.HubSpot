@@ -27,7 +27,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
             var result = _sut.Iterate();
 
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count());
+            Assert.Empty(result);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
             var result = _sut.Iterate();
 
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count());
+            Assert.Empty(result);
         }
 
         [Fact]
