@@ -41,7 +41,7 @@ namespace Crawling.HubSpot.Unit.Test.ClueProducers
             // ...
 
             // Test we have an incoming edge pointing to portal
-            Assert.Equal(1, clue.Data.EntityData.IncomingEdges.Count);
+            Assert.Single(clue.Data.EntityData.IncomingEdges);
             Assert.Equal(clue.Data.EntityData.IncomingEdges.First().FromReference.Code.Value, portalId.ToString());
         }
 
