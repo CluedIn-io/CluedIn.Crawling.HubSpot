@@ -22,24 +22,34 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             int offset = 0;
 
             limit = limit ?? 20;
-
-            while (true)
+            var result = new List<object>();
+            try
             {
-                var response = Client.GetAssociationsAsync(_objectId,  _associationType, limit.Value, offset).Result;
 
-                if (response?.Results == null || !response.Results.Any())
-                    break;
-
-                foreach (var result in response.Results)
+                while (true)
                 {
-                    yield return result;
+                    var response = Client.GetAssociationsAsync(_objectId, _associationType, limit.Value, offset).Result;
+
+                    if (response?.Results == null || !response.Results.Any())
+                        break;
+
+                    foreach (var assoc in response.Results)
+                    {
+                        result.Add(assoc);
+                    }
+
+                    if (response.HasMore == false || response.Results.Count < limit)
+                        break;
+
+                    offset = response.Offset;
                 }
-
-                if (response.HasMore == false || response.Results.Count < limit)
-                    break;
-
-                offset = response.Offset;
             }
+            catch
+            {
+                return Enumerable.Empty<object>();
+            }
+
+            return result;
         }
     }
 }

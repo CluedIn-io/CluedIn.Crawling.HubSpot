@@ -23,7 +23,9 @@ namespace CluedIn.Crawling.HubSpot.Core
         {
             return new Dictionary<string, object> {
                { HubSpotConstants.KeyName.ApiToken, ApiToken },
-               { HubSpotConstants.KeyName.CustomerSubDomain, ApiToken }
+               { HubSpotConstants.KeyName.CustomerSubDomain, ApiToken },
+               { HubSpotConstants.KeyName.BaseUri, BaseUri },
+               { HubSpotConstants.KeyName.LastCrawlFinishTime, LastCrawlFinishTime }
             };
         }
 

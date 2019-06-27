@@ -58,22 +58,18 @@ namespace CluedIn.Crawling.HubSpot
                 return EmptyResult;
             }
 
-            var companyProperties = await client.GetCompanyPropertiesAsync(settings);
+            
 
             var data = new List<object>();
-            data.AddRange(new CompanyIterator(client, crawlerJobData, companyProperties, settings).Iterate());
 
-            var dealProperties = await client.GetDealPropertiesAsync(settings);
-            data.AddRange(new DealIterator(client, crawlerJobData, dealProperties, settings).Iterate());
-
-            var contactProperties = await client.GetContactPropertiesAsync(settings);
-            data.AddRange(new ContactIterator(client, crawlerJobData, contactProperties).Iterate());
-
+            data.AddRange(new CompanyIterator(client, crawlerJobData, settings).Iterate());
+            data.AddRange(new DealIterator(client, crawlerJobData, settings).Iterate());
+            data.AddRange(new ContactIterator(client, crawlerJobData, settings).Iterate());
             data.AddRange(new DynamicContactListIterator(client, crawlerJobData).Iterate());
-            data.AddRange(await client.GetFormsAsync());
+            data.AddRange(new FormsIterator(client, crawlerJobData).Iterate());
             //data.AddRange(await client.GetKeywordsAsync(); TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
-            data.AddRange(await client.GetOwnersAsync());
-            data.AddRange(await client.GetPublishingChannelsAsync()); // TODO This is connected to fake LinkedIn using bfi@cluedin.com
+            data.AddRange(new OwnersIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData).Iterate()); // TODO This is connected to fake LinkedIn using bfi@cluedin.com
             data.AddRange(new FilesIterator(client, crawlerJobData).Iterate());
             data.AddRange(new SiteMapsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new TemplatesIterator(client, crawlerJobData).Iterate()); 
@@ -81,25 +77,19 @@ namespace CluedIn.Crawling.HubSpot
             data.AddRange(new EngagementsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new RecentDealsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData).Iterate());
-            //data.AddRange(await client.GetSmtpTokensAsync());  TODO Returns Http Forbidden code
+            data.AddRange(new SmtpTokensIterator(client, crawlerJobData).Iterate());            // TODO Returns Http Forbidden code
             data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData).Iterate()); // TODO Not sure how to test this
             data.AddRange(new StaticContactListIterator(client,crawlerJobData).Iterate());
             data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData).Iterate());//  TODO Not sure how to test this
-            data.AddRange((await client.GetWorkflowsAsync()).workflows);
+            data.AddRange(new WorkflowsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new BlogPostsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new BlogsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new BlogTopicsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new DomainsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData).Iterate()); 
-
-            var productProperties = await client.GetProductPropertiesAsync(settings);
-            data.AddRange(new ProductsIterator(client, crawlerJobData, productProperties).Iterate());
-
-            var lineItemProperties = await client.GetLineItemPropertiesAsync(settings);                      
-            data.AddRange(new LineItemsIterator(client, crawlerJobData, lineItemProperties).Iterate());
-
-            var ticketProperties = await client.GetTicketPropertiesAsync(settings);              
-            data.AddRange(new TicketsIterator(client, crawlerJobData, ticketProperties).Iterate());
+            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData).Iterate());
+            data.AddRange(new ProductsIterator(client, crawlerJobData, settings).Iterate());
+            data.AddRange(new LineItemsIterator(client, crawlerJobData, settings).Iterate());
+            data.AddRange(new TicketsIterator(client, crawlerJobData, settings).Iterate());
 
             return data;
         }

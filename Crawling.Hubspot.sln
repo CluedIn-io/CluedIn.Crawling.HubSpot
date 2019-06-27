@@ -70,6 +70,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Unit.Test"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Unit.Test", "test\unit\Provider.Hubspot.Unit.Test\Provider.HubSpot.Unit.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{71361451-FE9B-4AE9-BE46-782444EEA203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Test.Common", "test\common\Crawling.HubSpot.Test.Common\Crawling.HubSpot.Test.Common.csproj", "{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +112,10 @@ Global
 		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +138,8 @@ Global
 		{E34F1771-5B93-4754-8DFE-C8875E09FE48} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
 		{D5313469-60EA-4B41-9D76-347F5D4101E8} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
 		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
+		{71361451-FE9B-4AE9-BE46-782444EEA203} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C} = {71361451-FE9B-4AE9-BE46-782444EEA203}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F65A0D1-C784-4ABE-8B71-22B8FBD404C0}

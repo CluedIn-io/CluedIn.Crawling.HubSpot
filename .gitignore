@@ -266,3 +266,4 @@ __pycache__/
 
 # NDepend
 NDependOut/
+/test/integration/Crawling.Hubspot.Integration.Test/GeneratedClues

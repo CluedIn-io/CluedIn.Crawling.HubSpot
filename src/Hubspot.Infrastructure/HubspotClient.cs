@@ -4,9 +4,11 @@ using CluedIn.Core.Providers;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using RestSharp;
 using System.Threading.Tasks;
+using CluedIn.Core.Configuration;
 using CluedIn.Core.Utilities;
 using Newtonsoft.Json;
 
@@ -289,7 +291,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             });
         
 
-        public async Task<ContactResponse> GetContactsFromAllListsAsync(IList<string> properties, int limit = 100, int offset = 0)
+        public virtual async Task<ContactResponse> GetContactsFromAllListsAsync(IList<string> properties, int limit = 100, int offset = 0)
         {
             var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
             queryStrings.Insert(0, new QueryStringParameter("vidOffset", offset));
@@ -468,6 +470,30 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         {
             var request = new RestRequest(url, Method.GET);
 
+            AddParametersToRequest<T>(parameters, request);
+
+            var response = await _client.ExecuteTaskAsync(request);
+
+            return GetRequestResponse<T>(url, response);
+        }
+        private async Task<T> PostAsync<T>(string url, object body, IList<QueryStringParameter> parameters = null)
+        {
+            var request = new RestRequest(url, Method.POST);
+
+            AddParametersToRequest<T>(parameters, request);
+
+            if (body != null)
+            {
+                request.AddBody(body);
+            }
+
+            var response = await _client.ExecuteTaskAsync(request);
+
+            return GetRequestResponse<T>(url, response);
+        }
+
+        private static void AddParametersToRequest<T>(IList<QueryStringParameter> parameters, RestRequest request)
+        {
             if (parameters != null)
             {
                 foreach (var parameter in parameters)
@@ -475,8 +501,10 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                     request.AddParameter(parameter.Parameter);
                 }
             }
-            var response = await _client.ExecuteTaskAsync(request);
+        }
 
+        private T GetRequestResponse<T>(string url, IRestResponse response)
+        {
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 var diagnosticMessage = $"Request to {_client.BaseUrl}{url} failed, response {response.ErrorMessage} ({response.StatusCode})";
@@ -489,7 +517,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             var data = JsonConvert.DeserializeObject<T>(response.Content);
 
             _log.Verbose($"HubSpotClient returning {data} {JsonConvert.SerializeObject(data)}");
-            
+
             return data;
         }
 
@@ -508,9 +536,14 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
         }
 
-        public AccountInformation GetAccountInformation()
-        {
-            return new AccountInformation("", ""); //TODO
-        }
+        public virtual async Task<List<OwnerResponse>> GetAccountInformation() =>
+            await GetAsync<List<OwnerResponse>>("/owners/v2/owners");
+
+        public async Task<WebHookResponse> GetWebHooks() =>
+            await GetAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManager.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions");
+
+        public async Task<WebHookResponse> CreateWebHook(string subscription) =>
+            await PostAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManager.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions",
+                $"{{ \"subscriptionDetails\" : {{ \"subscriptionType\" : \"{subscription}\", \"propertyName\" : \"companyname\"}},\"enabled\" : true }}");
     }
 }

@@ -14,6 +14,7 @@ namespace Crawling.HubSpot.Unit.Test.ClueProducers
     {
         protected readonly Mock<ILogger> Logger;
         protected readonly Mock<IClueFactory> ClueFactory;
+        protected readonly Guid OrganizationId = Guid.NewGuid();
 
         protected abstract BaseClueProducer<T> Sut { get; }
         protected abstract EntityType ExpectedEntityType { get; }
