@@ -294,7 +294,6 @@ namespace CluedIn.Provider.HubSpot
             if (jobData == null)
                 throw new ArgumentNullException(nameof(jobData));
 
-            //TODO what the hell is this?
             //There is no limit set, so you can pull as often and as much as you want.
             return await Task.FromResult(new CrawlLimit(-1, TimeSpan.Zero));
         }

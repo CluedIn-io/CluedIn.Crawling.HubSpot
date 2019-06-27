@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
 
 namespace Crawling.HubSpot.Test.Common
@@ -9,10 +7,10 @@ namespace Crawling.HubSpot.Test.Common
     {
         public static Stream GetFile(string name)
         {
-            Assembly a = Assembly.GetCallingAssembly();
+            var a = Assembly.GetCallingAssembly();
 
             var @namespace = a.FullName.Split(',')[0];
-            Stream s = a.GetManifestResourceStream(@namespace + "." + name);
+            var s = a.GetManifestResourceStream(@namespace + "." + name);
 
             return s;
         }
