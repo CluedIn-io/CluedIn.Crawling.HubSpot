@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/content/api/v2/site-maps(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "site-maps.json"
+    }
+}

@@ -25,8 +25,7 @@ Describe 'Project Tests' -Tags 'Acceptance' , 'Quality' {
                 $projectFile = $_ | Select-Object -ExpandProperty FullName
 
                 $expectedPatterns = @(
-                    '<OutputPath>bin\$(Configuration)\</OutputPath>' ,
-                    '<PackageReference'
+                    '<OutputPath>bin\$(Configuration)\</OutputPath>'
                 )
 
                 $expectedPatterns | ForEach-Object {

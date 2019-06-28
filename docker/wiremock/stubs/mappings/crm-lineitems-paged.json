@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/crm-objects/v1/objects/line_items/paged(.*)"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "crm-lineitems-paged.json"
+    }
+}

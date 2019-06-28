@@ -263,3 +263,7 @@ __pycache__/
 
 # VS Code
 .vscode/
+
+# NDepend
+NDependOut/
+/test/integration/Crawling.Hubspot.Integration.Test/GeneratedClues

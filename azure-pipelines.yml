@@ -47,6 +47,7 @@ jobs:
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
       verbosityRestore: 'normal'
+      projects: 'Crawling.HubSpot.sln'
 
   # GitVersion
   - task: GitVersion@4
@@ -58,19 +59,32 @@ jobs:
     displayName: 'Build solution'
     inputs:
       command: 'build'
+      projects: 'Crawling.HubSpot.sln'
 
-  # Unit and Integration Test
+  # Unit Test
   - task: DotNetCoreCLI@2
-    displayName: 'Run Unit and Integration tests'
+    displayName: 'Run Unit tests'
     inputs:
       command: 'test'
+      projects: 'test/unit/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Unit'
 
-  # Acceptance Test
-  - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
-    displayName: 'Run Acceptance tests'
-    inputs:
-      scriptFolder: '$(testFolderPath)'
-      tag: Acceptance
+# TODO restore integration tests when Docker environment is available
+  # # Integration Test
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'Run Integration tests'
+  #   inputs:
+  #     command: 'test'
+  #     projects: 'test/integration/**/*.csproj'
+  #     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)  /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Integration'
+
+# TODO restore acceptance tests when Docker environment is available
+  # # Acceptance Test
+  # - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
+  #   displayName: 'Run Acceptance tests'
+  #   inputs:
+  #     scriptFolder: '$(testFolderPath)'
+  #     tag: Acceptance
 
   # Pack
   - task: DotNetCoreCLI@2

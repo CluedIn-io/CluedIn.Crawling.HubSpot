@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/properties/v2/tickets/properties(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "tickets-properties.json"
+  }
+}

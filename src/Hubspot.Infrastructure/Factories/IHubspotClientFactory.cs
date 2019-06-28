@@ -4,6 +4,6 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Factories
 {
     public interface IHubSpotClientFactory
     {
-        HubSpotClient CreateNew(HubSpotCrawlJobData hubspotCrawlJobData);
+        IHubSpotClient CreateNew(HubSpotCrawlJobData hubspotCrawlJobData);
     }
 }

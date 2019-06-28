@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/filemanager/api/v2/files(.*)"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "filemanager-files-empty-results.json"
+    }
+}

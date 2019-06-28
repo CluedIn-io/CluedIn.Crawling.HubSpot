@@ -1,0 +1,57 @@
+{
+    "objects": [
+        {
+            "id": 300081,
+            "name": "Example Table 1",
+            "createdAt": 1479479977286,
+            "publishedAt": 1479480005606,
+            "updatedAt": 1479480005781,
+            "columns": [
+                {
+                    "name": "Name",
+                    "label": null,
+                    "id": 1,
+                    "type": "TEXT"
+                },
+                {
+                    "name": "datecol",
+                    "label": "datecol",
+                    "id": 2,
+                    "type": "DATE"
+                }
+            ],
+            "deleted": false,
+            "useForPages": false,
+            "rowCount": 0,
+            "createdBy": null,
+            "updatedBy": null,
+            "columnCount": 2
+        },
+        {
+            "id": 300088,
+            "name": "Example Table 2",
+            "createdAt": 1479747789555,
+            "publishedAt": null,
+            "updatedAt": 0,
+            "columns": [
+                {
+                    "name": "Name",
+                    "label": null,
+                    "id": 1,
+                    "type": "TEXT"
+                }
+            ],
+            "deleted": false,
+            "useForPages": false,
+            "rowCount": 0,
+            "createdBy": null,
+            "updatedBy": null,
+            "columnCount": 1
+        }
+    ],
+    "total": 2,
+    "limit": 0,
+    "offset": 0,
+    "message": null,
+    "totalCount": 2
+}
