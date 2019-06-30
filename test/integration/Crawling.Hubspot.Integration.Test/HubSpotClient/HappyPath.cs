@@ -275,7 +275,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetDomainsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test due to Hubspot account privileges")]
         [InlineAutoData(300081, 62515)]
         public async Task TableRowsAreAvailable(long tableId, long portalId, Column dateColumn)
         {
@@ -290,7 +290,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetFormsAsync());
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
         public async Task TablesAreAvailable()
         {
             Assert.NotEmpty(
@@ -304,7 +304,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetWorkflowsAsync()).workflows);
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
         public async Task SmtpTokensAreAvailable()
         {
             Assert.NotEmpty(
