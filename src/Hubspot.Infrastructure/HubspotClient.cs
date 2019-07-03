@@ -505,6 +505,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         private T GetRequestResponse<T>(string url, IRestResponse response)
         {
+            _log.Verbose($"HubspotClient.GetAsync calling {url}");
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 var diagnosticMessage = $"Request to {_client.BaseUrl}{url} failed, response {response.ErrorMessage} ({response.StatusCode})";
