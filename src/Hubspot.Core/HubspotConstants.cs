@@ -9,11 +9,11 @@ namespace CluedIn.Crawling.HubSpot.Core
     {
         public struct KeyName
         {
-            public const string BaseUri = "Providers.HubSpotBaseUri";
-            public const string ApiToken = "Providers.HubSpotApiToken";
-            public const string CustomerSubDomain = "Providers.HubSpotCustomerSubDomain";
-            public const string LastCrawlFinishTime = "Providers.HubSpotlastCrawlFinishTime";  // Only used in Integration tests
-            public const string HubSpotLoginUri = "Providers.HubSpotLoginUri";
+            public const string BaseUri = "baseUri";
+            public const string ApiToken = "apiToken";
+            public const string CustomerSubDomain = "customerSubDomain";
+            public const string LastCrawlFinishTime = "lastCrawlFinishTime";  // Only used in Integration tests
+            public const string HubSpotLoginUri = "hubSpotLoginUri";
         }
 
         public const string User = "User";
