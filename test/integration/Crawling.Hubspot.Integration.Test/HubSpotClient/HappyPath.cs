@@ -18,9 +18,9 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         public HappyPath()
         {
+            var logger = new Mock<ILogger>();
             var crawlJobData = new HubSpotCrawlJobData(HubSpotConfiguration.Create());
 
-            var logger = new Mock<ILogger>();
 
             _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient(logger.Object, crawlJobData,
                 new RestClient());
