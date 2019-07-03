@@ -160,7 +160,7 @@ namespace CluedIn.Provider.HubSpot
             }
             catch (Exception e)
             {
-                _log.Error(() => "There was an error getting HubSpot account information", e.Message);
+                _log.Error(() => "There was an error getting HubSpot account information" + e.Message);
                 return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." }, {"exception", e.Message } }};
             }
         }

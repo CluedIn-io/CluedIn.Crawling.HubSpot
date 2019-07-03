@@ -11,7 +11,7 @@ namespace Crawling.HubSpot.Test.Common
         public static Dictionary<string, object> Create()
         {
             var result = new Dictionary<string, object> {
-                { HubSpotConstants.KeyName.BaseUri, ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.BaseUri, "https://api.hubapi.com/") },
+                { HubSpotConstants.KeyName.BaseUri, ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.BaseUri, "https://api.hubapi.com") },
                 { HubSpotConstants.KeyName.ApiToken, ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.ApiToken, "")  },
                 { HubSpotConstants.KeyName.CustomerSubDomain, ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.CustomerSubDomain, "") }
             };
