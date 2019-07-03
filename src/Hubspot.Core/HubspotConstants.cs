@@ -33,7 +33,7 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string ApiBaseUri = "https://api.hubapi.com";
 
 
-        public static readonly Guid ProviderId = Guid.Parse("2d3cf71a-8d29-4ac0-9864-e413f3c7246d");   // TODO: Replace value
+        public static readonly Guid ProviderId = Guid.Parse("7673C455-074A-499F-AFD3-C77DFBB7BC1F");   // TODO: Replace value
         public const string ProviderName = "HubSpot";         // TODO: Replace value
         public const bool SupportsConfiguration = true;             // TODO: Replace value
         public const bool SupportsWebHooks = false;             // TODO: Replace value
