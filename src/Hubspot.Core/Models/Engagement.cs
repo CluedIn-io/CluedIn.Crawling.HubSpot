@@ -12,15 +12,7 @@
         public long timestamp { get; set; }
     }
 
-    //public class Associations
-    //{
-    //    public List<int> contactIds { get; set; }
-    //    public List<object> companyIds { get; set; }
-    //    public List<object> dealIds { get; set; }
-    //    public List<object> ownerIds { get; set; }
-    //}
-
-    public class Metadata  // TODO there is a MetaData class already in this namespace, bug ?
+    public class Metadata  
     {
         public string body { get; set; }
     }

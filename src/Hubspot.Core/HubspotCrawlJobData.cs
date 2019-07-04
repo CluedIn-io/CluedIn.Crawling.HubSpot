@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.Core
             };
         }
 
-        //TODO
+        //TODO What are starting points?
         //public IList<CrawlEntry> StartingPoints { get; set; }
 
         public Uri BaseUri { get; set; }

@@ -112,8 +112,6 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Blog.Title] = input.title.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Blog.WeeklyNotificationEmailId] = input.weekly_notification_email_id.PrintIfAvailable();
 
-
-            //TODO
             if (input.item_layout_id != null)
                 _factory.CreateOutgoingEntityReference(clue, EntityType.Template, EntityEdgeType.IsType, input.item_layout_id.Value.ToString());
                 
