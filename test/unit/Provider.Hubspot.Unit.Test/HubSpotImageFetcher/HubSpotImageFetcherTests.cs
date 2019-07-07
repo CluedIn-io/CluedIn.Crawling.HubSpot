@@ -12,7 +12,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
 {
     public class HubSpotImageFetcherTests
     {
-        private readonly IHubSpotImageFetcher _sut;
+        private readonly IHubSpotFileFetcher _sut;
         private readonly Mock<IRestClient> _restClient;
         private readonly Mock<ILogger> _log;
 
@@ -21,7 +21,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
             _restClient = new Mock<IRestClient>();
             _log = new Mock<ILogger>();
 
-            _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotImageFetcher(_log.Object, _restClient.Object);
+            _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotFileFetcher(_log.Object, _restClient.Object);
         }
 
         [Fact]

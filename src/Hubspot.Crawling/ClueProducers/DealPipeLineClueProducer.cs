@@ -39,12 +39,11 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 foreach (var stage in input.stages)
                 {
-                    // TODO: Do not create multiple clues in subjects
                     var stageClue = CreateStageClue(stage, accountId);
                     //this.state.Status.Statistics.Tasks.IncrementTaskCount();
                     //this.state.Status.Statistics.Tasks.IncrementQueuedCount();
+                    clue.ChildClues.Add(stageClue);
 
-                    // TODO Verify how we handle multiple clues and statistics
                     _factory.CreateIncomingEntityReference(clue, EntityType.ProcessStage, EntityEdgeType.PartOf, stage, s => s.stageId);
                 }
             }

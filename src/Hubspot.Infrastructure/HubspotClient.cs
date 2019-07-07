@@ -1,6 +1,5 @@
 using System;
 using CluedIn.Core.Logging;
-using CluedIn.Core.Providers;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using System.Collections.Generic;
@@ -211,7 +210,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             return result.Select(n => n.Name).ToList();
         }
 
-        public async Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, int offset = 0)
+        public async Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, long offset = 0)
         {
             var queryStrings = properties.Select(n => new QueryStringParameter("properties", n)).ToList();
             queryStrings.Insert(0, new QueryStringParameter("offset", offset));

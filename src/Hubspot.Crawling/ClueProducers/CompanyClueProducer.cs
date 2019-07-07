@@ -15,12 +15,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class CompanyClueProducer : BaseClueProducer<Company>
     {
         private readonly IClueFactory _factory;
-        private readonly IHubSpotImageFetcher _imageFetcher;
+        private readonly IHubSpotFileFetcher _fileFetcher;
 
-        public CompanyClueProducer(IClueFactory factory, IHubSpotImageFetcher imageFetcher)
+        public CompanyClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-            _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
+            _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(fileFetcher));
         }
 
         protected override Clue MakeClueImpl(Company input, Guid accountId)
@@ -168,7 +168,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "photo" && ! String.IsNullOrWhiteSpace(property.Value.Value))
                     {
-                        var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.Value.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
+                        var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.Value.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                         if (previewImagePart != null)
                         {
                             clue.Details.RawData.Add(previewImagePart);
@@ -457,7 +457,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         if (!string.IsNullOrWhiteSpace(photo.Value))
                         {
-                            var previewImagePart = _imageFetcher.FetchAsRawDataPart(photo.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(data.Name));
+                            var previewImagePart = _fileFetcher.FetchAsRawDataPart(photo.Value, "/RawData/PreviewImage", "preview_{0}".FormatWith(data.Name));
                             if (previewImagePart != null)
                             {
                                 clue.Details.RawData.Add(previewImagePart);

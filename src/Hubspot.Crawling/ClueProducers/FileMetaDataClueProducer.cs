@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CluedIn.Core;
+using CluedIn.Core.Agent.Jobs;
+using CluedIn.Core.Crawling;
 using CluedIn.Core.Data;
+using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
+using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Indexing;
 using CluedIn.Crawling.HubSpot.Vocabularies;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -12,10 +18,18 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class FileMetaDataClueProducer : BaseClueProducer<FileMetaData>
     {
         private readonly IClueFactory _factory;
+        private readonly ILogger _log;
+        private readonly IHubSpotFileFetcher _fileFetcher;
+        private readonly ApplicationContext _context;
+        private readonly IAgentJobProcessorState<CrawlJobData> _state;
 
-        public FileMetaDataClueProducer(IClueFactory factory)
+        public FileMetaDataClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher, ILogger log, ApplicationContext context, IAgentJobProcessorState<CrawlJobData> state)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(_fileFetcher));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _state = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         protected override Clue MakeClueImpl(FileMetaData input, Guid accountId)
@@ -61,31 +75,24 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.Value.ToString(), s => "HubDpot");
 
             // TODO Figure out how to do file indexing
-            //if (value.name != null)
-            //{
-            //    try
-            //    {
-            //        using (var tempFile = new TemporaryFile($"{value.name}.{value.extension}"))
-            //        {
-            //            using (var webClient = new WebClient())
-            //            {
-            //                using (var stream = webClient.OpenRead(value.url))
-            //                {
-            //                    using (var fs = new FileStream(tempFile.FileInfo.FullName, FileMode.OpenOrCreate, FileAccess.Write))
-            //                    {
-            //                        stream.CopyTo(fs);
-            //                    }
-            //                }
-            //            }
+            if (input.name != null)
+            {
+                //try
+                //{
+                //    string filename = $"{input.name}.{input.extension}";
+                //    var fileData = _fileFetcher.FetchAsBytes(input.url);
 
-            //            FileCrawlingUtility.IndexFile(tempFile, clue.Data, clue, this.state, this.context);
-            //        }
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        this.state.Log.Warn(() => "Could not download HubSpot File", exception);
-            //    }
-            //}
+                //    if (_state.TaskFactory == null)
+                //        _state.TaskFactory = new TaskFactory(); // BF - this will prevent indexing occuring if not present while testing
+
+                //    var fileIndexer = new HubSpotFileIndexer(_state, _context);
+                //    fileIndexer.Index(fileData, filename, clue).Wait();
+                //}
+                //catch (Exception exception)
+                //{
+                //    _log.Warn(() => "Could not download HubSpot File", exception);
+                //}
+            }
 
             return clue;
         }

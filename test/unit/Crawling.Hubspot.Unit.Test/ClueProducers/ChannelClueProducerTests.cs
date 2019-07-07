@@ -37,7 +37,7 @@ namespace Crawling.HubSpot.Unit.Test.ClueProducers
             Assert.Equal(clue.Data.EntityData.Properties[HubSpotVocabulary.Channel.Type], type);
 
             // ...
-            // TODO test all properties
+            // test all properties
             // ...
 
             // Test we have an incoming edge pointing to portal

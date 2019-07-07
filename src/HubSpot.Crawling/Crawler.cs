@@ -67,9 +67,9 @@ namespace CluedIn.Crawling.HubSpot
             data.AddRange(new ContactIterator(client, crawlerJobData, settings).Iterate());
             data.AddRange(new DynamicContactListIterator(client, crawlerJobData).Iterate());
             data.AddRange(new FormsIterator(client, crawlerJobData).Iterate());
-            //data.AddRange(await client.GetKeywordsAsync(); TODO This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
+            //data.AddRange(await client.GetKeywordsAsync(); This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
             data.AddRange(new OwnersIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData).Iterate()); // TODO This is connected to fake LinkedIn using bfi@cluedin.com
+            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new FilesIterator(client, crawlerJobData).Iterate());
             data.AddRange(new SiteMapsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new TemplatesIterator(client, crawlerJobData).Iterate()); 
@@ -77,10 +77,10 @@ namespace CluedIn.Crawling.HubSpot
             data.AddRange(new EngagementsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new RecentDealsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new SmtpTokensIterator(client, crawlerJobData).Iterate());            // TODO Returns Http Forbidden code
-            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData).Iterate()); // TODO Not sure how to test this
+            data.AddRange(new SmtpTokensIterator(client, crawlerJobData).Iterate());            
+            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new StaticContactListIterator(client,crawlerJobData).Iterate());
-            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData).Iterate());//  TODO Not sure how to test this
+            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new WorkflowsIterator(client, crawlerJobData).Iterate());
             data.AddRange(new BlogPostsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new BlogsIterator(client, crawlerJobData).Iterate()); 

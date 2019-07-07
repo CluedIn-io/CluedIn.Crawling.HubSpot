@@ -5,6 +5,7 @@ using Castle.Facilities.TypedFactory;
 
 using CluedIn.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
+using CluedIn.Crawling.HubSpot.Infrastructure.Indexing;
 using RestSharp;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
@@ -16,7 +17,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
             container
                 .AddFacilityIfNotExists<TypedFactoryFacility>()
                 .Register(Component.For<IHubSpotClientFactory>().AsFactory())
-                .Register(Component.For<IHubSpotImageFetcher, HubSpotImageFetcher>())
+                .Register(Component.For<IHubSpotFileFetcher, HubSpotFileFetcher>())
+                .Register(Component.For<IHubSpotFileIndexer, HubSpotFileIndexer>())
                 .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient())
                 .Register(Component.For<ISystemNotifications, SystemNotifications>());
 

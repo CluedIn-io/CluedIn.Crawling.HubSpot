@@ -39,7 +39,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             data.Properties[HubSpotVocabulary.Channel.AccountId] = input.accountGuid;
             data.Properties[HubSpotVocabulary.Channel.ChannelId] = input.channelGuid;
-            data.Properties[HubSpotVocabulary.Channel.DataMap] = input.dataMap.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.Channel.DataMap] = input.dataMap.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.Channel.Email] = input.dataMap?.email;
             data.Properties[HubSpotVocabulary.Channel.FirstName] = input.dataMap?.firstName;
             data.Properties[HubSpotVocabulary.Channel.FullName] = input.dataMap?.fullName;

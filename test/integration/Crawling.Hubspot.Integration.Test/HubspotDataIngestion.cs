@@ -2,12 +2,8 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Data.Serialization;
-using CluedIn.Core.Processing;
 using CrawlerIntegrationTesting.Clues;
-using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -29,20 +25,20 @@ namespace Crawling.HubSpot.Integration.Test
 
         [Theory]
         [InlineData("/Provider/Root", 1)]
-        [InlineData("/Organization", 2)]
-        [InlineData("/Infrastructure/Contact", 6)]
-        // [InlineData("/Calendar/Meeting", 2)] TODO Setup in HubSpot
-        // [InlineData("/Calendar/Event", 2)] TODO Setup in HubSpot
-        [InlineData("/Note", 6)]
-        [InlineData("/PhoneCall", 2)]
-        [InlineData("/Task", 3)]
-        [InlineData("/Sales/Deal", 3)]
-        [InlineData("/Activity", 6)]
+        [InlineData("/Organization", 3)]
+        [InlineData("/Infrastructure/Contact", 12)]
+        // [InlineData("/Calendar/Meeting", 2)] Setup in HubSpot
+        // [InlineData("/Calendar/Event", 2)] Setup in HubSpot
+        [InlineData("/Note", 8)]
+        [InlineData("/PhoneCall", 3)]
+        [InlineData("/Task", 4)]
+        [InlineData("/Sales/Deal", 6)]
+        [InlineData("/Activity", 8)]
         [InlineData("/News", 6)]
         [InlineData("/Template", 120)]
         [InlineData("/Process", 2)]
         [InlineData("/Topic", 1)]
-        [InlineData("/Mail", 2)]
+        [InlineData("/Mail", 5)]
         [InlineData("/Form", 1)]
         [InlineData("/Person", 1)]
         [InlineData("/Channel", 1)]

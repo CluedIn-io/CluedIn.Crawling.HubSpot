@@ -4,7 +4,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
 {
     public class EngagementAssociations
     {
-        public List<int> companyIds { get; set; }
+        public List<long> companyIds { get; set; }
         public List<object> contactIds { get; set; }
         public List<object> dealIds { get; set; }
         public List<object> ownerIds { get; set; }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CluedIn.Core.Providers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
@@ -13,7 +12,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         Task<List<string>> GetContactPropertiesAsync(Settings settings);
         Task<IEnumerable<object>> GetEngagementByIdAndTypeAsync(long objectId, string objectType);
         Task<IList<string>> GetDealPropertiesAsync(Settings settings);
-        Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, int offset = 0);
+        Task<CompanyResponse> GetCompaniesAsync(IList<string> properties, int limit = 100, long offset = 0);
         Task<List<string>> GetProductPropertiesAsync(Settings settings);
         Task<ProductResponse> GetProductsAsync(IList<string> properties, int limit = 100, int offset = 0);
         Task<List<string>> GetLineItemPropertiesAsync(Settings settings);

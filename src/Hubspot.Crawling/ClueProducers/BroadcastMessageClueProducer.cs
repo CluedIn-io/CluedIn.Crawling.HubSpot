@@ -44,13 +44,13 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Broadcast.BroadcastGuid] = input.broadcastGuid;
             data.Properties[HubSpotVocabulary.Broadcast.CampaignGuid] = input.campaignGuid;
             data.Properties[HubSpotVocabulary.Broadcast.Clicks] = input.clicks.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.Broadcast.ClientTag] = input.clientTag.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property;
+            data.Properties[HubSpotVocabulary.Broadcast.ClientTag] = input.clientTag.PrintIfAvailable(JsonUtility.Serialize); ;
             data.Properties[HubSpotVocabulary.Broadcast.CreatedBy] = input.createdBy.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Broadcast.FinishedAt] = input.finishedAt.PrintIfAvailable(v => DateUtilities.EpochRef.AddMilliseconds(v.Value));
             data.Properties[HubSpotVocabulary.Broadcast.ForeignId] = input.foreignId;
             data.Properties[HubSpotVocabulary.Broadcast.GroupGuid] = input.groupGuid;
-            data.Properties[HubSpotVocabulary.Broadcast.InteractionCounts] = input.interactionCounts.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
-            data.Properties[HubSpotVocabulary.Broadcast.Interactions] = input.interactions.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.Broadcast.InteractionCounts] = input.interactionCounts.PrintIfAvailable(JsonUtility.Serialize); 
+            data.Properties[HubSpotVocabulary.Broadcast.Interactions] = input.interactions.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.Broadcast.LinkGuid] = input.linkGuid;
             data.Properties[HubSpotVocabulary.Broadcast.LinkTaskQueueId] = input.linkTaskQueueId;
             data.Properties[HubSpotVocabulary.Broadcast.RemoteContentId] = input.remoteContentId.PrintIfAvailable();

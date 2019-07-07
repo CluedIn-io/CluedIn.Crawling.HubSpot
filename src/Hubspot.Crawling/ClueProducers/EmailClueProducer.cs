@@ -168,7 +168,6 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -180,7 +179,6 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -192,7 +190,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -213,7 +211,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -225,7 +223,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -237,7 +235,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -258,7 +256,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -270,7 +268,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -282,7 +280,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    // TODO: Verify that parent is in scope
+                                    
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(

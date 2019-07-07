@@ -1,5 +1,8 @@
 using System.IO;
 using System.Reflection;
+using Castle.Windsor;
+using CluedIn.Core;
+using CluedIn.Core.Installers;
 using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CrawlerIntegrationTesting.Clues;
@@ -19,7 +22,9 @@ namespace Crawling.HubSpot.Integration.Test
 
             //_outputHelper.WriteLine($"Creating crawler host {HubSpotConstants.ProviderName} from folder {executingFolder}");
 
-            var crawlerHost = new DebugCrawlerHost<HubSpotCrawlJobData>(executingFolder, HubSpotConstants.ProviderName);
+            var crawlerHost = new TestCrawlerHost(executingFolder, HubSpotConstants.ProviderName);
+
+            crawlerHost.ContainerInstance.Install(new VocabulariesInstaller());
 
             ClueStorage = new ClueStorage();
 

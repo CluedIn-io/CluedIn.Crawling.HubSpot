@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Net;
 using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.Logging;
-using CluedIn.Core.Utilities;
 using RestSharp;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
-    public class HubSpotImageFetcher : IHubSpotImageFetcher
+    public class HubSpotFileFetcher : IHubSpotFileFetcher
     {
         private readonly ILogger _log;
         private readonly IRestClient _client;
 
-        public HubSpotImageFetcher(ILogger log, IRestClient client)
+        public HubSpotFileFetcher(ILogger log, IRestClient client)
         {
             _log = log ?? throw new ArgumentNullException(nameof(log));
             _client = client ?? throw new ArgumentNullException(nameof(client));
@@ -46,6 +44,11 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
 
             return rawDataPart;
+        }
+
+        public byte[] FetchAsBytes(string url)
+        {
+            return _client.DownloadData(new RestRequest(url));
         }
     }
 }

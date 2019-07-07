@@ -42,10 +42,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             data.Properties[HubSpotVocabulary.ContactList.Deleted] = input.deleted.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.ContactList.Dynamic] = input.dynamic.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.Filters] = input.filters.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.ContactList.Filters] = input.filters.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.ContactList.InternalListId] = input.internalListId.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.ContactList.ListId] = input.listId.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.ContactList.MetaData] = input.metaData.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.ContactList.MetaData] = input.metaData.PrintIfAvailable(JsonUtility.Serialize); 
 
             if (input.portalId != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(), s => "HubSpot");

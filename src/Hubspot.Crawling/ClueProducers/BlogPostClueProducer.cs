@@ -15,12 +15,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class BlogPostClueProducer : BaseClueProducer<BlogPost>
     {
         private readonly IClueFactory _factory;
-        private IHubSpotImageFetcher _imageFetcher;
+        private IHubSpotFileFetcher _fileFetcher;
 
-        public BlogPostClueProducer(IClueFactory factory, IHubSpotImageFetcher imageFetcher)
+        public BlogPostClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-            _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
+            _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(fileFetcher));
         }
 
         protected override Clue MakeClueImpl(BlogPost input, Guid accountId)
@@ -48,15 +48,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (!string.IsNullOrEmpty(input.published_url))
                 data.Uri = new Uri(input.published_url);
 
-            // TODO: Uri is written twice
             if (input.url != null && Uri.TryCreate(input.url, UriKind.Absolute, out var uri))
                 data.Uri = uri;
 
             data.Properties[HubSpotVocabulary.BlogPost.Archived] = input.archived.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.BlogPost.BlogAuthor] = input.blog_author.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
-            data.Properties[HubSpotVocabulary.BlogPost.Campaign] = input.campaign.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.BlogPost.BlogAuthor] = input.blog_author.PrintIfAvailable(JsonUtility.Serialize); 
+            data.Properties[HubSpotVocabulary.BlogPost.Campaign] = input.campaign.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.BlogPost.CampaignName] = input.campaign_name.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.BlogPost.ClonedFrom] = input.cloned_from.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.BlogPost.ClonedFrom] = input.cloned_from.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.BlogPost.CommentCount] = input.comment_count.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.BlogPost.DeletedAt] = input.deleted_at.PrintIfAvailable(v => DateUtilities.EpochRef.AddMilliseconds(v.Value));
             data.Properties[HubSpotVocabulary.BlogPost.FeaturedImage] = input.featured_image;
@@ -67,7 +66,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.BlogPost.HtmlTitle] = input.html_title;
             data.Properties[HubSpotVocabulary.BlogPost.IsDraft] = input.is_draft.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.BlogPost.MetaDescription] = input.meta_description;
-            data.Properties[HubSpotVocabulary.BlogPost.MetaKeywords] = input.meta_keywords.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.BlogPost.MetaKeywords] = input.meta_keywords.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.BlogPost.PerformableUrl] = input.performable_url.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.BlogPost.PostBody] = input.post_body;
             data.Properties[HubSpotVocabulary.BlogPost.PreviewImageSrc] = input.preview_image_src.PrintIfAvailable();
@@ -82,9 +81,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.BlogPost.State] = input.state;
             data.Properties[HubSpotVocabulary.BlogPost.StyleOverrideId] = input.style_override_id.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.BlogPost.Subcategory] = input.subcategory;
-            data.Properties[HubSpotVocabulary.BlogPost.TopicsIds] = input.topic_ids.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
-            data.Properties[HubSpotVocabulary.BlogPost.WidgetContainers] = input.widget_containers.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
-            data.Properties[HubSpotVocabulary.BlogPost.WidgetContainers] = input.widgetcontainers.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property
+            data.Properties[HubSpotVocabulary.BlogPost.TopicsIds] = input.topic_ids.PrintIfAvailable(JsonUtility.Serialize); 
+            data.Properties[HubSpotVocabulary.BlogPost.WidgetContainers] = input.widget_containers.PrintIfAvailable(JsonUtility.Serialize); 
+            data.Properties[HubSpotVocabulary.BlogPost.WidgetContainers] = input.widgetcontainers.PrintIfAvailable(JsonUtility.Serialize); 
             data.Properties[HubSpotVocabulary.BlogPost.Widgets] = input.widgets.PrintIfAvailable();
 
             if (input.author_user_id != null)
@@ -104,7 +103,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (! String.IsNullOrWhiteSpace(input.featured_image))
             {
-                var previewImagePart = _imageFetcher.FetchAsRawDataPart(input.featured_image, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
+                var previewImagePart = _fileFetcher.FetchAsRawDataPart(input.featured_image, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                 if (previewImagePart != null)
                 {
                     clue.Details.RawData.Add(previewImagePart);
