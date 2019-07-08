@@ -50,22 +50,25 @@ docker-compose logs wiremock
 
 * [HubSpot](https://developers.hubspot.com/docs/overview)
 
-### Usage
+## Usage
 
-## Nuget Packages
+### Nuget Packages
 
 To use the HubSpot provider and Crawler with CluedIn Backend server, add the following Nuget packages to the Providers.csproj:
 
 `
 Install-Package CluedIn.Crawling.HubSpot
+
 Install-Package CluedIn.Crawling.HubSpot.Core
+
 Install-Package CluedIn.Crawling.HubSpot.Infrastructure
+
 Install-Package CluedIn.Provider.HubSpot
 `
 
 These are found at the this [feed](https://dev.azure.com/CluedIn-io/CluedIn%20Crawlers/_packaging?_a=feed&feed=develop)
 
-## Debugging
+### Debugging
 
 To debug the Hubspot Provider/Crawler:
 
