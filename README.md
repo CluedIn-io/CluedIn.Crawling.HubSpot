@@ -73,8 +73,8 @@ To debug the Hubspot Provider/Crawler:
 - Open Crawling.HubSpot.sln in Visual Studio
 - Rebuild All
 - Copy DLL's and PDB's from \**\bin\debug\net452 to backend server's ServerComponents folder
-- Run CluedIn backend server using .\build.ps1 run
-- In Visual Studio with the Hubsport craler solution open, use Debug -> Attach to Process on CluedIn.Server.ConsoleHostv2 .exe
+- Run CluedIn backend server using `.\build.ps1 run`
+- In Visual Studio with the Hubsport crawler solution open, use Debug -> Attach to Process on CluedIn.Server.ConsoleHostv2 .exe
 - In the UI, add a new configuration for the HubSpot provider and invoke Re-Crawl
 
 ### Tooling
