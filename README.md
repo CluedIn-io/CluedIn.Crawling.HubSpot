@@ -22,22 +22,17 @@ A mocked environment is required to run `integration` and `acceptance` tests. Th
 docker-compose up --build -d
 ```
 
-To run all `unit` and `integration` tests
+Use the following commands to run all `Unit` and `Integration` tests within the repository:
 
 ```Shell
-dotnet test .\Crawling.Hubspot.sln
-```
-
-To run only `integration` tests
-
-```Shell
-dotnet test .\test\integration\Crawling.Hubspot.Integration.Test\
+dotnet test .\Crawling.Hubspot.sln --filter Unit
+dotnet test .\Crawling.Hubspot.sln --filter Integration
 ```
 
 To run [Pester](https://github.com/pester/Pester) `acceptance` tests
 
 ```PowerShell
-invoke-pester test\acceptance
+invoke-pester
 ```
 
 To review the [WireMock](http://wiremock.org/) HTTP proxy logs
