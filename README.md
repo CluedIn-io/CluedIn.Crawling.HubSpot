@@ -10,9 +10,39 @@ CluedIn crawler for HubSpot.
 
 This repository contains the code and associated tests for the [HubSpot](https://developers.hubspot.com/docs/overview) crawler.
 
+## Usage
+
+### NuGet Packages
+
+To use the `HubSpot` crawler and provider with the `CluedIn` server you will have to add the following NuGet packages to the `Providers.csproj` project file:
+
+```PowerShell
+Install-Package CluedIn.Crawling.HubSpot
+
+Install-Package CluedIn.Crawling.HubSpot.Core
+
+Install-Package CluedIn.Crawling.HubSpot.Infrastructure
+
+Install-Package CluedIn.Provider.HubSpot
+```
+
+The NuGet packages specified are available on the [internal development feed](https://dev.azure.com/CluedIn-io/CluedIn%20Crawlers/_packaging?_a=feed&feed=develop).
+
+### Debugging
+
+To debug the `HubSpot` Provider/Crawler:
+
+- Clone the [CluedIn.Crawling.HubSpot](https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot) repository
+- Open `Crawling.HubSpot.sln` in Visual Studio
+- Rebuild All
+- Copy DLL and PDB files from `\**\bin\debug\net452` to the servers `ServerComponents` folder
+- Run CluedIn backend server using `.\build.ps1 run`
+- In Visual Studio with the `HubSpot` crawler solution open, use `Debug -> Attach to Process` on `CluedIn.Server.ConsoleHostv2.exe`
+- In the UI, add a new configuration for the `HubSpot` provider and invoke `Re-Crawl`
+
 ## Working with the Code
 
-Load [Crawling.Hubspot.sln](.\Crawling.Hubspot.sln) in Visual Studio or your preferred development IDE.
+Load [Crawling.HubSpot.sln](.\Crawling.HubSpot.sln) in Visual Studio or your preferred development IDE.
 
 ### Running Tests
 
@@ -25,8 +55,8 @@ docker-compose up --build -d
 Use the following commands to run all `Unit` and `Integration` tests within the repository:
 
 ```Shell
-dotnet test .\Crawling.Hubspot.sln --filter Unit
-dotnet test .\Crawling.Hubspot.sln --filter Integration
+dotnet test .\Crawling.HubSpot.sln --filter Unit
+dotnet test .\Crawling.HubSpot.sln --filter Integration
 ```
 
 To run [Pester](https://github.com/pester/Pester) `acceptance` tests
@@ -43,40 +73,10 @@ docker-compose logs wiremock
 
 ## References
 
-* [HubSpot](https://developers.hubspot.com/docs/overview)
-
-## Usage
-
-### Nuget Packages
-
-To use the HubSpot provider and Crawler with CluedIn Backend server, add the following Nuget packages to the Providers.csproj:
-
-`
-Install-Package CluedIn.Crawling.HubSpot
-
-Install-Package CluedIn.Crawling.HubSpot.Core
-
-Install-Package CluedIn.Crawling.HubSpot.Infrastructure
-
-Install-Package CluedIn.Provider.HubSpot
-`
-
-These are found at the this [feed](https://dev.azure.com/CluedIn-io/CluedIn%20Crawlers/_packaging?_a=feed&feed=develop)
-
-### Debugging
-
-To debug the Hubspot Provider/Crawler:
-
-- Clone the [CluedIn.Crawling.HubSpot](https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot) repository
-- Open Crawling.HubSpot.sln in Visual Studio
-- Rebuild All
-- Copy DLL's and PDB's from \**\bin\debug\net452 to backend server's ServerComponents folder
-- Run CluedIn backend server using `.\build.ps1 run`
-- In Visual Studio with the Hubsport crawler solution open, use Debug -> Attach to Process on CluedIn.Server.ConsoleHostv2 .exe
-- In the UI, add a new configuration for the HubSpot provider and invoke Re-Crawl
+- [HubSpot](https://developers.hubspot.com/docs/overview)
 
 ### Tooling
 
-* [Docker](https://www.docker.com/)
-* [Pester](https://github.com/pester/Pester)
-* [WireMock](http://wiremock.org/)
+- [Docker](https://www.docker.com/)
+- [Pester](https://github.com/pester/Pester)
+- [WireMock](http://wiremock.org/)
