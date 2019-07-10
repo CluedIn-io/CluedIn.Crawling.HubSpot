@@ -67,7 +67,6 @@ namespace CluedIn.Crawling.HubSpot
             data.AddRange(new ContactIterator(client, crawlerJobData, settings).Iterate());
             data.AddRange(new DynamicContactListIterator(client, crawlerJobData).Iterate());
             data.AddRange(new FormsIterator(client, crawlerJobData).Iterate());
-            //data.AddRange(await client.GetKeywordsAsync(); This is deprecated https://developers.hubspot.com/changelog/2018-02-05-sunsetting-keywords-api-2018
             data.AddRange(new OwnersIterator(client, crawlerJobData).Iterate());
             data.AddRange(new PublishingChannelsIterator(client, crawlerJobData).Iterate()); 
             data.AddRange(new FilesIterator(client, crawlerJobData).Iterate());
