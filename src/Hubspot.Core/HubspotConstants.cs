@@ -27,8 +27,7 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string ProviderRootCodeValue = "HubSpot";
         public const string CrawlerName = "HubSpotCrawler";
         public const string CrawlerComponentName = "HubSpotCrawler";
-        public const string CrawlerDescription = "HubSpot is a ... to be completed ..."; // complete the crawler description
-        public const string CrawlerDisplayName = "HubSpot";  // RJ - this field is never used can it be removed ?
+        public const string CrawlerDescription = "HubSpot is a ... to be completed ...";
         public const string Uri = "http://www.sampleurl.com";
         public const string ApiBaseUri = "https://api.hubapi.com";
 
