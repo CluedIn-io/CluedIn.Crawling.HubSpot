@@ -80,9 +80,9 @@ namespace CluedIn.Provider.HubSpot
             }
         }
 
-        public override Task<ExpectedStatistics> FetchUnSyncedEntityStatistics(ExecutionContext context, IDictionary<string, object> configuration, Guid organizationId, Guid userId, Guid providerDefinitionId)
+        public override async Task<ExpectedStatistics> FetchUnSyncedEntityStatistics(ExecutionContext context, IDictionary<string, object> configuration, Guid organizationId, Guid userId, Guid providerDefinitionId)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(default(ExpectedStatistics));
         }
 
         public override async Task<IDictionary<string, object>> GetHelperConfiguration(
@@ -98,7 +98,6 @@ namespace CluedIn.Provider.HubSpot
 
             if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
             {
-                // TODO Is this required? Very hard to mock when testing
                 _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
 
                 var result = hubspotCrawlJobData.ToDictionary();
@@ -167,7 +166,6 @@ namespace CluedIn.Provider.HubSpot
 
         public override string Schedule(DateTimeOffset relativeDateTime, bool webHooksEnabled)
         {
-            //TODO is this common for all providers?
             return webHooksEnabled && ConfigurationManager.AppSettings.GetFlag("Feature.Webhooks.Enabled", false) ? $"{relativeDateTime.Minute} 0/23 * * *"
                 : $"{relativeDateTime.Minute} 0/4 * * *";
         }

@@ -16,12 +16,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class ContactClueProducer : BaseClueProducer<Contact>
     {
         private readonly IClueFactory _factory;
-        private readonly IHubSpotImageFetcher _imageFetcher;
+        private readonly IHubSpotFileFetcher _fileFetcher;
 
-        public ContactClueProducer(IClueFactory factory, IHubSpotImageFetcher imageFetcher)
+        public ContactClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-            _imageFetcher = imageFetcher ?? throw new ArgumentNullException(nameof(imageFetcher));
+            _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(fileFetcher));
         }
 
         protected override Clue MakeClueImpl(Contact input, Guid accountId)
@@ -82,7 +82,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
                             {
-                                var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
+                                var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                                 if (previewImagePart != null)
                                 {
                                     clue.Details.RawData.Add(previewImagePart);
@@ -242,7 +242,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
                         {
-                            var previewImagePart = _imageFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
+                            var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                             if (previewImagePart != null)
                             {
                                 clue.Details.RawData.Add(previewImagePart);

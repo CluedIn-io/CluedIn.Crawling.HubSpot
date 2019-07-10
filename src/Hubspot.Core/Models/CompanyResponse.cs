@@ -12,7 +12,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public bool hasMore { get; set; }
 
         [JsonProperty("offset")]
-        public int? offset { get; set; }
+        public long? offset { get; set; }
 
         [JsonProperty("total")]
         public int? total { get; set; }

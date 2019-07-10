@@ -27,7 +27,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             
             var data = clue.Data.EntityData;
 
-            data.Name = input.email;
+            data.Name = string.IsNullOrWhiteSpace(input.firstName + input.lastName) ? input.email :  $"{input.firstName} {input.lastName}";
             data.Aliases.Add(input.email);
 
             data.Properties[HubSpotVocabulary.EmailPerson.Email] = input.email;

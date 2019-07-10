@@ -30,15 +30,14 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             var data = clue.Data.EntityData;
 
-            // TODO: No name have been specified
             data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(input.created);
 
             data.Properties[HubSpotVocabulary.CampaignEvent.AppName] = input.appName;
-            data.Properties[HubSpotVocabulary.CampaignEvent.Browser] = input.browser.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property;
+            data.Properties[HubSpotVocabulary.CampaignEvent.Browser] = input.browser.PrintIfAvailable(JsonUtility.Serialize); ;
             data.Properties[HubSpotVocabulary.CampaignEvent.EmailCampaignId] = input.emailCampaignId.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.CampaignEvent.Hmid] = input.hmid;
             data.Properties[HubSpotVocabulary.CampaignEvent.IpAddress] = input.ipAddress;
-            data.Properties[HubSpotVocabulary.CampaignEvent.Location] = input.location.PrintIfAvailable(JsonUtility.Serialize); // TODO: Json serialized to property;
+            data.Properties[HubSpotVocabulary.CampaignEvent.Location] = input.location.PrintIfAvailable(JsonUtility.Serialize); ;
             data.Properties[HubSpotVocabulary.CampaignEvent.City] = input.location?.city;
             data.Properties[HubSpotVocabulary.CampaignEvent.Country] = input.location?.country;
             data.Properties[HubSpotVocabulary.CampaignEvent.State] = input.location?.state;

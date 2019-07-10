@@ -23,14 +23,14 @@ namespace CluedIn.Crawling.HubSpot.Core
         {
             return new Dictionary<string, object> {
                { HubSpotConstants.KeyName.ApiToken, ApiToken },
-               { HubSpotConstants.KeyName.CustomerSubDomain, ApiToken },
+               { HubSpotConstants.KeyName.CustomerSubDomain, CustomerSubDomain },
                { HubSpotConstants.KeyName.BaseUri, BaseUri },
                { HubSpotConstants.KeyName.LastCrawlFinishTime, LastCrawlFinishTime }
             };
         }
 
-        //TODO What are starting points?
-        //public IList<CrawlEntry> StartingPoints { get; set; }
+        
+        public IList<CrawlEntry> StartingPoints { get; set; }
 
         public Uri BaseUri { get; set; }
 

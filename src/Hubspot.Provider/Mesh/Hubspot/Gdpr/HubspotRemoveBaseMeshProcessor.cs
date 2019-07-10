@@ -95,7 +95,6 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
-            // TODO Replace with call to HubSpotClient
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.GET);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method

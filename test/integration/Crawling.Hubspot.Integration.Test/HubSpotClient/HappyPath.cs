@@ -103,7 +103,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetLineItemPropertiesAsync(settings));
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task LineItemsAreAvailable(List<string> properties)
         {
@@ -173,7 +173,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetFilesAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task SocialCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
         {
@@ -181,7 +181,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetSocialCalendarEventsAsync(startDate, endDate));
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task TaskCalendarEventsAreAvailable(DateTimeOffset startDate, DateTimeOffset endDate)
         {
@@ -206,7 +206,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetRecentlyCreatedDealsAsync(greaterThanEpoch)).results);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task BroadcastMessagesOfDealsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -214,7 +214,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetBroadcastMessagesAsync(greaterThanEpoch));
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task UrlMappingsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -243,7 +243,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetSiteMapsAsync()).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task BlogPostsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -251,7 +251,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetBlogPostsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task BlogTopicsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -259,7 +259,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetBlogTopicsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test as HubSpot test account expired")]
         [InlineAutoData]
         public async Task BlogsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -311,7 +311,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetSmtpTokensAsync());
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test as HubSpot test account expired")]
         public async Task PublishingChannelsAreAvailable()
         {
             Assert.NotEmpty(

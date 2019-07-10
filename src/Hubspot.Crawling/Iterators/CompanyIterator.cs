@@ -18,7 +18,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         public override IEnumerable<object> Iterate(int? limit = null)
         {
-            int offset = 0;
+            long offset = 0;
             long portalId = 0;
             limit = limit ?? 100;
             var result = new List<object>();
@@ -73,7 +73,6 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                     offset = response.offset.Value;
                 }
 
-                // TODO Is this correct? Just get deal pipelines for last company portal id?
                 try
                 {
                     var dealPipelines = Client.GetDealPipelinesAsync().Result;
