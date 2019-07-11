@@ -33,7 +33,7 @@ jobs:
     Dotnet.Skip.First.Time.Experience: 'True'
     testFolderPath: '$(Build.SourcesDirectory)/test'
 
-steps:
+  steps:
   
   # Install NuGet
   - task: NuGetToolInstaller@0
