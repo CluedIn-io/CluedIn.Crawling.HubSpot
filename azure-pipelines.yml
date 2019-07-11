@@ -134,7 +134,7 @@ jobs:
       versionEnvVar: GITVERSION_NUGETVERSIONV2
       includeSymbols: true
       configuration: '$(BuildConfiguration)' 
-      includeReferencedProjects: True
+      # includeReferencedProjects: True
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
 
