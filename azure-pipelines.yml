@@ -41,11 +41,11 @@ jobs:
 
   - powershell: |
       nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/CluedIn/nuget/v3/index.json
-      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/03c4a3d7-ffb5-4955-b40e-14b273e02373/nuget/v3/index.json
-      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/f9196da4-9446-4974-97ce-3b39ae4a86bc/nuget/v3/index.json
+      # nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/03c4a3d7-ffb5-4955-b40e-14b273e02373/nuget/v3/index.json
+      # nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/f9196da4-9446-4974-97ce-3b39ae4a86bc/nuget/v3/index.json
       nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/develop/nuget/v3/index.json
       nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/release/nuget/v3/index.json
-    condition: variables['NugetArtifactsReadKey']
+    # condition: variables['NugetArtifactsReadKey']
     displayName: 'Add api token to access nuget artifacts'
     env:
       NUGET_KEY: $(NugetArtifactsReadKey)
@@ -55,25 +55,24 @@ jobs:
     displayName: 'Restore Nuget packages'
     inputs:
       command: 'restore'
-      restoreSolution: '*.sln'
+      restoreSolution: '**/*.sln'
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
-      # # restoreDirectory: '$(nugetRestoreLocation)'
 
   # DotNet SDK
   - task: DotNetCoreInstaller@0
     inputs:
       version: '2.2.100'
 
-  # Restore NuGet
-  - task: DotNetCoreCLI@2
-    displayName: 'Restore NuGet packages'
-    inputs:
-      command: 'restore'
-      feedsToUse: 'config'
-      nugetConfigPath: 'nuget.config'
-      verbosityRestore: 'normal'
-      projects: 'Crawling.HubSpot.sln'
+  # # Restore NuGet
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'Restore NuGet packages'
+  #   inputs:
+  #     command: 'restore'
+  #     feedsToUse: 'config'
+  #     nugetConfigPath: 'nuget.config'
+  #     verbosityRestore: 'normal'
+  #     projects: 'Crawling.HubSpot.sln'
 
   # GitVersion
   - task: GitVersion@4
@@ -125,7 +124,7 @@ jobs:
   
   # Nuget Pack
   - task: NuGetCommand@2
-    displayName: 'Push Nuget packages to Develop feed'
+    displayName: 'Create Nuget packages'
     # TODO restore ... condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
     inputs:
       command: 'pack'
@@ -134,7 +133,10 @@ jobs:
       versioningScheme: 'byEnvVar'
       versionEnvVar: GITVERSION_NUGETVERSIONV2
       includeSymbols: true
-      # TODO set release configuration in build properties ...
+      configuration: '$(BuildConfiguration)' 
+      includeReferencedProjects: True
+      feedsToUse: 'config'
+      nugetConfigPath: 'nuget.config'
 
   # Publish Artifacts
   - task: PublishPipelineArtifact@0
