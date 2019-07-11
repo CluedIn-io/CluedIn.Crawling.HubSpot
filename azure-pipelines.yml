@@ -33,7 +33,33 @@ jobs:
     Dotnet.Skip.First.Time.Experience: 'True'
     testFolderPath: '$(Build.SourcesDirectory)/test'
 
-  steps:
+steps:
+  
+  # Install NuGet
+  - task: NuGetToolInstaller@0
+    displayName: 'Install Nuget'
+
+  - powershell: |
+      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/CluedIn/nuget/v3/index.json
+      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/03c4a3d7-ffb5-4955-b40e-14b273e02373/nuget/v3/index.json
+      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/f9196da4-9446-4974-97ce-3b39ae4a86bc/nuget/v3/index.json
+      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/develop/nuget/v3/index.json
+      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/release/nuget/v3/index.json
+    condition: variables['NugetArtifactsReadKey']
+    displayName: 'Add api token to access nuget artifacts'
+    env:
+      NUGET_KEY: $(NugetArtifactsReadKey)
+  
+  # Nuget Restore
+  - task: NuGetCommand@2
+    displayName: 'Restore Nuget packages'
+    inputs:
+      command: 'restore'
+      restoreSolution: '*.sln'
+      feedsToUse: 'config'
+      nugetConfigPath: 'nuget.config'
+      # # restoreDirectory: '$(nugetRestoreLocation)'
+
   # DotNet SDK
   - task: DotNetCoreInstaller@0
     inputs:
@@ -86,16 +112,29 @@ jobs:
   #     scriptFolder: '$(testFolderPath)'
   #     tag: Acceptance
 
-  # Pack
-  - task: DotNetCoreCLI@2
-    displayName: 'Create NuGet packages'
+  # # # Pack
+  # # - task: DotNetCoreCLI@2
+  # #   displayName: 'Create NuGet packages'
+  # #   inputs:
+  # #     command: 'pack'
+  # #     # packagesToPack: '**/*.csproj'
+  # #     # packDirectory: '$(Build.ArtifactStagingDirectory)'
+  # #     versioningScheme: 'byEnvVar'
+  # #     versionEnvVar: GITVERSION_NUGETVERSIONV2
+  # #     includeSymbols: true
+  
+  # Nuget Pack
+  - task: NuGetCommand@2
+    displayName: 'Push Nuget packages to Develop feed'
+    # TODO restore ... condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
     inputs:
       command: 'pack'
       packagesToPack: '**/*.csproj'
-      packDirectory: '$(Build.ArtifactStagingDirectory)'
+      packDestination: '$(Build.ArtifactStagingDirectory)'
       versioningScheme: 'byEnvVar'
       versionEnvVar: GITVERSION_NUGETVERSIONV2
       includeSymbols: true
+      # TODO set release configuration in build properties ...
 
   # Publish Artifacts
   - task: PublishPipelineArtifact@0
