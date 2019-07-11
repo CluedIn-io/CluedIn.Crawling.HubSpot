@@ -58,6 +58,7 @@ jobs:
       restoreSolution: '**/*.sln'
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
+      configuration: '$(buildConfiguration)'       
 
   # DotNet SDK
   - task: DotNetCoreInstaller@0
@@ -85,6 +86,7 @@ jobs:
     inputs:
       command: 'build'
       projects: 'Crawling.HubSpot.sln'
+      arguments: '--configuration $(buildConfiguration)'
 
   # Unit Test
   - task: DotNetCoreCLI@2
@@ -133,7 +135,7 @@ jobs:
       versioningScheme: 'byEnvVar'
       versionEnvVar: GITVERSION_NUGETVERSIONV2
       includeSymbols: true
-      configuration: '$(BuildConfiguration)' 
+      configuration: '$(buildConfiguration)' 
       # includeReferencedProjects: True
       feedsToUse: 'config'
       nugetConfigPath: 'nuget.config'
