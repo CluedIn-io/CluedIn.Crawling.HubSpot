@@ -31,6 +31,10 @@ resources:
 
 pool:
   vmImage: 'win1803'
+  
+variables:
+  Dotnet.Skip.First.Time.Experience: 'True'
+  testFolderPath: '$(Build.SourcesDirectory)/test'
 
 steps:
 - template: crawler.default.build.yml@templates
