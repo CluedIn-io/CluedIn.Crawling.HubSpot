@@ -22,106 +22,19 @@ pr:
     exclude:
     - '*.md'
 
-jobs:
-- job: compile_test_pack_push
-  displayName: 'Compile, test, pack and push'
-  pool:
-    vmImage: 'VS2017-Win2016'
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: CluedIn-io/AzurePipelines.Templates
+      endpoint: 'CluedIn-io'
 
-  variables:
-    BuildConfiguration: 'Release'
-    Dotnet.Skip.First.Time.Experience: 'True'
-    testFolderPath: '$(Build.SourcesDirectory)/test'
+pool:
+  vmImage: 'VS2017-Win2016'
+  
+variables:
+  Dotnet.Skip.First.Time.Experience: 'True'
+  testFolderPath: '$(Build.SourcesDirectory)/test'
 
-  steps:
-  # DotNet SDK
-  - task: DotNetCoreInstaller@0
-    inputs:
-      version: '2.2.100'
-
-  # Restore NuGet
-  - task: DotNetCoreCLI@2
-    displayName: 'Restore NuGet packages'
-    inputs:
-      command: 'restore'
-      feedsToUse: 'config'
-      nugetConfigPath: 'nuget.config'
-      verbosityRestore: 'normal'
-      projects: 'Crawling.HubSpot.sln'
-
-  # GitVersion
-  - task: GitVersion@4
-    inputs:
-      preferBundledVersion: true
-
-  # Build
-  - task: DotNetCoreCLI@2
-    displayName: 'Build solution'
-    inputs:
-      command: 'build'
-      projects: 'Crawling.HubSpot.sln'
-
-  # Unit Test
-  - task: DotNetCoreCLI@2
-    displayName: 'Run Unit tests'
-    inputs:
-      command: 'test'
-      projects: 'test/unit/**/*.csproj'
-      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Unit'
-
-# TODO restore integration tests when Docker environment is available
-  # # Integration Test
-  # - task: DotNetCoreCLI@2
-  #   displayName: 'Run Integration tests'
-  #   inputs:
-  #     command: 'test'
-  #     projects: 'test/integration/**/*.csproj'
-  #     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)  /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Integration'
-
-# TODO restore acceptance tests when Docker environment is available
-  # # Acceptance Test
-  # - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
-  #   displayName: 'Run Acceptance tests'
-  #   inputs:
-  #     scriptFolder: '$(testFolderPath)'
-  #     tag: Acceptance
-
-  # Pack
-  - task: DotNetCoreCLI@2
-    displayName: 'Create NuGet packages'
-    inputs:
-      command: 'pack'
-      packagesToPack: '**/*.csproj'
-      packDirectory: '$(Build.ArtifactStagingDirectory)'
-      versioningScheme: 'byEnvVar'
-      versionEnvVar: GITVERSION_NUGETVERSIONV2
-      includeSymbols: true
-
-  # Publish Artifacts
-  - task: PublishPipelineArtifact@0
-    displayName: 'Create Pipeline Artifact'
-    inputs:
-      artifactName: 'Nuget'
-      targetPath: $(Build.ArtifactStagingDirectory)
-
-  # Push NuGet packages to Develop
-  - task: NuGetCommand@2
-    displayName: 'Push to develop feed'
-    condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-      allowPackageConflicts: true
-      publishVstsFeed: 'develop'
-      includeSymbols: true
-
-# TODO restore once master branch creates valid packages for release
-  # - task: NuGetCommand@2
-  #   displayName: 'Push to release feed'
-  #   condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
-  #   inputs:
-  #     command: 'push'
-  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-  #     allowPackageConflicts: true
-  #     publishVstsFeed: 'release'
-  #     includeSymbols: false
+steps:
+- template: crawler.default.build.yml@templates
