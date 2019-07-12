@@ -22,118 +22,15 @@ pr:
     exclude:
     - '*.md'
 
-jobs:
-- job: compile_test_pack_push
-  displayName: 'Compile, test, pack and push'
-  pool:
-    vmImage: 'VS2017-Win2016'
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: CluedIn-io/AzurePipelines.Templates
+      endpoint: 'CluedIn-io'
 
-  variables:
-    Dotnet.Skip.First.Time.Experience: 'True'
-    testFolderPath: '$(Build.SourcesDirectory)/test'
+pool:
+  vmImage: 'win1803'
 
-  steps:
-  
-  # Install NuGet
-  - task: NuGetToolInstaller@1
-    displayName: 'Install Nuget'
-    inputs:
-      checkLatest: true
-  
-  # Nuget Restore
-  - task: NuGetCommand@2
-    displayName: 'Restore Nuget packages'
-    inputs:
-      command: 'restore'
-      restoreSolution: '**/*.sln'
-      feedsToUse: 'config'
-      nugetConfigPath: 'nuget.config'
-      configuration: '$(buildConfiguration)'       
-
-  # DotNet SDK
-  - task: DotNetCoreInstaller@0
-    inputs:
-      version: '2.2.100'
-
-  # GitVersion
-  - task: GitVersion@4
-    inputs:
-      preferBundledVersion: true
-
-  # Build
-  - task: DotNetCoreCLI@2
-    displayName: 'Build solution'
-    inputs:
-      command: 'build'
-      projects: 'Crawling.HubSpot.sln'
-      arguments: '--configuration $(buildConfiguration)'
-
-  # Unit Test
-  - task: DotNetCoreCLI@2
-    displayName: 'Run Unit tests'
-    inputs:
-      command: 'test'
-      projects: 'test/unit/**/*.csproj'
-      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Unit'
-
-# TODO restore integration tests when Docker environment is available
-  # # Integration Test
-  # - task: DotNetCoreCLI@2
-  #   displayName: 'Run Integration tests'
-  #   inputs:
-  #     command: 'test'
-  #     projects: 'test/integration/**/*.csproj'
-  #     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)  /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Integration'
-
-# TODO restore acceptance tests when Docker environment is available
-  # # Acceptance Test
-  # - task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
-  #   displayName: 'Run Acceptance tests'
-  #   inputs:
-  #     scriptFolder: '$(testFolderPath)'
-  #     tag: Acceptance
-  
-  # Nuget Pack
-  - task: NuGetCommand@2
-    displayName: 'Create Nuget packages'
-    # TODO restore ... condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    inputs:
-      command: 'pack'
-      packagesToPack: 'src/**/*.csproj'
-      packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
-      versioningScheme: 'byEnvVar'
-      versionEnvVar: GITVERSION_NUGETVERSIONV2
-      includeSymbols: true
-      configuration: '$(buildConfiguration)' 
-      # includeReferencedProjects: True
-      feedsToUse: 'config'
-      nugetConfigPath: 'nuget.config'
-
-  # Publish Artifacts
-  - task: PublishPipelineArtifact@0
-    displayName: 'Create Pipeline Artifact'
-    inputs:
-      artifactName: 'Nuget'
-      targetPath: $(Build.ArtifactStagingDirectory)/nuget
-
-  # Push NuGet packages to Develop
-  - task: NuGetCommand@2
-    displayName: 'Push to develop feed'
-    condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/**/*.nupkg'
-      allowPackageConflicts: true
-      publishVstsFeed: 'develop'
-      includeSymbols: true
-
-# TODO restore once master branch creates valid packages for release
-  # - task: NuGetCommand@2
-  #   displayName: 'Push to release feed'
-  #   condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
-  #   inputs:
-  #     command: 'push'
-  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/**/*.nupkg'
-  #     allowPackageConflicts: true
-  #     publishVstsFeed: 'release'
-  #     includeSymbols: false
+steps:
+- template: crawler.default.build.yml@templates
