@@ -36,19 +36,10 @@ jobs:
   steps:
   
   # Install NuGet
-  - task: NuGetToolInstaller@0
+  - task: NuGetToolInstaller@1
     displayName: 'Install Nuget'
-
-  - powershell: |
-      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/CluedIn/nuget/v3/index.json
-      # nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/03c4a3d7-ffb5-4955-b40e-14b273e02373/nuget/v3/index.json
-      # nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/f9196da4-9446-4974-97ce-3b39ae4a86bc/nuget/v3/index.json
-      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/develop/nuget/v3/index.json
-      nuget setapikey $env:NUGET_KEY -source https://pkgs.dev.azure.com/CluedIn-io/_packaging/release/nuget/v3/index.json
-    # condition: variables['NugetArtifactsReadKey']
-    displayName: 'Add api token to access nuget artifacts'
-    env:
-      NUGET_KEY: $(NugetArtifactsReadKey)
+    inputs:
+      checkLatest: true
   
   # Nuget Restore
   - task: NuGetCommand@2
@@ -64,16 +55,6 @@ jobs:
   - task: DotNetCoreInstaller@0
     inputs:
       version: '2.2.100'
-
-  # # Restore NuGet
-  # - task: DotNetCoreCLI@2
-  #   displayName: 'Restore NuGet packages'
-  #   inputs:
-  #     command: 'restore'
-  #     feedsToUse: 'config'
-  #     nugetConfigPath: 'nuget.config'
-  #     verbosityRestore: 'normal'
-  #     projects: 'Crawling.HubSpot.sln'
 
   # GitVersion
   - task: GitVersion@4
@@ -112,17 +93,6 @@ jobs:
   #   inputs:
   #     scriptFolder: '$(testFolderPath)'
   #     tag: Acceptance
-
-  # # # Pack
-  # # - task: DotNetCoreCLI@2
-  # #   displayName: 'Create NuGet packages'
-  # #   inputs:
-  # #     command: 'pack'
-  # #     # packagesToPack: '**/*.csproj'
-  # #     # packDirectory: '$(Build.ArtifactStagingDirectory)'
-  # #     versioningScheme: 'byEnvVar'
-  # #     versionEnvVar: GITVERSION_NUGETVERSIONV2
-  # #     includeSymbols: true
   
   # Nuget Pack
   - task: NuGetCommand@2
