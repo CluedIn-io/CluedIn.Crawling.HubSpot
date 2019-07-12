@@ -99,7 +99,7 @@ jobs:
     # TODO restore ... condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
     inputs:
       command: 'pack'
-      packagesToPack: '**/*.csproj'
+      packagesToPack: 'src/**/*.csproj'
       packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
       versioningScheme: 'byEnvVar'
       versionEnvVar: GITVERSION_NUGETVERSIONV2
