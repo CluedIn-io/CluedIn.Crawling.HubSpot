@@ -30,7 +30,7 @@ resources:
       endpoint: 'CluedIn-io'
 
 pool:
-  vmImage: 'win1803'
+  vmImage: 'VS2017-Win2016'
   
 variables:
   Dotnet.Skip.First.Time.Experience: 'True'
