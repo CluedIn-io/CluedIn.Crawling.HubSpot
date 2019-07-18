@@ -25,24 +25,26 @@ namespace CluedIn.Crawling.HubSpot.Core
 
         public const string CodeOrigin = "HubSpot";
         public const string ProviderRootCodeValue = "HubSpot";
-        public const string CrawlerName = "HubSpotCrawler";
+        public const string CrawlerName = "HubSpot CRM";
         public const string CrawlerComponentName = "HubSpotCrawler";
-        public const string CrawlerDescription = "HubSpot is a ... to be completed ...";
+        public const string CrawlerDescription = "HubSpot CRM is a web and mobile application for customers.";
+        public const string CrawlerDisplayName = "HubSpot CRM";
         public const string Uri = "http://www.sampleurl.com";
         public const string ApiBaseUri = "https://api.hubapi.com";
 
 
-        public static readonly Guid ProviderId = Guid.Parse("7673C455-074A-499F-AFD3-C77DFBB7BC1F");   
-        public const string ProviderName = "HubSpot";         
-        public const bool SupportsConfiguration = true;             
-        public const bool SupportsWebHooks = false;             
-        public const bool SupportsAutomaticWebhookCreation = true;             
-        public const bool RequiresAppInstall = false;            
-        public const string AppInstallUrl = null;             
-        public const string ReAuthEndpoint = null;             
-        public const string IconUri = "https://s3-eu-west-1.amazonaws.com/staticcluedin/bitbucket.png"; 
+        public static readonly Guid ProviderId = Guid.Parse("7673C455-074A-499F-AFD3-C77DFBB7BC1F");
+        public const string ProviderName = "HubSpot";
+        public const bool SupportsConfiguration = true;
+        public const bool SupportsWebHooks = false;
+        public const bool SupportsAutomaticWebhookCreation = true;
+        public const bool RequiresAppInstall = false;
+        public const string AppInstallUrl = null;
+        public const string ReAuthEndpoint = null;
+        public const string IconUri = "https://s3-eu-west-1.amazonaws.com/staticcluedin/bitbucket.png";
 
-        public static readonly ComponentEmailDetails ComponentEmailDetails = new ComponentEmailDetails {
+        public static readonly ComponentEmailDetails ComponentEmailDetails = new ComponentEmailDetails
+        {
             Features = new Dictionary<string, string>
                 {
                                        { "Tracking",        "Expenses and Invoices against customers" },
@@ -56,7 +58,8 @@ namespace CluedIn.Crawling.HubSpot.Core
 
         public static IProviderMetadata CreateProviderMetadata()
         {
-            return new ProviderMetadata {
+            return new ProviderMetadata
+            {
                 Id = ProviderId,
                 ComponentName = CrawlerName,
                 Name = ProviderName,

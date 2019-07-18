@@ -28,4 +28,7 @@
     <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
     <ProjectReference Include="..\..\common\Crawling.HubSpot.Test.Common\Crawling.HubSpot.Test.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-pullrequest0724-0841" />
+  </ItemGroup>
 </Project>

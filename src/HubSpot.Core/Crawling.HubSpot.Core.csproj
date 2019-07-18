@@ -15,9 +15,12 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Server" Version="2.18.0-alpha0846" />
+    <PackageReference Include="CluedIn.Server" Version="2.18.0-pullrequest0724-0841" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-pullrequest0724-0841" />
   </ItemGroup>
 </Project>
