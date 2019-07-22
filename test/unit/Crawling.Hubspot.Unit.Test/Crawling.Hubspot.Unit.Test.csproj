@@ -27,4 +27,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-pullrequest0724-0841" />
+  </ItemGroup>
 </Project>

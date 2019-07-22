@@ -19,8 +19,12 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
                 .Register(Component.For<IHubSpotClientFactory>().AsFactory())
                 .Register(Component.For<IHubSpotFileFetcher, HubSpotFileFetcher>())
                 .Register(Component.For<IHubSpotFileIndexer, HubSpotFileIndexer>())
-                .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient())
-                .Register(Component.For<ISystemNotifications, SystemNotifications>());
+                .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient());
+
+            if (!container.Kernel.HasComponent(typeof(ISystemNotifications)) && !container.Kernel.HasComponent(typeof(SystemNotifications)))
+            {
+                container.Register(Component.For<ISystemNotifications, SystemNotifications>());
+            }
 
             if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
             {
