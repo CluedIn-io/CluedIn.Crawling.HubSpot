@@ -222,7 +222,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetUrlMappingsAsync(greaterThanEpoch)).objects);
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
         public async Task TemplatesAreAvailable()
         {
             Assert.NotEmpty(
@@ -236,7 +236,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetEngagementsAsync()).results);
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
         public async Task SiteMapsAreAvailable()
         {
             Assert.NotEmpty(
@@ -267,7 +267,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetBlogsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory]
+        [Theory(Skip = "Cannot test due to Hubspot account privileges")]
         [InlineAutoData]
         public async Task DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -297,7 +297,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetTablesAsync());
         }
 
-        [Fact]
+        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
         public async Task WorkFlowsAreAvailable()
         {
             Assert.NotEmpty(
