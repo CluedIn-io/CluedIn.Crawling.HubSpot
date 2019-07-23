@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Linq;
 using RestSharp;
 using System.Threading.Tasks;
+using CluedIn.Core;
 using CluedIn.Core.Configuration;
 using CluedIn.Core.Utilities;
 using Newtonsoft.Json;

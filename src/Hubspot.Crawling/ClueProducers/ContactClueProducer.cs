@@ -690,7 +690,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_id")
                     {
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationHubSpotOwner] = val;
-                        if ((string)property.Value.First != null)
+                        if (!string.IsNullOrEmpty((string)property.Value.First))
                             _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => (string)property.Value.First);
                     }
                     else if (property.Key == "notes_last_contacted")
