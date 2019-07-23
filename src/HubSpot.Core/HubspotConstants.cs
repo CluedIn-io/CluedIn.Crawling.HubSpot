@@ -25,7 +25,7 @@ namespace CluedIn.Crawling.HubSpot.Core
 
         public const string CodeOrigin = "HubSpot";
         public const string ProviderRootCodeValue = "HubSpot";
-        public const string CrawlerName = "HubSpot CRM";
+        public const string CrawlerName = "HubSpotCrawler";
         public const string CrawlerComponentName = "HubSpotCrawler";
         public const string CrawlerDescription = "HubSpot CRM is a web and mobile application for customers.";
         public const string CrawlerDisplayName = "HubSpot CRM";
