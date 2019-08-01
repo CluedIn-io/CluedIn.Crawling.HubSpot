@@ -36,7 +36,7 @@ namespace CluedIn.Provider.HubSpot
         {
             _hubspotClientFactory = hubspotClientFactory ?? throw new ArgumentNullException(nameof(hubspotClientFactory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
-            _notifications = notifications ?? throw new ArgumentNullException(nameof(notifications));
+            _notifications = notifications;
         }
 
         /**********************************************************************************************************
@@ -98,7 +98,7 @@ namespace CluedIn.Provider.HubSpot
 
             if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
             {
-                _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+                if (_notifications != null) _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
 
                 var result = hubspotCrawlJobData.ToDictionary();
 
