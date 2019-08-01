@@ -28,7 +28,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core" />
     <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0935" />
     <PackageReference Include="CluedIn.Server" Version="2.18.0-alpha0935" />
     <PackageReference Include="ComponentHost" Version="1.0.0.46" />
