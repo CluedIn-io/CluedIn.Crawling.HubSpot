@@ -16,10 +16,11 @@
     <None Remove="HubSpotImageFetcher\CluedIn.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CluedIn.Core" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +37,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.18.0-pullrequest0724-0841" />
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0935" />
+    <PackageReference Update="Moq" Version="4.11.0" />
   </ItemGroup>
 </Project>
