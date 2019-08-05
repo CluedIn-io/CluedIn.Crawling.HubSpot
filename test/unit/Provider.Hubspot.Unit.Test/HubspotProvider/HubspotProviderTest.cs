@@ -42,7 +42,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
             Configuration = HubSpotConfiguration.Create();
             CrawlJobData = new HubSpotCrawlJobData(Configuration);
             Client = new Mock<HubSpotClient>(Logger.Object, CrawlJobData, new RestClient());
-            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, new Mock<SystemNotifications>(SystemContext.Object).Object);
+            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null);
 
             NameClientFactory.Setup(n => n.CreateNew(It.IsAny<HubSpotCrawlJobData>())).Returns(() => Client.Object);
         }

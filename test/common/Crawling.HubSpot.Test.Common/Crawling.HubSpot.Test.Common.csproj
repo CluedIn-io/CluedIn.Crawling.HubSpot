@@ -15,6 +15,10 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CluedIn.Core" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0935" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -30,6 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.18.0-pullrequest0724-0841" />
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0935" />
   </ItemGroup>
 </Project>
