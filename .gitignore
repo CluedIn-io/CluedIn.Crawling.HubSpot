@@ -268,3 +268,6 @@ __pycache__/
 NDependOut/
 /test/integration/Crawling.Hubspot.Integration.Test/GeneratedClues
 /src/HubSpot.Provider/Properties/launchSettings.json
+
+# Build artifacts
+Test-*.XML

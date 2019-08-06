@@ -7,4 +7,4 @@ if ($modules.Name -notcontains 'pester') {
     Install-Module -Name Pester -Force -SkipPublisherCheck
 }
 
-Invoke-Pester -Script "./Test/" -OutputFile "./Test-Pester.XML" -OutputFormat 'NUnitXML'
+Invoke-Pester -Script "./Test/" -ExcludeTag 'Docker' -OutputFile "./Test-Pester.XML" -OutputFormat 'NUnitXML'
