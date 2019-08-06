@@ -49,6 +49,7 @@ Load [Crawling.HubSpot.sln](.\Crawling.HubSpot.sln) in Visual Studio or your pre
 A mocked environment is required to run `integration` and `acceptance` tests. The mocked environment can be built and run using the following [Docker](https://www.docker.com/) command:
 
 ```Shell
+cd docker
 docker-compose up --build -d
 ```
 
