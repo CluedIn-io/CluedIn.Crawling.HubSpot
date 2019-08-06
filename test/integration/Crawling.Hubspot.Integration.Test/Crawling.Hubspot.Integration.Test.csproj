@@ -15,7 +15,6 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core" />
     <PackageReference Include="CrawlerIntegrationTesting" Version="1.2.0-alpha0001" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Moq" Version="4.11.0" />
@@ -28,8 +27,5 @@
     <ProjectReference Include="..\..\..\src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
     <ProjectReference Include="..\..\common\Crawling.HubSpot.Test.Common\Crawling.HubSpot.Test.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0935" />
   </ItemGroup>
 </Project>
