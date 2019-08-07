@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
 using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Data.Parts;
+using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -17,11 +19,13 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     {
         private readonly IClueFactory _factory;
         private readonly IHubSpotFileFetcher _fileFetcher;
+        private readonly ILogger _log;
 
-        public ContactClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher)
+        public ContactClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher, ILogger log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(fileFetcher));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         protected override Clue MakeClueImpl(Contact input, Guid accountId)
@@ -40,6 +44,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             var data = clue.Data.EntityData;
 
             data.Name = input.ProfileUrl;
+            if (input.PortalId != null)
+                data.Uri = new Uri($"https://app.hubspot.com/sales/{input.PortalId}/contact/{input.Vid}/");
 
             if (input.AddedAt != null)
             {
@@ -207,12 +213,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else if (property.type == "createddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "lastmodifieddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "LEAD_GUID")
@@ -221,7 +227,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else
                             {
-                                data.Properties[string.Format("hubspot.contact.custom-{0}", property.type)] = property.value;
+                                data.Properties[$"hubspot.contact.custom-{property.type}"] = property.value;
                             }
                         }
                     }
@@ -343,17 +349,17 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "createddate")
                         {
-                            if (long.TryParse(property.value, out long created))
+                            if (long.TryParse(property.value, out var created))
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(created);
                         }
                         else if (property.type == "lastmodifieddate")
                         {
-                            if (long.TryParse(property.value, out long modified))
+                            if (long.TryParse(property.value, out var modified))
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(modified);
                         }
                         else
                         {
-                            data.Properties[string.Format("hubspot.contact.custom-{0}", property.type)] = property.value;
+                            data.Properties[$"hubspot.contact.custom-{property.type}"] = property.value;
                         }
                     }
                 }
@@ -361,7 +367,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.IsContact == true && input.Properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
+                var allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
 
                 foreach (var property in allProperties)
                 {
@@ -370,7 +376,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     if (property.Value["value"] != null && property.Value["value"].ToString() != null)
                     {
                         val = property.Value["value"].ToString();
-                        if (long.TryParse(val, out long epoch))
+                        if (long.TryParse(val, out var epoch))
                         {
                             try
                             {
@@ -691,7 +697,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationHubSpotOwner] = val;
                         if (!string.IsNullOrEmpty((string)property.Value.First))
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => (string)property.Value.First);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, property.Value.First);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
@@ -739,7 +745,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, input, s => (string)property.Value.First);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, (string) property.Value.First);
                         }
                     }
                     else if (property.Key == "linkedinbio")
@@ -902,7 +908,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => val);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, val);
                         }
                     }
                     else if (property.Key == "associatedcompanylastupdated")
@@ -921,7 +927,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             data.ModifiedDate = date.Value;
                     }
                     else
-                        data.Properties[string.Format("hubspot.contact.custom-{0}", property.Key)] = val;
+                        data.Properties[$"hubspot.contact.custom-{property.Key}"] = val;
 
                 }
                 
@@ -940,7 +946,91 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 //    data.Properties[string.Format("hubspot.contact.custom-{0}", property.type)] = property.value;
                 //}
             }
-            
+
+            if (!string.IsNullOrEmpty(input.FirstName) && !string.IsNullOrEmpty(input.LastName))
+            {
+                data.Name = input.FirstName + ' ' + input.LastName;
+            }
+            else if (!string.IsNullOrEmpty(input.LastName))
+            {
+                data.Name = input.LastName;
+            }
+            else if (!string.IsNullOrEmpty(input.FirstName))
+            {
+                data.Name = input.FirstName;
+            }
+
+            if (!string.IsNullOrEmpty(input.Photo))
+            {
+                try
+                {
+                    using (var webClient = new WebClient())
+                    using (var stream = webClient.OpenRead(input.Photo))
+                    {
+                        var inArray = StreamUtilies.ReadFully(stream);
+                        if (inArray != null)
+                        {
+                            var rawDataPart = new RawDataPart()
+                            {
+                                Type = "/RawData/PreviewImage",
+                                MimeType = CluedIn.Core.FileTypes.MimeType.Jpeg.Code,
+                                FileName = "preview_{0}".FormatWith(data.Name),
+                                RawDataMD5 = FileHashUtility.GetMD5Base64String(inArray),
+                                RawData = Convert.ToBase64String(inArray)
+                            };
+
+                            clue.Details.RawData.Add(rawDataPart);
+
+                            clue.Data.EntityData.PreviewImage = new ImageReferencePart(rawDataPart, 256, 256);
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    _log.Warn(() => "Could not download image for HubSpot Contact", exception);
+                }
+            }
+
+            if (input.MergeAudits != null)
+            {
+                data.Properties[HubSpotVocabulary.Contact.MergeAudits] = JsonUtility.Serialize(input.MergeAudits);
+            }
+
+            if (input.CompanyId != null)
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input.CompanyId);
+
+            if (data.OutgoingEdges.Count == 0)
+            {
+                if (input.PortalId != null)
+                {
+                   _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input.PortalId.ToString(), s => "Hubspot");
+                }
+            }
+
+            if (input.ProfileUrl != null)
+            {
+                var uri = new Uri(input.ProfileUrl);
+
+                var noLastSegment = $"{uri.Scheme}://{uri.Authority}";
+
+                for (var i = 0; i < uri.Segments.Length - 1; i++)
+                {
+                    noLastSegment += uri.Segments[i];
+                }
+
+                if (input.Vid != null)
+                {
+                    noLastSegment = noLastSegment + input.Vid.Value;
+                    var cleanUrl = new Uri(noLastSegment);
+                    data.Uri = cleanUrl;
+                    data.Properties[HubSpotVocabulary.Contact.ProfileUrl] = noLastSegment;
+                }
+            }
+
+            if (input.Vid != null)
+            {
+                data.Properties[HubSpotVocabulary.Contact.Vid] = input.Vid.Value.ToString(CultureInfo.InvariantCulture);
+            }
 
             return clue;
             

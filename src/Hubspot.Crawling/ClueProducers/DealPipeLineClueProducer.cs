@@ -44,7 +44,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     //this.state.Status.Statistics.Tasks.IncrementQueuedCount();
                     clue.ChildClues.Add(stageClue);
 
-                    _factory.CreateIncomingEntityReference(clue, EntityType.ProcessStage, EntityEdgeType.PartOf, stage, s => s.stageId);
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.ProcessStage, EntityEdgeType.PartOf, stage, stage.stageId);
                 }
             }
 

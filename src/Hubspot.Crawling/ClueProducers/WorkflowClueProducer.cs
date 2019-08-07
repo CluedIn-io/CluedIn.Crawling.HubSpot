@@ -52,16 +52,16 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.lastUpdatedBy != null)
             {
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, s => s.lastUpdatedBy);
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input.lastUpdatedBy);
                 var createdBy = new PersonReference(new EntityCode(EntityType.Person, HubSpotNameConstants.CodeOrigin, input.lastUpdatedBy));
                 data.Authors.Add(createdBy);
             }
 
             if (input.originalAuthorUserId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, s => s.originalAuthorUserId.Value.ToString(CultureInfo.InvariantCulture));
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input.originalAuthorUserId.Value.ToString(CultureInfo.InvariantCulture));
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(CultureInfo.InvariantCulture), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(CultureInfo.InvariantCulture), s => "HubSpot");
 
             return clue;
         }

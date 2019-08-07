@@ -34,7 +34,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 data.Description = input.subject;
 
             if (input.appId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Application, EntityEdgeType.PartOf, input, s => s.appId.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Application, EntityEdgeType.PartOf, input, input.appId.Value.ToString());
 
             if (input.appName != null)
                 data.Properties[HubSpotVocabulary.Campaign.AppName] = input.appName;

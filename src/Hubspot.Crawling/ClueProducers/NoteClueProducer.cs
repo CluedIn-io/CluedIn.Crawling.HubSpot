@@ -45,7 +45,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     var r = JsonUtility.Deserialize<KeyValuePair<string, object>>(JsonUtility.Serialize(attachment));
 
                     if (r.Key == "id")
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Files.File, EntityEdgeType.Parent, input, selector => r.Value.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Files.File, EntityEdgeType.Parent, input, r.Value.ToString());
                 }
             }
 
@@ -54,27 +54,27 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.companyIds != null)
                 {
                     foreach (var companyId in input.associations.companyIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, companyId.ToString());
                 }
                 if (input.associations.contactIds != null)
                 {
                     foreach (var contactId in input.associations.contactIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, selector => contactId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, contactId.ToString());
                 }
                 if (input.associations.dealIds != null)
                 {
                     foreach (var dealId in input.associations.dealIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, selector => dealId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, dealId.ToString());
                 }
                 if (input.associations.ownerIds != null)
                 {
                     foreach (var ownerId in input.associations.ownerIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => ownerId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, ownerId.ToString());
                 }
                 if (input.associations.workflowIds != null)
                 {
                     foreach (var workflowId in input.associations.workflowIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, selector => workflowId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, workflowId.ToString());
                 }
             }
 
@@ -104,19 +104,19 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.createdBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, selector => input.engagement.createdBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.engagement.createdBy.ToString());
                 }
                 if (input.engagement.modifiedBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, selector => input.engagement.modifiedBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, input.engagement.modifiedBy.ToString());
                 }
                 if (input.engagement.ownerId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => input.engagement.ownerId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, input.engagement.ownerId.ToString());
                 }
                 if (input.engagement.portalId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.engagement.portalId.ToString());
                 }
             }
 
@@ -140,7 +140,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else
                         {
                             if (property.Value != null)
-                                data.Properties[string.Format("hubspot.note.custom-{0}", property.Key)] = property.Value.ToString();
+                                data.Properties[$"hubspot.note.custom-{property.Key}"] = property.Value.ToString();
                         }
                     }
                 }

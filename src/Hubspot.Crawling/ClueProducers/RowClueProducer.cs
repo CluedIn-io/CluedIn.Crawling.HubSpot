@@ -55,7 +55,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 data.Properties[HubSpotVocabulary.Row.CreatedAt] = data.CreatedDate.Value.DateTime.ToString("O");
 
             if (input.Table != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.List, EntityEdgeType.PartOf, input, selector => input.Table.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.List, EntityEdgeType.PartOf, input, input.Table.Value.ToString());
 
             try
             {
@@ -71,11 +71,11 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         {
                             if (int.TryParse(p.Name, out int n) && input.Columns.Exists(c => c.id == n))
                             {
-                                data.Properties[string.Format("hubspot.product.custom-{0}", input.Columns.Find(c => c.id == n).name)] = p.Value.ToString();
+                                data.Properties[$"hubspot.product.custom-{input.Columns.Find(c => c.id == n).name}"] = p.Value.ToString();
                             }
                             else
                             {
-                                data.Properties[string.Format("hubspot.product.custom-{0}", p.Name)] = p.Value.ToString();
+                                data.Properties[$"hubspot.product.custom-{p.Name}"] = p.Value.ToString();
                             }
                         }
                     }

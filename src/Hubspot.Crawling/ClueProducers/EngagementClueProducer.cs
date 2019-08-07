@@ -38,10 +38,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Engagement.Type] = input.engagement.type;
 
             if (input.engagement.ownerId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.Owns, input, s => s.engagement.ownerId.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.Owns, input, input.engagement.ownerId.Value.ToString());
 
             if (input.engagement.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "Hubspot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "Hubspot");
 
 
             return clue;

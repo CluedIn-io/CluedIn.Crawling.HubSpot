@@ -49,19 +49,19 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (input.associations.companyIds != null)
                     foreach (var association in input.associations.companyIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, a => association.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, association.ToString());
 
                 if (input.associations.contactIds != null)
                     foreach (var association in input.associations.contactIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.PartOf, input, a => association.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.PartOf, input, association.ToString());
 
                 if (input.associations.dealIds != null)
                     foreach (var association in input.associations.dealIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, a => association.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, association.ToString());
 
                 if (input.associations.workflowIds != null)
                     foreach (var association in input.associations.workflowIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.PartOf, input, a => association.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Process, EntityEdgeType.PartOf, input, association.ToString());
             }
 
             if (input.scheduledTasks != null)
@@ -71,7 +71,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     foreach (var p in r)
                     {
                         if (p.Key == "uuid")
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Task, EntityEdgeType.PartOf, input, a => p.Value.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Task, EntityEdgeType.PartOf, input, p.Value.ToString());
                     }
                 }
 
@@ -111,10 +111,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         data.Properties[HubSpotVocabulary.Engagement.TimeStamp] = DateUtilities.EpochRef.AddMilliseconds(timestamp).ToString();
 
                 if (input.engagement.ownerId != null)
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.PartOf, input, a => a.engagement.ownerId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.PartOf, input, input.engagement.ownerId.ToString());
 
                 if (input.engagement.portalId != null)
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, a => a.engagement.portalId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, input.engagement.portalId.ToString());
             }
 
             if (input.metadata != null)

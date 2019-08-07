@@ -46,10 +46,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.CampaignEvent.UserAgent] = input.userAgent;
 
             if (input.appId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Application, EntityEdgeType.PartOf, input, s => s.appId.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Application, EntityEdgeType.PartOf, input, input.appId.Value.ToString());
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
 
             return clue;
         }

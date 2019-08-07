@@ -72,7 +72,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.FileMetaData.Width] = input.width.PrintIfAvailable();
 
             if (input.portal_id != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.Value.ToString(), s => "HubDpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.Value.ToString(), s => "HubDpot");
 
             // TODO Figure out how to do file indexing
             if (input.name != null)

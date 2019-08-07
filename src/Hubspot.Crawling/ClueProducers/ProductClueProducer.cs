@@ -71,7 +71,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (data.CreatedDate != null)
                                 data.Properties[HubSpotVocabulary.Product.CreateDate] = data.CreatedDate.Value.ToString("o");
                             if (r.SourceId != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.SourceId);
                         }
 
                         else if (r.Name == "hs_lastmodifieddate")
@@ -116,7 +116,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else if (r.Name == "hs_cost_of_goods_sold")
                             data.Properties[HubSpotVocabulary.Product.Costofgoodssold] = r.Value.PrintIfAvailable();
                         else
-                            data.Properties[string.Format("hubspot.product.custom-{0}", r.Name)] = r.Value.PrintIfAvailable();
+                            data.Properties[$"hubspot.product.custom-{r.Name}"] = r.Value.PrintIfAvailable();
                     }
                 }
 
@@ -127,7 +127,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
 
             if (!data.OutgoingEdges.Any() && input.PortalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
 
 
             return clue;

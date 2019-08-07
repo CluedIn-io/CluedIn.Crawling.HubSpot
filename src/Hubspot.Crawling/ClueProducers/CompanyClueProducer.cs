@@ -46,7 +46,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Company.PortalId] = input.portalId.PrintIfAvailable();
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => input.portalId.Value.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => input.portalId.Value.ToString(), s => "HubSpot");
 
             if (input.properties != null)
             {
@@ -342,7 +342,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_id")
                     {
                         if (property.Value != null)
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => property.Value.Value.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, property.Value.Value.ToString());
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
@@ -450,7 +450,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else
                     {
-                        data.Properties[string.Format("hubspot.company.custom-{0}", property.Key)] = property.Value.Value;
+                        data.Properties[$"hubspot.company.custom-{property.Key}"] = property.Value.Value;
                     }
 
                     if (properties.TryGetValue("photo", out Property photo))

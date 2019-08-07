@@ -52,13 +52,13 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Table.UpdatedBy] = input.updatedBy.PrintIfAvailable();
 
             if (input.createdBy != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, selector => input.createdBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, input.createdBy.ToString());
 
             if (input.updatedBy != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.Modified, input, selector => input.updatedBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.Modified, input, input.updatedBy.ToString());
 
             if (input.PortalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.PortalId.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.PortalId.ToString());
 
 
             return clue;
