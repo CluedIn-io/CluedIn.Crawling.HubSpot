@@ -22,19 +22,117 @@ pr:
     exclude:
     - '*.md'
 
-resources:
-  repositories:
-    - repository: templates
-      type: github
-      name: CluedIn-io/AzurePipelines.Templates
-      endpoint: 'CluedIn-io'
+jobs:
+- job: compile_test_pack_push
+  displayName: 'Compile, test, pack and push'
+  pool:
+    vmImage: 'windows-2019'
 
-pool:
-  vmImage: 'VS2017-Win2016'
-  
-variables:
-  Dotnet.Skip.First.Time.Experience: 'True'
-  testFolderPath: '$(Build.SourcesDirectory)/test'
+  variables:
+    buildConfiguration: 'Release'
+    Dotnet.Skip.First.Time.Experience: 'True'
 
-steps:
-- template: crawler.default.build.yml@templates
+  steps:
+
+  # Restore NuGet
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore NuGet packages'
+    inputs:
+      command: 'restore'
+      feedsToUse: 'config'
+      nugetConfigPath: 'nuget.config'
+      verbosityRestore: 'normal'
+
+  # GitVersion
+  - task: GitVersion@4
+    inputs:
+      updateAssemblyInfo: true
+      additionalArguments: ' /ensureassemblyinfo'
+      preferBundledVersion: true
+
+  # Build
+  - task: DotNetCoreCLI@2
+    displayName: 'Build Solution'
+    inputs:
+      command: 'build'
+      projects: 'src/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+    env:
+      GenerateAssemblyInfo: 'false'
+
+  # Unit Test
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Unit tests'
+    inputs:
+      command: 'test'
+      projects: 'test/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Unit'
+    env:
+      GenerateAssemblyInfo: 'false'
+
+  # Integration Test
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Integration tests'
+    inputs:
+      command: 'test'
+      projects: 'test/**/*.csproj'
+      arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:Exclude="[xunit.*]*%2c[*.Test]*" --filter Integration'
+    env:
+      GenerateAssemblyInfo: 'false'
+
+  # Acceptance Test
+  - task: PowerShell@2
+    displayName: 'Run Acceptance tests'
+    inputs:
+      filePath: 'azure-pipelines.ps1'
+      pwsh: true
+
+  # Publish Test Results
+  - task: PublishTestResults@2
+    displayName: 'Publish Acceptance test results'
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '**/TEST-*.xml'
+      failTaskOnFailedTests: true
+
+  # Pack
+  - task: DotNetCoreCLI@2
+    displayName: 'Create NuGet packages'
+    inputs:
+      command: 'pack'
+      packagesToPack: 'src/**/*.csproj'
+      packDirectory: '$(Build.ArtifactStagingDirectory)'
+      nobuild: true
+      arguments: '--configuration $(buildConfiguration)'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: GITVERSION_NUGETVERSIONV2
+      includeSymbols: true
+
+  # Publish Artifacts
+  - task: PublishPipelineArtifact@0
+    displayName: 'Create Pipeline Artifact'
+    inputs:
+      artifactName: 'Nuget'
+      targetPath: $(Build.ArtifactStagingDirectory)
+
+  # Push NuGet packages to Develop
+  - task: NuGetCommand@2
+    displayName: 'Push to develop feed'
+    condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      allowPackageConflicts: true
+      publishVstsFeed: 'develop'
+      includeSymbols: true
+
+  # Push NuGet packages to Release
+  - task: NuGetCommand@2
+    displayName: 'Push to release feed'
+    condition: and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      allowPackageConflicts: true
+      publishVstsFeed: 'release'
+      includeSymbols: false

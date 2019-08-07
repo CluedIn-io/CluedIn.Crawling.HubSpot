@@ -13,10 +13,10 @@ services:
   wiremock:
     image: ${DOCKER_REGISTRY-}cluedinhubspotwiremock
     build:
-      context: docker/wiremock/
+      context: wiremock/
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports: 
+    ports:
       - 8080:8080
     healthcheck:
       interval: 1m
