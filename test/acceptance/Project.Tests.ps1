@@ -25,7 +25,7 @@ Describe 'Project Tests' -Tags 'Acceptance' , 'Quality' {
                 $projectFile = $_ | Select-Object -ExpandProperty FullName
 
                 $expectedPatterns = @(
-                    '<OutputPath>bin\$(Configuration)\</OutputPath>'
+                    'Sdk="Microsoft.NET.Sdk"'
                 )
 
                 $expectedPatterns | ForEach-Object {
@@ -35,8 +35,8 @@ Describe 'Project Tests' -Tags 'Acceptance' , 'Quality' {
                     It "$pattern found in $projectFile" {
 
                         Get-Content $projectFile |
-                            Select-String -SimpleMatch $pattern |
-                                Should -Not -BeNullOrEmpty
+                        Select-String -SimpleMatch $pattern |
+                        Should -Not -BeNullOrEmpty
                     }
                 }
 
@@ -55,8 +55,24 @@ Describe 'Project Tests' -Tags 'Acceptance' , 'Quality' {
                     It "No $pattern found in $projectFile" {
 
                         Get-Content $projectFile |
-                            Select-String -SimpleMatch $pattern |
-                                Should -BeNullOrEmpty
+                        Select-String -SimpleMatch $pattern |
+                        Should -BeNullOrEmpty
+                    }
+                }
+
+                $blockedPatterns = @(
+                    'PackageReference Update='
+                )
+
+                $blockedPatterns | ForEach-Object {
+
+                    $pattern = $_
+
+                    It "No $pattern found in $projectFile" {
+
+                        Get-Content $projectFile |
+                        Select-String -SimpleMatch $pattern |
+                        Should -BeNullOrEmpty
                     }
                 }
 
@@ -73,8 +89,8 @@ Describe 'Project Tests' -Tags 'Acceptance' , 'Quality' {
                     It "Project references for $_ not present in $projectFile" {
 
                         Get-Content $projectFile |
-                            Select-String -Pattern $pattern |
-                                Should -BeNullOrEmpty
+                        Select-String -Pattern $pattern |
+                        Should -BeNullOrEmpty
                     }
                 }
             }

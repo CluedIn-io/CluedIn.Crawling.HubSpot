@@ -36,11 +36,9 @@
     <Content Include="Provider.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core" />
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0935" />
-    <PackageReference Include="CluedIn.Crawling" Version="2.18.0-alpha0935" />
-    <PackageReference Include="CluedIn.Server" Version="2.18.0-alpha0935" />
-    <PackageReference Include="CluedIn.Server.Common.WebApi" Version="2.18.0-alpha0862" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0938" />
+    <PackageReference Include="CluedIn.Crawling" Version="2.18.0-alpha0938" />
+    <PackageReference Include="CluedIn.Server" Version="2.18.0-alpha0938" />
     <PackageReference Include="ComponentHost" Version="1.0.0.46" />
     <PackageReference Include="EntityFramework" Version="6.1.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.2" />
@@ -54,8 +52,5 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0935" />
   </ItemGroup>
 </Project>
