@@ -38,3 +38,15 @@ variables:
 
 steps:
 - template: crawler.default.build.yml@templates
+
+- task: ArchiveFiles@2
+  inputs:               # TODO Add condition to check /Documentation folder exists AND whether we have and changes
+    rootFolderOrFile: '$(Build.SourcesDirectory)/Documentation'
+    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Documentation.zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:             # TODO Same condition as above?
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: Documentation
