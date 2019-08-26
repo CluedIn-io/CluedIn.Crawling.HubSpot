@@ -4,6 +4,7 @@ using System.Linq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -20,6 +21,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         {
             long offset = 0;
             long portalId = 0;
+            var retries = 0;
             limit = limit ?? 100;
             var result = new List<object>();
             try
@@ -28,7 +30,9 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
                 while (true)
                 {
-                    var response = Client.GetCompaniesAsync(properties, limit.Value, offset).Result;
+                    try
+                    {
+                        var response = Client.GetCompaniesAsync(properties, limit.Value, offset).Result;
 
                     if (response.results == null || !response.results.Any())
                         break;
@@ -45,25 +49,9 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
                         if (company.companyId.HasValue)
                         {
-                            try
-                            {
-                                var contacts = Client.GetContactsByCompanyAsync(company.companyId.Value).Result;
-                                result.AddRange(contacts.contacts);
-                            }
-                            catch
-                            {
-                                // ignored
-                            }
+                            GetContacts(company, result);
 
-                            try
-                            {
-                                var engagements = Client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
-                                result.AddRange(engagements);
-                            }
-                            catch
-                            {
-                                // ignored
-                            }
+                            GetEngagements(company, result);
                         }
                     }
 
@@ -71,39 +59,22 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                         break;
 
                     offset = response.offset.Value;
-                }
-
-                try
-                {
-                    var dealPipelines = Client.GetDealPipelinesAsync().Result;
-                    foreach (var dealPipeline in dealPipelines)
+                    retries = 0;
+                    }
+                    catch (ThrottlingException e)
                     {
-                        dealPipeline.portalId = portalId;
-                        result.Add(dealPipeline);
+                        if (!ShouldRetryThrottledCall(e, retries))
+                        {
+                            break;
+                        }
+
+                        retries++;
                     }
                 }
-                catch
-                {
-                    // ignored
-                }
 
-                try
-                {
+                GetDealPipelines(portalId, result);
 
-                    var tables = Client.GetTablesAsync().Result;
-
-                    foreach (var table in tables)
-                    {
-                        table.PortalId = portalId;
-
-                        result.Add(table);
-                        result.AddRange(new TableRowsIterator(Client, JobData, table, portalId).Iterate());
-                    }
-                }
-                catch
-                {
-                    // ignored
-                }
+                GetTables(portalId, result);
             }
             catch
             {
@@ -113,5 +84,67 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             return result;
         }
 
+        private void GetTables(long portalId, List<object> result)
+        {
+            try
+            {
+                var tables = Client.GetTablesAsync().Result;
+
+                foreach (var table in tables)
+                {
+                    table.PortalId = portalId;
+
+                    result.Add(table);
+                    result.AddRange(new TableRowsIterator(Client, JobData, table, portalId).Iterate());
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void GetDealPipelines(long portalId, List<object> result)
+        {
+            try
+            {
+                var dealPipelines = Client.GetDealPipelinesAsync().Result;
+                foreach (var dealPipeline in dealPipelines)
+                {
+                    dealPipeline.portalId = portalId;
+                    result.Add(dealPipeline);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void GetEngagements(Company company, List<object> result)
+        {
+            try
+            {
+                var engagements = Client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
+                result.AddRange(engagements);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void GetContacts(Company company, List<object> result)
+        {
+            try
+            {
+                var contacts = Client.GetContactsByCompanyAsync(company.companyId.Value).Result;
+                result.AddRange(contacts.contacts);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
     }
 }

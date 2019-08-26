@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 using Moq;
 
 namespace Crawling.HubSpot.Unit.Test.IteratorTests
@@ -22,5 +24,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
                 { HubSpotConstants.KeyName.LastCrawlFinishTime, DateTimeOffset.Now }
             });
         }
+
+       
     }
 }

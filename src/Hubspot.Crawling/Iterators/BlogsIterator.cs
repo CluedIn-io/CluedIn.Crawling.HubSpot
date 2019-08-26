@@ -2,6 +2,7 @@
 using System.Linq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -13,25 +14,39 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         public override IEnumerable<object> Iterate(int? limit = null)
         {
-            int offset = 0;
+            var offset = 0;
             limit = limit ?? 20;
-
+            var retries = 0;
             var result = new List<object>();
             try
             {
+                
                 while (true)
                 {
-                    var response = Client.GetBlogsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
+                    try
+                    {
+                        var response = Client.GetBlogsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
 
-                    if (response?.objects == null || !response.objects.Any())
-                        break;
+                        if (response?.objects == null || !response.objects.Any())
+                            break;
 
-                    result.AddRange(response.objects);
+                        result.AddRange(response.objects);
 
-                    if (response.objects.Count < limit || response.offset == null)
-                        break;
+                        if (response.objects.Count < limit || response.offset == null)
+                            break;
 
-                    offset = response.offset.Value;
+                        offset = response.offset.Value;
+                        retries = 0;
+                    }
+                    catch (ThrottlingException e)
+                    {
+                        if (!ShouldRetryThrottledCall(e, retries))
+                        {
+                            break;
+                        }
+
+                        retries++;
+                    }
                 }
             }
             catch

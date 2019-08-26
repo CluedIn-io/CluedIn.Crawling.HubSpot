@@ -5,11 +5,13 @@ using CluedIn.Crawling.HubSpot.Core.Models;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using RestSharp;
 using System.Threading.Tasks;
 using CluedIn.Core;
 using CluedIn.Core.Configuration;
 using CluedIn.Core.Utilities;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 using Newtonsoft.Json;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
@@ -281,7 +283,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
             });
-        
+
 
         public async Task<AssociationResponse> GetAssociationsAsync(int objectId, AssociationType associationType, int limit = 100, int offset = 0) =>
             await GetAsync<AssociationResponse>($"crm-associations/v1/associations/{objectId}/HUBSPOT_DEFINED/" + Convert.ToInt32(associationType), new List<QueryStringParameter>
@@ -289,7 +291,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 new QueryStringParameter("offset", offset),
                 new QueryStringParameter("limit", limit)
             });
-        
+
 
         public virtual async Task<ContactResponse> GetContactsFromAllListsAsync(IList<string> properties, int limit = 100, int offset = 0)
         {
@@ -450,7 +452,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         public async Task<List<Form>> GetSmtpTokensAsync() =>
             await GetAsync<List<Form>>("email/public/v1/smtpapi/tokens");
-            
+
         public async Task<List<Channel>> GetPublishingChannelsAsync() =>
             await GetAsync<List<Channel>>("broadcast/v1/channels/setting/publish/current");
 
@@ -505,8 +507,18 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         private T GetRequestResponse<T>(string url, IRestResponse response)
         {
-            _log.Verbose($"HubspotClient.GetAsync calling {url}");
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            _log.Verbose($"HubSpotClient.GetAsync calling {url}");
+            if ((int)response.StatusCode == 429)
+            {
+                throw new ThrottlingException
+                {
+                    DailyRemaining = Convert.ToInt32(response.Headers.Single(n => n.Name == "X-HubSpot-RateLimit-Daily-Remaining")?.Value),
+                    RateLimitIntervalMilliseconds = Convert.ToInt32(response.Headers.Single(n => n.Name == "X-HubSpot-RateLimit-Interval-Milliseconds")?.Value),
+                    RateLimitRemaining = Convert.ToInt32(response.Headers.Single(n => n.Name == "X-HubSpot-RateLimit-Interval-Milliseconds")?.Value)
+                };
+            }
+
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 var diagnosticMessage = $"Request to {_client.BaseUrl}{url} failed, response {response.ErrorMessage} ({response.StatusCode})";
 

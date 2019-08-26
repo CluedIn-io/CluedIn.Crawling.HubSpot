@@ -4,6 +4,7 @@ using System.Linq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -19,6 +20,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         public override IEnumerable<object> Iterate(int? limit = null)
         {
             int offset = 0;
+            var retries = 0;
             limit = limit ?? 100;
 
             var result = new List<object>();
@@ -28,32 +30,45 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
                 while (true)
                 {
-                    var response = Client.GetContactsFromAllListsAsync(properties, limit.Value, offset).Result;
-
-                    if (response?.contacts == null || !response.contacts.Any())
-                        break;
-
-                    foreach (var contact in response.contacts)
+                    try
                     {
-                        if (contact.Vid.HasValue)
+                        var response = Client.GetContactsFromAllListsAsync(properties, limit.Value, offset).Result;
+
+                        if (response?.contacts == null || !response.contacts.Any())
+                            break;
+
+                        foreach (var contact in response.contacts)
                         {
-                            try
+                            if (contact.Vid.HasValue)
                             {
-                                result.AddRange(Client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result);
+                                try
+                                {
+                                    result.AddRange(Client.GetEngagementByIdAndTypeAsync(contact.Vid.Value, "CONTACT").Result);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
                             }
-                            catch
-                            {
-                                // ignored
-                            }
+
+                            result.Add(contact);
                         }
 
-                        result.Add(contact);
+                        if (response.hasMore == false || response.contacts.Count < limit || response.vidOffset == null)
+                            break;
+
+                        offset = response.vidOffset.Value;
+                        retries = 0;
                     }
+                    catch (ThrottlingException e)
+                    {
+                        if (!ShouldRetryThrottledCall(e, retries))
+                        {
+                            break;
+                        }
 
-                    if (response.hasMore == false || response.contacts.Count < limit || response.vidOffset == null)
-                        break;
-
-                    offset = response.vidOffset.Value;
+                        retries++;
+                    }
                 }
             }
             catch
