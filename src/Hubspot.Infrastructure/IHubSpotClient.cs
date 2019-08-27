@@ -51,5 +51,6 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         Task<List<OwnerResponse>> GetAccountInformation();
         Task<WebHookResponse> GetWebHooks();
         Task<WebHookResponse> CreateWebHook(string subscription);
+        Task<DailyLimit> GetDailyLimitAsync();
     }
 }
