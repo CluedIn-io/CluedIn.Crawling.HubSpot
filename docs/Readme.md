@@ -4,7 +4,15 @@ CluedIn HubSpot Crawler is designed to crawl company data stored on [Hubspot CRM
 
 ## Installation and Setup
 
-Please refer to Crawler installation 
+Please refer to general Crawler installation documentation on how to deploy Crawlers with CluedIn Backend
+
+To add a new Integrations:
+
+- Click on Integrations -> Available menu
+  
+![Add Configuration](HubSpotAddConfiguration.png "Add Configuration)
+
+
 
 
 
