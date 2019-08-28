@@ -1,4 +1,4 @@
-### CluedIn.Crawling.Hubspot 
+## CluedIn.Crawling.Hubspot 
 
 CluedIn HubSpot Crawler is designed to crawl company data stored on [Hubspot CRM](https://www.hubspot.com/products/crm), covering all current editions (Free, Sales Hub, Marketing hub and Service Hub)
 
