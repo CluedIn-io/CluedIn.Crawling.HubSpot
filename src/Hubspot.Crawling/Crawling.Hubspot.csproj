@@ -40,4 +40,7 @@
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0938" />
+  </ItemGroup>
 </Project>
