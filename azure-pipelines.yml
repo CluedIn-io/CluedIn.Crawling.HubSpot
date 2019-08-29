@@ -27,7 +27,7 @@ resources:
     - repository: templates
       type: github
       name: CluedIn-io/AzurePipelines.Templates
-      endpoint: 'CluedIn-io (2)'
+      endpoint: 'CluedIn-io'
 
 pool:
   vmImage: 'VS2017-Win2016'
