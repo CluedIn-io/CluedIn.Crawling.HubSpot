@@ -29,4 +29,7 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0938" />
+  </ItemGroup>
 </Project>
