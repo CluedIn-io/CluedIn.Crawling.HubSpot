@@ -39,7 +39,12 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         public async Task<Settings> GetSettingsAsync() => await GetAsync<Settings>("integrations/v1/me");
 
-        public async Task<DailyLimit> GetDailyLimitAsync() => await GetAsync<DailyLimit>(" integrations/v1/limit/daily");
+        public async Task<DailyLimit> GetDailyLimitAsync()
+        {
+            var result = await GetAsync<DailyLimit[]>("integrations/v1/limit/daily");
+
+            return result.FirstOrDefault();
+        } 
 
         public async Task<List<string>> GetCompanyPropertiesAsync(Settings settings)
         {

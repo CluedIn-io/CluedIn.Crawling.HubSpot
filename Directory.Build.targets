@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CluedIn.Core" Version="2.18.0-alpha0938" />
         <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     </ItemGroup>
 
