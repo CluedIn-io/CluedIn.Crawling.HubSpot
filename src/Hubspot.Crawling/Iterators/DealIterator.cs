@@ -4,6 +4,7 @@ using System.Linq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -18,7 +19,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         public override IEnumerable<object> Iterate(int? limit = null)
         {
-            int offset = 0;
+            var offset = 0;
+            var retries = 0;
 
             limit = limit ?? 100;
 
@@ -29,37 +31,50 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
                 while (true)
                 {
-                    var response = Client.GetDealsAsync(properties, _settings, limit.Value, offset).Result;
-
-                    if (response?.deals == null || !response.deals.Any())
-                        break;
-
-                    foreach (var deal in response.deals)
+                    try
                     {
+                        var response = Client.GetDealsAsync(properties, _settings, limit.Value, offset).Result;
 
-                        if (_settings?.currency != null)
-                            deal.Currency = _settings.currency;
+                        if (response?.deals == null || !response.deals.Any())
+                            break;
 
-                        if (deal.dealId.HasValue)
+                        foreach (var deal in response.deals)
                         {
-                            try
+
+                            if (_settings?.currency != null)
+                                deal.Currency = _settings.currency;
+
+                            if (deal.dealId.HasValue)
                             {
-                                var engagements = Client.GetEngagementByIdAndTypeAsync(deal.dealId.Value, "DEAL").Result;
-                                result.AddRange(engagements);
+                                try
+                                {
+                                    var engagements = Client.GetEngagementByIdAndTypeAsync(deal.dealId.Value, "DEAL").Result;
+                                    result.AddRange(engagements);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
                             }
-                            catch
-                            {
-                                // ignored
-                            }
+
+                            result.Add(deal);
                         }
 
-                        result.Add(deal);
+                        if (response.hasMore == false || response.deals.Count < limit)
+                            break;
+
+                        offset = response.offset;
+                        retries = 0;
                     }
+                    catch (ThrottlingException e)
+                    {
+                        if (!ShouldRetryThrottledCall(e, retries))
+                        {
+                            break;
+                        }
 
-                    if (response.hasMore == false || response.deals.Count < limit)
-                        break;
-
-                    offset = response.offset;
+                        retries++;
+                    }
                 }
             }
             catch

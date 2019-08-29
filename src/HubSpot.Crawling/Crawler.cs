@@ -58,6 +58,12 @@ namespace CluedIn.Crawling.HubSpot
                 return EmptyResult;
             }
 
+            var dailyLimit = await client.GetDailyLimitAsync();
+            if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
+            {
+                _log.Error("HubSpot daily usage limit has been reached");
+                return EmptyResult;
+            }
             
 
             var data = new List<object>();

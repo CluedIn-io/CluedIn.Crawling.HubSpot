@@ -30,6 +30,7 @@
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Exceptions\" />
     <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0938" />
   </ItemGroup>
 </Project>

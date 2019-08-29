@@ -4,6 +4,7 @@ using System.Linq;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -19,7 +20,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         public override IEnumerable<object> Iterate(int? limit = null)
         {
-            int offset = 0;
+            var offset = 0;
+            var retries = 0;
             limit = limit ?? 100;
 
             var result = new List<object>();
@@ -28,53 +30,67 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 var properties = Client.GetTicketPropertiesAsync(_settings).Result;
                 while (true)
                 {
-                    var response = Client.GetTicketsAsync(properties, limit.Value, offset).Result;
 
-                    if (response?.Objects == null || !response.Objects.Any())
-                        break;
-
-                    foreach (var ticket in response.Objects)
+                    try
                     {
-                        if (ticket.ObjectId.HasValue)
+                        var response = Client.GetTicketsAsync(properties, limit.Value, offset).Result;
+
+                        if (response?.Objects == null || !response.Objects.Any())
+                            break;
+
+                        foreach (var ticket in response.Objects)
                         {
-                            try
+                            if (ticket.ObjectId.HasValue)
                             {
-                                var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToContact).Iterate(100).Cast<long>();
-                                ticket.Associations.Contacts.AddRange(associations);
-                            }
-                            catch
-                            {
-                                // ignored
+                                try
+                                {
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToContact).Iterate(100).Cast<long>();
+                                    ticket.Associations.Contacts.AddRange(associations);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
+
+                                try
+                                {
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToEngagement).Iterate(100).Cast<long>();
+                                    ticket.Associations.Engagements.AddRange(associations);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
+
+                                try
+                                {
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToCompany).Iterate(100).Cast<long>();
+                                    ticket.Associations.Companies.AddRange(associations);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
                             }
 
-                            try
-                            {
-                                var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToEngagement).Iterate(100).Cast<long>();
-                                ticket.Associations.Engagements.AddRange(associations);
-                            }
-                            catch
-                            {
-                                // ignored
-                            }
-
-                            try
-                            {
-                                var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToCompany).Iterate(100).Cast<long>();
-                                ticket.Associations.Companies.AddRange(associations);
-                            }
-                            catch
-                            {
-                                // ignored
-                            }
+                            result.Add(ticket);
                         }
 
-                        result.Add(ticket);
+                        if (response.HasMore == false || response.Objects.Count < limit || response.Offset == null)
+                            break;
+
+                        offset = response.Offset.Value;
+                        retries = 0;
                     }
+                    catch (ThrottlingException e)
+                    {
+                        if (!ShouldRetryThrottledCall(e, retries))
+                        {
+                            break;
+                        }
 
-                    if (response.HasMore == false || response.Objects.Count < limit || response.Offset == null)
-                        break;
-
-                    offset = response.Offset.Value;
+                        retries++;
+                    }
                 }
             }
             catch
