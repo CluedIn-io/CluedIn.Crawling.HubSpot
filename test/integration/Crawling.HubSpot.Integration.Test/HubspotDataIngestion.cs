@@ -25,8 +25,8 @@ namespace Crawling.HubSpot.Integration.Test
 
         [Theory]
         [InlineData("/Provider/Root", 1)]
-        [InlineData("/Organization", 3)]
-        [InlineData("/Infrastructure/Contact", 12)]
+        [InlineData("/Organization", 4)]
+        [InlineData("/Infrastructure/Contact", 16)]
         // [InlineData("/Calendar/Meeting", 2)] Setup in HubSpot
         // [InlineData("/Calendar/Event", 2)] Setup in HubSpot
         //[InlineData("/Note", 8)]
