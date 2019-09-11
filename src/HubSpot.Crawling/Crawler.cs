@@ -31,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot
             }
             catch (AggregateException e)
             {
-                _log.Error(e.InnerExceptions.First().Message);
+                _log.Error(() => e.InnerExceptions.First().Message);
                 throw e.InnerExceptions.First();
             }
         }
@@ -54,14 +54,14 @@ namespace CluedIn.Crawling.HubSpot
 
             if (settings == null)
             {
-                _log.Error("Settings could not be obtained from HubSpot");
+                _log.Error(() => "Settings could not be obtained from HubSpot");
                 return EmptyResult;
             }
 
             var dailyLimit = await client.GetDailyLimitAsync();
             if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
             {
-                _log.Error("HubSpot daily usage limit has been reached");
+                _log.Error(() => "HubSpot daily usage limit has been reached");
                 return EmptyResult;
             }
             
