@@ -24,16 +24,16 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Grouping       = EntityType.Files.File;
 
             AltKey     = Add(new VocabularyKey("AltKey"));
-            AltKeyHash = Add(new VocabularyKey("AltKeyHash", VocabularyKeyVisiblity.Hidden));
+            AltKeyHash = Add(new VocabularyKey("AltKeyHash", VocabularyKeyVisibility.Hidden));
             AltUrl     = Add(new VocabularyKey("AltUrl"));
             Archived   = Add(new VocabularyKey("Archived"));
             DeletedAt  = Add(new VocabularyKey("DeletedAt"));
             Extension  = Add(new VocabularyKey("Extension"));
-            FolderId   = Add(new VocabularyKey("FolderId", VocabularyKeyVisiblity.Hidden));
+            FolderId   = Add(new VocabularyKey("FolderId", VocabularyKeyVisibility.Hidden));
             Height     = Add(new VocabularyKey("Height"));
-            IsCtaImage = Add(new VocabularyKey("IsCtaImage", VocabularyKeyVisiblity.Hidden));
-            Meta       = Add(new VocabularyKey("Meta", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            PortalId   = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            IsCtaImage = Add(new VocabularyKey("IsCtaImage", VocabularyKeyVisibility.Hidden));
+            Meta       = Add(new VocabularyKey("Meta", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            PortalId   = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             Title      = Add(new VocabularyKey("Title"));
             Type       = Add(new VocabularyKey("Type"));
             Updated    = Add(new VocabularyKey("Updated"));

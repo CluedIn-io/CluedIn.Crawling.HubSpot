@@ -25,8 +25,8 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
 
             Created   = Add(new VocabularyKey("Created"));
             DeletedAt = Add(new VocabularyKey("DeletedAt"));
-            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
-            Slug      = Add(new VocabularyKey("Slug", VocabularyKeyVisiblity.Hidden));
+            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
+            Slug      = Add(new VocabularyKey("Slug", VocabularyKeyVisibility.Hidden));
             Updated   = Add(new VocabularyKey("Updated"));
 
             AddMapping(Created, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInDates.CreatedDate);

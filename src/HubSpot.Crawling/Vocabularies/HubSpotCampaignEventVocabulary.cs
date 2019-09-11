@@ -26,14 +26,14 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             AddGroup("Hubspot Campaign Event Details", group =>
             {
                 AppName         = group.Add(new VocabularyKey("AppName"));
-                Browser         = group.Add(new VocabularyKey("Browser", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-                EmailCampaignId = group.Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
-                Hmid            = group.Add(new VocabularyKey("Hmid", VocabularyKeyVisiblity.Hidden));
-                IpAddress = group.Add(new VocabularyKey("IpAddress", VocabularyKeyVisiblity.Hidden));
-                Location        = group.Add(new VocabularyKey("Location", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Browser         = group.Add(new VocabularyKey("Browser", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+                EmailCampaignId = group.Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisibility.Hidden));
+                Hmid            = group.Add(new VocabularyKey("Hmid", VocabularyKeyVisibility.Hidden));
+                IpAddress = group.Add(new VocabularyKey("IpAddress", VocabularyKeyVisibility.Hidden));
+                Location        = group.Add(new VocabularyKey("Location", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
                 Recipient       = group.Add(new VocabularyKey("Recipient"));
                 Type            = group.Add(new VocabularyKey("Type"));
-                UserAgent = group.Add(new VocabularyKey("UserAgent", VocabularyKeyVisiblity.Hidden));
+                UserAgent = group.Add(new VocabularyKey("UserAgent", VocabularyKeyVisibility.Hidden));
 
                 City = group.Add(new VocabularyKey("City", VocabularyKeyDataType.GeographyCity));
                 Country = group.Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));

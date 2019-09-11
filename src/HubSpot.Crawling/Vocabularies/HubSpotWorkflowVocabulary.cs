@@ -23,17 +23,17 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Process;
 
-            Actions                            = Add(new VocabularyKey("Actions", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Actions                            = Add(new VocabularyKey("Actions", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             AllowContactToTriggerMultipleTimes = Add(new VocabularyKey("AllowContactToTriggerMultipleTimes"));
             Enabled                            = Add(new VocabularyKey("Enabled"));
-            GoalListIds                        = Add(new VocabularyKey("GoalListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            GoalListIds                        = Add(new VocabularyKey("GoalListIds", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             InsertingAt                        = Add(new VocabularyKey("InsertingAt"));
             Listening                          = Add(new VocabularyKey("Listening"));
-            NutureTimeRange                    = Add(new VocabularyKey("NutureTimeRange", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            NutureTimeRange                    = Add(new VocabularyKey("NutureTimeRange", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             OnlyExecOnBizDays                  = Add(new VocabularyKey("OnlyExecOnBizDays"));
-            RecurringSetting                   = Add(new VocabularyKey("RecurringSetting", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            SuppressionListIds                 = Add(new VocabularyKey("SuppressionListIds", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            TriggerSets                        = Add(new VocabularyKey("TriggerSets", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            RecurringSetting                   = Add(new VocabularyKey("RecurringSetting", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            SuppressionListIds                 = Add(new VocabularyKey("SuppressionListIds", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            TriggerSets                        = Add(new VocabularyKey("TriggerSets", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             Type                               = Add(new VocabularyKey("Type"));
             UnEnrollmentSetting                = Add(new VocabularyKey("UnEnrollmentSetting"));
 

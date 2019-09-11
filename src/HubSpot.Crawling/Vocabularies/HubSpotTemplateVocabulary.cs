@@ -23,18 +23,18 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Template;
 
-            CategoryId               = Add(new VocabularyKey("CategoryId", VocabularyKeyVisiblity.Hidden));
+            CategoryId               = Add(new VocabularyKey("CategoryId", VocabularyKeyVisibility.Hidden));
             CdnMinifiedUrl           = Add(new VocabularyKey("CdnMinifiedUrl"));
             CdnUrl                   = Add(new VocabularyKey("CdnUrl"));
             DeletedAt                = Add(new VocabularyKey("DeletedAt"));
             Folder                   = Add(new VocabularyKey("Folder"));
-            GeneratedFromLayoutId    = Add(new VocabularyKey("GeneratedFromLayoutId", VocabularyKeyVisiblity.Hidden));
+            GeneratedFromLayoutId    = Add(new VocabularyKey("GeneratedFromLayoutId", VocabularyKeyVisibility.Hidden));
             IsAvailableForNewContent = Add(new VocabularyKey("IsAvailableForNewContent"));
-            IsFromLayout = Add(new VocabularyKey("IsFromLayout", VocabularyKeyVisiblity.Hidden));
+            IsFromLayout = Add(new VocabularyKey("IsFromLayout", VocabularyKeyVisibility.Hidden));
             IsReadOnly               = Add(new VocabularyKey("IsReadOnly"));
             LinkedInStyleLayout      = Add(new VocabularyKey("LinkedInStyleLayout"));
             Path                     = Add(new VocabularyKey("Path"));
-            PortalId                 = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            PortalId                 = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             TemplateType             = Add(new VocabularyKey("TemplateType"));
             ThumbnailWidth           = Add(new VocabularyKey("ThumbnailWidth"));
             Type                     = Add(new VocabularyKey("Type"));

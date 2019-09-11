@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Active       = Add(new VocabularyKey("Active"));
             DisplayOrder = Add(new VocabularyKey("DisplayOrder"));
             Label        = Add(new VocabularyKey("Label"));
-            PipelineId   = Add(new VocabularyKey("PipelineId", VocabularyKeyVisiblity.Hidden));
+            PipelineId   = Add(new VocabularyKey("PipelineId", VocabularyKeyVisibility.Hidden));
 
             // TODO: map keys to CluedIn vocabulary
         }

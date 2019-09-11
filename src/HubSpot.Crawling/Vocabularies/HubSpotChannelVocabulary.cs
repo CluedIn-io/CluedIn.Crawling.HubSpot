@@ -25,20 +25,20 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
 
             AddGroup("Hubspot Channel Details", group =>
             {
-                AccountId = group.Add(new VocabularyKey("AccountId", VocabularyKeyVisiblity.Hidden));
-                ChannelId = group.Add(new VocabularyKey("ChannelId", VocabularyKeyVisiblity.Hidden));
-                DataMap   = group.Add(new VocabularyKey("DataMap", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                AccountId = group.Add(new VocabularyKey("AccountId", VocabularyKeyVisibility.Hidden));
+                ChannelId = group.Add(new VocabularyKey("ChannelId", VocabularyKeyVisibility.Hidden));
+                DataMap   = group.Add(new VocabularyKey("DataMap", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
                 Type      = group.Add(new VocabularyKey("Type"));
                 Email = group.Add(new VocabularyKey("Email"));
                 FirstName = group.Add(new VocabularyKey("FirstName"));
                 FullName = group.Add(new VocabularyKey("FullName"));
                 LastName = group.Add(new VocabularyKey("LastName"));
                 PageCategory = group.Add(new VocabularyKey("PageCategory"));
-                PageId = group.Add(new VocabularyKey("PageId", VocabularyKeyVisiblity.Hidden));
+                PageId = group.Add(new VocabularyKey("PageId", VocabularyKeyVisibility.Hidden));
                 PageName = group.Add(new VocabularyKey("PageName"));
                 Picture = group.Add(new VocabularyKey("Picture"));
                 ProfileUrl = group.Add(new VocabularyKey("ProfileUrl"));
-                UserId = group.Add(new VocabularyKey("UserId", VocabularyKeyVisiblity.Hidden));
+                UserId = group.Add(new VocabularyKey("UserId", VocabularyKeyVisibility.Hidden));
             });
 
             // TODO: map keys to CluedIn vocabulary

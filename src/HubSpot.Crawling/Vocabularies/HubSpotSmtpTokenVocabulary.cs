@@ -23,13 +23,13 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Activity;
 
-            AppId           = Add(new VocabularyKey("AppId", VocabularyKeyVisiblity.Hidden));
+            AppId           = Add(new VocabularyKey("AppId", VocabularyKeyVisibility.Hidden));
             CampaignName    = Add(new VocabularyKey("CampaignName"));
             CreatedAt       = Add(new VocabularyKey("CreatedAt"));
             CreatedBy       = Add(new VocabularyKey("CreatedBy"));
             Deleted         = Add(new VocabularyKey("Deleted"));
-            EmailCampaignId = Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisiblity.Hidden));
-            PortalId        = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            EmailCampaignId = Add(new VocabularyKey("EmailCampaignId", VocabularyKeyVisibility.Hidden));
+            PortalId        = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             UserName        = Add(new VocabularyKey("UserName"));
 
             // TODO: map keys to CluedIn vocabulary

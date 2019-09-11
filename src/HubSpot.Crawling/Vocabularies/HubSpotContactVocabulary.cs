@@ -23,13 +23,13 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Infrastructure.Contact;
 
-            CanonicalVid     = Add(new VocabularyKey("CanonicalVid",                                  VocabularyKeyVisiblity.Hidden));
-            FormSubmissions  = Add(new VocabularyKey("FormSubmissions",   VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            CanonicalVid     = Add(new VocabularyKey("CanonicalVid",                                  VocabularyKeyVisibility.Hidden));
+            FormSubmissions  = Add(new VocabularyKey("FormSubmissions",   VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
        
-            MergeAudits      = Add(new VocabularyKey("MergeAudits",       VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            IsContact        = Add(new VocabularyKey("IsContact",                                     VocabularyKeyVisiblity.Hidden));
-            ProfileUrl       = Add(new VocabularyKey("ProfileUrl",                                    VocabularyKeyVisiblity.Hidden));
-            Vid              = Add(new VocabularyKey("Vid",                                           VocabularyKeyVisiblity.Hidden));
+            MergeAudits      = Add(new VocabularyKey("MergeAudits",       VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            IsContact        = Add(new VocabularyKey("IsContact",                                     VocabularyKeyVisibility.Hidden));
+            ProfileUrl       = Add(new VocabularyKey("ProfileUrl",                                    VocabularyKeyVisibility.Hidden));
+            Vid              = Add(new VocabularyKey("Vid",                                           VocabularyKeyVisibility.Hidden));
             Email            = Add(new VocabularyKey("Email").WithDataAnnotations(
                                                                 k => k.PrimaryKey()
                                                               , k => k.CanEdit()

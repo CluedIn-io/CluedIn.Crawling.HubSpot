@@ -33,7 +33,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                 Type                          = group.Add(new VocabularyKey("Type"));
                 FieldType                     = group.Add(new VocabularyKey("FieldType"));
                 Hidden                        = group.Add(new VocabularyKey("Hidden"));
-                Options                       = group.Add(new VocabularyKey("Options", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                Options                       = group.Add(new VocabularyKey("Options", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
                 Calculated                    = group.Add(new VocabularyKey("Calculated"));
                 ExternalOptions               = group.Add(new VocabularyKey("ExternalOptions"));
                 HubspotDefined                = group.Add(new VocabularyKey("HubspotDefined"));

@@ -25,8 +25,8 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
 
             Created   = Add(new VocabularyKey("Created"));
             DeletedAt = Add(new VocabularyKey("DeletedAt", VocabularyKeyDataType.DateTime));
-            PagesTree = Add(new VocabularyKey("PagesTree", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            PagesTree = Add(new VocabularyKey("PagesTree", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            PortalId  = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             Updated   = Add(new VocabularyKey("Updated"));
 
             // TODO: map keys to CluedIn vocabulary

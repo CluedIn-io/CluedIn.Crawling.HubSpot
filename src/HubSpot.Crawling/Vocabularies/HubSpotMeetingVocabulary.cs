@@ -23,8 +23,8 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Calendar.Meeting;
 
-            Title       = Add(new VocabularyKey("Title", VocabularyKeyDataType.Text, VocabularyKeyVisiblity.HiddenInFrontendUI));
-            Description = Add(new VocabularyKey("Description", VocabularyKeyVisiblity.HiddenInFrontendUI));
+            Title       = Add(new VocabularyKey("Title", VocabularyKeyDataType.Text, VocabularyKeyVisibility.HiddenInFrontendUI));
+            Description = Add(new VocabularyKey("Description", VocabularyKeyVisibility.HiddenInFrontendUI));
             StartTime   = Add(new VocabularyKey("StartTime", VocabularyKeyDataType.DateTime));
             EndTime     = Add(new VocabularyKey("EndTime", VocabularyKeyDataType.DateTime));
             Reminder     = Add(new VocabularyKey("Reminder", VocabularyKeyDataType.DateTime));

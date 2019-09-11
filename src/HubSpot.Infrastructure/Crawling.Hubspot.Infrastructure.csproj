@@ -22,7 +22,7 @@
     <ProjectReference Include="..\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0938" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.18.0-alpha0973" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="RestSharp" Version="105.2.3" />
@@ -31,6 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0938" />
+    <PackageReference Update="CluedIn.Core" Version="2.18.0-alpha0973" />
   </ItemGroup>
 </Project>
