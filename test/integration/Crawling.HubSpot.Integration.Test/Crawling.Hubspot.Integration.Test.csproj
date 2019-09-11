@@ -15,9 +15,9 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CluedIn.Core" Version="2.4.0-alpha0073" />
     <PackageReference Include="CrawlerIntegrationTesting" Version="1.2.0-alpha0001" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
-    <PackageReference Include="Moq" Version="4.11.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
