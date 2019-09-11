@@ -2,19 +2,19 @@ using Castle.MicroKernel.Registration;
 
 using CluedIn.Core;
 using CluedIn.Core.Providers;
+using CluedIn.Core.Server;
 //
 using CluedIn.Core.Webhooks;
 //
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure.Installers;
 //
-using CluedIn.Server;
 using ComponentHost;
 
 namespace CluedIn.Provider.HubSpot
 {
     [Component(HubSpotConstants.ProviderName, "Providers", ComponentType.Service, ServerComponents.ProviderWebApi, Components.Server, Components.DataStores, Isolation = ComponentIsolation.NotIsolated)]
-    public sealed class HubSpotProviderComponent : ServiceApplicationComponent<EmbeddedServer>
+    public sealed class HubSpotProviderComponent : ServiceApplicationComponent<IServer>
     {
         /**********************************************************************************************************
          * CONSTRUCTOR
