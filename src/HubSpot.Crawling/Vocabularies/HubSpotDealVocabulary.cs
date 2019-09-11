@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Sales.Deal;
 
-            Associations                           = Add(new VocabularyKey("Associations", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Associations                           = Add(new VocabularyKey("Associations", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             LastMeetingBooked                      = Add(new VocabularyKey("LastMeetingBooked", VocabularyKeyDataType.Text));
             LastMeetingBookedCampaign              = Add(new VocabularyKey("LastMeetingBookedCampaign", VocabularyKeyDataType.Text));
             LastMeetingBookedMedium                = Add(new VocabularyKey("LastMeetingBookedMedium", VocabularyKeyDataType.Text));

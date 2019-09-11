@@ -26,8 +26,8 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             AddGroup("Hubspot Campaign Details", group =>
             {
                 AppName     = group.Add(new VocabularyKey("AppName"));
-                ContentId   = group.Add(new VocabularyKey("ContentId", VocabularyKeyVisiblity.Hidden));
-                Counters    = group.Add(new VocabularyKey("Counters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+                ContentId   = group.Add(new VocabularyKey("ContentId", VocabularyKeyVisibility.Hidden));
+                Counters    = group.Add(new VocabularyKey("Counters", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
                 NumIncluded = group.Add(new VocabularyKey("NumIncluded", VocabularyKeyDataType.Number));
                 NumQueued   = group.Add(new VocabularyKey("NumQueued", VocabularyKeyDataType.Number));
                 SubType     = group.Add(new VocabularyKey("SubType"));

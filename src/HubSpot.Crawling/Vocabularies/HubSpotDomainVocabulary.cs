@@ -24,18 +24,18 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Grouping       = EntityType.Note;
 
             ActualCName                  = Add(new VocabularyKey("ActualCName"));
-            ActualIp = Add(new VocabularyKey("ActualIp", VocabularyKeyVisiblity.Hidden));
+            ActualIp = Add(new VocabularyKey("ActualIp", VocabularyKeyVisibility.Hidden));
             ConsecutiveNonResolvingCount = Add(new VocabularyKey("ConsecutiveNonResolvingCount"));
             Domain                       = Add(new VocabularyKey("Domain"));
             FullCategoryKey              = Add(new VocabularyKey("FullCategoryKey"));
-            IsAnyPrimary = Add(new VocabularyKey("IsAnyPrimary", VocabularyKeyVisiblity.Hidden));
-            IsDnsCorrect = Add(new VocabularyKey("IsDnsCorrect", VocabularyKeyVisiblity.Hidden));
+            IsAnyPrimary = Add(new VocabularyKey("IsAnyPrimary", VocabularyKeyVisibility.Hidden));
+            IsDnsCorrect = Add(new VocabularyKey("IsDnsCorrect", VocabularyKeyVisibility.Hidden));
             IsInternalDomain             = Add(new VocabularyKey("IsInternalDomain"));
-            IsLegacy = Add(new VocabularyKey("IsLegacy", VocabularyKeyVisiblity.Hidden));
-            IsLegacyDomain = Add(new VocabularyKey("IsLegacyDomain", VocabularyKeyVisiblity.Hidden));
-            IsResolving = Add(new VocabularyKey("IsResolving", VocabularyKeyVisiblity.Hidden));
-            ManuallyMarkedAsResolving = Add(new VocabularyKey("ManuallyMarkedAsResolving", VocabularyKeyVisiblity.Hidden));
-            PortalId                     = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            IsLegacy = Add(new VocabularyKey("IsLegacy", VocabularyKeyVisibility.Hidden));
+            IsLegacyDomain = Add(new VocabularyKey("IsLegacyDomain", VocabularyKeyVisibility.Hidden));
+            IsResolving = Add(new VocabularyKey("IsResolving", VocabularyKeyVisibility.Hidden));
+            ManuallyMarkedAsResolving = Add(new VocabularyKey("ManuallyMarkedAsResolving", VocabularyKeyVisibility.Hidden));
+            PortalId                     = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             PrimaryBlogPost              = Add(new VocabularyKey("PrimaryBlogPost"));
             PrimaryEmail                 = Add(new VocabularyKey("PrimaryEmail"));
             PrimaryLandingPage           = Add(new VocabularyKey("PrimaryLandingPage"));

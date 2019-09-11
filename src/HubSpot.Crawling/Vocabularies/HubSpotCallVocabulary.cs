@@ -28,9 +28,9 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Duration           = Add(new VocabularyKey("Duration", VocabularyKeyDataType.Time));
             Status             = Add(new VocabularyKey("Status", VocabularyKeyDataType.Text));
             Body               = Add(new VocabularyKey("Notes", VocabularyKeyDataType.Text));
-            Disposition        = Add(new VocabularyKey("Disposition", VocabularyKeyVisiblity.HiddenInFrontendUI));
-            ExternalAccountId  = Add(new VocabularyKey("ExternalAccountId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
-            ExternalId         = Add(new VocabularyKey("ExternalId", VocabularyKeyDataType.DateTime, VocabularyKeyVisiblity.HiddenInFrontendUI));
+            Disposition        = Add(new VocabularyKey("Disposition", VocabularyKeyVisibility.HiddenInFrontendUI));
+            ExternalAccountId  = Add(new VocabularyKey("ExternalAccountId", VocabularyKeyDataType.DateTime, VocabularyKeyVisibility.HiddenInFrontendUI));
+            ExternalId         = Add(new VocabularyKey("ExternalId", VocabularyKeyDataType.DateTime, VocabularyKeyVisibility.HiddenInFrontendUI));
             RecordingUrl       = Add(new VocabularyKey("RecordingUrl", VocabularyKeyDataType.Uri));
 
             AddMapping(Duration, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInAudio.Duration);

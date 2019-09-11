@@ -25,10 +25,10 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
 
             Deleted        = Add(new VocabularyKey("Deleted"));
             Dynamic        = Add(new VocabularyKey("Dynamic"));
-            Filters        = Add(new VocabularyKey("Filters", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            InternalListId = Add(new VocabularyKey("InternalListId", VocabularyKeyVisiblity.Hidden));
-            ListId         = Add(new VocabularyKey("ListId", VocabularyKeyVisiblity.Hidden));
-            MetaData       = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Filters        = Add(new VocabularyKey("Filters", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            InternalListId = Add(new VocabularyKey("InternalListId", VocabularyKeyVisibility.Hidden));
+            ListId         = Add(new VocabularyKey("ListId", VocabularyKeyVisibility.Hidden));
+            MetaData       = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
 
             // TODO: map keys to CluedIn vocabulary
         }

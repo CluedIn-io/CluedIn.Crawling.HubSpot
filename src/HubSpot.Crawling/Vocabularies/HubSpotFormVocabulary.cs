@@ -26,12 +26,12 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Action                 = Add(new VocabularyKey("Action"));
             CssClass               = Add(new VocabularyKey("CssClass"));
             Deletable              = Add(new VocabularyKey("Deletable"));
-            FollowUpId             = Add(new VocabularyKey("FollowUpId", VocabularyKeyVisiblity.Hidden));
-            FormFieldGroups        = Add(new VocabularyKey("FormFieldGroups", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
-            Guid                   = Add(new VocabularyKey("Guid", VocabularyKeyVisiblity.Hidden));
+            FollowUpId             = Add(new VocabularyKey("FollowUpId", VocabularyKeyVisibility.Hidden));
+            FormFieldGroups        = Add(new VocabularyKey("FormFieldGroups", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
+            Guid                   = Add(new VocabularyKey("Guid", VocabularyKeyVisibility.Hidden));
             IgnoreCurrentValues    = Add(new VocabularyKey("IgnoreCurrentValues"));
             LeadNuturingCampaignId = Add(new VocabularyKey("LeadNuturingCampaignId"));
-            MetaData               = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            MetaData               = Add(new VocabularyKey("MetaData", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             Method                 = Add(new VocabularyKey("Method"));
             MigratedFrom           = Add(new VocabularyKey("MigratedFrom"));
             NotifyRecipients       = Add(new VocabularyKey("NotifyRecipients"));

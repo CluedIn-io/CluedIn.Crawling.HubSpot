@@ -21,7 +21,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace CluedIn.Provider.HubSpot
 {
-    public class HubSpotProvider : ProviderBase
+    public class HubSpotProvider : ProviderBase, IExtendedProviderMetadata
     {
         private readonly IHubSpotClientFactory _hubspotClientFactory;
         private readonly ILogger _log;
@@ -296,5 +296,13 @@ namespace CluedIn.Provider.HubSpot
             //There is no limit set, so you can pull as often and as much as you want.
             return await Task.FromResult(new CrawlLimit(-1, TimeSpan.Zero));
         }
+
+        public string Icon { get; } = HubSpotConstants.UiIcon;
+        public string Domain { get; } = HubSpotConstants.Uri;
+        public string About { get; } = HubSpotConstants.CrawlerDescription;
+        public string AuthMethods { get; } = HubSpotConstants.AuthMethodsJson;
+        public string Properties { get; }
+        public string ServiceType { get; } = HubSpotConstants.ServiceTypeJson;
+        public string Aliases { get; } = HubSpotConstants.Aliases;
     }
 }

@@ -27,9 +27,9 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string ProviderRootCodeValue = "HubSpot";
         public const string CrawlerName = "HubSpotCrawler";
         public const string CrawlerComponentName = "HubSpotCrawler";
-        public const string CrawlerDescription = "HubSpot CRM is a web and mobile application for customers.";
+        public const string CrawlerDescription = "Hubspot is all-in-one software for inbound marketing, CRM and Sales.";
         public const string CrawlerDisplayName = "HubSpot CRM";
-        public const string Uri = "http://www.sampleurl.com";
+        public const string Uri = "http://www.hubspot.com";
         public const string ApiBaseUri = "https://api.hubapi.com";
 
 
@@ -42,6 +42,12 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string AppInstallUrl = null;
         public const string ReAuthEndpoint = null;
         public const string IconUri = "https://s3-eu-west-1.amazonaws.com/staticcluedin/bitbucket.png";
+
+        // The below are used by IExtendedProviderMetaData implementation to replace info from provider.js
+        public const string UiIcon = "${cdnUrl}hubspot.png";
+        public const string AuthMethodsJson = "{ token: [{ displayName: 'Api Token', type: 'input', name: 'apiToken', isRequired: true, }] }";
+        public const string ServiceTypeJson = "[CRMType]";
+        public const string Aliases = "['HubSpot', 'HubSpot CRM']";
 
         public static readonly ComponentEmailDetails ComponentEmailDetails = new ComponentEmailDetails
         {

@@ -32,8 +32,8 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             UseForPages = Add(new VocabularyKey("UseForPages", VocabularyKeyDataType.Boolean));
             RowCount    = Add(new VocabularyKey("RowCount", VocabularyKeyDataType.Integer));
             ColumnCount = Add(new VocabularyKey("ColumnCount", VocabularyKeyDataType.Integer));
-            CreatedBy   = Add(new VocabularyKey("CreatedBy", VocabularyKeyDataType.Integer, VocabularyKeyVisiblity.Hidden));
-            UpdatedBy   = Add(new VocabularyKey("UpdatedBy", VocabularyKeyDataType.Integer, VocabularyKeyVisiblity.Hidden));
+            CreatedBy   = Add(new VocabularyKey("CreatedBy", VocabularyKeyDataType.Integer, VocabularyKeyVisibility.Hidden));
+            UpdatedBy   = Add(new VocabularyKey("UpdatedBy", VocabularyKeyDataType.Integer, VocabularyKeyVisibility.Hidden));
         }
 
         public VocabularyKey Id { get; private set; }

@@ -27,7 +27,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             {
                 AvatarUrl         = group.Add(new VocabularyKey("AvatarUrl", VocabularyKeyDataType.Uri));
                 Category          = group.Add(new VocabularyKey("Category"));
-                CreatedById       = group.Add(new VocabularyKey("CreatedById", VocabularyKeyVisiblity.Hidden));
+                CreatedById       = group.Add(new VocabularyKey("CreatedById", VocabularyKeyVisibility.Hidden));
                 EventDate         = group.Add(new VocabularyKey("EventDate", VocabularyKeyDataType.DateTime));
                 EventType         = group.Add(new VocabularyKey("EventType"));
                 PreviewKey        = group.Add(new VocabularyKey("PreviewKey"));
@@ -35,10 +35,10 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                 SocialDisplayName = group.Add(new VocabularyKey("SocialDisplayName"));
                 SocialUserName    = group.Add(new VocabularyKey("SocialUserName"));
                 State             = group.Add(new VocabularyKey("State"));
-                TopicsIds         = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyVisiblity.Hidden));
+                TopicsIds         = group.Add(new VocabularyKey("TopicsIds", VocabularyKeyVisibility.Hidden));
             });
 
-            DayOfWeek = Add(new VocabularyKey("DayOfWeek", VocabularyKeyVisiblity.Hidden));
+            DayOfWeek = Add(new VocabularyKey("DayOfWeek", VocabularyKeyVisibility.Hidden));
             AddMapping(DayOfWeek, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInEvent.DayOfWeek);
             // TODO: map keys to CluedIn vocabulary
         }

@@ -24,7 +24,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             Grouping       = EntityType.Person;
 
             CreatedAt      = Add(new VocabularyKey("CreatedAt"));
-            RemoteList     = Add(new VocabularyKey("RemoteList", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            RemoteList     = Add(new VocabularyKey("RemoteList", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
             Type           = Add(new VocabularyKey("Type"));
             Email          = Add(new VocabularyKey("Email"));
             FirstName      = Add(new VocabularyKey("FirstName"));

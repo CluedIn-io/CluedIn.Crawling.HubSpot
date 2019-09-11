@@ -26,9 +26,9 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Organization;
 
-            CompanyId               = Add(new VocabularyKey("CompanyId", VocabularyKeyVisiblity.Hidden));
+            CompanyId               = Add(new VocabularyKey("CompanyId", VocabularyKeyVisibility.Hidden));
             IsDeleted               = Add(new VocabularyKey("IsDeleted"));
-            PortalId                = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            PortalId                = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             Zip                     = Add(new VocabularyKey("Zip"));
             Country                 = Add(new VocabularyKey("Country", VocabularyKeyDataType.GeographyCountry));
             Website                 = Add(new VocabularyKey("Website", VocabularyKeyDataType.Uri));
@@ -40,7 +40,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             LastName                = Add(new VocabularyKey("LastName"));
             Company                 = Add(new VocabularyKey("Company"));
             Salutation              = Add(new VocabularyKey("Salutation"));
-            IpAddress               = Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress, VocabularyKeyVisiblity.Hidden));
+            IpAddress               = Add(new VocabularyKey("IPAddress", VocabularyKeyDataType.IPAddress, VocabularyKeyVisibility.Hidden));
             Fax                     = Add(new VocabularyKey("Fax", VocabularyKeyDataType.PhoneNumber));
             OwnerName               = Add(new VocabularyKey("OwnerName"));
             OwnerEmail              = Add(new VocabularyKey("OwnerEmail", VocabularyKeyDataType.Email));
@@ -53,7 +53,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             AssociateContactsCounts = Add(new VocabularyKey("AssociateContactsCounts"));
             Notes                   = Add(new VocabularyKey("Notes"));
 
-            Properties              = Add(new VocabularyKey("Properties", VocabularyKeyDataType.Json, VocabularyKeyVisiblity.Hidden));
+            Properties              = Add(new VocabularyKey("Properties", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
 
             AddMapping(EmailDomain, CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInOrganization.EmailDomainNames);   
 

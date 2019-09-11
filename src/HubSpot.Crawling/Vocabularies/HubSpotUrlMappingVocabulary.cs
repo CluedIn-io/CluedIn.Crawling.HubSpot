@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Note;
 
-            ContentGroupId      = Add(new VocabularyKey("ContentGroupId", VocabularyKeyVisiblity.Hidden));
+            ContentGroupId      = Add(new VocabularyKey("ContentGroupId", VocabularyKeyVisibility.Hidden));
             Created             = Add(new VocabularyKey("Created"));
             DeletedAt           = Add(new VocabularyKey("DeletedAt"));
             Destination         = Add(new VocabularyKey("Destination"));
@@ -32,7 +32,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             IsOnlyAfterNotFound = Add(new VocabularyKey("IsOnlyAfterNotFound"));
             IsPattern           = Add(new VocabularyKey("IsPattern"));
             IsRegex             = Add(new VocabularyKey("IsRegex"));
-            PortalId            = Add(new VocabularyKey("PortalId", VocabularyKeyVisiblity.Hidden));
+            PortalId            = Add(new VocabularyKey("PortalId", VocabularyKeyVisibility.Hidden));
             Precedence          = Add(new VocabularyKey("Precedence"));
             RedirectStyle       = Add(new VocabularyKey("RedirectStyle"));
             RoutePrefix         = Add(new VocabularyKey("RoutePrefix"));
