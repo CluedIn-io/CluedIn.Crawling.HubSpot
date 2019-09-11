@@ -53,6 +53,5 @@
   <ItemGroup>
     <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0073" />
     <PackageReference Include="CluedIn.Crawling" Version="2.4.0-alpha0073" />
-    <PackageReference Include="CluedIn.Server" Version="2.4.0-alpha0073" />
   </ItemGroup>
 </Project>
