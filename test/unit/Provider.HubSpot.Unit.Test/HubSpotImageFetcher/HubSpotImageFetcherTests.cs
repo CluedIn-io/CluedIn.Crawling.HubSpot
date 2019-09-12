@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using CluedIn.Provider.HubSpot.Resources;
 using Crawling.HubSpot.Test.Common;
 using Moq;
 using RestSharp;
@@ -21,7 +23,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
             _restClient = new Mock<IRestClient>();
             _log = new Mock<ILogger>();
 
-            _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotFileFetcher(_log.Object, _restClient.Object);
+            _sut = new HubSpotFileFetcher(_log.Object, _restClient.Object);
         }
 
         [Fact]
@@ -33,7 +35,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
          InlineData("HubSpotImageFetcher.CluedIn.png", "https://some-url.com", "/RawData/PreviewImage")]
         public void CheckDataPartIsReturnedFromFetchAsRawDataPart(string filename, string url, string type)
         {
-            var fileData = ResourceHelper.GetFile(filename).ToArray();
+            var fileData = ResourceHelper.GetFile(filename, Assembly.GetAssembly(typeof(HubSpotImageFetcherTests))).ToArray();
 
             _restClient.Setup(n => n.DownloadData(new RestRequest(url))).Returns(fileData);
 

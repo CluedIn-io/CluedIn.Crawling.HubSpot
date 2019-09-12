@@ -16,9 +16,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
+    <None Remove="Resources\hubspot.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Configuration" />
@@ -31,6 +29,7 @@
     <EmbeddedResource Include="HubSpotProviderComponent.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\hubspot.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Provider.sql" />
