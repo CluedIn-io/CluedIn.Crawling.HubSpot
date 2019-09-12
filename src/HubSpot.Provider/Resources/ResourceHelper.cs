@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using CluedIn.Core;
 
 namespace CluedIn.Provider.HubSpot.Resources
 {
@@ -12,6 +13,11 @@ namespace CluedIn.Provider.HubSpot.Resources
 
             var @namespace = a.FullName.Split(',')[0];
             var s = a.GetManifestResourceStream(@namespace + "." + name);
+
+            if (s == null)
+            {
+                throw new NotFoundException($"Could not find resource " + name);
+            }
 
             return s;
         }

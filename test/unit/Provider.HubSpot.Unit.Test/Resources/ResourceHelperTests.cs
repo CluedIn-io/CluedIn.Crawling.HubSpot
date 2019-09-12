@@ -1,4 +1,5 @@
 ﻿using AutoFixture.Xunit2;
+using CluedIn.Core;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Provider.HubSpot.Resources;
 using Xunit;
@@ -15,6 +16,13 @@ namespace Provider.HubSpot.Unit.Test.Resources
             var result = ResourceHelper.GetFileAsBase64(file);
 
             Assert.Equal(base64, result);
+        }
+
+        [Theory,
+         InlineData("IDontExist.png")]
+        public void ThrowNotFoundException(string file)
+        {
+            Assert.Throws<NotFoundException>(() => ResourceHelper.GetFile(file));
         }
     }
 }
