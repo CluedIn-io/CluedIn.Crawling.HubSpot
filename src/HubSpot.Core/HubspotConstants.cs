@@ -41,13 +41,12 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const bool RequiresAppInstall = false;
         public const string AppInstallUrl = null;
         public const string ReAuthEndpoint = null;
-        public const string IconUri = "https://s3-eu-west-1.amazonaws.com/staticcluedin/hubspot.png";
 
         // The below are used by IExtendedProviderMetaData implementation to replace info from provider.js
         public const string AuthMethodsJson = "{ token: [{ displayName: 'Api Token', type: 'input', name: 'apiToken', isRequired: true, }] }";
         public const string ServiceTypeJson = "[CRMType]";
         public const string Aliases = "['HubSpot', 'HubSpot CRM']";
-        public const string IconResourceName = @"Resources.hubspot.png";
+        public const string IconResourceName = "Resources.hubspot.png";
 
         public static readonly ComponentEmailDetails ComponentEmailDetails = new ComponentEmailDetails
         {
@@ -56,7 +55,7 @@ namespace CluedIn.Crawling.HubSpot.Core
                                        { "Tracking",        "Expenses and Invoices against customers" },
                                        { "Intelligence",    "Aggregate types of invoices and expenses against customers and companies." }
                                    },
-            Icon = new Uri(IconUri),
+            Icon = ProviderIconFactory.CreateUri(ProviderId),
             ProviderName = ProviderName,
             ProviderId = ProviderId,
             Webhooks = SupportsWebHooks

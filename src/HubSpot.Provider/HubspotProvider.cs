@@ -16,7 +16,6 @@ using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
-using CluedIn.Provider.HubSpot.Resources;
 using CluedIn.Providers.Models;
 using Task = System.Threading.Tasks.Task;
 
@@ -298,7 +297,7 @@ namespace CluedIn.Provider.HubSpot
             return await Task.FromResult(new CrawlLimit(-1, TimeSpan.Zero));
         }
 
-        public string Icon => ResourceHelper.GetFileAsBase64(HubSpotConstants.IconResourceName);
+        public string Icon => HubSpotConstants.IconResourceName;
 
         public string Domain { get; } = HubSpotConstants.Uri;
         public string About { get; } = HubSpotConstants.CrawlerDescription;
