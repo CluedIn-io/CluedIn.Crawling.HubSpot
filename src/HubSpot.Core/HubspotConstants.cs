@@ -47,6 +47,10 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string ServiceTypeJson = "[CRMType]";
         public const string Aliases = "['HubSpot', 'HubSpot CRM']";
         public const string IconResourceName = "Resources.hubspot.png";
+        public const string Instructions = "You will need to login in your HubSpot account and get the Api Token and paste it in below.";
+        public const string Type = "cloud";
+        public const string Category = "Contacts";
+        public const string Details = "Our HubSpot provider will allow you to search across all your crm data.";
 
         public static readonly ComponentEmailDetails ComponentEmailDetails = new ComponentEmailDetails
         {
@@ -60,6 +64,8 @@ namespace CluedIn.Crawling.HubSpot.Core
             ProviderId = ProviderId,
             Webhooks = SupportsWebHooks
         };
+
+        
 
         public static IProviderMetadata CreateProviderMetadata()
         {

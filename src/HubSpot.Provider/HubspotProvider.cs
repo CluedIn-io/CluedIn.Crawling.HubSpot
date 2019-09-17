@@ -305,5 +305,16 @@ namespace CluedIn.Provider.HubSpot
         public string Properties { get; } = null;
         public string ServiceType { get; } = HubSpotConstants.ServiceTypeJson;
         public string Aliases { get; } = HubSpotConstants.Aliases;
+        public Guide Guide { get; set; } = new Guide
+        {
+            Instructions = HubSpotConstants.Instructions,
+            Value = new List<string> { HubSpotConstants.CrawlerDescription },
+                Details = HubSpotConstants.Details
+            
+        };
+
+        public string Details { get; set; } = HubSpotConstants.Details;
+        public string Category { get; set; } = HubSpotConstants.Category;
+        public new string Type { get; set; } = HubSpotConstants.Type;
     }
 }
