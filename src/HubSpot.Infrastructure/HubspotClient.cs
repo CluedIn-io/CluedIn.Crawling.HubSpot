@@ -514,7 +514,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         private T GetRequestResponse<T>(string url, IRestResponse response)
         {
-            _log.Verbose($"HubSpotClient.GetAsync calling {url}");
+            _log.Verbose(() =>$"HubSpotClient.GetAsync calling {url}");
             if ((int)response.StatusCode == 429)
             {
                 throw new ThrottlingException
@@ -536,7 +536,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             var data = JsonConvert.DeserializeObject<T>(response.Content);
 
-            _log.Verbose($"HubSpotClient returning {data}");
+            _log.Verbose(() =>$"HubSpotClient returning {data}");
 
             return data;
         }
