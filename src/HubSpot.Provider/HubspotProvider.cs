@@ -17,6 +17,7 @@ using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Providers.Models;
+using Newtonsoft.Json;
 using Task = System.Threading.Tasks.Task;
 
 namespace CluedIn.Provider.HubSpot
@@ -298,13 +299,12 @@ namespace CluedIn.Provider.HubSpot
         }
 
         public string Icon => HubSpotConstants.IconResourceName;
-
         public string Domain { get; } = HubSpotConstants.Uri;
         public string About { get; } = HubSpotConstants.CrawlerDescription;
-        public string AuthMethods { get; } = HubSpotConstants.AuthMethodsJson;
+        public string AuthMethods { get; } = JsonConvert.SerializeObject(HubSpotConstants.AuthMethodsJson);
         public string Properties { get; } = null;
-        public string ServiceType { get; } = HubSpotConstants.ServiceTypeJson;
-        public string Aliases { get; } = HubSpotConstants.Aliases;
+        public string ServiceType { get; } = JsonConvert.SerializeObject(HubSpotConstants.ServiceTypeJson);
+        public string Aliases { get; } = JsonConvert.SerializeObject(HubSpotConstants.Aliases);
         public Guide Guide { get; set; } = new Guide
         {
             Instructions = HubSpotConstants.Instructions,
