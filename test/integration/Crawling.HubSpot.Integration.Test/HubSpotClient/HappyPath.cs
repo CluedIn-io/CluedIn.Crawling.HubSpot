@@ -12,6 +12,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 {
+    [Trait("Category", "web")]
     public class HappyPath
     {
         private readonly CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient _sut;

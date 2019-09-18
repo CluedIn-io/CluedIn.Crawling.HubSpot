@@ -1,11 +1,11 @@
 using System.IO;
 using System.Reflection;
-using Castle.Windsor;
-using CluedIn.Core;
+
 using CluedIn.Core.Installers;
-using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
+
 using CrawlerIntegrationTesting.Clues;
+
 using Crawling.HubSpot.Test.Common;
 
 namespace Crawling.HubSpot.Integration.Test
