@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -12,7 +13,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
     {
         private readonly Settings _settings;
 
-        public ProductsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings) : base(client, jobData)
+        public ProductsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings, ILogger logger)
+            : base(client, jobData, logger)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
@@ -59,7 +61,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;

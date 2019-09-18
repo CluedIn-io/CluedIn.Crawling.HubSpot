@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 using CluedIn.Crawling.HubSpot.Iterators;
@@ -13,11 +14,13 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
 {
     public class BlogIteratorTest : BaseIteratorTest
     {
-        private BlogsIterator _sut;
-        
+        private readonly BlogsIterator _sut;
+        private readonly Mock<ILogger> _loggerMock;
+
         public BlogIteratorTest()
         {
-            _sut = new BlogsIterator(Client.Object, JobData);
+            _loggerMock = new Mock<ILogger>();
+            _sut = new BlogsIterator(Client.Object, JobData, _loggerMock.Object);
         }
 
         [Fact]

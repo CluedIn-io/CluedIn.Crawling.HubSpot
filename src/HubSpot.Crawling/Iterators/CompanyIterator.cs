@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -12,7 +13,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
     {
         private readonly Settings _settings;
 
-        public CompanyIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings) : base(client, jobData)
+        public CompanyIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings, ILogger logger)
+            : base(client, jobData, logger)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
@@ -78,7 +80,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;
@@ -95,12 +97,12 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                     table.PortalId = portalId;
 
                     result.Add(table);
-                    result.AddRange(new TableRowsIterator(Client, JobData, table, portalId).Iterate());
+                    result.AddRange(new TableRowsIterator(Client, JobData, table, portalId, Logger).Iterate());
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                // ignored
+                Logger.Warn(() => $"Failed to get Tables for portal Id {portalId}", exception);
             }
         }
 
@@ -115,9 +117,9 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                     result.Add(dealPipeline);
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                // ignored
+                Logger.Warn(() => $"Failed to get Deal Pipelines for portal Id {portalId}", exception);
             }
         }
 
@@ -128,9 +130,9 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 var engagements = Client.GetEngagementByIdAndTypeAsync(company.companyId.Value, "COMPANY").Result;
                 result.AddRange(engagements);
             }
-            catch
+            catch (Exception exception)
             {
-                // ignored
+                Logger.Warn(() => $"Failed to get Engagements for Company {company.companyId} ", exception);
             }
         }
 
@@ -141,9 +143,9 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 var contacts = Client.GetContactsByCompanyAsync(company.companyId.Value).Result;
                 result.AddRange(contacts.contacts);
             }
-            catch
+            catch (Exception exception)
             {
-                // ignored
+                Logger.Warn(() => $"Failed to get Contacts for Company {company.companyId} ", exception);
             }
         }
     }

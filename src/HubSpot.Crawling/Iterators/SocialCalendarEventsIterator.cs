@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
@@ -9,7 +10,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 {
     public class SocialCalendarEventsIterator : HubSpotIteratorBase
     {
-        public SocialCalendarEventsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData) : base(client, jobData)
+        public SocialCalendarEventsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, ILogger logger)
+            : base(client, jobData, logger)
         {
         }
 
@@ -52,7 +54,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -13,7 +14,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         private readonly Settings _settings;
 
-        public LineItemsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings) : base(client, jobData)
+        public LineItemsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings settings, ILogger logger)
+            : base(client, jobData, logger)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
@@ -44,12 +46,12 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                             {
                                 try
                                 {
-                                    var dealAssociations = new AssociationsIterator(Client, JobData, lineItem.ObjectId.Value, AssociationType.LineItemToDeal).Iterate(limit).Cast<long>();
+                                    var dealAssociations = new AssociationsIterator(Client, JobData, lineItem.ObjectId.Value, AssociationType.LineItemToDeal, Logger).Iterate(limit).Cast<long>();
                                     lineItem.Associations.AddRange(dealAssociations);
                                 }
-                                catch
+                                catch (Exception exception)
                                 {
-                                    // ignored
+                                    Logger.Warn(() => $"Failed to get Associations for Line Item {lineItem.ObjectId.Value}", exception);
                                 }
                             }
 
@@ -75,7 +77,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -13,7 +14,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         private readonly int _objectId;
         private readonly AssociationType _associationType;
 
-        public AssociationsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, int objectId, AssociationType associationType) : base(client, jobData)
+        public AssociationsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, int objectId, AssociationType associationType, ILogger logger)
+            : base(client, jobData, logger)
         {
             _objectId = objectId;
             _associationType = associationType;
@@ -60,7 +62,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;
