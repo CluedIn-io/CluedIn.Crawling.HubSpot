@@ -536,7 +536,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             var data = JsonConvert.DeserializeObject<T>(response.Content);
 
-            _log.Verbose(() =>$"HubSpotClient returning {data}");
+            _log.Verbose(() =>$"HubSpotClient response content length: {response.Content.Length}");
 
             return data;
         }
