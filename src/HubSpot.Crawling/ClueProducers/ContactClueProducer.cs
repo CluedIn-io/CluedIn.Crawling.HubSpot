@@ -80,7 +80,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 data.Name = property.value;
                             }
-                            else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
+                            else if (property.type == "photo" && !string.IsNullOrWhiteSpace(property.value))
                             {
                                 var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                                 if (previewImagePart != null)
@@ -207,12 +207,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else if (property.type == "createddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "lastmodifieddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "LEAD_GUID")
@@ -240,7 +240,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         {
                             data.Name = property.value;
                         }
-                        else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
+                        else if (property.type == "photo" && !string.IsNullOrWhiteSpace(property.value))
                         {
                             var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                             if (previewImagePart != null)
@@ -343,12 +343,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "createddate")
                         {
-                            if (long.TryParse(property.value, out long created))
+                            if (long.TryParse(property.value, out var created))
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(created);
                         }
                         else if (property.type == "lastmodifieddate")
                         {
-                            if (long.TryParse(property.value, out long modified))
+                            if (long.TryParse(property.value, out var modified))
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(modified);
                         }
                         else
@@ -361,7 +361,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.IsContact == true && input.Properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
+                var allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
 
                 foreach (var property in allProperties)
                 {
@@ -370,7 +370,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     if (property.Value["value"] != null && property.Value["value"].ToString() != null)
                     {
                         val = property.Value["value"].ToString();
-                        if (long.TryParse(val, out long epoch))
+                        if (long.TryParse(val, out var epoch))
                         {
                             try
                             {
@@ -924,7 +924,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         data.Properties[string.Format("hubspot.contact.custom-{0}", property.Key)] = val;
 
                 }
-                
+
                 //Loop over results
                 //if (property.type == "hubspot_analytics_source")
                 //{
@@ -940,10 +940,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 //    data.Properties[string.Format("hubspot.contact.custom-{0}", property.type)] = property.value;
                 //}
             }
-            
+
 
             return clue;
-            
+
         }
     }
 }
