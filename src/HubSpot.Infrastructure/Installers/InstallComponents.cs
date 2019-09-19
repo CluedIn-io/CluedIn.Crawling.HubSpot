@@ -16,10 +16,20 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
         {
             container
                 .AddFacilityIfNotExists<TypedFactoryFacility>()
-                .Register(Component.For<IHubSpotClientFactory>().AsFactory())
-                .Register(Component.For<IHubSpotFileFetcher, HubSpotFileFetcher>())
-                .Register(Component.For<IHubSpotFileIndexer, HubSpotFileIndexer>())
-                .Register(Component.For<IHubSpotClient, HubSpotClient>().LifestyleTransient());
+                .Register(
+                    Component.For<IHubSpotClientFactory>()
+                        .AsFactory()
+                        .OnlyNewServices())
+                .Register(
+                    Component.For<IHubSpotFileFetcher, HubSpotFileFetcher>()
+                        .OnlyNewServices())
+                .Register(
+                    Component.For<IHubSpotFileIndexer, HubSpotFileIndexer>()
+                        .OnlyNewServices())
+                .Register(
+                    Component.For<IHubSpotClient, HubSpotClient>()
+                        .LifestyleTransient()
+                        .OnlyNewServices());
 
             if (!container.Kernel.HasComponent(typeof(ISystemNotifications)) && !container.Kernel.HasComponent(typeof(SystemNotifications)))
             {

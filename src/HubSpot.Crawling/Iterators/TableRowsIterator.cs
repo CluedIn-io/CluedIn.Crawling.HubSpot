@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -13,7 +14,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         private readonly Table _table;
         private readonly long _portalId;
 
-        public TableRowsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Table table, long portalId) : base(client, jobData)
+        public TableRowsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Table table, long portalId, ILogger logger)
+            : base(client, jobData, logger)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
             _portalId = portalId;
@@ -67,7 +69,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;

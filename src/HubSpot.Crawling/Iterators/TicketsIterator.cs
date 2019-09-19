@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
@@ -13,7 +14,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         private readonly Settings _settings;
 
-        public TicketsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings properties) : base(client, jobData)
+        public TicketsIterator(IHubSpotClient client, HubSpotCrawlJobData jobData, Settings properties, ILogger logger)
+            : base(client, jobData, logger)
         {
             _settings = properties ?? throw new ArgumentNullException(nameof(properties));
         }
@@ -44,32 +46,32 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                             {
                                 try
                                 {
-                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToContact).Iterate(100).Cast<long>();
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToContact, Logger).Iterate(100).Cast<long>();
                                     ticket.Associations.Contacts.AddRange(associations);
                                 }
-                                catch
+                                catch (Exception exception)
                                 {
-                                    // ignored
+                                    Logger.Warn(() => $"Failed to get Associations for Ticket Contacts {ticket.ObjectId.Value}", exception);
                                 }
 
                                 try
                                 {
-                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToEngagement).Iterate(100).Cast<long>();
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToEngagement, Logger).Iterate(100).Cast<long>();
                                     ticket.Associations.Engagements.AddRange(associations);
                                 }
-                                catch
+                                catch (Exception exception)
                                 {
-                                    // ignored
+                                    Logger.Warn(() => $"Failed to get Associations for Ticket Engagements {ticket.ObjectId.Value}", exception);
                                 }
 
                                 try
                                 {
-                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToCompany).Iterate(100).Cast<long>();
+                                    var associations = new AssociationsIterator(Client, JobData, ticket.ObjectId.Value, AssociationType.TicketToCompany, Logger).Iterate(100).Cast<long>();
                                     ticket.Associations.Companies.AddRange(associations);
                                 }
-                                catch
+                                catch (Exception exception)
                                 {
-                                    // ignored
+                                    Logger.Warn(() => $"Failed to get Associations for Ticket Companies {ticket.ObjectId.Value}", exception);
                                 }
                             }
 
@@ -95,12 +97,10 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                return Enumerable.Empty<object>();
+                return CreateEmptyResults();
             }
 
             return result;
         }
-
-
     }
 }

@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Crawling.HubSpot.Integration.Test
 {
+    [Trait("Category", "web")]
     public class DataIngestion : IClassFixture<HubSpotTestFixture>
     {
         private readonly HubSpotTestFixture _fixture;

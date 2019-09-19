@@ -31,7 +31,7 @@ namespace CluedIn.Crawling.HubSpot
             }
             catch (AggregateException e)
             {
-                _log.Error(e.InnerExceptions.First().Message);
+                _log.Error(() => e.InnerExceptions.First().Message, e);
                 throw e.InnerExceptions.First();
             }
         }
@@ -54,47 +54,46 @@ namespace CluedIn.Crawling.HubSpot
 
             if (settings == null)
             {
-                _log.Error("Settings could not be obtained from HubSpot");
+                _log.Error(() => "Settings could not be obtained from HubSpot");
                 return EmptyResult;
             }
 
             var dailyLimit = await client.GetDailyLimitAsync();
             if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
             {
-                _log.Error("HubSpot daily usage limit has been reached");
+                _log.Error(() =>"HubSpot daily usage limit has been reached");
                 return EmptyResult;
             }
-            
 
             var data = new List<object>();
 
-            data.AddRange(new CompanyIterator(client, crawlerJobData, settings).Iterate());
-            data.AddRange(new DealIterator(client, crawlerJobData, settings).Iterate());
-            data.AddRange(new ContactIterator(client, crawlerJobData, settings).Iterate());
-            data.AddRange(new DynamicContactListIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new FormsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new OwnersIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new FilesIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new SiteMapsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new TemplatesIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new UrlMappingsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new EngagementsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new RecentDealsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new SmtpTokensIterator(client, crawlerJobData).Iterate());            
-            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new StaticContactListIterator(client,crawlerJobData).Iterate());
-            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new WorkflowsIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new BlogPostsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new BlogsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new BlogTopicsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new DomainsIterator(client, crawlerJobData).Iterate()); 
-            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData).Iterate());
-            data.AddRange(new ProductsIterator(client, crawlerJobData, settings).Iterate());
-            data.AddRange(new LineItemsIterator(client, crawlerJobData, settings).Iterate());
-            data.AddRange(new TicketsIterator(client, crawlerJobData, settings).Iterate());
+            data.AddRange(new CompanyIterator(client, crawlerJobData, settings, _log).Iterate());
+            data.AddRange(new DealIterator(client, crawlerJobData, settings, _log).Iterate());
+            data.AddRange(new ContactIterator(client, crawlerJobData, settings, _log).Iterate());
+            data.AddRange(new DynamicContactListIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new FormsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new OwnersIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new FilesIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new SiteMapsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new TemplatesIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new UrlMappingsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new EngagementsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new RecentDealsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new SmtpTokensIterator(client, crawlerJobData, _log).Iterate());            
+            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new StaticContactListIterator(client,crawlerJobData, _log).Iterate());
+            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new WorkflowsIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new BlogPostsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new BlogsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new BlogTopicsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new DomainsIterator(client, crawlerJobData, _log).Iterate()); 
+            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData, _log).Iterate());
+            data.AddRange(new ProductsIterator(client, crawlerJobData, settings, _log).Iterate());
+            data.AddRange(new LineItemsIterator(client, crawlerJobData, settings, _log).Iterate());
+            data.AddRange(new TicketsIterator(client, crawlerJobData, settings, _log).Iterate());
 
             return data;
         }
