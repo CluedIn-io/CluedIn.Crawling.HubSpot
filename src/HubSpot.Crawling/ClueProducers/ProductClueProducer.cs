@@ -69,7 +69,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (epoch != long.MinValue)
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(epoch);
                             if (data.CreatedDate != null)
-                                data.Properties[HubSpotVocabulary.Product.CreateDate] = data.CreatedDate.Value.ToString("o");
+                                data.Properties[HubSpotVocabulary.Product.CreateDate] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
                             if (r.SourceId != null)
                                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
                         }
@@ -82,7 +82,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (epoch != long.MinValue)
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(epoch);
                             if (data.ModifiedDate != null)
-                                data.Properties[HubSpotVocabulary.Product.LastModifiedDate] = data.ModifiedDate.Value.ToString("o");
+                                data.Properties[HubSpotVocabulary.Product.LastModifiedDate] = DateTimeFormatter.ToIso8601(data.ModifiedDate.Value);;
                         }
 
                         else if (r.Name == "hs_recurring_billing_start_date")
@@ -92,7 +92,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Product.StartDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Product.StartDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
 
                         else if (r.Name == "name")

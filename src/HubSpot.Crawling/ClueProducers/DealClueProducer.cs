@@ -64,13 +64,13 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "Hubspot");
                 }
 
-                string url = $"https://app.hubspot.com/sales/{input.portalId}/deal/{input.dealId}/";  // TODO take from configuration
+                var url = $"https://app.hubspot.com/sales/{input.portalId}/deal/{input.dealId}/";  // TODO take from configuration
                 data.Uri = new Uri(url);
             }
 
             if (input.properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.properties));
+                var allProperties = JObject.Parse(JsonUtility.Serialize(input.properties));
 
                 foreach (var property in allProperties)
                 {
@@ -79,7 +79,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     if (property.Value["value"] != null && property.Value["value"].ToString() != null)
                     {
                         val = property.Value["value"].ToString();
-                        if (long.TryParse(val, out long epoch))
+                        if (long.TryParse(val, out var epoch))
                         {
                             try
                             {
@@ -116,7 +116,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_assigneddate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationOwnerAssignedDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationOwnerAssignedDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "dealname")
                     {
@@ -139,7 +139,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "closedate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationCloseDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationCloseDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "createdate")
                     {
@@ -149,17 +149,17 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "engagements_last_meeting_booked")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBooked] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBooked] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_campaign")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedCampaign] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedCampaign] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_medium")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedMedium] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedMedium] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_source")
                     {
@@ -167,22 +167,22 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "hubspot_owner_id")
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => val.ToString());
+                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => val);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastContacted] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastContacted] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "notes_last_updated")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastActivityDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastActivityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "notes_next_activity_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationNextActivityDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationNextActivityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "num_contacted_notes")
                     {

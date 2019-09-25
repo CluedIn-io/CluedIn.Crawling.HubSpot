@@ -80,7 +80,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 data.Name = property.value;
                             }
-                            else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
+                            else if (property.type == "photo" && !string.IsNullOrWhiteSpace(property.value))
                             {
                                 var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                                 if (previewImagePart != null)
@@ -207,12 +207,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             }
                             else if (property.type == "createddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "lastmodifieddate")
                             {
-                                if (long.TryParse(property.value, out long date))
+                                if (long.TryParse(property.value, out var date))
                                     data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(date);
                             }
                             else if (property.type == "LEAD_GUID")
@@ -240,7 +240,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         {
                             data.Name = property.value;
                         }
-                        else if (property.type == "photo" && ! string.IsNullOrWhiteSpace(property.value))
+                        else if (property.type == "photo" && !string.IsNullOrWhiteSpace(property.value))
                         {
                             var previewImagePart = _fileFetcher.FetchAsRawDataPart(property.value, "/RawData/PreviewImage", "preview_{0}".FormatWith(clue.OriginEntityCode.Key));
                             if (previewImagePart != null)
@@ -343,12 +343,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.type == "createddate")
                         {
-                            if (long.TryParse(property.value, out long created))
+                            if (long.TryParse(property.value, out var created))
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(created);
                         }
                         else if (property.type == "lastmodifieddate")
                         {
-                            if (long.TryParse(property.value, out long modified))
+                            if (long.TryParse(property.value, out var modified))
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(modified);
                         }
                         else
@@ -361,7 +361,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.IsContact == true && input.Properties != null)
             {
-                JObject allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
+                var allProperties = JObject.Parse(JsonUtility.Serialize(input.Properties));
 
                 foreach (var property in allProperties)
                 {
@@ -370,7 +370,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     if (property.Value["value"] != null && property.Value["value"].ToString() != null)
                     {
                         val = property.Value["value"].ToString();
-                        if (long.TryParse(val, out long epoch))
+                        if (long.TryParse(val, out var epoch))
                         {
                             try
                             {
@@ -395,7 +395,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "first_conversion_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ConversionInformationFirstConversionDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ConversionInformationFirstConversionDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "first_conversion_event_name")
                     {
@@ -404,7 +404,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "first_deal_created_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationFirstDealCreatedDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationFirstDealCreatedDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_additional_emails")
                     {
@@ -514,7 +514,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_assigneddate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationOwnerAssignedDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationOwnerAssignedDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "ip_city")
                     {
@@ -564,7 +564,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "recent_conversion_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ConversionInformationRecentConversionDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ConversionInformationRecentConversionDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "recent_conversion_event_name")
                     {
@@ -577,7 +577,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "recent_deal_close_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationRecentDealCloseDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationRecentDealCloseDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "total_revenue")
                     {
@@ -660,7 +660,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_analytics_first_timestamp")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeFirstSeen] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeFirstSeen] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "address")
                     {
@@ -685,7 +685,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_analytics_first_visit_timestamp")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeofFirstVisit] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeofFirstVisit] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hubspot_owner_id")
                     {
@@ -696,7 +696,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "notes_last_contacted")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationLastContacted] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationLastContacted] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "notes_last_updated")
                     {
@@ -705,12 +705,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "notes_next_activity_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationNextActivityDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationNextActivityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "num_contacted_notes")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationNumberoftimescontacted] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationNumberoftimescontacted] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "num_notes")
                     {
@@ -731,7 +731,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_analytics_last_timestamp")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeLastSeen] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeLastSeen] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hubspot_team_id")
                     {
@@ -753,7 +753,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_analytics_last_visit_timestamp")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeofLastVisit] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.AnalyticsInformationTimeofLastVisit] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "state")
                     {
@@ -807,7 +807,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "closedate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationCloseDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationCloseDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_analytics_last_referrer")
                     {
@@ -828,17 +828,17 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_lifecyclestage_lead_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaLeadDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaLeadDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_lifecyclestage_marketingqualifiedlead_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaMarketingQualifiedLeadDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaMarketingQualifiedLeadDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_lifecyclestage_opportunity_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanOpportunityDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanOpportunityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "ipaddress")
                     {
@@ -852,12 +852,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_lifecyclestage_salesqualifiedlead_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaSalesQualifiedLeadDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaSalesQualifiedLeadDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_lifecyclestage_evangelist_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanEvangelistDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanEvangelistDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hubspotscore")
                     {
@@ -870,12 +870,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_lifecyclestage_customer_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaCustomerDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaCustomerDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "hs_lifecyclestage_subscriber_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaSubscriberDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameaSubscriberDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "website")
                     {
@@ -884,7 +884,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hs_lifecyclestage_other_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanOtherLifecycleDate] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationBecameanOtherLifecycleDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "numemployees")
                     {
@@ -908,7 +908,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "associatedcompanylastupdated")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Contact.ContactInformationAssociatedCompanyLastUpdated] = date.Value.ToString();
+                            data.Properties[HubSpotVocabulary.Contact.ContactInformationAssociatedCompanyLastUpdated] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "createddate")
                     {
@@ -924,7 +924,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         data.Properties[string.Format("hubspot.contact.custom-{0}", property.Key)] = val;
 
                 }
-                
+
                 //Loop over results
                 //if (property.type == "hubspot_analytics_source")
                 //{
@@ -940,10 +940,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 //    data.Properties[string.Format("hubspot.contact.custom-{0}", property.type)] = property.value;
                 //}
             }
-            
+
 
             return clue;
-            
+
         }
     }
 }
