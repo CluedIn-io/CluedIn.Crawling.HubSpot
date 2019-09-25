@@ -67,7 +67,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.ClosedDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.ClosedDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "created_by")
                         {
@@ -83,7 +83,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (epoch != long.MinValue)
                                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(epoch);
                             if (data.CreatedDate != null)
-                                data.Properties[HubSpotVocabulary.Ticket.CreatedDate] = data.CreatedDate.Value.ToString("o");
+                                data.Properties[HubSpotVocabulary.Ticket.CreatedDate] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
                             if (r.SourceId != null)
                                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
                         }
@@ -94,7 +94,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.FirstAgentResponseDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.FirstAgentResponseDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "hs_lastactivitydate")
                         {
@@ -103,7 +103,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.LastActivityDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.LastActivityDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "hs_lastcontacted")
                         {
@@ -112,7 +112,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.LastContactedDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.LastContactedDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "hs_lastmodifieddate")
                         {
@@ -122,7 +122,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (epoch != long.MinValue)
                                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(epoch);
                             if (data.ModifiedDate != null)
-                                data.Properties[HubSpotVocabulary.Ticket.LastModifiedDate] = data.ModifiedDate.Value.ToString("o");
+                                data.Properties[HubSpotVocabulary.Ticket.LastModifiedDate] = DateTimeFormatter.ToIso8601(data.ModifiedDate.Value);;
                         }
                         else if (r.Name == "hs_nextactivitydate")
                         {
@@ -131,7 +131,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.NextActivityDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.NextActivityDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "last_engagement_date")
                         {
@@ -140,7 +140,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.DateOfLastEngagement] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.DateOfLastEngagement] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "last_reply_date")
                         {
@@ -149,7 +149,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.LastCustomerReplyDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.LastCustomerReplyDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "hubspot_owner_assigneddate")
                         {
@@ -158,7 +158,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 long.TryParse(r.Value, out epoch);
                             if (epoch != long.MinValue)
                                 if (DateUtilities.EpochRef.AddMilliseconds(epoch) != null)
-                                    data.Properties[HubSpotVocabulary.Ticket.OwnerAssignedDate] = DateUtilities.EpochRef.AddMilliseconds(epoch).ToString("o");
+                                    data.Properties[HubSpotVocabulary.Ticket.OwnerAssignedDate] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(epoch));
                         }
                         else if (r.Name == "hubspot_owner_id")
                         {

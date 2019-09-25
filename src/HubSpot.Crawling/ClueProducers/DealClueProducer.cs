@@ -116,7 +116,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_assigneddate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationOwnerAssignedDate] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationOwnerAssignedDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "dealname")
                     {
@@ -139,7 +139,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "closedate")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationCloseDate] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationCloseDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "createdate")
                     {
@@ -149,17 +149,17 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "engagements_last_meeting_booked")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBooked] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBooked] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_campaign")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedCampaign] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedCampaign] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_medium")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedMedium] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.LastMeetingBookedMedium] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "engagements_last_meeting_booked_source")
                     {
@@ -172,17 +172,17 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "notes_last_contacted")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastContacted] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastContacted] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "notes_last_updated")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastActivityDate] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationLastActivityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "notes_next_activity_date")
                     {
                         if (date.HasValue)
-                            data.Properties[HubSpotVocabulary.Deal.DealInformationNextActivityDate] = date.Value.ToString("O");
+                            data.Properties[HubSpotVocabulary.Deal.DealInformationNextActivityDate] = DateTimeFormatter.ToIso8601(date.Value);
                     }
                     else if (property.Key == "num_contacted_notes")
                     {

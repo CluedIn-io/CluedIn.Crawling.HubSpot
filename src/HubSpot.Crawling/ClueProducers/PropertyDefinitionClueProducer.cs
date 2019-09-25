@@ -35,12 +35,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input.Createdat.HasValue)
                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(input.Createdat.Value);
             if (data.CreatedDate != null)
-                data.Properties[HubSpotVocabulary.PropertyDefinition.CreatedAt] = data.CreatedDate.Value.ToString("o");
+                data.Properties[HubSpotVocabulary.PropertyDefinition.CreatedAt] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
 
             if (input.Updatedat.HasValue)
                 data.ModifiedDate = DateUtilities.EpochRef.AddMilliseconds(input.Updatedat.Value);
             if (data.ModifiedDate != null)
-                data.Properties[HubSpotVocabulary.PropertyDefinition.UpdatedAt] = data.ModifiedDate.Value.ToString("o");
+                data.Properties[HubSpotVocabulary.PropertyDefinition.UpdatedAt] = DateTimeFormatter.ToIso8601(data.ModifiedDate.Value);
 
             if (input.Createduserid != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => input.Createduserid.Value.ToString());

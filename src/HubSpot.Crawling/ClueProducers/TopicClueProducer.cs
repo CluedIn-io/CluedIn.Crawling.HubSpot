@@ -33,7 +33,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             if (input.created != null)
             {
                 data.CreatedDate = DateUtilities.EpochRef.AddMilliseconds(input.created.Value);
-                data.Properties[HubSpotVocabulary.Topic.Created] = DateUtilities.EpochRef.AddMilliseconds(input.created.Value).ToString("o");
+                data.Properties[HubSpotVocabulary.Topic.Created] = DateTimeFormatter.ToIso8601(DateUtilities.EpochRef.AddMilliseconds(input.created.Value));
             }
 
             if (input.deletedAt != null)

@@ -52,7 +52,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Row.Id] = input.Id.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.Row.Path] = input.Path.PrintIfAvailable();
             if (data.CreatedDate.HasValue)
-                data.Properties[HubSpotVocabulary.Row.CreatedAt] = data.CreatedDate.Value.DateTime.ToString("O");
+                data.Properties[HubSpotVocabulary.Row.CreatedAt] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
 
             if (input.Table != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.List, EntityEdgeType.PartOf, input, selector => input.Table.Value.ToString());
