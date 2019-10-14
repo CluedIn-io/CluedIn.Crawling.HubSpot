@@ -299,13 +299,13 @@ namespace CluedIn.Provider.HubSpot
         }
 
         public string Icon => HubSpotConstants.IconResourceName;
-        public string Domain { get; } = HubSpotConstants.Uri;
-        public string About { get; } = HubSpotConstants.CrawlerDescription;
-        public string AuthMethods { get; } = JsonConvert.SerializeObject(HubSpotConstants.AuthMethodsJson);
-        public string Properties { get; } = null;
-        public string ServiceType { get; } = JsonConvert.SerializeObject(HubSpotConstants.ServiceTypeJson);
-        public string Aliases { get; } = JsonConvert.SerializeObject(HubSpotConstants.Aliases);
-        public Guide Guide { get; set; } = new Guide
+        public string Domain => HubSpotConstants.Uri;
+        public string About => HubSpotConstants.CrawlerDescription;
+        public AuthMethods AuthMethods => HubSpotConstants.AuthMethodsJson;
+        public IEnumerable<Control> Properties => null;
+        public string ServiceType => JsonConvert.SerializeObject(HubSpotConstants.ServiceTypeJson);
+        public string Aliases => JsonConvert.SerializeObject(HubSpotConstants.Aliases);
+        public Guide Guide => new Guide
         {
             Instructions = HubSpotConstants.Instructions,
             Value = new List<string> { HubSpotConstants.CrawlerDescription },
@@ -313,8 +313,13 @@ namespace CluedIn.Provider.HubSpot
             
         };
 
-        public string Details { get; set; } = HubSpotConstants.Details;
-        public string Category { get; set; } = HubSpotConstants.Category;
-        public new string Type { get; set; } = HubSpotConstants.Type;
+        public string Details => HubSpotConstants.Details;
+        public string Category => HubSpotConstants.Category;
+        public new IntegrationType Type => HubSpotConstants.Type;
+
+
+
+
+
     }
 }

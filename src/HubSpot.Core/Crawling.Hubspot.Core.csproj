@@ -15,13 +15,13 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Crawling" Version="2.4.0-alpha0086" />
+    <PackageReference Include="CluedIn.Crawling" Version="2.4.0-alpha0101" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="CluedIn.Core" Version="2.4.0-alpha0086" />
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0086" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0101" />
   </ItemGroup>
 </Project>
