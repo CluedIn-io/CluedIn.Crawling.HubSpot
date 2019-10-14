@@ -16,7 +16,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0086" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0101" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
