@@ -20,43 +20,53 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             var retries = 0;
             limit = limit ?? 20;
 
-            var result = new List<object>();
-            try
-            {
-                while (true)
-                {
-                    try
-                    {
-                        var response = Client.GetRecentDealsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
+            var canContinue = true;
 
-                        if (response?.results == null || !response.results.Any())
-                            break;
+            while (canContinue)
+            {
+                var result = new List<object>();
+                try
+                {
+                    var response = Client.GetRecentDealsAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
+
+                    if (response?.results == null || !response.results.Any())
+                        canContinue = false;
+                    else
+                    {
 
                         result.AddRange(response.results);
 
                         if (response.results.Count < limit)
-                            break;
-
-                        offset = response.offset;
-                        retries = 0;
-                    }
-                    catch (ThrottlingException e)
-                    {
-                        if (!ShouldRetryThrottledCall(e, retries))
+                            canContinue = false;
+                        else
                         {
-                            break;
+                            offset = response.offset;
+                            retries = 0;
                         }
-
-                        retries++;
                     }
                 }
-            }
-            catch
-            {
-                return CreateEmptyResults();
-            }
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
+                    {
+                        break;
+                    }
 
-            return result;
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    break;
+                }
+
+                foreach (var item in result)
+                {
+                    yield return item;
+                }
+            }
         }
+
     }
 }
+

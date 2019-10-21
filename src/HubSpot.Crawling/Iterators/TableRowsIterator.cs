@@ -27,20 +27,21 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             var retries = 0;
             int count = 0;
             limit = limit ?? 500;
-            var result = new List<object>();
-            try
+            var canContinue = true;
+
+            while (canContinue)
             {
-                while (true)
+
+                var result = new List<object>();
+                try
                 {
+                    var dateColumn = _table.columns.Find(c => c.type == "DATE");
+                    var response = Client.GetTableRowsAsync(JobData.LastCrawlFinishTime, _table.id, dateColumn, _portalId, limit.Value, offset).Result;
 
-                    try
+                    if (response.Objects == null || !response.Objects.Any())
+                        canContinue = false;
+                    else
                     {
-                        var dateColumn = _table.columns.Find(c => c.type == "DATE");
-                        var response = Client.GetTableRowsAsync(JobData.LastCrawlFinishTime, _table.id, dateColumn, _portalId, limit.Value, offset).Result;
-
-                        if (response.Objects == null || !response.Objects.Any())
-                            break;
-
                         foreach (var row in response.Objects)
                         {
                             row.Columns = _table.columns;
@@ -51,28 +52,35 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                         count += 500;
 
                         if (response.Total < count || response.TotalCount < count)
-                            break;
-
-                        offset = response.Offset;
-                        retries = 0;
-                    }
-                    catch (ThrottlingException e)
-                    {
-                        if (!ShouldRetryThrottledCall(e, retries))
+                            canContinue = false;
+                        else
                         {
-                            break;
+                            offset = response.Offset;
+                            retries = 0;
                         }
-
-                        retries++;
                     }
                 }
-            }
-            catch
-            {
-                return CreateEmptyResults();
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
+                    {
+                        canContinue = false;
+                    }
+
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    canContinue = false;
+                }
+
+                foreach (var item in result)
+                {
+                    yield return item;
+                }
             }
 
-            return result;
         }
     }
 }

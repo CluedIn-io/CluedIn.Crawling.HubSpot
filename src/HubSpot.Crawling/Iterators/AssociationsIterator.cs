@@ -26,17 +26,19 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             var offset = 0;
             var retries = 0;
             limit = limit ?? 20;
-            var result = new List<object>();
-            try
-            {
-                while (true)
-                {
-                    try
-                    {
-                        var response = Client.GetAssociationsAsync(_objectId, _associationType, limit.Value, offset).Result;
+            var canContinue = true;
 
-                        if (response?.Results == null || !response.Results.Any())
-                            break;
+            while (canContinue)
+            {
+                var result = new List<object>();
+                try
+                {
+                    var response = Client.GetAssociationsAsync(_objectId, _associationType, limit.Value, offset).Result;
+
+                    if (response?.Results == null || !response.Results.Any())
+                        canContinue = false;
+                    else
+                    {
 
                         foreach (var assoc in response.Results)
                         {
@@ -44,28 +46,33 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                         }
 
                         if (response.HasMore == false || response.Results.Count < limit)
-                            break;
+                            canContinue = false;
 
                         offset = response.Offset;
                         retries = 0;
                     }
-                    catch (ThrottlingException e)
+                }
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
                     {
-                        if (! ShouldRetryThrottledCall(e, retries))
-                        {
-                            break;
-                        }
-
-                        retries++;
+                        canContinue = false;
                     }
+
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    canContinue = false;
+                }
+
+                foreach (var item in result)
+                {
+                    yield return item;
                 }
             }
-            catch
-            {
-                return CreateEmptyResults();
-            }
 
-            return result;
         }
     }
 }

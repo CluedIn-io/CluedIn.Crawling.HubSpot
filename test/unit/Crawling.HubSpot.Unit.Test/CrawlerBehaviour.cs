@@ -54,8 +54,7 @@ namespace Crawling.HubSpot.Unit.Test
             [Fact]
             public void RequiresCrawlJobDataParameter()
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    _sut.GetData(default(CrawlJobData)));
+                Assert.Empty(_sut.GetData(default(CrawlJobData)));
             }
 
             [Theory]
@@ -65,8 +64,8 @@ namespace Crawling.HubSpot.Unit.Test
             {
                 var instance = Activator.CreateInstance(jobDataType);
 
-                Assert.Empty(
-                    _sut.GetData((CrawlJobData)instance));
+                var result = _sut.GetData((CrawlJobData)instance);
+                Assert.Empty(result);
             }
 
             [Fact]

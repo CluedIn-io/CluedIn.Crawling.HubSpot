@@ -15,13 +15,19 @@ namespace CluedIn.Crawling.HubSpot.Iterators
 
         public override IEnumerable<object> Iterate(int? limit = null)
         {
+            var result = new List<object>();
             try
             {
-                return Client.GetSmtpTokensAsync().Result;
+                result.AddRange(Client.GetSmtpTokensAsync().Result);
             }
             catch
             {
-                return CreateEmptyResults();
+                Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+            }
+
+            foreach (var item in result)
+            {
+                yield return item;
             }
         }
     }

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CluedIn.Core.Crawling;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Core.Models;
+using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Crawling.HubSpot.Iterators;
 
@@ -14,9 +14,7 @@ namespace CluedIn.Crawling.HubSpot
     {
         private readonly IHubSpotClientFactory _clientFactory;
         private readonly ILogger _log;
-
-        private static readonly IEnumerable<object> EmptyResult = Enumerable.Empty<object>();
-
+        
         public Crawler(IHubSpotClientFactory clientFactory, ILogger log)
         {
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
@@ -25,77 +23,198 @@ namespace CluedIn.Crawling.HubSpot
 
         public IEnumerable<object> GetData(CrawlJobData jobData)
         {
-            try
-            {
-                return GetDataAsync(jobData).Result;
-            }
-            catch (AggregateException e)
-            {
-                _log.Error(() => e.InnerExceptions.First().Message, e);
-                throw e.InnerExceptions.First();
-            }
-        }
-
-        public async Task<IEnumerable<object>> GetDataAsync(CrawlJobData jobData)
-        {
             if (jobData == null)
             {
-                throw new ArgumentNullException(nameof(jobData));
+                yield break;
             }
 
             if (!(jobData is HubSpotCrawlJobData crawlerJobData))
             {
-                return EmptyResult;
+                yield break;
             }
-
+            
             var client = _clientFactory.CreateNew(crawlerJobData);
 
-            var settings = await client.GetSettingsAsync();
+            var settings = client.GetSettingsAsync().Result;
 
             if (settings == null)
             {
                 _log.Error(() => "Settings could not be obtained from HubSpot");
-                return EmptyResult;
+                yield break;
             }
 
-            var dailyLimit = await client.GetDailyLimitAsync();
+            var dailyLimit = client.GetDailyLimitAsync().Result;
             if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
             {
-                _log.Error(() =>"HubSpot daily usage limit has been reached");
-                return EmptyResult;
+                _log.Error(() => "HubSpot daily usage limit has been reached");
+                yield break;
             }
 
-            var data = new List<object>();
+            foreach (var item in GetCompanies(client, crawlerJobData, settings))
+            {
+                yield return item;
+            }
 
-            data.AddRange(new CompanyIterator(client, crawlerJobData, settings, _log).Iterate());
-            data.AddRange(new DealIterator(client, crawlerJobData, settings, _log).Iterate());
-            data.AddRange(new ContactIterator(client, crawlerJobData, settings, _log).Iterate());
-            data.AddRange(new DynamicContactListIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new FormsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new OwnersIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new PublishingChannelsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new FilesIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new SiteMapsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new TemplatesIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new UrlMappingsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new EngagementsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new RecentDealsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new RecentlyCreatedDealsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new SmtpTokensIterator(client, crawlerJobData, _log).Iterate());            
-            data.AddRange(new SocialCalendarEventsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new StaticContactListIterator(client,crawlerJobData, _log).Iterate());
-            data.AddRange(new TaskCalendarEventsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new WorkflowsIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new BlogPostsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new BlogsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new BlogTopicsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new DomainsIterator(client, crawlerJobData, _log).Iterate()); 
-            data.AddRange(new BroadcastMessagesIterator(client, crawlerJobData, _log).Iterate());
-            data.AddRange(new ProductsIterator(client, crawlerJobData, settings, _log).Iterate());
-            data.AddRange(new LineItemsIterator(client, crawlerJobData, settings, _log).Iterate());
-            data.AddRange(new TicketsIterator(client, crawlerJobData, settings, _log).Iterate());
+            foreach (var item in new DealIterator(client, crawlerJobData, settings, _log).Iterate())
+            {
+                yield return item;
+            }
 
-            return data;
+            foreach (var item in new ContactIterator(client, crawlerJobData, settings, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new DynamicContactListIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new FormsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new OwnersIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new PublishingChannelsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new FilesIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new SiteMapsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new TemplatesIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new UrlMappingsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new EngagementsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new RecentDealsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new RecentlyCreatedDealsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new SmtpTokensIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new SocialCalendarEventsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new StaticContactListIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new TaskCalendarEventsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new WorkflowsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new BlogPostsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new BlogsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new BlogTopicsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new DomainsIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new BroadcastMessagesIterator(client, crawlerJobData, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new ProductsIterator(client, crawlerJobData, settings, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new LineItemsIterator(client, crawlerJobData, settings, _log).Iterate())
+            {
+                yield return item;
+            }
+
+            foreach (var item in new TicketsIterator(client, crawlerJobData, settings, _log).Iterate())
+            {
+                yield return item;
+            }
+
         }
+
+        private IEnumerable<object> GetCompanies(IHubSpotClient client, HubSpotCrawlJobData crawlerJobData, Settings settings)
+        {
+            long? portalId = null;
+            var companyIterator = new CompanyIterator(client, crawlerJobData, settings, _log);
+            foreach (var item in companyIterator.Iterate())
+            {
+                yield return item;
+
+                if (item is Company company && company.portalId.HasValue)
+                {
+                    portalId = company.portalId.Value;
+                }
+            }
+
+            if (portalId != null)
+            {
+                foreach (var item in companyIterator.GetDealPipelines(portalId.Value))
+                {
+                    yield return item;
+                }
+
+
+                foreach (var item in companyIterator.GetTables(portalId.Value))
+                {
+                    yield return item;
+                }
+            }
+        }
+
     }
 }
