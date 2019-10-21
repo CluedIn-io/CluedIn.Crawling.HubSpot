@@ -19,44 +19,50 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             var offset = 0;
             var retries = 0;
             limit = limit ?? 100;
+            var canContinue = true;
 
-            var result = new List<object>();
-            try
+            while (canContinue)
             {
-                while (true)
+
+                var result = new List<object>();
+                try
                 {
-                    try
+                    var response = Client.GetBroadcastMessagesAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
+
+                    if (response == null || !response.Any())
+                        canContinue = false;
+                    else
                     {
-                        var response = Client.GetBroadcastMessagesAsync(JobData.LastCrawlFinishTime, limit.Value, offset).Result;
-
-                        if (response == null || !response.Any())
-                            break;
-
                         result.AddRange(response);
 
                         if (response.Count < limit)
-                            break;
+                            canContinue = false;
 
                         offset += limit.Value;
                         retries = 0;
                     }
-                    catch (ThrottlingException e)
+                }
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
                     {
-                        if (!ShouldRetryThrottledCall(e, retries))
-                        {
-                            break;
-                        }
-
-                        retries++;
+                        canContinue = false;
                     }
+
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    canContinue = false;
+                }
+
+                foreach (var item in result)
+                {
+                    yield return item;
                 }
             }
-            catch
-            {
-                return CreateEmptyResults();
-            }
 
-            return result;
         }
     }
 }

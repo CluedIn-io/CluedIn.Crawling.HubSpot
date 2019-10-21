@@ -128,7 +128,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetTicketsAsync(properties)).Objects);
         }
 
-        [Fact]
+        [Fact(Skip = "No dynamic contact lists available in test account")]
         public async Task DynamicContactListsAreAvailable()
         {
             Assert.NotEmpty(

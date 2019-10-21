@@ -25,21 +25,22 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             var offset = 0;
             var retries = 0;
             limit = limit ?? 100;
+            var canContinue = true;
 
-            var result = new List<object>();
-            try
+            var properties = Client.GetTicketPropertiesAsync(_settings).Result;
+            while (canContinue)
             {
-                var properties = Client.GetTicketPropertiesAsync(_settings).Result;
-                while (true)
+                var result = new List<object>();
+
+                try
                 {
+                    var response = Client.GetTicketsAsync(properties, limit.Value, offset).Result;
 
-                    try
+                    if (response?.Objects == null || !response.Objects.Any())
+                        canContinue = false;
+
+                    else
                     {
-                        var response = Client.GetTicketsAsync(properties, limit.Value, offset).Result;
-
-                        if (response?.Objects == null || !response.Objects.Any())
-                            break;
-
                         foreach (var ticket in response.Objects)
                         {
                             if (ticket.ObjectId.HasValue)
@@ -79,28 +80,35 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                         }
 
                         if (response.HasMore == false || response.Objects.Count < limit || response.Offset == null)
-                            break;
-
-                        offset = response.Offset.Value;
-                        retries = 0;
-                    }
-                    catch (ThrottlingException e)
-                    {
-                        if (!ShouldRetryThrottledCall(e, retries))
+                            canContinue = false;
+                        else
                         {
-                            break;
+                            offset = response.Offset.Value;
+                            retries = 0;
                         }
-
-                        retries++;
                     }
                 }
-            }
-            catch
-            {
-                return CreateEmptyResults();
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
+                    {
+                        canContinue = false;
+                    }
+
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    canContinue = false;
+                }
+
+                foreach (var item in result)
+                {
+                    yield return item;
+                }
             }
 
-            return result;
         }
     }
 }

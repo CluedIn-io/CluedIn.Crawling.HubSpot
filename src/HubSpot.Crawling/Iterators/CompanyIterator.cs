@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CluedIn.Core;
 using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -22,72 +23,72 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         public override IEnumerable<object> Iterate(int? limit = null)
         {
             long offset = 0;
-            long portalId = 0;
             var retries = 0;
             limit = limit ?? 100;
-            var result = new List<object>();
-            try
-            {
-                var properties = Client.GetCompanyPropertiesAsync(_settings).Result;
+            var canContinue = true;
+            var properties = Client.GetCompanyPropertiesAsync(_settings).Result;
 
-                while (true)
+            while (canContinue)
+            {
+                var result = new List<object>();
+                try
                 {
-                    try
-                    {
-                        var response = Client.GetCompaniesAsync(properties, limit.Value, offset).Result;
+                    var response = Client.GetCompaniesAsync(properties, limit.Value, offset).Result;
 
                     if (response.results == null || !response.results.Any())
-                        break;
-
-                    foreach (var company in response.results)
+                        canContinue = false;
+                    else
                     {
-                        if (_settings?.currency != null)
-                            company.Currency = _settings.currency;
 
-                        if (company.portalId.HasValue)
-                            portalId = company.portalId.Value;
-
-                        result.Add(company);
-
-                        if (company.companyId.HasValue)
+                        foreach (var company in response.results)
                         {
-                            GetContacts(company, result);
+                            if (_settings?.currency != null)
+                                company.Currency = _settings.currency;
 
-                            GetEngagements(company, result);
-                        }
-                    }
+                            result.Add(company);
 
-                    if (response.hasMore == false || response.offset == null || response.results.Count < limit)
-                        break;
+                            if (company.companyId.HasValue)
+                            {
+                                GetContacts(company, result);
 
-                    offset = response.offset.Value;
-                    retries = 0;
-                    }
-                    catch (ThrottlingException e)
-                    {
-                        if (!ShouldRetryThrottledCall(e, retries))
-                        {
-                            break;
+                                GetEngagements(company, result);
+                            }
                         }
 
-                        retries++;
+                        if (response.hasMore == false || response.offset == null || response.results.Count < limit)
+                            canContinue = false;
+                        else
+                        {
+                            offset = response.offset.Value;
+                            retries = 0;
+                        }
                     }
                 }
+                catch (ThrottlingException e)
+                {
+                    if (!ShouldRetryThrottledCall(e, retries))
+                    {
+                        canContinue = false;
+                    }
 
-                GetDealPipelines(portalId, result);
+                    retries++;
+                }
+                catch
+                {
+                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    canContinue = false;
+                }
 
-                GetTables(portalId, result);
-            }
-            catch
-            {
-                return CreateEmptyResults();
-            }
-
-            return result;
+                foreach (var item in result)
+                {
+                    yield return item;
+                }
+            } 
         }
 
-        private void GetTables(long portalId, List<object> result)
+        public IEnumerable<object> GetTables(long portalId)
         {
+            IList<object> result = new List<object>();
             try
             {
                 var tables = Client.GetTablesAsync().Result;
@@ -104,10 +105,13 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             {
                 Logger.Warn(() => $"Failed to get Tables for portal Id {portalId}", exception);
             }
+
+            return result;
         }
 
-        private void GetDealPipelines(long portalId, List<object> result)
+        public IEnumerable<object> GetDealPipelines(long portalId)
         {
+            IList<object> result = new List<object>();
             try
             {
                 var dealPipelines = Client.GetDealPipelinesAsync().Result;
@@ -121,6 +125,8 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             {
                 Logger.Warn(() => $"Failed to get Deal Pipelines for portal Id {portalId}", exception);
             }
+
+            return result;
         }
 
         private void GetEngagements(Company company, List<object> result)

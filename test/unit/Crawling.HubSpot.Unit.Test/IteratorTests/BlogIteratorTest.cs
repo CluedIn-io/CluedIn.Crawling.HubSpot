@@ -90,7 +90,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
                 DailyRemaining = 0
             });
 
-            _sut.Iterate(2);
+            var result = _sut.Iterate(2).ToList();
 
             Client.Verify(n => n.GetBlogsAsync(greaterThanEpoch, 2, 0), Times.Once);
         }
@@ -110,7 +110,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
                 RateLimitIntervalMilliseconds = 1000
             });
             
-            _sut.Iterate(2);
+            var result = _sut.Iterate(2).ToList();
 
             Client.Verify(n => n.GetBlogsAsync(greaterThanEpoch, 2, 0), Times.Exactly(3));
         }
@@ -125,9 +125,7 @@ namespace Crawling.HubSpot.Unit.Test.IteratorTests
             Client.Setup(n => n.GetBlogsAsync(greaterThanEpoch, 2, 0)).Throws(new Exception());
 
             var result = _sut.Iterate(2);
-
-            Client.Verify(n => n.GetBlogsAsync(greaterThanEpoch, 2, 0), Times.Once);
-
+            
             Assert.Empty(result);
         }
     }
