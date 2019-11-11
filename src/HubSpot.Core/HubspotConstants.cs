@@ -59,7 +59,7 @@ namespace CluedIn.Crawling.HubSpot.Core
         public static IList<string> ServiceTypeJson = new List<string> { "CRMType" };
         public static IList<string> Aliases = new List<string> { "HubSpot", "HubSpot CRM" };
         public const string IconResourceName = "Resources.hubspot.png";
-        public const string Instructions = "You will need to login in your HubSpot account and get the Api Token and paste it in below.";
+        public const string Instructions = "You will need to login in your HubSpot account and get the Api Token and paste it in above.";
         public const IntegrationType Type = IntegrationType.Cloud;
         public const string Category = "Contacts";
         public const string Details = "Our HubSpot provider will allow you to search across all your crm data.";
