@@ -28,7 +28,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CluedIn.Crawling" Version="2.4.0-alpha0101" />
+    <PackageReference Include="CluedIn.Crawling" Version="2.5.6" />
     <PackageReference Include="ComponentHost" Version="1.0.0.46" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.Web.Xdt" Version="2.1.1" />
@@ -40,7 +40,7 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.4.0-alpha0086" />
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.4.0-alpha0101" />
+    <PackageReference Update="CluedIn.Core" Version="2.5.6" />
+    <PackageReference Include="CluedIn.Core.Agent" Version="2.5.6" />
   </ItemGroup>
 </Project>

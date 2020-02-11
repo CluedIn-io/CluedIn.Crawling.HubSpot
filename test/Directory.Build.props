@@ -17,6 +17,6 @@
     <PackageReference Include="xunit.assert" Version="2.4.1" />
      -->
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.utility" Version="2.4.1" />
+    <!-- <PackageReference Include="xunit.runner.utility" Version="2.4.1" /> -->
   </ItemGroup>
 </Project>

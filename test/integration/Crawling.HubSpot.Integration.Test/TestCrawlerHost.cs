@@ -1,6 +1,7 @@
 ﻿using Castle.Windsor;
 using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
+using CrawlerIntegrationTesting.CrawlerHost;
 
 namespace Crawling.HubSpot.Integration.Test
 {

@@ -13,6 +13,7 @@ using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
 using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
+using CrawlerIntegrationTesting.CrawlerHost;
 
 namespace CluedIn.Provider.HubSpot.WebHooks
 {
