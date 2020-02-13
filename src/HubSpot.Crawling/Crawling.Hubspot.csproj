@@ -41,6 +41,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="CluedIn.Core" Version="2.5.6" />
-    <PackageReference Include="CluedIn.Core.Agent" Version="2.5.6" />
   </ItemGroup>
 </Project>

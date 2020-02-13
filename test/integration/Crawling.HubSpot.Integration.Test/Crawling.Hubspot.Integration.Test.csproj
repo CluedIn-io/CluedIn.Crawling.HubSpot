@@ -16,7 +16,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Castle.Windsor" Version="4.1.1" />
-    <PackageReference Include="CrawlerIntegrationTesting" Version="2.4.1" />
+    <PackageReference Include="CrawlerIntegrationTesting" Version="2.5.0-alpha0002" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Moq" Version="4.11.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
