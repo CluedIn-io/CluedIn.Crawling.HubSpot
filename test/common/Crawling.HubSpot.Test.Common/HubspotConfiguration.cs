@@ -5,7 +5,7 @@ using CluedIn.Core.Configuration;
 using CluedIn.Crawling.HubSpot.Core;
 
 namespace Crawling.HubSpot.Test.Common
-{ 
+{
     public static class HubSpotConfiguration
     {
         public static Dictionary<string, object> Create()

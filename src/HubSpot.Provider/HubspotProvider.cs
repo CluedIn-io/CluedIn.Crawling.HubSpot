@@ -7,11 +7,9 @@ using CluedIn.Core.Crawling;
 using CluedIn.Core.Data.Relational;
 using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
-using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using CluedIn.Core.Configuration;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -19,20 +17,21 @@ using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Providers.Models;
 using Newtonsoft.Json;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Provider.HubSpot
 {
     public class HubSpotProvider : ProviderBase, IExtendedProviderMetadata
     {
         private readonly IHubSpotClientFactory _hubspotClientFactory;
-        private readonly ILogger _log;
+        private readonly ILogger<HubSpotProvider> _log;
         private readonly ISystemNotifications _notifications;
 
         /**********************************************************************************************************
          * CONSTRUCTORS
          **********************************************************************************************************/
 
-        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory, ILogger log, ISystemNotifications notifications)
+        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory, ILogger<HubSpotProvider> log, ISystemNotifications notifications)
             : base(appContext, HubSpotConstants.CreateProviderMetadata())
         {
             _hubspotClientFactory = hubspotClientFactory ?? throw new ArgumentNullException(nameof(hubspotClientFactory));
@@ -76,7 +75,7 @@ namespace CluedIn.Provider.HubSpot
             }
             catch (Exception exception)
             {
-                _log.Warn(() => "Could not add HubSpot provider", exception);
+                _log.LogWarning(exception, "Could not add HubSpot provider");
                 return false;
             }
         }
@@ -160,14 +159,14 @@ namespace CluedIn.Provider.HubSpot
             }
             catch (Exception e)
             {
-                _log.Error(() => "There was an error getting HubSpot account information" + e.Message);
+                _log.LogError(e, "There was an error getting HubSpot account information {message}", e.Message);
                 return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." }, {"exception", e.Message } }};
             }
         }
 
         public override string Schedule(DateTimeOffset relativeDateTime, bool webHooksEnabled)
         {
-            return webHooksEnabled && ConfigurationManager.AppSettings.GetFlag("Feature.Webhooks.Enabled", false) ? $"{relativeDateTime.Minute} 0/23 * * *"
+            return webHooksEnabled && ConfigurationManagerEx.AppSettings.GetFlag("Feature.Webhooks.Enabled", false) ? $"{relativeDateTime.Minute} 0/23 * * *"
                 : $"{relativeDateTime.Minute} 0/4 * * *";
         }
 
@@ -210,19 +209,19 @@ namespace CluedIn.Provider.HubSpot
                         await client.CreateWebHook(subscription);
                         webhookSignatures.Add(new WebHookSignature { Signature = webhookDefinition.ProviderDefinitionId.ToString(), ExternalVersion = "v1", ExternalId = null, EventTypes = "contact.creation,contact.deletion,contact.propertyChange,company.creation,company.deletion,company.propertyChange,deal.creation,deal.deletion,deal.propertyChange" });
                     }
-                    catch (Exception e)
+                    catch (Exception exception)
                     {
-                        _log.Warn(() => $"Could not create HubSpot Webhook for subscription: {subscription}", e);
+                        _log.LogWarning(exception, "Could not create HubSpot Webhook for subscription: {subscription}", subscription);
                     }
                 }
 
-                webhookDefinition.Uri = new Uri(this.appContext.System.Configuration.WebhookReturnUrl.Trim('/') + ConfigurationManager.AppSettings["Providers.HubSpot.WebhookEndpoint"]);
+                webhookDefinition.Uri = new Uri(this.appContext.System.Configuration.WebhookReturnUrl.Trim('/') + ConfigurationManagerEx.AppSettings["Providers.HubSpot.WebhookEndpoint"]);
 
                 webhookDefinition.Verified = true;
             }
             catch (Exception exception)
             {
-                _log.Warn(() => "Could not create HubSpot Webhook", exception);
+                _log.LogWarning(exception, "Could not create HubSpot Webhook");
             }
 
             var organizationProviderDataStore = context.Organization.DataStores.GetDataStore<ProviderDefinition>();

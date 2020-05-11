@@ -1,5 +1,18 @@
 # GitVersion.yml
 mode: ContinuousDelivery
-branches: {}
+next-version: 3.0
+branches:
+  feature:
+    regex: ^features?[/-](^netcore)
+  netcore:
+    regex: '^feature/netcore$'
+    mode: ContinuousDeployment
+    tag: netcore
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    source-branches: [ 'master' ]
 ignore:
   sha: []

@@ -3,7 +3,6 @@ using System;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Iterators;
 
 namespace CluedIn.Crawling.HubSpot.Installers
@@ -19,11 +18,6 @@ namespace CluedIn.Crawling.HubSpot.Installers
                 .Install(
                     new Infrastructure.Installers.InstallComponents()
                 )
-
-                .Register(
-                    Component.For<ILogger>()
-                        .UsingFactoryMethod(() => GlobalLog.Console)
-                        .OnlyNewServices())
 
                 .Register(
                     Component.For<IHubSpotIterator>()

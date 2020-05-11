@@ -41,7 +41,7 @@ namespace Crawling.HubSpot.Integration.Test
         //[InlineData("/Topic", 1)]
         [InlineData("/Mail", 5)]
         [InlineData("/Form", 1)]
-        [InlineData("/Person", 1)]
+        [InlineData("/Person", 5)]
         //[InlineData("/Channel", 1)]
         //[InlineData("/Announcement", 1)]
         [InlineData("/Product", 1)]

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using Crawling.HubSpot.Test.Common;
-using Moq;
+using Microsoft.Extensions.Logging;
 using RestSharp;
 using Xunit;
+using Moq;
 using Task = System.Threading.Tasks.Task;
 
 namespace Crawling.HubSpot.Integration.Test.HubSpotClient
@@ -19,7 +19,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
 
         public HappyPath()
         {
-            var logger = new Mock<ILogger>();
+            var logger = new Mock<ILogger<CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient>>();
             var crawlJobData = new HubSpotCrawlJobData(HubSpotConfiguration.Create());
 
 

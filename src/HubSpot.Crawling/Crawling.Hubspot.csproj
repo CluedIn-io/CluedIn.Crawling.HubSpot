@@ -1,45 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <ProjectGuid>{5F649221-EBE9-4E5C-9463-F4E40A435435}</ProjectGuid>
-    <RootNamespace>CluedIn.Crawling.HubSpot</RootNamespace>
-    <AssemblyName>CluedIn.Crawling.HubSpot</AssemblyName>
-    <TargetFramework>net452</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <AssemblyTitle>CluedIn.Crawling.HubSpot</AssemblyTitle>
-    <Product>CluedIn.Crawling.HubSpot</Product>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
     <ProjectReference Include="..\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <EmbeddedResource Include="HubSpotCrawlerComponent.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CluedIn.Crawling" Version="2.5.6" />
-    <PackageReference Include="ComponentHost" Version="1.0.0.46" />
-    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
-    <PackageReference Include="Microsoft.Web.Xdt" Version="2.1.1" />
-    <PackageReference Include="Rx-Core" Version="2.2.5" />
-    <PackageReference Include="Rx-Interfaces" Version="2.2.5" />
-    <PackageReference Include="Rx-Linq" Version="2.2.5" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="CluedIn.Core" Version="2.5.6" />
-  </ItemGroup>
+  
 </Project>

@@ -6,7 +6,6 @@ using CluedIn.Crawling.HubSpot.ClueProducers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Factories;
 using CluedIn.Crawling.HubSpot.Vocabularies;
-using Moq;
 using Xunit;
 
 namespace Crawling.HubSpot.Unit.Test.ClueProducers

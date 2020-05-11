@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using CluedIn.Core;
 using CluedIn.Core.Configuration;
 using CluedIn.Core.Data;
@@ -31,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.Factories
             data.EntityData.Name = "HubSpot CRM";
             data.EntityData.Description = "HubSpot CRM is a web and mobile application for customers.";
             data.EntityData.DisplayName = "HubSpot CRM";
-            data.EntityData.Uri = new Uri(ConfigurationManager.AppSettings.GetValue(HubSpotConstants.KeyName.HubSpotLoginUri, "https://app.hubspot.com/login"));  
+            data.EntityData.Uri = new Uri(ConfigurationManagerEx.AppSettings.GetValue(HubSpotConstants.KeyName.HubSpotLoginUri, "https://app.hubspot.com/login"));  
             data.EntityData.Codes.Add(new EntityCode(EntityType.Product, "CluedIn", "HubSpot"));
 
             var iconBytes = GetIcon();

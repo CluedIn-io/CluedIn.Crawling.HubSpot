@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 using CluedIn.Core;
@@ -31,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Indexing
             if (clue == null)
                 throw new ArgumentNullException(nameof(clue));
 
-            if (!ConfigurationManager.AppSettings.GetFlag("Crawl.InitialCrawl.FileIndexing", true))
+            if (!ConfigurationManagerEx.AppSettings.GetFlag("Crawl.InitialCrawl.FileIndexing", true))
                 return;
 
             if (data.Length > Constants.MaxFileIndexingFileSize)

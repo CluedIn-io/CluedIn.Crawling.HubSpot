@@ -1,17 +1,17 @@
 ﻿using System;
 using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
-using CluedIn.Core.Logging;
+using Microsoft.Extensions.Logging;
 using RestSharp;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
     public class HubSpotFileFetcher : IHubSpotFileFetcher
     {
-        private readonly ILogger _log;
+        private readonly ILogger<HubSpotFileFetcher> _log;
         private readonly IRestClient _client;
 
-        public HubSpotFileFetcher(ILogger log, IRestClient client)
+        public HubSpotFileFetcher(ILogger<HubSpotFileFetcher> log, IRestClient client)
         {
             _log = log ?? throw new ArgumentNullException(nameof(log));
             _client = client ?? throw new ArgumentNullException(nameof(client));
@@ -40,7 +40,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
             catch (Exception exception)
             {
-                _log.Warn(() => "Could not download HubSpot thumbnail", exception);  
+                _log.LogWarning(exception, "Could not download HubSpot thumbnail");  
             }
 
             return rawDataPart;

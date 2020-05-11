@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -34,33 +33,33 @@ namespace CluedIn.Crawling.HubSpot.Iterators
         {
             if (e.DailyRemaining <= 0)
             {
-                Logger.Warn(() => "Exceeded daily quota");
+                Logger.LogWarning("Exceeded daily quota");
                 return false;
             }
 
             if (e.RateLimitRemaining > 0)
             {
-                Logger.Verbose(() => $"Retrying request, {e.RateLimitRemaining} remaining attempts");
+                Logger.LogTrace("Retrying request, {remainingAttempts} remaining attempts", e.RateLimitRemaining);
 
                 return true;
             }
 
             if (retries < MaxRetries)
             {
-                Logger.Verbose(() => $"Retrying request in {e.RateLimitIntervalMilliseconds} milliseconds");
+                Logger.LogTrace("Retrying request in {millisecondsInterval} milliseconds", e.RateLimitIntervalMilliseconds);
 
                 Thread.Sleep(e.RateLimitIntervalMilliseconds);
                 return true;
             }
 
-            Logger.Warn(() => $"Failed request after {MaxRetries} retries");
+            Logger.LogWarning("Failed request after {MaxRetries} retries", MaxRetries);
 
             return false;
         }
 
         protected IEnumerable<object> CreateEmptyResults()
         {
-            Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+            Logger.LogWarning("Failed to retrieve data in {type}", GetType().FullName);
             return Enumerable.Empty<object>();
         }
     }

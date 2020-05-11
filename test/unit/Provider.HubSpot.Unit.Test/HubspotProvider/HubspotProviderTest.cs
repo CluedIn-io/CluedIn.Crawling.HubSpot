@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using Castle.Windsor;
 using CluedIn.Core;
-using CluedIn.Core.Accounts;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Providers;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
@@ -14,8 +12,10 @@ using Crawling.HubSpot.Test.Common;
 using Moq;
 using RestSharp;
 using Xunit;
-using Owner = java.security.acl.Owner;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.Extensions.Logging;
+using CluedIn.Crawling.HubSpot.Test.Common;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Provider.HubSpot.Unit.Test.HubSpotProvider
 {
@@ -26,7 +26,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
         protected readonly ApplicationContext ApplicationContext;
         protected readonly Mock<IWindsorContainer> Container;
         protected readonly Mock<SystemContext> SystemContext;
-        protected readonly Mock<ILogger> Logger;
+        protected readonly Mock<ILogger<CluedIn.Provider.HubSpot.HubSpotProvider>> Logger;
         protected readonly Guid OrganizationId = Guid.NewGuid();
         protected readonly Dictionary<string, object> Configuration;
         protected readonly HubSpotCrawlJobData CrawlJobData;
@@ -38,10 +38,10 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
             SystemContext = new Mock<SystemContext>(Container.Object);
             NameClientFactory = new Mock<IHubSpotClientFactory>();
             ApplicationContext = new ApplicationContext(Container.Object);
-            Logger = new Mock<ILogger>();
+            Logger = new Mock<ILogger<CluedIn.Provider.HubSpot.HubSpotProvider>>();
             Configuration = HubSpotConfiguration.Create();
             CrawlJobData = new HubSpotCrawlJobData(Configuration);
-            Client = new Mock<HubSpotClient>(Logger.Object, CrawlJobData, new RestClient());
+            Client = new Mock<HubSpotClient>(new NullLogger<HubSpotClient>(), CrawlJobData, new RestClient());
             Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null);
 
             NameClientFactory.Setup(n => n.CreateNew(It.IsAny<HubSpotCrawlJobData>())).Returns(() => Client.Object);
@@ -54,9 +54,10 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
             {
                 Client.Setup(n => n.GetContactsFromAllListsAsync(It.IsAny<IList<string>>(), 1, 0)).Throws(new Exception());
 
-                await Sut.TestAuthentication(null, Configuration, OrganizationId, Guid.Empty, Guid.Empty);
+                var result = await Sut.TestAuthentication(null, Configuration, OrganizationId, Guid.Empty, Guid.Empty);
 
-                Logger.Verify(n => n.Warn(It.IsAny<Func<string>>(), It.IsAny<Exception>()), Times.Once);
+                MoqUtils.VerifyLog(Logger.Object, LogLevel.Warning, Times.Once());
+                Assert.False(result);
             }
 
             [Fact]

@@ -1,9 +1,7 @@
 using System;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using RestSharp;
@@ -13,15 +11,16 @@ using CluedIn.Core.Configuration;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.Infrastructure
 {
     public class HubSpotClient : IHubSpotClient
     {
-        private readonly ILogger _log;
+        private readonly ILogger<HubSpotClient> _log;
         private readonly IRestClient _client;
 
-        public HubSpotClient(ILogger log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client)
+        public HubSpotClient(ILogger<HubSpotClient> log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client)
         {
             if (hubspotCrawlJobData == null)
                 throw new ArgumentNullException(nameof(hubspotCrawlJobData));
@@ -514,7 +513,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         private T GetRequestResponse<T>(string url, IRestResponse response)
         {
-            _log.Verbose(() =>$"HubSpotClient.GetAsync calling {url}");
+            _log.LogTrace("HubSpotClient.GetAsync calling {url}", url);
             if ((int)response.StatusCode == 429)
             {
                 throw new ThrottlingException
@@ -527,16 +526,14 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                var diagnosticMessage = $"Request to {_client.BaseUrl}{url} failed, response {response.ErrorMessage} ({response.StatusCode})";
+                _log.LogError("Request to {url} failed, response {errorMessage} ({statusCode})", $"{_client.BaseUrl}{url}", response.ErrorMessage, response.StatusCode);
 
-                _log.Error(() => diagnosticMessage);
-
-                throw new InvalidOperationException($"Communication to HubSpot unavailable. {diagnosticMessage}");
+                throw new InvalidOperationException("Communication to HubSpot unavailable.");
             }
 
             var data = JsonConvert.DeserializeObject<T>(response.Content);
 
-            _log.Verbose(() =>$"HubSpotClient response content length: {response.Content.Length}");
+            _log.LogTrace("HubSpotClient response content length: {contentLength}", response.Content.Length);
 
             return data;
         }
@@ -544,15 +541,10 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
         private class QueryStringParameter
         {
             public Parameter Parameter { get; }
+
             public QueryStringParameter(string name, object value)
             {
-                Parameter =
-                  new Parameter()
-                  {
-                      Type = ParameterType.QueryString,
-                      Name = name,
-                      Value = value.ToString()
-                  };
+                Parameter = new Parameter(name, value.ToString(), ParameterType.QueryString);
             }
         }
 
@@ -560,10 +552,10 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             await GetAsync<List<OwnerResponse>>("owners/v2/owners");
 
         public async Task<WebHookResponse> GetWebHooks() =>
-            await GetAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManager.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions");
+            await GetAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManagerEx.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions");
 
         public async Task<WebHookResponse> CreateWebHook(string subscription) =>
-            await PostAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManager.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions",
+            await PostAsync<WebHookResponse>($"webhooks/v1/{ConfigurationManagerEx.AppSettings.GetValue("Providers.HubSpot.AppId", "")}/subscriptions",
                 $"{{ \"subscriptionDetails\" : {{ \"subscriptionType\" : \"{subscription}\", \"propertyName\" : \"companyname\"}},\"enabled\" : true }}");
     }
 }

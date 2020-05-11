@@ -1,11 +1,11 @@
 ﻿using System;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -13,9 +13,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class RowClueProducer : BaseClueProducer<Row>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<RowClueProducer> _log;
 
-        public RowClueProducer(IClueFactory factory, ILogger log)
+        public RowClueProducer(IClueFactory factory, ILogger<RowClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -84,7 +84,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
             catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse columns for Hubspot Row", exception);
+                _log.LogError(exception, "Failed to parse columns for Hubspot Row");
             }
 
             return clue;

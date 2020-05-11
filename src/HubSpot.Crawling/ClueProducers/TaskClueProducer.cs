@@ -4,20 +4,20 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class TaskClueProducer : BaseClueProducer<Task>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<TaskClueProducer> _log;
 
-        public TaskClueProducer(IClueFactory factory, ILogger log)
+        public TaskClueProducer(IClueFactory factory, ILogger<TaskClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -189,7 +189,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
             catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse metadata for Hubspot Task", exception);
+                _log.LogError(exception, "Failed to parse metadata for Hubspot Task");
             }
 
             if (data.Name == null)

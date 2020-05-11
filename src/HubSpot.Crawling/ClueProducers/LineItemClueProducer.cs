@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -16,9 +16,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class LineItemClueProducer : BaseClueProducer<LineItem>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<LineItemClueProducer> _log;
 
-        public LineItemClueProducer(IClueFactory factory, ILogger log)
+        public LineItemClueProducer(IClueFactory factory, ILogger<LineItemClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -152,7 +152,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 catch (Exception exception)
                 {
-                    _log.Error(() => "Could not parse HubSpot Line Item Properies", exception);
+                    _log.LogError(exception, "Could not parse HubSpot Line Item Properies");
                 }
 
                 if (input.Associations.Any())

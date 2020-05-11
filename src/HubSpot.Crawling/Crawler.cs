@@ -1,21 +1,21 @@
 using System;
 using System.Collections.Generic;
 using CluedIn.Core.Crawling;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Factories;
 using CluedIn.Crawling.HubSpot.Iterators;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot
 {
     public class Crawler : ICrawlerDataGenerator
     {
         private readonly IHubSpotClientFactory _clientFactory;
-        private readonly ILogger _log;
+        private readonly ILogger<Crawler> _log;
         
-        public Crawler(IHubSpotClientFactory clientFactory, ILogger log)
+        public Crawler(IHubSpotClientFactory clientFactory, ILogger<Crawler> log)
         {
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -39,14 +39,14 @@ namespace CluedIn.Crawling.HubSpot
 
             if (settings == null)
             {
-                _log.Error(() => "Settings could not be obtained from HubSpot");
+                _log.LogError("Settings could not be obtained from HubSpot");
                 yield break;
             }
 
             var dailyLimit = client.GetDailyLimitAsync().Result;
             if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
             {
-                _log.Error(() => "HubSpot daily usage limit has been reached");
+                _log.LogError("HubSpot daily usage limit has been reached");
                 yield break;
             }
 

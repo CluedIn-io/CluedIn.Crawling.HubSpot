@@ -1,12 +1,12 @@
 using System.IO;
 using System.Reflection;
-
+using Castle.MicroKernel.Registration;
 using CluedIn.Core.Installers;
 using CluedIn.Crawling.HubSpot.Core;
-
 using CrawlerIntegrationTesting.Clues;
-
 using Crawling.HubSpot.Test.Common;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Crawling.HubSpot.Integration.Test
 {
@@ -22,10 +22,9 @@ namespace Crawling.HubSpot.Integration.Test
 
             //_outputHelper.WriteLine($"Creating crawler host {HubSpotConstants.ProviderName} from folder {executingFolder}");
 
-            var crawlerHost = new TestCrawlerHost(executingFolder, HubSpotConstants.ProviderName);
+            var crawlerHost = new TestCrawlerHost(executingFolder);
 
-            crawlerHost.ContainerInstance.Install(new VocabulariesInstaller());
-
+            
             ClueStorage = new ClueStorage();
 
             crawlerHost.ProcessClue += CrawlerHost_ProcessClue;

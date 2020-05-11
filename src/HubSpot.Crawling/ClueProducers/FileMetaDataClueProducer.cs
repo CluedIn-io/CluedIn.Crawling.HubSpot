@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CluedIn.Core;
 using CluedIn.Core.Agent.Jobs;
 using CluedIn.Core.Crawling;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
-using CluedIn.Crawling.HubSpot.Infrastructure.Indexing;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {

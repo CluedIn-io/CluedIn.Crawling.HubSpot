@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using CluedIn.Core;
@@ -11,9 +10,9 @@ using CluedIn.Core.DataStore;
 using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Providers;
 using CluedIn.Core.Webhooks;
-using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using CrawlerIntegrationTesting.CrawlerHost;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Provider.HubSpot.WebHooks
 {
@@ -33,8 +32,8 @@ namespace CluedIn.Provider.HubSpot.WebHooks
         {
             try
             {
-                if (ConfigurationManager.AppSettings.GetFlag("Feature.Webhooks.Log.Posts", false))
-                    context.Log.Debug(() => command.HttpPostData);
+                if (ConfigurationManagerEx.AppSettings.GetFlag("Feature.Webhooks.Log.Posts", false))
+                    context.Log.LogDebug(command.HttpPostData);
 
                 var configurationDataStore = context.ApplicationContext.Container.Resolve<IConfigurationRepository>();
                 if (command.WebhookDefinition.ProviderDefinitionId != null)
@@ -70,7 +69,9 @@ namespace CluedIn.Provider.HubSpot.WebHooks
             }
             catch (Exception exception)
             {
-                context.Log.Error(new { command.HttpHeaders, command.HttpQueryString, command.HttpPostData, command.WebhookDefinitionId }, () => "Could not process web hook message", exception);
+                using (context.Log.BeginScope(new { command.HttpHeaders, command.HttpQueryString, command.HttpPostData, command.WebhookDefinitionId })) {
+                    context.Log.LogError(exception, "Could not process web hook message");
+                }                
             }
 
             return new List<Clue>();

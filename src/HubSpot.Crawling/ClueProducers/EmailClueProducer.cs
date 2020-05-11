@@ -2,20 +2,20 @@
 using System.Globalization;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class EmailClueProducer : BaseClueProducer<Email>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<EmailClueProducer> _log;
 
-        public EmailClueProducer(IClueFactory factory, ILogger log)
+        public EmailClueProducer(IClueFactory factory, ILogger<EmailClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -321,9 +321,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
             }
 
-            catch (Exception e)
+            catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse value.metadata for Hubspot Email", e);
+                _log.LogError(exception, "Failed to parse value.metadata for Hubspot Email");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

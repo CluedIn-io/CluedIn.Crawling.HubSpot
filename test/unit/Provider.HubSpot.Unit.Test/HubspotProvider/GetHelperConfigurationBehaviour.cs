@@ -5,7 +5,7 @@ using CluedIn.Core.Crawling;
 using CluedIn.Crawling.HubSpot.Core;
 using Crawling.HubSpot.Test.Common;
 using Provider.HubSpot.Unit.Test.HubSpotProvider;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace Provider.HubSpot.Unit.Test.HubspotProvider
@@ -27,8 +27,7 @@ namespace Provider.HubSpot.Unit.Test.HubspotProvider
                     .Wait());
 
             ((ArgumentNullException)ex.InnerExceptions.Single())
-                .ParamName
-                .ShouldEqual("jobData");
+                .ParamName.ShouldBe("jobData");
         }
 
         [Theory]
@@ -41,8 +40,8 @@ namespace Provider.HubSpot.Unit.Test.HubspotProvider
         }
         
         [Theory]
-        [InlineAutoData("apiToken", "apiToken", "4fad15b1-8d51-4919-b11a-125bd9346e51")]
-        [InlineAutoData("customerSubDomain", "customerSubDomain", "")]
+        [InlineAutoData("apiToken", "ApiToken", "4fad15b1-8d51-4919-b11a-125bd9346e51")]
+        [InlineAutoData("customerSubDomain", "CustomerSubDomain", "")]
         // Fill in the values for expected results ....
         public void Returns_Expected_Data(string key, string propertyName, object expectedValue, Guid organizationId, Guid userId, Guid providerDefinitionId) 
         {
@@ -58,7 +57,7 @@ namespace Provider.HubSpot.Unit.Test.HubspotProvider
                     $"{key} not found in results");
 
             result[key]
-                .ShouldEqual(expectedValue);
+                .ShouldBe(expectedValue);
         }
     }
 }
