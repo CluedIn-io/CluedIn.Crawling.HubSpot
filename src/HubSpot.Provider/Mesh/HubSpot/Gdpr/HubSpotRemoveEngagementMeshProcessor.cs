@@ -1,10 +1,10 @@
 ﻿using CluedIn.Core;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 {
-    public class HubspotRemoveEngagementMeshProcessor : HubspotRemoveBaseMeshProcessor
+    public class HubSpotRemoveEngagementMeshProcessor : HubSpotRemoveBaseMeshProcessor
     {
-        public HubspotRemoveEngagementMeshProcessor(ApplicationContext appContext)
+        public HubSpotRemoveEngagementMeshProcessor(ApplicationContext appContext)
             : base(appContext,  "engagements/v1/engagements/", CluedIn.Core.Data.EntityType.Task, CluedIn.Core.Data.EntityType.Activity)
         {
         }

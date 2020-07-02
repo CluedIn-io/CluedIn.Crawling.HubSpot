@@ -9,14 +9,14 @@ using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using RestSharp;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 {
-    public abstract class HubspotUpdateBaseMeshProcessor : BaseMeshProcessor
+    public abstract class HubSpotUpdateBaseMeshProcessor : BaseMeshProcessor
     {
         public EntityType[] EntityType { get; }
         public string EditUrl { get; }
-     
-        protected HubspotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, params EntityType[] entityType)
+
+        protected HubSpotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, params EntityType[] entityType)
             : base(appContext)
         {
             EntityType = entityType;
@@ -32,7 +32,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
         {
             return;
         }
-        
+
         public override List<RawQuery> GetRawQueries(IDictionary<string, object> config, IEntity entity, Core.Mesh.Properties properties)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
@@ -46,7 +46,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
                 }
             };
         }
-        
+
         public override Guid GetProviderId()
         {
             return Constants.Providers.HubSpotId;
@@ -95,6 +95,6 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
 
-        
+
     }
 }

@@ -84,7 +84,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
             catch (Exception exception)
             {
-                _log.LogError(exception, "Failed to parse columns for Hubspot Row");
+                _log.LogError(exception, "Failed to parse columns for HubSpot Row");
             }
 
             return clue;

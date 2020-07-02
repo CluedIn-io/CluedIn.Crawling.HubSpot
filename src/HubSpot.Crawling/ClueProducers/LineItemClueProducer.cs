@@ -30,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Sales.Order, input.ObjectId.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_001_Name_MustBeSet);
@@ -160,7 +160,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, s => association.ToString());
 
                 if (!data.OutgoingEdges.Any() && input.PortalId != null)
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
+                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "HubSpot");
             }
 
             return clue;

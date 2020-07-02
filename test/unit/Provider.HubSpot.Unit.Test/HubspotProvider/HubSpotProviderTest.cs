@@ -87,7 +87,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
 
         public class GetAccountInformationTests : HubSpotProviderTest
         {
-            [Theory(Skip = "Requires HubspotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface"), AutoData]
+            [Theory(Skip = "Requires HubSpotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface"), AutoData]
             public async Task GetAccountInformationReturnsAccountInformationWithPortalId(int portalId)
             {
                 Client.Setup(n => n.GetAccountInformation()).ReturnsAsync(new List<OwnerResponse> {new OwnerResponse {portalId = portalId}});
@@ -98,7 +98,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
                 Assert.Equal(portalId.ToString(), result.AccountDisplay);
             }
 
-            [Fact(Skip = "Requires HubspotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface")]
+            [Fact(Skip = "Requires HubSpotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface")]
             public async Task GetAccountInformationHandlesNullResult()
             {
                 Client.Setup(n => n.GetAccountInformation()).ReturnsAsync(default(List<OwnerResponse>));
@@ -110,7 +110,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
                 Assert.NotEmpty(result.Errors);
             }
 
-            [Fact(Skip = "Requires HubspotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface")]
+            [Fact(Skip = "Requires HubSpotClient.GetAccountInformation to be virtual as we are mocking concrete class NOT the interface")]
             public async Task GetAccountInformationHandlesException()
             {
                 Client.Setup(n => n.GetAccountInformation()).Throws(new Exception());

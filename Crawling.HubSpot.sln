@@ -66,9 +66,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{646CF1D9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{E34F1771-5B93-4754-8DFE-C8875E09FE48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Unit.Test", "test\unit\Crawling.Hubspot.Unit.Test\Crawling.HubSpot.Unit.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Unit.Test", "test\unit\Crawling.HubSpot.Unit.Test\Crawling.HubSpot.Unit.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Unit.Test", "test\unit\Provider.Hubspot.Unit.Test\Provider.HubSpot.Unit.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Unit.Test", "test\unit\Provider.HubSpot.Unit.Test\Provider.HubSpot.Unit.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{71361451-FE9B-4AE9-BE46-782444EEA203}"
 EndProject

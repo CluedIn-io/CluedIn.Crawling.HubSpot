@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Support.Ticket;
 
-            AddGroup("Hubspot Ticket Details", group =>
+            AddGroup("HubSpot Ticket Details", group =>
             {
                 TicketName                      = group.Add(new VocabularyKey("TicketName"));
                 TicketDescription               = group.Add(new VocabularyKey("TicketDescription"));

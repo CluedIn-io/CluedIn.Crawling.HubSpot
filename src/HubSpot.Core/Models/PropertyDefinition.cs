@@ -14,7 +14,7 @@ namespace CluedIn.Crawling.HubSpot.Core.Models
         public List<object> Options { get; set; }
         public bool Calculated { get; set; }
         public bool Externaloptions { get; set; }
-        public bool? Hubspotdefined { get; set; }
+        public bool? HubSpotdefined { get; set; }
         public bool Formfield { get; set; }
         public int Displayorder { get; set; }
         public bool Readonlyvalue { get; set; }

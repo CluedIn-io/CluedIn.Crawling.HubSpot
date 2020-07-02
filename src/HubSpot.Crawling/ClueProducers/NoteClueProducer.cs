@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Note, input.engagement.id.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
@@ -149,7 +149,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             catch (Exception exception)
             {
-               _log.LogError(exception, "Failed to parse metadata for Hubspot Note");
+               _log.LogError(exception, "Failed to parse metadata for HubSpot Note");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

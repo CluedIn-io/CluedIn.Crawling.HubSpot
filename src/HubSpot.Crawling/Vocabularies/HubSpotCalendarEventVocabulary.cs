@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Calendar.Event;
 
-            AddGroup("Hubspot Calendar Event Details", group =>
+            AddGroup("HubSpot Calendar Event Details", group =>
             {
                 AvatarUrl         = group.Add(new VocabularyKey("AvatarUrl", VocabularyKeyDataType.Uri));
                 Category          = group.Add(new VocabularyKey("Category"));

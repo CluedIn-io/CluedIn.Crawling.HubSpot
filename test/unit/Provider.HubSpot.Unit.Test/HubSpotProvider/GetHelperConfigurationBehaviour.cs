@@ -8,7 +8,7 @@ using Provider.HubSpot.Unit.Test.HubSpotProvider;
 using Shouldly;
 using Xunit;
 
-namespace Provider.HubSpot.Unit.Test.HubspotProvider
+namespace Provider.HubSpot.Unit.Test.HubSpotProvider
 {
     public class GetHelperConfigurationBehaviour : HubSpotProviderTest
     {
@@ -38,12 +38,12 @@ namespace Provider.HubSpot.Unit.Test.HubspotProvider
                 .Result
                 .ShouldNotBeNull();
         }
-        
+
         [Theory]
         [InlineAutoData("apiToken", "ApiToken", "4fad15b1-8d51-4919-b11a-125bd9346e51")]
         [InlineAutoData("customerSubDomain", "CustomerSubDomain", "")]
         // Fill in the values for expected results ....
-        public void Returns_Expected_Data(string key, string propertyName, object expectedValue, Guid organizationId, Guid userId, Guid providerDefinitionId) 
+        public void Returns_Expected_Data(string key, string propertyName, object expectedValue, Guid organizationId, Guid userId, Guid providerDefinitionId)
         {
             var property = _jobData.GetType().GetProperty(propertyName);
             property?.SetValue(_jobData, expectedValue);

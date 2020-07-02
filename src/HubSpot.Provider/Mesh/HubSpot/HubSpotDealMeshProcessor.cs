@@ -1,10 +1,10 @@
 ﻿using CluedIn.Core;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 {
-    public class HubspotDealMeshProcessor : HubspotUpdateBaseMeshProcessor
+    public class HubSpotDealMeshProcessor : HubSpotUpdateBaseMeshProcessor
     {
-        public HubspotDealMeshProcessor(ApplicationContext appContext)
+        public HubSpotDealMeshProcessor(ApplicationContext appContext)
             : base(appContext, "deals/v1/deal/", CluedIn.Core.Data.EntityType.Sales.Deal)
         {
         }

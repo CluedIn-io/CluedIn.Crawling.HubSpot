@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Marketing.Campaign;
 
-            AddGroup("Hubspot Campaign Details", group =>
+            AddGroup("HubSpot Campaign Details", group =>
             {
                 AppName     = group.Add(new VocabularyKey("AppName"));
                 ContentId   = group.Add(new VocabularyKey("ContentId", VocabularyKeyVisibility.Hidden));

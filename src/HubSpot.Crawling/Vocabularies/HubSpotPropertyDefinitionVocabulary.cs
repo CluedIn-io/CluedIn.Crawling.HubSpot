@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Note;
 
-            AddGroup("Hubspot Ticket Details", group =>
+            AddGroup("HubSpot Ticket Details", group =>
             {
 
                 Name                          = group.Add(new VocabularyKey("Name"));
@@ -36,7 +36,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
                 Options                       = group.Add(new VocabularyKey("Options", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
                 Calculated                    = group.Add(new VocabularyKey("Calculated"));
                 ExternalOptions               = group.Add(new VocabularyKey("ExternalOptions"));
-                HubspotDefined                = group.Add(new VocabularyKey("HubspotDefined"));
+                HubSpotDefined                = group.Add(new VocabularyKey("HubSpotDefined"));
                 FormField                     = group.Add(new VocabularyKey("FormField"));
                 DisplayOrder                  = group.Add(new VocabularyKey("DisplayOrder"));
                 ReadonlyValue                 = group.Add(new VocabularyKey("ReadonlyValue"));
@@ -69,7 +69,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
         public VocabularyKey Options { get; private set; }
         public VocabularyKey Calculated { get; private set; }
         public VocabularyKey ExternalOptions { get; private set; }
-        public VocabularyKey HubspotDefined { get; private set; }
+        public VocabularyKey HubSpotDefined { get; private set; }
         public VocabularyKey FormField { get; private set; }
         public VocabularyKey DisplayOrder { get; private set; }
         public VocabularyKey ReadonlyValue { get; private set; }

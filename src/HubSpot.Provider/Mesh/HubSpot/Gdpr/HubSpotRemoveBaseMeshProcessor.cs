@@ -8,19 +8,19 @@ using CluedIn.Core.Messages.Processing;
 using CluedIn.Crawling.HubSpot.Core;
 using RestSharp;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 {
-    public abstract class HubspotRemoveBaseMeshProcessor : BaseRemoveProcessor
+    public abstract class HubSpotRemoveBaseMeshProcessor : BaseRemoveProcessor
     {
         public EntityType[] EntityType { get; }
         public string DeleteUrl { get; }
 
-        protected HubspotRemoveBaseMeshProcessor(ApplicationContext appContext)
+        protected HubSpotRemoveBaseMeshProcessor(ApplicationContext appContext)
            : base(appContext)
         {
         }
 
-        protected HubspotRemoveBaseMeshProcessor(ApplicationContext appContext, string deleteUrl, params EntityType[] entityType)
+        protected HubSpotRemoveBaseMeshProcessor(ApplicationContext appContext, string deleteUrl, params EntityType[] entityType)
             : base(appContext)
         {
             EntityType = entityType;

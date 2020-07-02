@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Calendar.Meeting, input.engagement.id.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
@@ -72,7 +72,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (input.engagement.id != null)
                 {
-                    //var url = 
+                    //var url =
                     //data.Uri = new Uri(url);
                 }
                 if (input.engagement.createdAt != null)
@@ -161,7 +161,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             catch (Exception exception)
             {
-                _log.LogError(exception, "Failed to parse metadata for Hubspot Meeting");
+                _log.LogError(exception, "Failed to parse metadata for HubSpot Meeting");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

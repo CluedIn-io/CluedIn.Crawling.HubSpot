@@ -45,7 +45,7 @@
 //namespace CluedIn.Tests.Unit.ExternalSearch
 //{
 //    [TestFixture]
-//    public class HubspotTests
+//    public class HubSpotTests
 //    {
 //        /**********************************************************************************************************
 //         * FIELDS
@@ -83,7 +83,7 @@
 //                Transform = new List<Transform>()
 //                {
 //                    new Transform()
-//                    { 
+//                    {
 //                        key = "cluedin.user.jobTitle",
 //                        value = "CTO"
 //                    }
@@ -104,7 +104,7 @@
 //            var e = new Entity(EntityType.Organization, this.testContext.Context.Organization);
 //            e.Codes.Add(new EntityCode(EntityType.Organization, "HubSpot", "123"));
 
-//            var hubspotMeshProvider = new Mock<HubspotDealMeshProcessor>(MockBehavior.Loose, this.testContext.AppContext.Object);
+//            var hubspotMeshProvider = new Mock<HubSpotDealMeshProcessor>(MockBehavior.Loose, this.testContext.AppContext.Object);
 
 //            hubspotMeshProvider.CallBase = true;
 
@@ -198,7 +198,7 @@
 //                EntityType = EntityType.Organization
 //            };
 
-//            var hubspotMeshProvider = new Mock<HubspotDealMeshProcessor>(MockBehavior.Loose, this.testContext.AppContext.Object);
+//            var hubspotMeshProvider = new Mock<HubSpotDealMeshProcessor>(MockBehavior.Loose, this.testContext.AppContext.Object);
 
 //            hubspotMeshProvider.CallBase = true;
 

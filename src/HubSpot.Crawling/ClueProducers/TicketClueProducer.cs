@@ -30,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Support.Ticket, input.ObjectId.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
@@ -216,7 +216,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 catch (Exception exception)
                 {
-                    _log.LogError(exception, "Failed to parse properties for Hubspot Ticket");
+                    _log.LogError(exception, "Failed to parse properties for HubSpot Ticket");
                 }
             }
 

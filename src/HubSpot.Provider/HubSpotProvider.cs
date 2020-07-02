@@ -154,13 +154,13 @@ namespace CluedIn.Provider.HubSpot
                     var portalId = result.First().portalId;
                     return new AccountInformation(portalId.ToString(CultureInfo.InvariantCulture), portalId.ToString(CultureInfo.InvariantCulture));
                 }
-                return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." } } };
-                
+                return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with HubSpot." } } };
+
             }
             catch (Exception e)
             {
                 _log.LogError(e, "There was an error getting HubSpot account information {message}", e.Message);
-                return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with Hubspot." }, {"exception", e.Message } }};
+                return new AccountInformation(string.Empty, string.Empty) { Errors = new Dictionary<string, string>() { { "error", "Please contact CluedIn support in the top menu to help you setup with HubSpot." }, {"exception", e.Message } }};
             }
         }
 
@@ -309,7 +309,7 @@ namespace CluedIn.Provider.HubSpot
             Instructions = HubSpotConstants.Instructions,
             Value = new List<string> { HubSpotConstants.CrawlerDescription },
                 Details = HubSpotConstants.Details
-            
+
         };
 
         public string Details => HubSpotConstants.Details;
