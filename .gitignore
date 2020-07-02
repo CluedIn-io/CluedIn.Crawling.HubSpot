@@ -266,5 +266,5 @@ __pycache__/
 
 # NDepend
 NDependOut/
-/test/integration/Crawling.Hubspot.Integration.Test/GeneratedClues
+/test/integration/Crawling.HubSpot.Integration.Test/GeneratedClues
 /src/HubSpot.Provider/Properties/launchSettings.json

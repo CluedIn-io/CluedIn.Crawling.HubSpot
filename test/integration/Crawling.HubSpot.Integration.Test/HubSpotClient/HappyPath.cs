@@ -223,7 +223,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetUrlMappingsAsync(greaterThanEpoch)).objects);
         }
 
-        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
+        [Fact(Skip = "Cannot test due to HubSpot account privileges")]
         public async Task TemplatesAreAvailable()
         {
             Assert.NotEmpty(
@@ -237,7 +237,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetEngagementsAsync()).results);
         }
 
-        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
+        [Fact(Skip = "Cannot test due to HubSpot account privileges")]
         public async Task SiteMapsAreAvailable()
         {
             Assert.NotEmpty(
@@ -268,7 +268,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetBlogsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory(Skip = "Cannot test due to Hubspot account privileges")]
+        [Theory(Skip = "Cannot test due to HubSpot account privileges")]
         [InlineAutoData]
         public async Task DomainsAreAvailable(DateTimeOffset greaterThanEpoch)
         {
@@ -276,7 +276,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 (await _sut.GetDomainsAsync(greaterThanEpoch)).objects);
         }
 
-        [Theory(Skip = "Cannot test due to Hubspot account privileges")]
+        [Theory(Skip = "Cannot test due to HubSpot account privileges")]
         [InlineAutoData(300081, 62515)]
         public async Task TableRowsAreAvailable(long tableId, long portalId, Column dateColumn)
         {
@@ -291,21 +291,21 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
                 await _sut.GetFormsAsync());
         }
 
-        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
+        [Fact(Skip = "Cannot test due to HubSpot account privileges")]
         public async Task TablesAreAvailable()
         {
             Assert.NotEmpty(
                 await _sut.GetTablesAsync());
         }
 
-        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
+        [Fact(Skip = "Cannot test due to HubSpot account privileges")]
         public async Task WorkFlowsAreAvailable()
         {
             Assert.NotEmpty(
                 (await _sut.GetWorkflowsAsync()).workflows);
         }
 
-        [Fact(Skip = "Cannot test due to Hubspot account privileges")]
+        [Fact(Skip = "Cannot test due to HubSpot account privileges")]
         public async Task SmtpTokensAreAvailable()
         {
             Assert.NotEmpty(

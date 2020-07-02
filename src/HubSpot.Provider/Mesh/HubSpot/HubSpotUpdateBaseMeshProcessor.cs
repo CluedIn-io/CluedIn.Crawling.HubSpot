@@ -5,45 +5,35 @@ using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Mesh;
 using CluedIn.Core.Messages.Processing;
+using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using RestSharp;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 {
-    public abstract class HubspotRemoveBaseMeshProcessor : BaseRemoveProcessor
+    public abstract class HubSpotUpdateBaseMeshProcessor : BaseMeshProcessor
     {
         public EntityType[] EntityType { get; }
-        public string DeleteUrl { get; }
+        public string EditUrl { get; }
 
-        protected HubspotRemoveBaseMeshProcessor(ApplicationContext appContext)
-           : base(appContext)
-        {
-        }
-
-        protected HubspotRemoveBaseMeshProcessor(ApplicationContext appContext, string deleteUrl, params EntityType[] entityType)
+        protected HubSpotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, params EntityType[] entityType)
             : base(appContext)
         {
             EntityType = entityType;
-            DeleteUrl = deleteUrl;
+            EditUrl = editUrl;
         }
 
-        public override bool Accept(RemoveDataCommand command, MeshQuery query, IEntity entity)
+        public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
         {
-            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.REMOVE && EntityType.Contains(entity.EntityType);
+            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType);
         }
 
-        // TODO: MeshQUery should be handed in
-        //All of the stores should be in a base class and only the client parts are passed in.
-        /// <summary>Does the process.</summary>
-        /// <param name="context">The context.</param>
-        /// <param name="command">The command.</param>
-        /// <returns></returns>
-        public override void DoProcess(CluedIn.Core.ExecutionContext context, RemoveDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
+        public override void DoProcess(CluedIn.Core.ExecutionContext context, MeshDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
         {
             return;
         }
 
-        public override List<Core.Messages.WebApp.RawQuery> GetRawQueries(IDictionary<string, object> config, IEntity entity)
+        public override List<RawQuery> GetRawQueries(IDictionary<string, object> config, IEntity entity, Core.Mesh.Properties properties)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
@@ -51,7 +41,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
             {
                 new Core.Messages.WebApp.RawQuery()
                 {
-                    Query = string.Format("curl -X DELETE https://api.hubapi.com/" + DeleteUrl + "{0}?hapikey={1} "  + "--header \"Content-Type: application/json\"", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity)),
+                    Query = string.Format("curl -X PUT https://api.hubapi.com/" + EditUrl + "{1}?hapikey={0} "  + "--header \"Content-Type: application/json\"" + " --data '{2}'", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity), JsonUtility.Serialize(properties)),
                     Source = "cUrl"
                 }
             };
@@ -79,11 +69,25 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
             return code.Value;
         }
 
-        public override List<QueryResponse> RunQueries(IDictionary<string, object> config, string id)
+        public override List<QueryResponse> RunQueries(IDictionary<string, object> config, string id, Core.Mesh.Properties properties)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.DELETE);
+            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.PUT);
+            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+            request.AddJsonBody(properties);
+
+            var result = client.ExecuteTaskAsync(request).Result;
+
+            return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
+        }
+
+        public override List<QueryResponse> Validate(ExecutionContext context, MeshDataCommand command, IDictionary<string, object> config, string id, MeshQuery query)
+        {
+            var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
+
+            var client = new RestClient("https://api.hubapi.com");
+            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.GET);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
 
             var result = client.ExecuteTaskAsync(request).Result;
@@ -91,17 +95,6 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot.Gdpr
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
 
-        public override List<QueryResponse> Validate(ExecutionContext context, RemoveDataCommand command, IDictionary<string, object> config, string id, MeshQuery query)
-        {
-            var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
-            var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-
-            var result = client.ExecuteTaskAsync(request).Result;
-
-            return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
-        }
     }
 }

@@ -5,35 +5,45 @@ using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Mesh;
 using CluedIn.Core.Messages.Processing;
-using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using RestSharp;
 
-namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
+namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 {
-    public abstract class HubspotUpdateBaseMeshProcessor : BaseMeshProcessor
+    public abstract class HubSpotRemoveBaseMeshProcessor : BaseRemoveProcessor
     {
         public EntityType[] EntityType { get; }
-        public string EditUrl { get; }
-     
-        protected HubspotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, params EntityType[] entityType)
+        public string DeleteUrl { get; }
+
+        protected HubSpotRemoveBaseMeshProcessor(ApplicationContext appContext)
+           : base(appContext)
+        {
+        }
+
+        protected HubSpotRemoveBaseMeshProcessor(ApplicationContext appContext, string deleteUrl, params EntityType[] entityType)
             : base(appContext)
         {
             EntityType = entityType;
-            EditUrl = editUrl;
+            DeleteUrl = deleteUrl;
         }
 
-        public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
+        public override bool Accept(RemoveDataCommand command, MeshQuery query, IEntity entity)
         {
-            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType);
+            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.REMOVE && EntityType.Contains(entity.EntityType);
         }
 
-        public override void DoProcess(CluedIn.Core.ExecutionContext context, MeshDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
+        // TODO: MeshQUery should be handed in
+        //All of the stores should be in a base class and only the client parts are passed in.
+        /// <summary>Does the process.</summary>
+        /// <param name="context">The context.</param>
+        /// <param name="command">The command.</param>
+        /// <returns></returns>
+        public override void DoProcess(CluedIn.Core.ExecutionContext context, RemoveDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
         {
             return;
         }
-        
-        public override List<RawQuery> GetRawQueries(IDictionary<string, object> config, IEntity entity, Core.Mesh.Properties properties)
+
+        public override List<Core.Messages.WebApp.RawQuery> GetRawQueries(IDictionary<string, object> config, IEntity entity)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
@@ -41,12 +51,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
             {
                 new Core.Messages.WebApp.RawQuery()
                 {
-                    Query = string.Format("curl -X PUT https://api.hubapi.com/" + EditUrl + "{1}?hapikey={0} "  + "--header \"Content-Type: application/json\"" + " --data '{2}'", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity), JsonUtility.Serialize(properties)),
+                    Query = string.Format("curl -X DELETE https://api.hubapi.com/" + DeleteUrl + "{0}?hapikey={1} "  + "--header \"Content-Type: application/json\"", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity)),
                     Source = "cUrl"
                 }
             };
         }
-        
+
         public override Guid GetProviderId()
         {
             return Constants.Providers.HubSpotId;
@@ -69,25 +79,11 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
             return code.Value;
         }
 
-        public override List<QueryResponse> RunQueries(IDictionary<string, object> config, string id, Core.Mesh.Properties properties)
+        public override List<QueryResponse> RunQueries(IDictionary<string, object> config, string id)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.PUT);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-            request.AddJsonBody(properties);
-
-            var result = client.ExecuteTaskAsync(request).Result;
-
-            return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
-        }
-
-        public override List<QueryResponse> Validate(ExecutionContext context, MeshDataCommand command, IDictionary<string, object> config, string id, MeshQuery query)
-        {
-            var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
-
-            var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.GET);
+            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.DELETE);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
 
             var result = client.ExecuteTaskAsync(request).Result;
@@ -95,6 +91,17 @@ namespace CluedIn.Provider.HubSpot.Mesh.Hubspot
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
 
-        
+        public override List<QueryResponse> Validate(ExecutionContext context, RemoveDataCommand command, IDictionary<string, object> config, string id, MeshQuery query)
+        {
+            var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
+
+            var client = new RestClient("https://api.hubapi.com");
+            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.GET);
+            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            var result = client.ExecuteTaskAsync(request).Result;
+
+            return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
+        }
     }
 }

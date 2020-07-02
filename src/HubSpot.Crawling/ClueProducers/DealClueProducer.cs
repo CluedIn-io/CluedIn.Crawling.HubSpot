@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
-            
+
             var data = clue.Data.EntityData;
 
             data.Name = input.dealId.Value.ToString(CultureInfo.InvariantCulture);
@@ -61,7 +61,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (data.OutgoingEdges.Count == 0)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "Hubspot");
+                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
                 }
 
                 var url = $"https://app.hubspot.com/sales/{input.portalId}/deal/{input.dealId}/";  // TODO take from configuration

@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Channel;
 
-            AddGroup("Hubspot Channel Details", group =>
+            AddGroup("HubSpot Channel Details", group =>
             {
                 AccountId = group.Add(new VocabularyKey("AccountId", VocabularyKeyVisibility.Hidden));
                 ChannelId = group.Add(new VocabularyKey("ChannelId", VocabularyKeyVisibility.Hidden));

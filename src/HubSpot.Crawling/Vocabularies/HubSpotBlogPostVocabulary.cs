@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.News;
 
-            AddGroup("Hubspot Blog Details", group =>
+            AddGroup("HubSpot Blog Details", group =>
             {
                 Archived           = group.Add(new VocabularyKey("Archived", VocabularyKeyDataType.Boolean));
                 BlogAuthor         = group.Add(new VocabularyKey("BlogAuthor", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));

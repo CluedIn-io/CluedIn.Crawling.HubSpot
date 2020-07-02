@@ -190,7 +190,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -211,7 +211,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -223,7 +223,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -235,7 +235,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -256,7 +256,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -268,7 +268,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -280,7 +280,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -323,7 +323,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             catch (Exception exception)
             {
-                _log.LogError(exception, "Failed to parse value.metadata for Hubspot Email");
+                _log.LogError(exception, "Failed to parse value.metadata for HubSpot Email");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

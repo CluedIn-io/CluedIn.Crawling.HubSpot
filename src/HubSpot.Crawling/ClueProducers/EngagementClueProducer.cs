@@ -41,7 +41,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.Owns, input, s => s.engagement.ownerId.Value.ToString());
 
             if (input.engagement.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "Hubspot");
+                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "HubSpot");
 
 
             return clue;

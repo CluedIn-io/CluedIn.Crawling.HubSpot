@@ -27,7 +27,7 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string ProviderRootCodeValue = "HubSpot";
         public const string CrawlerName = "HubSpotCrawler";
         public const string CrawlerComponentName = "HubSpotCrawler";
-        public const string CrawlerDescription = "Hubspot is all-in-one software for inbound marketing, CRM and Sales.";
+        public const string CrawlerDescription = "HubSpot is all-in-one software for inbound marketing, CRM and Sales.";
         public const string CrawlerDisplayName = "HubSpot CRM";
         public const string Uri = "http://www.hubspot.com";
         public const string ApiBaseUri = "https://api.hubapi.com";

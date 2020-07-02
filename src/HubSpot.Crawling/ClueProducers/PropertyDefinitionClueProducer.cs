@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Note, input.Groupname + input.Name, accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
@@ -58,7 +58,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.PropertyDefinition.Options] = input.Options.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.Calculated] = input.Calculated.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.ExternalOptions] = input.Externaloptions.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.PropertyDefinition.HubspotDefined] = input.Hubspotdefined.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.PropertyDefinition.HubSpotDefined] = input.HubSpotdefined.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.FormField] = input.Formfield.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.DisplayOrder] = input.Displayorder.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.ReadonlyValue] = input.Readonlyvalue.PrintIfAvailable();

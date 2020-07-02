@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.Vocabularies
             KeySeparator   = ".";
             Grouping       = EntityType.Calendar.Event;
 
-            AddGroup("Hubspot Campaign Event Details", group =>
+            AddGroup("HubSpot Campaign Event Details", group =>
             {
                 AppName         = group.Add(new VocabularyKey("AppName"));
                 Browser         = group.Add(new VocabularyKey("Browser", VocabularyKeyDataType.Json, VocabularyKeyVisibility.Hidden));
