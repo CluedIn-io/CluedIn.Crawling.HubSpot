@@ -2,7 +2,7 @@
   <PropertyGroup Label="Dependency Versions">
     <_ComponentHost>2.0.0-alpha-14</_ComponentHost>
     <_AutoFixture>4.11.0</_AutoFixture>
-    <_CluedIn>3.0.0-netcore.*</_CluedIn>
+    <_CluedIn>3.0.0-*</_CluedIn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,7 +34,7 @@
     <PackageReference Update="CluedIn.Crawling" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Core" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Core.Agent" Version="$(_CluedIn)" />
-    <PackageReference Update="CluedIn.CrawlerIntegrationTesting" Version="$(_CluedIn)" />
+    <PackageReference Update="CluedIn.CrawlerIntegrationTesting" Version="3.0.0-netcore.*" />
 
   </ItemGroup>
 
