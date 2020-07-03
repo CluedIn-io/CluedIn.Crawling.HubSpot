@@ -43,10 +43,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 data.Properties[HubSpotVocabulary.PropertyDefinition.UpdatedAt] = DateTimeFormatter.ToIso8601(data.ModifiedDate.Value);
 
             if (input.Createduserid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => input.Createduserid.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, input.Createduserid.Value.ToString());
 
             if (input.Updateduserid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.ModifiedBy, input, c => input.Updateduserid.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.ModifiedBy, input, input.Updateduserid.Value.ToString());
 
             data.Properties[HubSpotVocabulary.PropertyDefinition.Name] = input.Name.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.Label] = input.Label.PrintIfAvailable();

@@ -40,7 +40,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.contactIds != null)
                 {
                     foreach (var contactId in input.associations.contactIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, selector => contactId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, contactId.ToString());
                 }
                 if (input.associations.dealIds != null)
                 {
