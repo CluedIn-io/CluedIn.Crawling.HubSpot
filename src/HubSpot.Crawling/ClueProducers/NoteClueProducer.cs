@@ -69,7 +69,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.ownerIds != null)
                 {
                     foreach (var ownerId in input.associations.ownerIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => ownerId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, ownerId.ToString());
                 }
                 if (input.associations.workflowIds != null)
                 {
@@ -104,15 +104,15 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.createdBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, selector => input.engagement.createdBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.engagement.createdBy.ToString());
                 }
                 if (input.engagement.modifiedBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, selector => input.engagement.modifiedBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, input.engagement.modifiedBy.ToString());
                 }
                 if (input.engagement.ownerId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => input.engagement.ownerId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, input.engagement.ownerId.ToString());
                 }
                 if (input.engagement.portalId != null)
                 {

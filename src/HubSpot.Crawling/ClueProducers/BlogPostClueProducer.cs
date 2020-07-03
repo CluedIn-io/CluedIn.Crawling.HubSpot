@@ -87,10 +87,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.BlogPost.Widgets] = input.widgets.PrintIfAvailable();
 
             if (input.author_user_id != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.author_user_id.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.author_user_id.Value.ToString());
 
             if (input.blog_author_id != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.blog_author_id.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.blog_author_id.Value.ToString());
 
             if (input.campaign != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.Marketing.Campaign, EntityEdgeType.For, input, input.campaign.ToString());

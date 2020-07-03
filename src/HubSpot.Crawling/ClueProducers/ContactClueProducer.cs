@@ -691,7 +691,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationHubSpotOwner] = val;
                         if (!string.IsNullOrEmpty((string)property.Value.First))
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => (string)property.Value.First);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, (string)property.Value.First);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {

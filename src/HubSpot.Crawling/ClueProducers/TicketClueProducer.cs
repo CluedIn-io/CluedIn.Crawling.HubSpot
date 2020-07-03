@@ -72,7 +72,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else if (r.Name == "created_by")
                         {
                             if (r.Value != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, p => r.Value);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.Value);
                             data.Properties[HubSpotVocabulary.Ticket.CreatedBy] = r.Value.PrintIfAvailable();
                         }
                         else if (r.Name == "createdate")
@@ -85,7 +85,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (data.CreatedDate != null)
                                 data.Properties[HubSpotVocabulary.Ticket.CreatedDate] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
                             if (r.SourceId != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.SourceId);
                         }
                         else if (r.Name == "first_agent_reply_date")
                         {
@@ -163,7 +163,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else if (r.Name == "hubspot_owner_id")
                         {
                             if (r.Value != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.OwnedBy, input, p => r.Value);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.OwnedBy, input, r.Value);
                             data.Properties[HubSpotVocabulary.Ticket.TicketOwner] = r.Value.PrintIfAvailable();
                         }
                         else if (r.Name == "hs_custom_inbox")
@@ -228,7 +228,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                 if (input.Associations.Contacts.Any())
                     foreach (var t in input.Associations.Contacts)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Involves, input, t.ToString());
 
                 if (input.Associations.Engagements.Any())
                     foreach (var t in input.Associations.Engagements)

@@ -342,7 +342,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     else if (property.Key == "hubspot_owner_id")
                     {
                         if (property.Value != null)
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => property.Value.Value.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, property.Value.Value.ToString());
                     }
                     else if (property.Key == "notes_last_contacted")
                     {

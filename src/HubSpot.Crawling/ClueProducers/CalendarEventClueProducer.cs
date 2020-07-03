@@ -61,10 +61,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 _factory.CreateIncomingEntityReference(clue, EntityType.News, EntityEdgeType.PartOf, input, s => s.contentId.ToString());
 
             if (input.createdBy != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, s => s.createdBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.createdBy.ToString());
 
             if (input.ownerId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => s.createdBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, input.createdBy.ToString());
 
             if (input.portalId != null)
                 _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
