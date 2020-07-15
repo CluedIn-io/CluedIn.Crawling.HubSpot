@@ -55,7 +55,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 data.Properties[HubSpotVocabulary.Row.CreatedAt] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
 
             if (input.Table != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.List, EntityEdgeType.PartOf, input, selector => input.Table.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.List, EntityEdgeType.PartOf, input, input.Table.Value.ToString());
 
             try
             {

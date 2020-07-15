@@ -40,8 +40,8 @@ namespace Crawling.HubSpot.Unit.Test.ClueProducers
             // ...
 
             // Test we have an incoming edge pointing to portal
-            Assert.Single(clue.Data.EntityData.IncomingEdges);
-            Assert.Equal(clue.Data.EntityData.IncomingEdges.First().FromReference.Code.Value, portalId.ToString());
+            Assert.Single(clue.Data.EntityData.OutgoingEdges);
+            Assert.Equal(clue.Data.EntityData.OutgoingEdges.First().ToReference.Code.Value, portalId.ToString());
         }
 
         protected override BaseClueProducer<Channel> Sut => new ChannelClueProducer(ClueFactory.Object);

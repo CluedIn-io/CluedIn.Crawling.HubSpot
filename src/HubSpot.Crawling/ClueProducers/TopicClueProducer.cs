@@ -50,7 +50,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
             if (input.portalId != null)
             {
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
                 data.Properties[HubSpotVocabulary.Topic.PortalId] = input.portalId.ToString();
             }
 

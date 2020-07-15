@@ -26,6 +26,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             var clue = _factory.Create(EntityType.Activity, input.engagement.id.ToString(), accountId);
 
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.METADATA_001_Name_MustBeSet);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
             var data = clue.Data.EntityData;
 
@@ -38,10 +40,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Engagement.Type] = input.engagement.type;
 
             if (input.engagement.ownerId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.Owns, input, s => s.engagement.ownerId.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.Owns, input, input.engagement.ownerId.Value.ToString());
 
             if (input.engagement.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.engagement.portalId.ToString(), s => "HubSpot");
 
 
             return clue;

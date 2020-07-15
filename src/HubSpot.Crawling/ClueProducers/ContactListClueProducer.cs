@@ -48,7 +48,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.ContactList.MetaData] = input.metaData.PrintIfAvailable(JsonUtility.Serialize); 
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.Value.ToString(), s => "HubSpot");
 
 
             return clue;

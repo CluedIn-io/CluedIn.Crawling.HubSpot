@@ -50,7 +50,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.companyIds != null)
                 {
                     foreach (var companyId in input.associations.companyIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, companyId.ToString());
                 }
                 if (input.associations.contactIds != null)
                 {
@@ -60,7 +60,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.dealIds != null)
                 {
                     foreach (var dealId in input.associations.dealIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, selector => dealId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, dealId.ToString());
                 }
                 if (input.associations.ownerIds != null)
                 {
@@ -70,7 +70,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.workflowIds != null)
                 {
                     foreach (var workflowId in input.associations.workflowIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, selector => workflowId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, workflowId.ToString());
                 }
             }
 
@@ -119,7 +119,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.portalId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.engagement.portalId.ToString());
                 }
             }
 

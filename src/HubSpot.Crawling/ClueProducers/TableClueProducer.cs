@@ -58,7 +58,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.Modified, input, input.updatedBy.ToString());
 
             if (input.PortalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.PortalId.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.PortalId.ToString());
 
 
             return clue;

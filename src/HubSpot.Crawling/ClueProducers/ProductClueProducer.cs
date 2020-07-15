@@ -127,7 +127,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
 
             if (!data.OutgoingEdges.Any() && input.PortalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "HubSpot");
 
 
             return clue;

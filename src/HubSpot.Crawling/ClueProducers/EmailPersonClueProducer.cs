@@ -24,7 +24,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             var clue = _factory.Create(EntityType.Person, input.email, accountId);
 
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.ENTITYTYPE_001_Person_MustNotBeUsedDirectly);
-            
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
+            clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
+
             var data = clue.Data.EntityData;
 
             data.Name = string.IsNullOrWhiteSpace(input.firstName + input.lastName) ? input.email :  $"{input.firstName} {input.lastName}";

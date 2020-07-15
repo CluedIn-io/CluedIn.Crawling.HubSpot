@@ -224,7 +224,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (input.Associations.Companies.Any())
                     foreach (var t in input.Associations.Companies)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Involves, input, t.ToString());
 
                 if (input.Associations.Contacts.Any())
                     foreach (var t in input.Associations.Contacts)
@@ -232,7 +232,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                 if (input.Associations.Engagements.Any())
                     foreach (var t in input.Associations.Engagements)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Activity, EntityEdgeType.Involves, input, t.ToString());
             }
 
             return clue;
