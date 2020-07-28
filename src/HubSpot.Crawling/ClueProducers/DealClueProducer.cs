@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
-            
+
             var data = clue.Data.EntityData;
 
             data.Name = input.dealId.Value.ToString(CultureInfo.InvariantCulture);
@@ -41,19 +41,19 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     if (input.associations.associatedCompanyIds != null)
                         foreach (var company in input.associations.associatedCompanyIds)
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => company.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, company.ToString());
                         }
 
                     if (input.associations.associatedDealIds != null)
                         foreach (var company in input.associations.associatedDealIds)
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, s => company.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.PartOf, input, company.ToString());
                         }
 
                     if (input.associations.associatedVids != null)
                         foreach (var company in input.associations.associatedVids)
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, input, s => company.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Activity, EntityEdgeType.PartOf, input, company.ToString());
                         }
                 }
             }
@@ -61,7 +61,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (data.OutgoingEdges.Count == 0)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "Hubspot");
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
                 }
 
                 var url = $"https://app.hubspot.com/sales/{input.portalId}/deal/{input.dealId}/";  // TODO take from configuration
@@ -167,7 +167,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     }
                     else if (property.Key == "hubspot_owner_id")
                     {
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => val);
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input,  val);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {

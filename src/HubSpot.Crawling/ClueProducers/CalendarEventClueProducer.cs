@@ -49,25 +49,25 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.CalendarEvent.TopicsIds] = input.topicIds.PrintIfAvailable();
 
             if (input.campaignGuid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Marketing.Campaign, EntityEdgeType.PartOf, input, s => s.campaignGuid);
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Marketing.Campaign, EntityEdgeType.PartOf, input, input.campaignGuid);
 
             if (input.categoryId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Tag, EntityEdgeType.PartOf, input, s => s.categoryId.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Tag, EntityEdgeType.PartOf, input, input.categoryId.ToString());
 
             if (input.contentGroupId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Tag, EntityEdgeType.PartOf, input, s => s.contentGroupId.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Tag, EntityEdgeType.PartOf, input, input.contentGroupId.ToString());
 
             if (input.contentId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.News, EntityEdgeType.PartOf, input, s => s.contentId.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.News, EntityEdgeType.PartOf, input, input.contentId.ToString());
 
             if (input.createdBy != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, s => s.createdBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.createdBy.ToString());
 
             if (input.ownerId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => s.createdBy.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, input.createdBy.ToString());
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
 
 
             return clue;

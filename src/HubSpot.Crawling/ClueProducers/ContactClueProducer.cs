@@ -691,7 +691,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         data.Properties[HubSpotVocabulary.Contact.ContactInformationHubSpotOwner] = val;
                         if (!string.IsNullOrEmpty((string)property.Value.First))
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, s => (string)property.Value.First);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, (string)property.Value.First);
                     }
                     else if (property.Key == "notes_last_contacted")
                     {
@@ -739,7 +739,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, input, s => (string)property.Value.First);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Group, EntityEdgeType.Parent, input, (string)property.Value.First);
                         }
                     }
                     else if (property.Key == "linkedinbio")
@@ -902,7 +902,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                     {
                         if (!string.IsNullOrEmpty((string)property.Value.First))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, s => val);
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.PartOf, input, val);
                         }
                     }
                     else if (property.Key == "associatedcompanylastupdated")

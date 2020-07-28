@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -21,7 +21,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
             }
             catch
             {
-                Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                Logger.LogWarning("Failed to retrieve data in {type}", GetType().FullName);
             }
 
             foreach (var item in result)

@@ -1,35 +1,27 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CluedIn.Core;
 using CluedIn.Core.Agent.Jobs;
 using CluedIn.Core.Crawling;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
-using CluedIn.Crawling.HubSpot.Infrastructure.Indexing;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class FileMetaDataClueProducer : BaseClueProducer<FileMetaData>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
         private readonly IHubSpotFileFetcher _fileFetcher;
-        private readonly ApplicationContext _context;
-        private readonly IAgentJobProcessorState<CrawlJobData> _state;
 
-        public FileMetaDataClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher, ILogger log, ApplicationContext context, IAgentJobProcessorState<CrawlJobData> state)
+        public FileMetaDataClueProducer(IClueFactory factory, IHubSpotFileFetcher fileFetcher)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _fileFetcher = fileFetcher ?? throw new ArgumentNullException(nameof(_fileFetcher));
-            _log = log ?? throw new ArgumentNullException(nameof(log));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _state = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         protected override Clue MakeClueImpl(FileMetaData input, Guid accountId)
@@ -72,7 +64,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.FileMetaData.Width] = input.width.PrintIfAvailable();
 
             if (input.portal_id != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.Value.ToString(), s => "HubDpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portal_id.Value.ToString(), s => "HubDpot");
 
             // TODO Figure out how to do file indexing
             if (input.name != null)

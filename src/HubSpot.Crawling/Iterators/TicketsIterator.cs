@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -52,7 +52,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                                 }
                                 catch (Exception exception)
                                 {
-                                    Logger.Warn(() => $"Failed to get Associations for Ticket Contacts {ticket.ObjectId.Value}", exception);
+                                    Logger.LogWarning(exception, "Failed to get Associations for Ticket Contacts {id}", ticket.ObjectId.Value);
                                 }
 
                                 try
@@ -62,7 +62,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                                 }
                                 catch (Exception exception)
                                 {
-                                    Logger.Warn(() => $"Failed to get Associations for Ticket Engagements {ticket.ObjectId.Value}", exception);
+                                    Logger.LogWarning(exception, "Failed to get Associations for Ticket Engagements {id}", ticket.ObjectId.Value);
                                 }
 
                                 try
@@ -72,7 +72,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                                 }
                                 catch (Exception exception)
                                 {
-                                    Logger.Warn(() => $"Failed to get Associations for Ticket Companies {ticket.ObjectId.Value}", exception);
+                                    Logger.LogWarning(exception, "Failed to get Associations for Ticket Companies {id}", ticket.ObjectId.Value);
                                 }
                             }
 
@@ -99,7 +99,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 }
                 catch
                 {
-                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    Logger.LogWarning("Failed to retrieve data in {type}", GetType().FullName);
                     canContinue = false;
                 }
 

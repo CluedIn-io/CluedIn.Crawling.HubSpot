@@ -4,20 +4,20 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class CallClueProducer : BaseClueProducer<Call>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<CallClueProducer> _log;
 
-        public CallClueProducer(IClueFactory factory, ILogger log)
+        public CallClueProducer(IClueFactory factory, ILogger<CallClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -29,7 +29,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.PhoneCall, input.engagement.id.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
@@ -40,28 +40,28 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.contactIds != null)
                 {
                     foreach (var contactId in input.associations.contactIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, selector => contactId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, contactId.ToString());
                 }
                 if (input.associations.dealIds != null)
                 {
                     foreach (var dealId in input.associations.dealIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, selector => dealId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, dealId.ToString());
                 }
                 if (input.associations.ownerIds != null)
                 {
                     foreach (var ownerId in input.associations.ownerIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => ownerId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, ownerId.ToString());
                 }
                 if (input.associations.workflowIds != null)
                 {
                     foreach (var workflowId in input.associations.workflowIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, selector => workflowId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, workflowId.ToString());
                 }
                 if (input.associations.companyIds != null)
                 {
                     if (data.OutgoingEdges.Count == 0)
                         foreach (var companyId in input.associations.companyIds)
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, companyId.ToString());
                 }
             }
 
@@ -99,20 +99,20 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.createdBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, selector => input.engagement.createdBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, input.engagement.createdBy.ToString());
                 }
                 if (input.engagement.modifiedBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, selector => input.engagement.modifiedBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, input.engagement.modifiedBy.ToString());
                 }
                 if (input.engagement.ownerId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => input.engagement.ownerId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input,  input.engagement.ownerId.ToString());
                 }
                 if (input.engagement.portalId != null)
                 {
                     if (data.OutgoingEdges.Count == 0)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.engagement.portalId.ToString());
                 }
             }
 
@@ -146,7 +146,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         }
                         else if (property.Key == "externalAccountId" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => property.Value.ToString());
+                            _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, property.Value.ToString());
                             data.Properties[HubSpotVocabulary.Call.ExternalAccountId] = property.Value.ToString();
                         }
                         else if (property.Key == "recordingUrl" && property.Value != null && !string.IsNullOrEmpty(property.Value.ToString()))
@@ -172,7 +172,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             }
             catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse metadata for Hubspot Call", exception);
+                _log.LogError(exception, "Failed to parse metadata for HubSpot Call");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

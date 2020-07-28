@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -16,9 +16,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class ProductClueProducer : BaseClueProducer<Product>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<ProductClueProducer> _log;
 
-        public ProductClueProducer(IClueFactory factory, ILogger log)
+        public ProductClueProducer(IClueFactory factory, ILogger<ProductClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -30,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Product, input.ObjectId.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
@@ -71,7 +71,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (data.CreatedDate != null)
                                 data.Properties[HubSpotVocabulary.Product.CreateDate] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
                             if (r.SourceId != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.SourceId);
                         }
 
                         else if (r.Name == "hs_lastmodifieddate")
@@ -122,12 +122,12 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
                 catch (Exception exception)
                 {
-                    _log.Error(() => "Could not parse HubSpot Product Properies", exception);
+                    _log.LogError(exception, "Could not parse HubSpot Product Properies");
                 }
             }
 
             if (!data.OutgoingEdges.Any() && input.PortalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "Hubspot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.PortalId.ToString(), s => "HubSpot");
 
 
             return clue;

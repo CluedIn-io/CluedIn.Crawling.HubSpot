@@ -2,20 +2,20 @@
 using System.Globalization;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
 {
     public class EmailClueProducer : BaseClueProducer<Email>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<EmailClueProducer> _log;
 
-        public EmailClueProducer(IClueFactory factory, ILogger log)
+        public EmailClueProducer(IClueFactory factory, ILogger<EmailClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -50,27 +50,27 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 if (input.associations.companyIds != null)
                 {
                     foreach (var companyId in input.associations.companyIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, selector => companyId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Parent, input, companyId.ToString());
                 }
                 if (input.associations.contactIds != null)
                 {
                     foreach (var contactId in input.associations.contactIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, selector => contactId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Parent, input, contactId.ToString());
                 }
                 if (input.associations.dealIds != null)
                 {
                     foreach (var dealId in input.associations.dealIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, selector => dealId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Sales.Deal, EntityEdgeType.Parent, input, dealId.ToString());
                 }
                 if (input.associations.ownerIds != null)
                 {
                     foreach (var ownerId in input.associations.ownerIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => ownerId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, ownerId.ToString());
                 }
                 if (input.associations.workflowIds != null)
                 {
                     foreach (var workflowId in input.associations.workflowIds)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, selector => workflowId.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Process, EntityEdgeType.Parent, input, workflowId.ToString());
                 }
             }
 
@@ -107,19 +107,19 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 if (input.engagement.createdBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input, selector => input.engagement.createdBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.CreatedBy, input,  input.engagement.createdBy.ToString());
                 }
                 if (input.engagement.modifiedBy != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input, selector => input.engagement.modifiedBy.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.ModifiedBy, input,  input.engagement.modifiedBy.ToString());
                 }
                 if (input.engagement.ownerId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input, selector => input.engagement.ownerId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Person, EntityEdgeType.OwnedBy, input,  input.engagement.ownerId.ToString());
                 }
                 if (input.engagement.portalId != null)
                 {
-                    _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, selector => input.engagement.portalId.ToString());
+                    _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.Parent, input, input.engagement.portalId.ToString());
                 }
             }
 
@@ -190,7 +190,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -211,7 +211,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -223,7 +223,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -235,7 +235,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -256,7 +256,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             {
                                 if (recipient.email != null && recipient.firstName != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -268,7 +268,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 if (recipient.email != null && recipient.lastName != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -280,7 +280,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                                 }
                                 else if (recipient.email != null)
                                 {
-                                    
+
                                     var entityCode = new EntityCode(EntityType.Infrastructure.User, CodeOrigin.CluedIn.CreateSpecific("email"), recipient.email);
 
                                     var entityEdge = new EntityEdge(
@@ -321,9 +321,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
             }
 
-            catch (Exception e)
+            catch (Exception exception)
             {
-                _log.Error(() => "Failed to parse value.metadata for Hubspot Email", e);
+                _log.LogError(exception, "Failed to parse value.metadata for HubSpot Email");
             }
             if (data.Name == null)
                 data.Name = input.engagement.type + " at " + data.CreatedDate.Value.ToString("MM/dd/yyyy hh:mm tt", CultureInfo.InvariantCulture);

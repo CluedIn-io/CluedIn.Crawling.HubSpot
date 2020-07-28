@@ -1,6 +1,6 @@
-## CluedIn.Crawling.Hubspot 
+## CluedIn.Crawling.HubSpot
 
-CluedIn HubSpot Crawler is designed to crawl company data stored on [Hubspot CRM](https://www.hubspot.com/products/crm), covering all current editions (Free, Sales Hub, Marketing hub and Service Hub)
+CluedIn HubSpot Crawler is designed to crawl company data stored on [HubSpot CRM](https://www.hubspot.com/products/crm), covering all current editions (Free, Sales Hub, Marketing hub and Service Hub)
 
 ## Installation and Setup
 
@@ -9,20 +9,20 @@ Please refer to general Crawler installation documentation on how to deploy Craw
 To add a new Integrations:
 
 - Click on `Integrations -> Available` menu, and then Add Configuration on the HubSpot row
-  
+
 ![Add Configuration](HubSpotAddConfiguration.png "Add Configuration")
 
 - Enter your API Token which can be found in HubSpot settings
-  
+
 ![API Token](HubSpotApiToken.png "API Token")
 
 - Enter a display name, select web-hooks, other settings and click Save Settings
-  
+
 ![Settings](HubSpotSettings1.png "Settings")
 ![Settings](HubSpotSettings2.png "Settings")
 
 - You should now see your new Integration in the `Integrations -> Configured` menu. Clicking on the Integration will open a menu to aloow stopping, styarting and invoking recrawl etc
-  
+
 ![Recrawl](HubSpotRecrawl.png "Recrawl")
 
 ## Output

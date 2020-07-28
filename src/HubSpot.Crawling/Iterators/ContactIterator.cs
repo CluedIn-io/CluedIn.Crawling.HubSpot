@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CluedIn.Crawling.HubSpot.Iterators
 {
@@ -49,7 +49,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                                 }
                                 catch (Exception exception)
                                 {
-                                    Logger.Warn(() => $"Failed to get Engagements for Contact {contact.Vid.Value}", exception);
+                                    Logger.LogWarning(exception, "Failed to get Engagements for Contact {vid}", contact.Vid.Value);
                                 }
                             }
 
@@ -76,7 +76,7 @@ namespace CluedIn.Crawling.HubSpot.Iterators
                 }
                 catch
                 {
-                    Logger.Warn(() => $"Failed to retrieve data in {GetType().FullName}");
+                    Logger.LogWarning("Failed to retrieve data in {type}", GetType().FullName);
                     canContinue = false;
                 }
 

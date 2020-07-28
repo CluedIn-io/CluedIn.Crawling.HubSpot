@@ -23,7 +23,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Note, input.Groupname + input.Name, accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(CluedIn.Core.Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
 
@@ -43,10 +43,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 data.Properties[HubSpotVocabulary.PropertyDefinition.UpdatedAt] = DateTimeFormatter.ToIso8601(data.ModifiedDate.Value);
 
             if (input.Createduserid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => input.Createduserid.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, input.Createduserid.Value.ToString());
 
             if (input.Updateduserid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.ModifiedBy, input, c => input.Updateduserid.Value.ToString());
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.ModifiedBy, input, input.Updateduserid.Value.ToString());
 
             data.Properties[HubSpotVocabulary.PropertyDefinition.Name] = input.Name.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.Label] = input.Label.PrintIfAvailable();
@@ -58,7 +58,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.PropertyDefinition.Options] = input.Options.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.Calculated] = input.Calculated.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.ExternalOptions] = input.Externaloptions.PrintIfAvailable();
-            data.Properties[HubSpotVocabulary.PropertyDefinition.HubspotDefined] = input.Hubspotdefined.PrintIfAvailable();
+            data.Properties[HubSpotVocabulary.PropertyDefinition.HubSpotDefined] = input.HubSpotdefined.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.FormField] = input.Formfield.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.DisplayOrder] = input.Displayorder.PrintIfAvailable();
             data.Properties[HubSpotVocabulary.PropertyDefinition.ReadonlyValue] = input.Readonlyvalue.PrintIfAvailable();

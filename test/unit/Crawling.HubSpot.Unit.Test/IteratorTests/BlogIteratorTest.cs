@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using CluedIn.Core.Logging;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Infrastructure.Exceptions;
 using CluedIn.Crawling.HubSpot.Iterators;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 using Task = System.Threading.Tasks.Task;

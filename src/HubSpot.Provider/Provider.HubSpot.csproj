@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HubSpotProviderComponent.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\hubspot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Provider.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CluedIn.Core" />
+    <PackageReference Include="CluedIn.CrawlerIntegrationTesting" />
+    <PackageReference Include="ComponentHost" />
+  </ItemGroup>
+</Project>

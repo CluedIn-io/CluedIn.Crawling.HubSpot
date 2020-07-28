@@ -38,7 +38,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure.Installers
 
             if (!container.Kernel.HasComponent(typeof(IRestClient)) && !container.Kernel.HasComponent(typeof(RestClient)))
             {
-                container.Register(Component.For<IRestClient, RestClient>());
+                container.Register(Component.For<IRestClient, RestClient>().LifestyleTransient());
             }
         }
     }

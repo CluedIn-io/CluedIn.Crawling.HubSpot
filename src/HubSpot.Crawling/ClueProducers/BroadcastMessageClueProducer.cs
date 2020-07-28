@@ -61,10 +61,10 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             data.Properties[HubSpotVocabulary.Broadcast.UpdatedBy] = input.updatedBy.PrintIfAvailable();
 
             if (input.channelGuid != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Channel, EntityEdgeType.PartOf, input, s => s.channelGuid);
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Channel, EntityEdgeType.PartOf, input, input.channelGuid);
 
             if (input.portalId != null)
-                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
+                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Site, EntityEdgeType.PartOf, input, s => s.portalId.ToString(), s => "HubSpot");
 
             return clue;
         }

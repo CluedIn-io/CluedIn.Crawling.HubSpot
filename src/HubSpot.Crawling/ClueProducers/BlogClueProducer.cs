@@ -114,7 +114,8 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
 
             if (input.item_layout_id != null)
                 _factory.CreateOutgoingEntityReference(clue, EntityType.Template, EntityEdgeType.IsType, input.item_layout_id.Value.ToString());
-                
+
+            
             return clue;
         }
 

@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\HubSpot.Crawling\Crawling.HubSpot.csproj" />
+    <ProjectReference Include="..\..\..\src\HubSpot.Provider\Provider.HubSpot.csproj" />
+    <ProjectReference Include="..\..\common\Crawling.HubSpot.Test.Common\Crawling.HubSpot.Test.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HubSpotImageFetcher\CluedIn.png" />
+  </ItemGroup>
+</Project>

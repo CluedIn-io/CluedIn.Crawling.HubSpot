@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CluedIn.Core;
 using CluedIn.Core.Data;
-using CluedIn.Core.Logging;
 using CluedIn.Core.Utilities;
 using CluedIn.Crawling.Factories;
 using CluedIn.Crawling.Helpers;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using CluedIn.Crawling.HubSpot.Vocabularies;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace CluedIn.Crawling.HubSpot.ClueProducers
@@ -16,9 +16,9 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
     public class TicketClueProducer : BaseClueProducer<Ticket>
     {
         private readonly IClueFactory _factory;
-        private readonly ILogger _log;
+        private readonly ILogger<TicketClueProducer> _log;
 
-        public TicketClueProducer(IClueFactory factory, ILogger log)
+        public TicketClueProducer(IClueFactory factory, ILogger<TicketClueProducer> log)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
@@ -30,7 +30,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 throw new ArgumentNullException(nameof(input));
 
             var clue = _factory.Create(EntityType.Support.Ticket, input.ObjectId.ToString(), accountId);
-            
+
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_001_Outgoing_Edge_MustExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.EDGES_002_Incoming_Edge_ShouldNotExist);
             clue.ValidationRuleSuppressions.Add(Constants.Validation.Rules.PROPERTIES_002_Unknown_VocabularyKey_Used);
@@ -72,7 +72,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else if (r.Name == "created_by")
                         {
                             if (r.Value != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, p => r.Value);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.Value);
                             data.Properties[HubSpotVocabulary.Ticket.CreatedBy] = r.Value.PrintIfAvailable();
                         }
                         else if (r.Name == "createdate")
@@ -85,7 +85,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                             if (data.CreatedDate != null)
                                 data.Properties[HubSpotVocabulary.Ticket.CreatedDate] = DateTimeFormatter.ToIso8601(data.CreatedDate.Value);
                             if (r.SourceId != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, c => r.SourceId);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.CreatedBy, input, r.SourceId);
                         }
                         else if (r.Name == "first_agent_reply_date")
                         {
@@ -163,7 +163,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                         else if (r.Name == "hubspot_owner_id")
                         {
                             if (r.Value != null)
-                                _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.OwnedBy, input, p => r.Value);
+                                _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.User, EntityEdgeType.OwnedBy, input, r.Value);
                             data.Properties[HubSpotVocabulary.Ticket.TicketOwner] = r.Value.PrintIfAvailable();
                         }
                         else if (r.Name == "hs_custom_inbox")
@@ -216,7 +216,7 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
                 }
                 catch (Exception exception)
                 {
-                    _log.Error(() => "Failed to parse properties for Hubspot Ticket", exception);
+                    _log.LogError(exception, "Failed to parse properties for HubSpot Ticket");
                 }
             }
 
@@ -224,15 +224,15 @@ namespace CluedIn.Crawling.HubSpot.ClueProducers
             {
                 if (input.Associations.Companies.Any())
                     foreach (var t in input.Associations.Companies)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Organization, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Organization, EntityEdgeType.Involves, input, t.ToString());
 
                 if (input.Associations.Contacts.Any())
                     foreach (var t in input.Associations.Contacts)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Infrastructure.Contact, EntityEdgeType.Involves, input, t.ToString());
 
                 if (input.Associations.Engagements.Any())
                     foreach (var t in input.Associations.Engagements)
-                        _factory.CreateIncomingEntityReference(clue, EntityType.Activity, EntityEdgeType.Involves, input, p => t.ToString());
+                        _factory.CreateOutgoingEntityReference(clue, EntityType.Activity, EntityEdgeType.Involves, input, t.ToString());
             }
 
             return clue;
