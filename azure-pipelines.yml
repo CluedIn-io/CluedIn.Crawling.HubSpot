@@ -5,7 +5,6 @@ trigger:
     include:
     - master
     - develop
-    - feature/netcore
   tags:
     include:
       - v*
@@ -19,7 +18,6 @@ pr:
     - develop
     - master
     - release/*
-    - feature/netcore
   paths:
     exclude:
     - '*.md'
@@ -35,7 +33,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  - group: nuget  
+  - group: nuget
   - name: testFolderPath
     value: '$(Build.SourcesDirectory)/test'
   - name: DOTNET_SKIP_FIRST_TIME_EXPERIENCE
@@ -58,25 +56,3 @@ steps:
 - template: crawler.default.build.yml@templates
 
 - template: documentation.publish.yml@templates
-
-- task: DotNetCoreCLI@2
-  displayName: 'Create Netcore NuGet packages'
-  condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/feature/netcore'))
-  inputs:
-    command: 'pack'
-    packagesToPack: 'src/**/*.csproj'
-    packDirectory: '$(Build.ArtifactStagingDirectory)/nuget'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: GITVERSION_SEMVER
-    includeSymbols: true
-    nugetConfigPath: nuget.config
-
-- task: NuGetCommand@2
-  displayName: 'Push Netcore to develop feed'
-  condition: and ( succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/feature/netcore'))
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/**/*.nupkg'
-    allowPackageConflicts: true
-    publishVstsFeed: 'develop'
-    includeSymbols: true
