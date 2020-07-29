@@ -53,6 +53,6 @@ steps:
   env:
     NUGET_KEY: $(nuget.key)
 
-- template: crawler.default.build.yml@templates
+- template: crawler.netcore.build.yml@templates
 
 - template: documentation.publish.yml@templates
