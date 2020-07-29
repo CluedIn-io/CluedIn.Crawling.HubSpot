@@ -1,0 +1,1769 @@
+{
+    "lists": [
+        {
+            "portalId": 62515,
+            "createdAt": 1395249992415,
+            "listId": 21916,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1556311087834,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154886,
+            "deleteable": false,
+            "updatedAt": 1395249992415,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_1"
+                    }
+                ]
+            ],
+            "name": "Marketing Mary Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1395249992519,
+            "listId": 21917,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367691,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154887,
+            "deleteable": false,
+            "updatedAt": 1395249992519,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_1"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Marketing Mary Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1395249992608,
+            "listId": 21918,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1535059071488,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154888,
+            "deleteable": false,
+            "updatedAt": 1395249992608,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_1"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Marketing Mary Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1395249992696,
+            "listId": 21919,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1535059216335,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154889,
+            "deleteable": false,
+            "updatedAt": 1395249992696,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_1"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Marketing Mary Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1440019279817,
+            "listId": 122343,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1545845211081,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154890,
+            "deleteable": false,
+            "updatedAt": 1440019279817,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_7"
+                    }
+                ]
+            ],
+            "name": "Debbie Downer Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1440019279866,
+            "listId": 122344,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367537,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154891,
+            "deleteable": false,
+            "updatedAt": 1440019279866,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_7"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Debbie Downer Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1440019279978,
+            "listId": 122345,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311366180,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154892,
+            "deleteable": false,
+            "updatedAt": 1440019279978,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_7"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Debbie Downer Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1440019280048,
+            "listId": 122346,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311366124,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154893,
+            "deleteable": false,
+            "updatedAt": 1440019280048,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_7"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Debbie Downer Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441274721270,
+            "listId": 123658,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1545845218914,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154894,
+            "deleteable": false,
+            "updatedAt": 1441274721270,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_9"
+                    }
+                ]
+            ],
+            "name": "IHI Owner Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441274721313,
+            "listId": 123659,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367586,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154895,
+            "deleteable": false,
+            "updatedAt": 1441274721313,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_9"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "IHI Owner Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441274721401,
+            "listId": 123660,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367484,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154896,
+            "deleteable": false,
+            "updatedAt": 1441274721401,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_9"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "IHI Owner Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441274721486,
+            "listId": 123661,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367639,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154897,
+            "deleteable": false,
+            "updatedAt": 1441274721486,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_9"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "IHI Owner Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441960245027,
+            "listId": 124896,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1545845221983,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154898,
+            "deleteable": false,
+            "updatedAt": 1441960245027,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_10"
+                    }
+                ]
+            ],
+            "name": "Marketing John Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441960245097,
+            "listId": 124897,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367216,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154899,
+            "deleteable": false,
+            "updatedAt": 1441960245097,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_10"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Marketing John Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441960245181,
+            "listId": 124898,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1535059295510,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154900,
+            "deleteable": false,
+            "updatedAt": 1441960245181,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_10"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Marketing John Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1441960245218,
+            "listId": 124899,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311366452,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154901,
+            "deleteable": false,
+            "updatedAt": 1441960245218,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_10"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Marketing John Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1449092677305,
+            "listId": 134598,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1552962126547,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154906,
+            "deleteable": false,
+            "updatedAt": 1449092677305,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_12"
+                    }
+                ]
+            ],
+            "name": "Helen Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1449092677359,
+            "listId": 134599,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311366344,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154907,
+            "deleteable": false,
+            "updatedAt": 1449092677359,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_12"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Helen Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1449092677399,
+            "listId": 134600,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1552962126732,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154908,
+            "deleteable": false,
+            "updatedAt": 1449092677399,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_12"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Helen Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1449092677443,
+            "listId": 134601,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311368230,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154909,
+            "deleteable": false,
+            "updatedAt": 1449092677443,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_12"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Helen Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1456913634438,
+            "listId": 145053,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1535059172346,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154910,
+            "deleteable": false,
+            "updatedAt": 1456913634438,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_13"
+                    }
+                ]
+            ],
+            "name": "zozo Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1456913634607,
+            "listId": 145054,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311367899,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154911,
+            "deleteable": false,
+            "updatedAt": 1456913634607,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_13"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "zozo Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1456913634805,
+            "listId": 145055,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1535059095895,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154912,
+            "deleteable": false,
+            "updatedAt": 1456913634805,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_13"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "zozo Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1456913634965,
+            "listId": 145056,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1459311365947,
+                "error": "",
+                "lastSizeChangeAt": 1459311368108,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 154913,
+            "deleteable": false,
+            "updatedAt": 1456913634965,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_13"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "zozo Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1468861173851,
+            "listId": 187454,
+            "authorId": 859437,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1468861216227,
+                "error": "",
+                "lastSizeChangeAt": 1549400511068,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 188030,
+            "deleteable": false,
+            "updatedAt": 1468861173851,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_16"
+                    }
+                ]
+            ],
+            "name": "Product Manager - Jacqueline Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1468861174057,
+            "listId": 187455,
+            "authorId": 859437,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1468861216227,
+                "error": "",
+                "lastSizeChangeAt": 1468861216377,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 188031,
+            "deleteable": false,
+            "updatedAt": 1468861174057,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_16"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Product Manager - Jacqueline Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1468861174314,
+            "listId": 187456,
+            "authorId": 859437,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1468861216227,
+                "error": "",
+                "lastSizeChangeAt": 1468861216435,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 188032,
+            "deleteable": false,
+            "updatedAt": 1468861174314,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_16"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Product Manager - Jacqueline Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1468861174512,
+            "listId": 187457,
+            "authorId": 859437,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1468861220847,
+                "error": "",
+                "lastSizeChangeAt": 1468861221089,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 188033,
+            "deleteable": false,
+            "updatedAt": 1468861174512,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_16"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Product Manager - Jacqueline Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1476871684503,
+            "listId": 217485,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1476871765101,
+                "error": "",
+                "lastSizeChangeAt": 1535059147027,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 218097,
+            "deleteable": false,
+            "updatedAt": 1476871684503,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_19"
+                    }
+                ]
+            ],
+            "name": "Someone Interesting Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1476871684833,
+            "listId": 217486,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1476871757602,
+                "error": "",
+                "lastSizeChangeAt": 1476871757960,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 218098,
+            "deleteable": false,
+            "updatedAt": 1476871684833,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_19"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Someone Interesting Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1476871685072,
+            "listId": 217487,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1476871758247,
+                "error": "",
+                "lastSizeChangeAt": 1535059147107,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 218099,
+            "deleteable": false,
+            "updatedAt": 1476871685072,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_19"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Someone Interesting Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1476871685402,
+            "listId": 217488,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1476871758247,
+                "error": "",
+                "lastSizeChangeAt": 1476871758295,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 218100,
+            "deleteable": false,
+            "updatedAt": 1476871685402,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_19"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Someone Interesting Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1505824056552,
+            "listId": 288667,
+            "authorId": 2034622,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1505824183145,
+                "error": "",
+                "lastSizeChangeAt": 1505824183372,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 289381,
+            "deleteable": false,
+            "updatedAt": 1505824056552,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_20"
+                    }
+                ]
+            ],
+            "name": "ada Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1505824056762,
+            "listId": 288668,
+            "authorId": 2034622,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1505824183145,
+                "error": "",
+                "lastSizeChangeAt": 1505824183207,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 289382,
+            "deleteable": false,
+            "updatedAt": 1505824056762,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_20"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "ada Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1505824056926,
+            "listId": 288669,
+            "authorId": 2034622,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1505824183145,
+                "error": "",
+                "lastSizeChangeAt": 1505824183264,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 289383,
+            "deleteable": false,
+            "updatedAt": 1505824056926,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_20"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "ada Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1505824057099,
+            "listId": 288670,
+            "authorId": 2034622,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1505824183145,
+                "error": "",
+                "lastSizeChangeAt": 1505824183322,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 289384,
+            "deleteable": false,
+            "updatedAt": 1505824057099,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_20"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "ada Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1521806564849,
+            "listId": 428890,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1521806756273,
+                "error": "",
+                "lastSizeChangeAt": 1549400513400,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 429640,
+            "deleteable": false,
+            "updatedAt": 1521806564849,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_21"
+                    }
+                ]
+            ],
+            "name": "Sony Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1521806565149,
+            "listId": 428891,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1521806756273,
+                "error": "",
+                "lastSizeChangeAt": 1521806756526,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 429641,
+            "deleteable": false,
+            "updatedAt": 1521806565149,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_21"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Sony Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1521806565473,
+            "listId": 428892,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1521806756273,
+                "error": "",
+                "lastSizeChangeAt": 1521806756341,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 429642,
+            "deleteable": false,
+            "updatedAt": 1521806565473,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_21"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Sony Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1521806565811,
+            "listId": 428893,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1521806756273,
+                "error": "",
+                "lastSizeChangeAt": 1521806756420,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 429643,
+            "deleteable": false,
+            "updatedAt": 1521806565811,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_21"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Sony Persona - Customers",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1526561084971,
+            "listId": 439783,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1526561223334,
+                "error": "",
+                "lastSizeChangeAt": 1526561223445,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 440539,
+            "deleteable": false,
+            "updatedAt": 1526561084971,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_22"
+                    }
+                ]
+            ],
+            "name": "Pablo Ailan Persona - All Contacts",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1526561085241,
+            "listId": 439784,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1526561223334,
+                "error": "",
+                "lastSizeChangeAt": 1526561223542,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 440540,
+            "deleteable": false,
+            "updatedAt": 1526561085241,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_22"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "marketingqualifiedlead"
+                    }
+                ]
+            ],
+            "name": "Pablo Ailan Persona - MQLs",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1526561085523,
+            "listId": 439785,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1526561223334,
+                "error": "",
+                "lastSizeChangeAt": 1526561223590,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 440541,
+            "deleteable": false,
+            "updatedAt": 1526561085523,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_22"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "lead"
+                    }
+                ]
+            ],
+            "name": "Pablo Ailan Persona - Leads",
+            "readOnly": true
+        },
+        {
+            "portalId": 62515,
+            "createdAt": 1526561085841,
+            "listId": 439786,
+            "authorId": 215482,
+            "listType": "DYNAMIC",
+            "archived": false,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1526561223334,
+                "error": "",
+                "lastSizeChangeAt": 1526561223494,
+                "size": 0
+            },
+            "dynamic": true,
+            "internalListId": 440542,
+            "deleteable": false,
+            "updatedAt": 1526561085841,
+            "filters": [
+                [
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "hs_persona",
+                        "value": "persona_22"
+                    },
+                    {
+                        "withinTimeMode": "PAST",
+                        "operator": "SET_ANY",
+                        "filterFamily": "PropertyValue",
+                        "type": "enumeration",
+                        "property": "lifecyclestage",
+                        "value": "customer"
+                    }
+                ]
+            ],
+            "name": "Pablo Ailan Persona - Customers",
+            "readOnly": true
+        }
+    ]
+}

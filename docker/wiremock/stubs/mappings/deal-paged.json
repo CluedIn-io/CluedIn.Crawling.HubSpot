@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/deals/v1/deal/paged(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "deal-paged.json"
+    }
+  }

@@ -1,0 +1,11 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/companies/v2/companies/paged(.*)"
+
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "companies-paged.json"
+    }
+}

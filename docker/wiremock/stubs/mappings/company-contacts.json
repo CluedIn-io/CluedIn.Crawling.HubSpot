@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/companies/v2/companies/([0-9]*)/contacts(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "company-contacts.json"
+    }
+  }

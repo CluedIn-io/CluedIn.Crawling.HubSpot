@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/hubdb/api/v2/tables(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "tables.json"
+  }
+}

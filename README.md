@@ -6,51 +6,77 @@ CluedIn crawler for HubSpot.
 
 ------
 
-## Migration Notes
+## Overview
 
-```Shell
-# Create a new directory for the crawler
-md Crawler.HubSpot
-cd Crawler.HubSpot
+This repository contains the code and associated tests for the [HubSpot](https://developers.hubspot.com/docs/overview) crawler.
 
-# Initialize the folder as a Git repository
-git init
-git flow init
+## Usage
 
-# Run the yeoman generator
-#  Answers to generator prompts:
-#   Yes to Webhooks
-#   No to OAuth
-docker run --rm -ti -v ${PWD}:/generated cluedin/generator-crawler-template
+### NuGet Packages
 
+To use the `HubSpot` crawler and provider with the `CluedIn` server you will have to add the following NuGet packages to the `Providers.csproj` project file:
 
-# TODO Create Git repository for CluedIn.Crawling.HubSpot
-# Add Git remote
-git remote add origin https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot.git
-git push -u origin master
+```PowerShell
+Install-Package CluedIn.Crawling.HubSpot
 
-# TODO fix all the broken bits for dotnet build to run
+Install-Package CluedIn.Crawling.HubSpot.Core
 
-# .NET Build
-dotnet build
-dotnet test
-dotnet pack
+Install-Package CluedIn.Crawling.HubSpot.Infrastructure
 
-# TODO add coverlet to generate test code coverage statistics from build
-
+Install-Package CluedIn.Provider.HubSpot
 ```
 
-## Issues Identified
+The NuGet packages specified are available on the [internal development feed](https://dev.azure.com/CluedIn-io/CluedIn%20Crawlers/_packaging?_a=feed&feed=develop).
 
-* [ ] `dotnet build` fails after yeoman generator has been run
+### Debugging
 
-* [ ] `C:\windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe` fails after yeoman generator has been run
+To debug the `HubSpot` Provider/Crawler:
 
-* [ ] update `yeoman-crawler-template` repository to use latest `crawler-template` as a Git sub-module
+- Clone the [CluedIn.Crawling.HubSpot](https://github.com/CluedIn-io/CluedIn.Crawling.HubSpot) repository
+- Open `Crawling.HubSpot.sln` in Visual Studio
+- Rebuild All
+- Copy DLL and PDB files from `\**\bin\debug\net452` to the servers `ServerComponents` folder
+- Run CluedIn backend server using `.\build.ps1 run`
+- In Visual Studio with the `HubSpot` crawler solution open, use `Debug -> Attach to Process` on `CluedIn.Server.ConsoleHostv2.exe`
+- In the UI, add a new configuration for the `HubSpot` provider and invoke `Re-Crawl`
 
-  * PR #15 failing test. Ref: <https://github.com/CluedIn-io/yeoman-crawler-template/pull/15>
-  * Requires `Node.js` version 12
-  * Requires `gulp` ... `npm install gulp`
-    * [X] `npm` found 10 package vulnerabilities (4 moderate, 6 high). Ref <https://github.com/CluedIn-io/yeoman-crawler-template/issues/16>
+## Working with the Code
 
-* [ ] rename `test\unit-test`folder to `test\unit` in `crawler-template` repository
+Load [Crawling.HubSpot.sln](.\Crawling.HubSpot.sln) in Visual Studio or your preferred development IDE.
+
+### Running Tests
+
+A mocked environment is required to run `integration` and `acceptance` tests. The mocked environment can be built and run using the following [Docker](https://www.docker.com/) command:
+
+```Shell
+docker-compose up --build -d
+```
+
+Use the following commands to run all `Unit` and `Integration` tests within the repository:
+
+```Shell
+dotnet test .\Crawling.HubSpot.sln --filter Unit
+dotnet test .\Crawling.HubSpot.sln --filter Integration
+```
+
+To run [Pester](https://github.com/pester/Pester) `acceptance` tests
+
+```PowerShell
+invoke-pester
+```
+
+To review the [WireMock](http://wiremock.org/) HTTP proxy logs
+
+```Shell
+docker-compose logs wiremock
+```
+
+## References
+
+- [HubSpot](https://developers.hubspot.com/docs/overview)
+
+### Tooling
+
+- [Docker](https://www.docker.com/)
+- [Pester](https://github.com/pester/Pester)
+- [WireMock](http://wiremock.org/)

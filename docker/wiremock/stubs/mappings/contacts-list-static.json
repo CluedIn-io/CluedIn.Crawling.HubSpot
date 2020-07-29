@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/contacts/v1/lists/static(.*)"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "contacts-list-static.json"
+    }
+}

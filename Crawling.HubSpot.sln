@@ -1,0 +1,147 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Core", "src\HubSpot.Core\Crawling.HubSpot.Core.csproj", "{46D89BED-5F80-454B-9496-3163759DBEB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot", "src\HubSpot.Crawling\Crawling.HubSpot.csproj", "{5F649221-EBE9-4E5C-9463-F4E40A435435}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Infrastructure", "src\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj", "{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot", "src\HubSpot.Provider\Provider.HubSpot.csproj", "{E1744515-A08B-4972-9185-0D56131AC429}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{57E743C9-2E9B-4CA7-A9BD-E89B46B390E9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D081256-19A6-4190-8224-FB9CF5793B6A}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{32830E2D-B53F-4D0F-984E-806248F7C8D8}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{6068A50D-8E76-434E-ADE8-2E4A0A66333D}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Security\Crawler Threat Model.tm7 = docs\Security\Crawler Threat Model.tm7
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}"
+	ProjectSection(SolutionItems) = preProject
+		test\unit\Directory.Build.props = test\unit\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{CBD22F04-6415-467D-B079-44D5B01965D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Integration.Test", "test\integration\Crawling.HubSpot.Integration.Test\Crawling.HubSpot.Integration.Test.csproj", "{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2890545-0A08-46C6-96F1-EC7F2F59F54D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{4B8F8BD3-E95D-434A-9B56-92703E9EE646}"
+	ProjectSection(SolutionItems) = preProject
+		Nuget.config = Nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5DBEE18B-9635-495A-BB7F-13E0C6E05634}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{25845449-3550-4E1F-9095-415076333019}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{646CF1D9-7E2F-4FBB-A134-BF8B7CE7D823}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{E34F1771-5B93-4754-8DFE-C8875E09FE48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crawling.HubSpot.Unit.Test", "test\unit\Crawling.HubSpot.Unit.Test\Crawling.HubSpot.Unit.Test.csproj", "{D5313469-60EA-4B41-9D76-347F5D4101E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.HubSpot.Unit.Test", "test\unit\Provider.HubSpot.Unit.Test\Provider.HubSpot.Unit.Test.csproj", "{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{71361451-FE9B-4AE9-BE46-782444EEA203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawling.HubSpot.Test.Common", "test\common\Crawling.HubSpot.Test.Common\Crawling.HubSpot.Test.Common.csproj", "{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46D89BED-5F80-454B-9496-3163759DBEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D89BED-5F80-454B-9496-3163759DBEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D89BED-5F80-454B-9496-3163759DBEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D89BED-5F80-454B-9496-3163759DBEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F649221-EBE9-4E5C-9463-F4E40A435435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F649221-EBE9-4E5C-9463-F4E40A435435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F649221-EBE9-4E5C-9463-F4E40A435435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F649221-EBE9-4E5C-9463-F4E40A435435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE5BE162-01C7-4D2F-98F4-144E2EEB5993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1744515-A08B-4972-9185-0D56131AC429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1744515-A08B-4972-9185-0D56131AC429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1744515-A08B-4972-9185-0D56131AC429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1744515-A08B-4972-9185-0D56131AC429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5313469-60EA-4B41-9D76-347F5D4101E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5313469-60EA-4B41-9D76-347F5D4101E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5313469-60EA-4B41-9D76-347F5D4101E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5313469-60EA-4B41-9D76-347F5D4101E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46D89BED-5F80-454B-9496-3163759DBEB4} = {4D081256-19A6-4190-8224-FB9CF5793B6A}
+		{5F649221-EBE9-4E5C-9463-F4E40A435435} = {4D081256-19A6-4190-8224-FB9CF5793B6A}
+		{DE5BE162-01C7-4D2F-98F4-144E2EEB5993} = {4D081256-19A6-4190-8224-FB9CF5793B6A}
+		{E1744515-A08B-4972-9185-0D56131AC429} = {4D081256-19A6-4190-8224-FB9CF5793B6A}
+		{57E743C9-2E9B-4CA7-A9BD-E89B46B390E9} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{6068A50D-8E76-434E-ADE8-2E4A0A66333D} = {57E743C9-2E9B-4CA7-A9BD-E89B46B390E9}
+		{D10B16B9-F33D-498D-8C6F-442B0EC7C6E2} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
+		{CBD22F04-6415-467D-B079-44D5B01965D1} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
+		{8F3EF0B2-A6CA-4426-919D-5E0B26F8366B} = {CBD22F04-6415-467D-B079-44D5B01965D1}
+		{76FFDB59-C0B2-44D3-A8A9-AEB3E4AF844E} = {E34F1771-5B93-4754-8DFE-C8875E09FE48}
+		{4B8F8BD3-E95D-434A-9B56-92703E9EE646} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{5DBEE18B-9635-495A-BB7F-13E0C6E05634} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{25845449-3550-4E1F-9095-415076333019} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{646CF1D9-7E2F-4FBB-A134-BF8B7CE7D823} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{E34F1771-5B93-4754-8DFE-C8875E09FE48} = {A2890545-0A08-46C6-96F1-EC7F2F59F54D}
+		{D5313469-60EA-4B41-9D76-347F5D4101E8} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
+		{24C48AD5-562B-4C9B-9FC3-52EB0C79007C} = {D10B16B9-F33D-498D-8C6F-442B0EC7C6E2}
+		{71361451-FE9B-4AE9-BE46-782444EEA203} = {32830E2D-B53F-4D0F-984E-806248F7C8D8}
+		{7EA3FDD6-ACF9-4C4E-A3E8-E2FB4B2A3D8C} = {71361451-FE9B-4AE9-BE46-782444EEA203}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F65A0D1-C784-4ABE-8B71-22B8FBD404C0}
+	EndGlobalSection
+EndGlobal

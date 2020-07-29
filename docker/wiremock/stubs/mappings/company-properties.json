@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/properties/v1/companies/properties(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "company-properties.json"
+  }
+}

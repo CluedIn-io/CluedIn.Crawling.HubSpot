@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/contacts/v1/lists/all/contacts/all(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "contacts-all.json"
+  }
+}

@@ -1,0 +1,67 @@
+[
+    {
+        "pipelineId": "default",
+        "stages": [
+            {
+                "stageId": "appointmentscheduled",
+                "label": "Appointment Scheduled",
+                "probability": 0.2,
+                "active": true,
+                "displayOrder": 0,
+                "closedWon": false
+            },
+            {
+                "stageId": "qualifiedtobuy",
+                "label": "Qualified To Buy",
+                "probability": 0.4,
+                "active": true,
+                "displayOrder": 1,
+                "closedWon": false
+            },
+            {
+                "stageId": "presentationscheduled",
+                "label": "Presentation Scheduled",
+                "probability": 0.6,
+                "active": true,
+                "displayOrder": 2,
+                "closedWon": false
+            },
+            {
+                "stageId": "decisionmakerboughtin",
+                "label": "Decision Maker Bought-In",
+                "probability": 0.8,
+                "active": true,
+                "displayOrder": 3,
+                "closedWon": false
+            },
+            {
+                "stageId": "contractsent",
+                "label": "Contract Sent",
+                "probability": 0.9,
+                "active": true,
+                "displayOrder": 4,
+                "closedWon": false
+            },
+            {
+                "stageId": "closedwon",
+                "label": "Closed Won",
+                "probability": 1.0,
+                "active": true,
+                "displayOrder": 5,
+                "closedWon": true
+            },
+            {
+                "stageId": "closedlost",
+                "label": "Closed Lost",
+                "probability": 0.0,
+                "active": true,
+                "displayOrder": 6,
+                "closedWon": false
+            }
+        ],
+        "label": "Sales Pipeline",
+        "active": true,
+        "displayOrder": 0,
+        "staticDefault": true
+    }
+]

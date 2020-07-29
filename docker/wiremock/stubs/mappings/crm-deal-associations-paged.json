@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPattern": "/crm-associations/v1/associations/([0-9]*)/(.*)/([0-9]*)(.*)"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "crm-deal-associations-paged.json"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/calendar/v1/events/task(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "blogs.json"
+    }
+}

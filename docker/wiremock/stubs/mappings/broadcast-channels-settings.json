@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPattern": "/broadcast/v1/channels/setting/publish/current(.*)"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "broadcast-channels-settings.json"
+    }
+}

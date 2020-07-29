@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="CluedIn.Core.Agent" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\HubSpot.Core\Crawling.HubSpot.Core.csproj" />
+  </ItemGroup>
+</Project>

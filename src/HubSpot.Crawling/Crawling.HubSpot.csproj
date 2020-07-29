@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\HubSpot.Infrastructure\Crawling.HubSpot.Infrastructure.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="HubSpotCrawlerComponent.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+</Project>

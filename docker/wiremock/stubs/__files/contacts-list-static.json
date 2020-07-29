@@ -1,0 +1,50 @@
+{
+    "lists": [
+        {
+            "portalId": 4275951,
+            "createdAt": 1517489952463,
+            "listId": 1,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1518092097764,
+                "error": "",
+                "lastSizeChangeAt": 1518092097562,
+                "size": 40
+            },
+            "authorId": 5305024,
+            "listType": "STATIC",
+            "archived": false,
+            "dynamic": false,
+            "internalListId": 1,
+            "deleteable": true,
+            "updatedAt": 1518092097938,
+            "filters": [],
+            "name": "contacts_sample_import.csv"
+        },
+        {
+            "portalId": 4275951,
+            "createdAt": 1518092096690,
+            "listId": 2,
+            "metaData": {
+                "listReferencesCount": null,
+                "parentFolderId": null,
+                "processing": "DONE",
+                "lastProcessingStateChangeAt": 1518092097679,
+                "error": "",
+                "lastSizeChangeAt": 1518092098309,
+                "size": 29
+            },
+            "authorId": 5305024,
+            "listType": "STATIC",
+            "archived": false,
+            "dynamic": false,
+            "internalListId": 2,
+            "deleteable": true,
+            "updatedAt": 1518092097719,
+            "filters": [],
+            "name": "30 contacts"
+        }
+    ]
+}
