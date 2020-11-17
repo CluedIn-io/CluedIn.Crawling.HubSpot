@@ -4,9 +4,8 @@
     <_EasyNetQ>3.7.1</_EasyNetQ>
     <_EntityFramework>3.1.3</_EntityFramework>
     <_MicrosoftExtensions>3.1.3</_MicrosoftExtensions>
-    <_ComponentHost>2.0.0-alpha-14</_ComponentHost>
     <_AutoFixture>4.11.0</_AutoFixture>
-    <_CluedIn>3.0.0-*</_CluedIn>
+    <_CluedIn>3.2.0-*</_CluedIn>
   </PropertyGroup>
 
   <ItemGroup>
