@@ -4,7 +4,6 @@
     "rollForward": "latestFeature"
   },
   "msbuild-sdks": {
-    "Microsoft.Build.CentralPackageVersions": "2.0.52",
-    "Microsoft.Build.Traversal": "2.0.31"
+    "Microsoft.Build.CentralPackageVersions": "2.0.52"
   }
 }
