@@ -98,7 +98,7 @@ namespace CluedIn.Provider.HubSpot
 
             if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
             {
-                if (_notifications != null) _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+                //if (_notifications != null) _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
 
                 var result = hubspotCrawlJobData.ToDictionary();
 
