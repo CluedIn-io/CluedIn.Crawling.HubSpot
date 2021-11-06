@@ -37,7 +37,7 @@
     <PackageReference Update="CluedIn.Core" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Core.Agent" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Crawling" Version="$(_CluedIn)" />
-    <PackageReference Update="CluedIn.CrawlerIntegrationTesting" Version="$(_CluedIn)" />
+    <PackageReference Update="CluedIn.CrawlerIntegrationTesting" Version="3.2.0-*" />
     <PackageReference Update="RestSharp" Version="106.10.1" />
 
   </ItemGroup>
