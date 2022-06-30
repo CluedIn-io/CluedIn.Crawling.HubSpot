@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Internal;
 using CluedIn.Core.Mesh;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
@@ -10,6 +11,11 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
         public static HubspotProperties ToHubspotProperties(this Properties properties, string prefix)
         {
             var hubspotProperties = new HubspotProperties();
+            if(properties?.properties == null || prefix.IsNullOrEmpty())
+            {
+                return hubspotProperties;
+            }
+
             foreach (var property in properties.properties.Where(property => property.name.Contains(prefix, StringComparison.OrdinalIgnoreCase)))
             {
                 hubspotProperties.TryAdd(
@@ -31,7 +37,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
         public void TryAdd(HubspotProperty hubspotProperty)
         {
-            if (properties.Any(p => p.property == hubspotProperty.property))
+            if (properties.Any(p => p.name == hubspotProperty.name))
             {
                 return;
             }
@@ -42,13 +48,13 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
     public class HubspotProperty
     {
-        public HubspotProperty(string property, string value, string prefix)
+        public HubspotProperty(string name, string value, string prefix)
         {
-            this.property = property.ToLower().Replace(prefix, "");
+            this.name = name.ToLower().Replace(prefix, "");
             this.value = value;
         }
 
-        public string property { get; set; }
+        public string name { get; set; }
         public string value { get; set; }
     }
 }
