@@ -7,13 +7,13 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 {
     public static class PropertiesExtensions
     {
-        public static HubspotProperties ToHubspotProperties(this Properties properties)
+        public static HubspotProperties ToHubspotProperties(this Properties properties, string prefix)
         {
             var hubspotProperties = new HubspotProperties();
-            foreach (var property in properties.properties.Where(property => property.name.Contains("hubspot.contact", StringComparison.OrdinalIgnoreCase)))
+            foreach (var property in properties.properties.Where(property => property.name.Contains(prefix, StringComparison.OrdinalIgnoreCase)))
             {
                 hubspotProperties.TryAdd(
-                    new HubspotProperty(property.name, property.value));
+                    new HubspotProperty(property.name, property.value, prefix));
             }
 
             return hubspotProperties;
@@ -42,9 +42,9 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
     public class HubspotProperty
     {
-        public HubspotProperty(string property, string value)
+        public HubspotProperty(string property, string value, string prefix)
         {
-            this.property = property.ToLower().Replace("hubspot.contact.", "");
+            this.property = property.ToLower().Replace(prefix, "");
             this.value = value;
         }
 

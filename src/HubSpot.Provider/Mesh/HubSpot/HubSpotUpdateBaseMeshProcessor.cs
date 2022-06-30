@@ -16,12 +16,14 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
     {
         public EntityType[] EntityType { get; }
         public string EditUrl { get; }
+        public string VocabPrefix { get; }
 
-        protected HubSpotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, params EntityType[] entityType)
+        protected HubSpotUpdateBaseMeshProcessor(ApplicationContext appContext, string editUrl, string vocabPrefix, params EntityType[] entityType)
             : base(appContext)
         {
             EntityType = entityType;
             EditUrl = editUrl;
+            VocabPrefix = vocabPrefix;
         }
 
         public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
@@ -74,9 +76,9 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(EditUrl.Replace(":vid", id), Method.POST);
+            var request = new RestRequest(EditUrl.Replace(":id", id), Method.POST);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-            request.AddJsonBody(properties.ToHubspotProperties());
+            request.AddJsonBody(properties.ToHubspotProperties(VocabPrefix));
 
             var result = client.ExecuteTaskAsync(request).Result;
 
