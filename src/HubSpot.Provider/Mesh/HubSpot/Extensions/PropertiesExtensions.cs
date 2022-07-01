@@ -37,7 +37,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
         public void TryAdd(HubspotProperty hubspotProperty)
         {
-            if (properties.Any(p => p.name == hubspotProperty.name))
+            if (properties.Any(p => p.property == hubspotProperty.property))
             {
                 return;
             }
@@ -48,13 +48,14 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
     public class HubspotProperty
     {
-        public HubspotProperty(string name, string value, string prefix)
+        public HubspotProperty(string property, string value, string prefix)
         {
-            this.name = name.ToLower().Replace(prefix, "");
+            this.property = property.ToLower().Replace(prefix, "")
+                .Replace("companyname", "company");
             this.value = value;
         }
 
-        public string name { get; set; }
+        public string property { get; set; }
         public string value { get; set; }
     }
 }
