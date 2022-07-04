@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Castle.Core.Internal;
 using CluedIn.Core.Mesh;
 
@@ -8,36 +9,36 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 {
     public static class PropertiesExtensions
     {
-        public static HubspotProperties ToHubspotProperties(this Properties properties, string prefix)
+        public static HubSpotProperties ToHubSpotProperties(this Properties properties, string prefix)
         {
-            var hubspotProperties = new HubspotProperties();
+            var hubspotProperties = new HubSpotProperties();
             if(properties?.properties == null || prefix.IsNullOrEmpty())
             {
-                return hubspotProperties;
+                return null;
             }
 
             foreach (var property in properties.properties.Where(property => property.name.Contains(prefix, StringComparison.OrdinalIgnoreCase)))
             {
-                hubspotProperties.TryAdd(
-                    new HubspotProperty(property.name, property.value, prefix));
+                hubspotProperties.AddIfNotExists(
+                    new HubSpotProperty(property.name, property.value, prefix));
             }
 
             return hubspotProperties;
         }
     }
 
-    public class HubspotProperties
+    public class HubSpotProperties
     {
-        public List<HubspotProperty> properties { get; set; }
+        public List<HubSpotProperty> properties { get; set; }
 
-        public HubspotProperties()
+        public HubSpotProperties()
         {
-            properties = new List<HubspotProperty>();
+            properties = new List<HubSpotProperty>();
         }
 
-        public void TryAdd(HubspotProperty hubspotProperty)
+        public void AddIfNotExists(HubSpotProperty hubspotProperty)
         {
-            if (properties.Any(p => p.property == hubspotProperty.property))
+            if (properties.Any(p => p.Property == hubspotProperty.Property))
             {
                 return;
             }
@@ -46,16 +47,33 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
         }
     }
 
-    public class HubspotProperty
+    public class HubSpotProperty
     {
-        public HubspotProperty(string property, string value, string prefix)
+        
+        private string? Name { get; set; }
+        private string? Prefix { get; set; }
+
+        public HubSpotProperty(string name, string value, string prefix)
         {
-            this.property = property.ToLower().Replace(prefix, "")
-                .Replace("companyname", "company");
-            this.value = value;
+            Name = name;
+            Value = value;
+            Prefix = prefix;
         }
 
-        public string property { get; set; }
-        public string value { get; set; }
+        [JsonPropertyName("property")]
+        public string Property
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(Prefix)) Prefix = string.Empty;
+
+                return string.IsNullOrEmpty(Name) ? string.Empty : Name.Replace(Prefix, string.Empty)
+                    .ToLower()
+                    .Replace("companyname", "company");
+            }
+        }
+
+        [JsonPropertyName("value")]
+        public string Value { get; }
     }
 }

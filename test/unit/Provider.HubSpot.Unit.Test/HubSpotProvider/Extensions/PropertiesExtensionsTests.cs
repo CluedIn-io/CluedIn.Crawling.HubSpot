@@ -19,10 +19,10 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             var properties = new Core.Mesh.Properties();
 
             // act
-            var result = properties.ToHubspotProperties("hubspot.contact.");
+            var result = properties.ToHubSpotProperties("hubspot.contact.");
 
             // assert
-            Assert.Empty(result.properties);
+            Assert.Null(result);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             properties.properties = internalProperties;
 
             // act
-            var result = properties.ToHubspotProperties("hubspot.contact.");
+            var result = properties.ToHubSpotProperties("hubspot.contact.");
 
             // assert
             Assert.Empty(result.properties);
@@ -59,10 +59,10 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             properties.properties = internalProperties;
 
             // act
-            var result = properties.ToHubspotProperties(string.Empty);
+            var result = properties.ToHubSpotProperties(string.Empty);
 
             // assert
-            Assert.Empty(result.properties);
+            Assert.Null(result);
         }
 
         [Fact]
@@ -79,12 +79,12 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             properties.properties = internalProperties;
 
             // act
-            var result = properties.ToHubspotProperties("hubspot.contact.");
+            var result = properties.ToHubSpotProperties("hubspot.contact.");
 
             // assert
             Assert.NotNull(result);
             Assert.Single(result.properties);
-            Assert.Equal("firstname", result.properties.First().property);
+            Assert.Equal("firstname", result.properties.First().Property);
         }
 
         [Fact]
@@ -102,13 +102,13 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             properties.properties = internalProperties;
 
             // act
-            var result = properties.ToHubspotProperties("hubspot.contact.");
+            var result = properties.ToHubSpotProperties("hubspot.contact.");
 
             // assert
             Assert.NotNull(result);
             Assert.Equal(2, result.properties.Count());
-            Assert.Equal("firstname", result.properties.First().property);
-            Assert.Equal("lastname", result.properties.Skip(1).First().property);
+            Assert.Equal("firstname", result.properties.First().Property);
+            Assert.Equal("lastname", result.properties.Skip(1).First().Property);
         }
     }
 }

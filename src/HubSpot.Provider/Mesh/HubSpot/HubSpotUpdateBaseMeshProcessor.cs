@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using CluedIn.Core;
 using CluedIn.Core.Data;
 using CluedIn.Core.Mesh;
@@ -76,11 +77,17 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
         public override List<QueryResponse> RunQueries(IDictionary<string, object> config, string id, Core.Mesh.Properties properties)
         {
+            var hubSpotProperties = properties.ToHubSpotProperties(VocabPrefix);
+            if(hubSpotProperties == null)
+            {
+                return new List<QueryResponse>() { new QueryResponse() { Content = "Properties are invalid.", StatusCode = HttpStatusCode.BadRequest } };
+            }
+
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(EditUrl.Replace(":id", id), UpdateMethod);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-            request.AddJsonBody(properties.ToHubspotProperties(VocabPrefix));
+            request.AddJsonBody(hubSpotProperties);
 
             var result = client.ExecuteTaskAsync(request).Result;
 
