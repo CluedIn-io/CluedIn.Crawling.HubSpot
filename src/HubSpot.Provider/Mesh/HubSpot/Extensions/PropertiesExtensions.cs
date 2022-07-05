@@ -63,9 +63,20 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
             this.Value = value;
         }
 
-        public string Property =>
-            _name.Replace(_prefix, string.Empty)
-                .Replace("companyname", "company");
+        public string Property
+        {
+            get
+            {
+                var returnValue = _name;
+
+                if (returnValue.StartsWith(_prefix, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    returnValue = returnValue.Remove(0, _prefix.Length);
+                }
+
+                return returnValue.Replace("companyname", "company");
+            }
+        }
 
         public string Value { get; }
     }

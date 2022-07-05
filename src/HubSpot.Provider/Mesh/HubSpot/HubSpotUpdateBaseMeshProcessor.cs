@@ -106,7 +106,5 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
-
-
     }
 }
