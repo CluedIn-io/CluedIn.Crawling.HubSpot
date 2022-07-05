@@ -84,7 +84,7 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             // assert
             Assert.NotNull(result);
             Assert.Single(result.properties);
-            Assert.Equal("firstname", result.properties.First().Property);
+            Assert.Equal("firstname", result.properties.First().property);
         }
 
         [Fact]
@@ -107,8 +107,8 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             // assert
             Assert.NotNull(result);
             Assert.Equal(2, result.properties.Count());
-            Assert.Equal("firstname", result.properties.First().Property);
-            Assert.Equal("lastname", result.properties.Skip(1).First().Property);
+            Assert.Equal("firstname", result.properties.First().property);
+            Assert.Equal("lastname", result.properties.Skip(1).First().property);
         }
     }
 }

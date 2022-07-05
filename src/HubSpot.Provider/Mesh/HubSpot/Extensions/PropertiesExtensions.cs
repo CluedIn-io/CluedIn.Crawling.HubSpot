@@ -38,7 +38,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
         public void AddIfNotExists(HubSpotProperty hubspotProperty)
         {
-            if (properties.Any(p => p.Property == hubspotProperty.Property))
+            if (properties.Any(p => p.property == hubspotProperty.property))
             {
                 return;
             }
@@ -55,13 +55,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 
         public HubSpotProperty(string name, string value, string prefix)
         {
-            Name = name;
-            Value = value;
-            Prefix = prefix;
+            this.Name = name;
+            this.value = value;
+            this.Prefix = prefix;
         }
-
-        [JsonPropertyName("property")]
-        public string Property
+        
+        public string property
         {
             get
             {
@@ -72,8 +71,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
                     .Replace("companyname", "company");
             }
         }
-
-        [JsonPropertyName("value")]
-        public string Value { get; }
+        
+        public string value { get; }
     }
 }
