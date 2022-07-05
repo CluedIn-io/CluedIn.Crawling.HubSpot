@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
 using CluedIn.Core.Mesh;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
 {
@@ -26,26 +28,28 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
         }
     }
 
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class HubSpotProperties
     {
-        public List<HubSpotProperty> properties { get; set; }
+        public List<HubSpotProperty> Properties { get; set; }
 
         public HubSpotProperties()
         {
-            properties = new List<HubSpotProperty>();
+            Properties = new List<HubSpotProperty>();
         }
 
         public void AddIfNotExists(HubSpotProperty hubspotProperty)
         {
-            if (properties.Any(p => p.property == hubspotProperty.property))
+            if (Properties.Any(p => p.Property == hubspotProperty.Property))
             {
                 return;
             }
 
-            properties.Add(hubspotProperty);
+            Properties.Add(hubspotProperty);
         }
     }
 
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class HubSpotProperty
     {
         private readonly string _name;
@@ -56,13 +60,13 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
             _name = string.IsNullOrEmpty(name) ? string.Empty : name.ToLower();
             _prefix = string.IsNullOrEmpty(prefix) ? string.Empty : prefix.ToLower();
 
-            this.value = value;
+            this.Value = value;
         }
 
-        public string property =>
+        public string Property =>
             _name.Replace(_prefix, string.Empty)
                 .Replace("companyname", "company");
 
-        public string value { get; }
+        public string Value { get; }
     }
 }

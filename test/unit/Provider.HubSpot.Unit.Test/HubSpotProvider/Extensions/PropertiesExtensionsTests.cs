@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CluedIn.Core.Mesh;
 using CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions;
-using RestSharp.Extensions;
-using Shouldly;
+using Newtonsoft.Json;
+using RestSharp;
 using Xunit;
 
 namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
@@ -42,7 +40,7 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
             var result = properties.ToHubSpotProperties("hubspot.contact.");
 
             // assert
-            Assert.Empty(result.properties);
+            Assert.Empty(result.Properties);
         }
 
         [Fact]
@@ -83,8 +81,8 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
 
             // assert
             Assert.NotNull(result);
-            Assert.Single(result.properties);
-            Assert.Equal("firstname", result.properties.First().property);
+            Assert.Single(result.Properties);
+            Assert.Equal("firstname", result.Properties.First().Property);
         }
 
         [Fact]
@@ -106,9 +104,32 @@ namespace CluedIn.Provider.HubSpot.Unit.Test.HubSpotProvider.Extensions
 
             // assert
             Assert.NotNull(result);
-            Assert.Equal(2, result.properties.Count());
-            Assert.Equal("firstname", result.properties.First().property);
-            Assert.Equal("lastname", result.properties.Skip(1).First().property);
+            Assert.Equal(2, result.Properties.Count());
+            Assert.Equal("firstname", result.Properties.First().Property);
+            Assert.Equal("lastname", result.Properties.Skip(1).First().Property);
+        }
+
+        [Fact]
+        internal void ToHubspotProperties_ValidKeys_ShouldBeCamelCase()
+        {
+            // arrange
+            var properties = new Core.Mesh.Properties();
+            var internalProperties = new List<Property>
+            {
+                new Property { name = "acceptance.contact.firstName", value = "test" },
+                new Property { name = "salesforce.contact.firstName", value = "test" },
+                new Property { name = "hubspot.contact.firstName", value = "test" },
+                new Property { name = "hubspot.contact.lastNAME", value = "mctest" }
+            };
+            properties.properties = internalProperties;
+
+            // act
+            var result = properties.ToHubSpotProperties("hubspot.contact.");
+
+            var json = JsonConvert.SerializeObject(result);
+
+            // assert
+            Assert.Equal("{\"properties\":[{\"property\":\"firstname\",\"value\":\"test\"},{\"property\":\"lastname\",\"value\":\"mctest\"}]}", json);
         }
     }
 }
