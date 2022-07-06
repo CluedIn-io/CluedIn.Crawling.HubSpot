@@ -52,32 +52,27 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
     [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class HubSpotProperty
     {
-        private readonly string _name;
-        private readonly string _prefix;
-
         public HubSpotProperty(string name, string value, string prefix)
         {
-            _name = string.IsNullOrEmpty(name) ? string.Empty : name.ToLower();
-            _prefix = string.IsNullOrEmpty(prefix) ? string.Empty : prefix.ToLower();
-
+            this.Property = ResolveProperty(name, prefix);
             this.Value = value;
         }
 
-        public string Property
-        {
-            get
-            {
-                var returnValue = _name;
-
-                if (returnValue.StartsWith(_prefix, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    returnValue = returnValue.Remove(0, _prefix.Length);
-                }
-
-                return returnValue.Replace("companyname", "company");
-            }
-        }
+        public string Property { get; }
 
         public string Value { get; }
+
+        private static string ResolveProperty(string name, string prefix)
+        {
+            var returnValue = string.IsNullOrEmpty(name) ? string.Empty : name.ToLower();
+            var normalizedPrefix = string.IsNullOrEmpty(prefix) ? string.Empty : prefix.ToLower();
+
+            if (returnValue.StartsWith(normalizedPrefix, StringComparison.InvariantCultureIgnoreCase))
+            {
+                returnValue = returnValue.Remove(0, normalizedPrefix.Length);
+            }
+
+            return returnValue.Replace("companyname", "company");
+        }
     }
 }
