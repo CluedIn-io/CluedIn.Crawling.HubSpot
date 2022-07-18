@@ -31,7 +31,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
         public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
         {
-            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType);
+            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType) && query.Transform.HasValidVocabularyKey();
         }
 
         public override void DoProcess(CluedIn.Core.ExecutionContext context, MeshDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
