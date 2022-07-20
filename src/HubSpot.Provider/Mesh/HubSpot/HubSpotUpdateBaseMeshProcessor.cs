@@ -9,6 +9,7 @@ using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
@@ -87,7 +88,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(EditUrl.Replace(":id", id), UpdateMethod);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-            request.AddJsonBody(hubSpotProperties);
+            request.AddJsonBody(JsonConvert.SerializeObject(hubSpotProperties));
 
             var result = client.ExecuteTaskAsync(request).Result;
 
