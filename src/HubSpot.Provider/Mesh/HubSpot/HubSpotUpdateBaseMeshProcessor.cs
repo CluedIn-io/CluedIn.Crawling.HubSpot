@@ -9,6 +9,7 @@ using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
@@ -31,7 +32,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
         public override bool Accept(MeshDataCommand command, MeshQuery query, IEntity entity)
         {
-            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType);
+            return command.ProviderId == this.GetProviderId() && query.Action == ActionType.UPDATE && EntityType.Contains(entity.EntityType) && query.Transform.HasValidVocabularyKey();
         }
 
         public override void DoProcess(CluedIn.Core.ExecutionContext context, MeshDataCommand command, IDictionary<string, object> jobData, MeshQuery query)
@@ -87,7 +88,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(EditUrl.Replace(":id", id), UpdateMethod);
             request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
-            request.AddJsonBody(hubSpotProperties);
+            request.AddJsonBody(JsonConvert.SerializeObject(hubSpotProperties));
 
             var result = client.ExecuteTaskAsync(request).Result;
 
