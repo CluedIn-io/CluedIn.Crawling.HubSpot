@@ -87,7 +87,10 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(EditUrl.Replace(":id", id), UpdateMethod);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
+
             request.AddJsonBody(JsonConvert.SerializeObject(hubSpotProperties));
 
             var result = client.ExecuteTaskAsync(request).Result;
@@ -101,7 +104,9 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
 
             var result = client.ExecuteTaskAsync(request).Result;
 
