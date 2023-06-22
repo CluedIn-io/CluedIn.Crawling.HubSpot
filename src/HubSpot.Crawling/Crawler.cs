@@ -42,14 +42,7 @@ namespace CluedIn.Crawling.HubSpot
                 _log.LogError("Settings could not be obtained from HubSpot");
                 yield break;
             }
-
-            var dailyLimit = client.GetDailyLimitAsync().Result;
-            if (dailyLimit.currentUsage >= dailyLimit.usageLimit)
-            {
-                _log.LogError("HubSpot daily usage limit has been reached");
-                yield break;
-            }
-
+            
             foreach (var item in GetCompanies(client, crawlerJobData, settings))
             {
                 yield return item;
