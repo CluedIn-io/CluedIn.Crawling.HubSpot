@@ -33,7 +33,8 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                     ? hubspotCrawlJobData.BaseUri
                     : new Uri(HubSpotConstants.ApiBaseUri);
 
-            _client.AddDefaultParameter("hapikey", hubspotCrawlJobData.ApiToken, ParameterType.QueryString);
+            _client.AddDefaultHeader("Authorization", $"Bearer {hubspotCrawlJobData.ApiToken}");
+            _client.AddDefaultHeader("Content-Type", "application/json");
         }
 
         public async Task<Settings> GetSettingsAsync() => await GetAsync<Settings>("integrations/v1/me");
