@@ -44,11 +44,11 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
-            return new List<Core.Messages.WebApp.RawQuery>()
+            return new List<RawQuery>()
             {
-                new Core.Messages.WebApp.RawQuery()
+                new RawQuery()
                 {
-                    Query = string.Format("curl -X PUT https://api.hubapi.com/" + EditUrl + "{1}?hapikey={0} "  + "--header \"Content-Type: application/json\"" + " --data '{2}'", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity), JsonUtility.Serialize(properties)),
+                    Query = $"curl -X PUT https://api.hubapi.com/{EditUrl}{GetLookupId(entity)} --header \"Bearer {hubSpotCrawlJobData.ApiToken}\" --header \"Content-Type: application/json\" --data '{JsonUtility.Serialize(properties)}'",
                     Source = "cUrl"
                 }
             };

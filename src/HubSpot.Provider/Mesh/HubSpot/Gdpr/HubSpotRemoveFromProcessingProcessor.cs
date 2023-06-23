@@ -51,7 +51,10 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", GetLookupId(entity)), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
+
             var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
             if (result.Data == null)
             {
@@ -72,7 +75,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             {
                 queries.Add(new Core.Messages.WebApp.RawQuery()
                 {
-                    Query = string.Format("curl -X DELETE https://api.hubapi.com/" + "/automation/v2/workflows/{1}/enrollments/contacts/{2}" + "?hapikey={0} " + "--header \"Content-Type: application/json\"", hubSpotCrawlJobData.ApiToken, workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]),
+                    Query = $"curl -X DELETE https://api.hubapi.com/automation/v2/workflows/{workflow.id}/enrollments/contacts/{entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]} --header \"Bearer {hubSpotCrawlJobData.ApiToken}\" --header \"Content-Type: application/json\"",
                     Source = "cUrl"
                 });
             }
@@ -108,7 +111,10 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var quereis = new List<QueryResponse>();
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
+
             var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
             if (result.Data == null)
             {
@@ -128,7 +134,10 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             foreach (var workflow in result.Data)
             {
                 var removeRequest = new RestRequest(string.Format("/automation/v2/workflows/{0}/enrollments/contacts/{1}", workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]), Method.DELETE);
-                removeRequest.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+                client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+                client.AddDefaultHeader("Content-Type", "application/json");
+
                 var removeResult = client.ExecuteTaskAsync(removeRequest).Result;
 
                 quereis.Add(new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode });
@@ -140,10 +149,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
         public override List<QueryResponse> Validate(ExecutionContext context, RemoveFromProcessingDataCommand command, IDictionary<string, object> config, string id, MeshQuery query)
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
-            var quereis = new List<QueryResponse>();
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
+
             var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
