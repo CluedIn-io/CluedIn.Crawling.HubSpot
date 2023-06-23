@@ -32,7 +32,6 @@ namespace CluedIn.Crawling.HubSpot.Core
         public const string Uri = "http://www.hubspot.com";
         public const string ApiBaseUri = "https://api.hubapi.com";
 
-
         public static readonly Guid ProviderId = Guid.Parse("7673C455-074A-499F-AFD3-C77DFBB7BC1F");
         public const string ProviderName = "HubSpot";
         public const bool SupportsConfiguration = true;
