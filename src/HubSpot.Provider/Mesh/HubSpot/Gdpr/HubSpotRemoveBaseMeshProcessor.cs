@@ -51,7 +51,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             {
                 new Core.Messages.WebApp.RawQuery()
                 {
-                    Query = string.Format("curl -X DELETE https://api.hubapi.com/" + DeleteUrl + "{0}?hapikey={1} "  + "--header \"Content-Type: application/json\"", hubSpotCrawlJobData.ApiToken, this.GetLookupId(entity)),
+                    Query = $"curl -X DELETE https://api.hubapi.com/{DeleteUrl}{GetLookupId(entity)} --header \"Bearer {hubSpotCrawlJobData.ApiToken}\" --header \"Content-Type: application/json\"",
                     Source = "cUrl"
                 }
             };
@@ -84,7 +84,9 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.DELETE);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+            
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
 
             var result = client.ExecuteTaskAsync(request).Result;
 
@@ -97,7 +99,9 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 
             var client = new RestClient("https://api.hubapi.com");
             var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.GET);
-            request.AddQueryParameter("hapikey", hubSpotCrawlJobData.ApiToken); // adds to POST or URL querystring based on Method
+
+            client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
+            client.AddDefaultHeader("Content-Type", "application/json");
 
             var result = client.ExecuteTaskAsync(request).Result;
 
