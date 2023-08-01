@@ -7,4 +7,4 @@ branches:
     tag: pr
     increment: None
   develop:
-    tag: alpha1
+    tag: alpha
