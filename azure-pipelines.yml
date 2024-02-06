@@ -38,7 +38,7 @@ variables:
 
 steps:
 
-- task: NuGetAuthenticate@0
+- task: NuGetAuthenticate@1
   displayName: 'Authenticate with nuget'
 
 - template: crawler.build.yml@templates
