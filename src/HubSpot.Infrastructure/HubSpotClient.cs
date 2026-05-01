@@ -18,21 +18,17 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
     public class HubSpotClient : IHubSpotClient
     {
         private readonly ILogger<HubSpotClient> _log;
-        private readonly IRestClient _client;
+        private readonly RestClient _client;
 
-        public HubSpotClient(ILogger<HubSpotClient> log, HubSpotCrawlJobData hubspotCrawlJobData, IRestClient client)
+        public HubSpotClient(ILogger<HubSpotClient> log, HubSpotCrawlJobData hubspotCrawlJobData)
         {
             if (hubspotCrawlJobData == null)
                 throw new ArgumentNullException(nameof(hubspotCrawlJobData));
 
             _log = log ?? throw new ArgumentNullException(nameof(log));
 
-            _client = client ?? throw new ArgumentNullException(nameof(client));
-            _client.BaseUrl =
-                hubspotCrawlJobData.BaseUri != null
-                    ? hubspotCrawlJobData.BaseUri
-                    : new Uri(HubSpotConstants.ApiBaseUri);
-
+            var baseUri = hubspotCrawlJobData.BaseUri ?? new Uri(HubSpotConstants.ApiBaseUri);
+            _client = new RestClient(new RestClientOptions(baseUri));
             _client.AddDefaultHeader("Authorization", $"Bearer {hubspotCrawlJobData.ApiToken}");
             _client.AddDefaultHeader("Content-Type", "application/json");
         }
@@ -477,17 +473,17 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
         private async Task<T> GetAsync<T>(string url, IList<QueryStringParameter> parameters = null)
         {
-            var request = new RestRequest(url, Method.GET);
+            var request = new RestRequest(url, Method.Get);
 
             AddParametersToRequest<T>(parameters, request);
 
-            var response = await _client.ExecuteTaskAsync(request);
+            var response = await _client.ExecuteAsync(request);
 
             return GetRequestResponse<T>(url, response);
         }
         private async Task<T> PostAsync<T>(string url, object body, IList<QueryStringParameter> parameters = null)
         {
-            var request = new RestRequest(url, Method.POST);
+            var request = new RestRequest(url, Method.Post);
 
             AddParametersToRequest<T>(parameters, request);
 
@@ -496,7 +492,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
                 request.AddBody(body);
             }
 
-            var response = await _client.ExecuteTaskAsync(request);
+            var response = await _client.ExecuteAsync(request);
 
             return GetRequestResponse<T>(url, response);
         }
@@ -512,7 +508,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
             }
         }
 
-        private T GetRequestResponse<T>(string url, IRestResponse response)
+        private T GetRequestResponse<T>(string url, RestResponse response)
         {
             _log.LogTrace("HubSpotClient.GetAsync calling {url}", url);
             if ((int)response.StatusCode == 429)
@@ -527,7 +523,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                _log.LogError("Request to {url} failed, response {errorMessage} ({statusCode})", $"{_client.BaseUrl}{url}", response.ErrorMessage, response.StatusCode);
+                _log.LogError("Request to {url} failed, response {errorMessage} ({statusCode})", $"{_client.Options.BaseUrl}{url}", response.ErrorMessage, response.StatusCode);
 
                 throw new InvalidOperationException("Communication to HubSpot unavailable.");
             }
@@ -545,7 +541,7 @@ namespace CluedIn.Crawling.HubSpot.Infrastructure
 
             public QueryStringParameter(string name, object value)
             {
-                Parameter = new Parameter(name, value.ToString(), ParameterType.QueryString);
+                Parameter = new QueryParameter(name, value.ToString());
             }
         }
 

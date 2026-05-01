@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using CluedIn.Core.Mesh;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -13,7 +12,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions
         public static HubSpotProperties ToHubSpotProperties(this Properties properties, string prefix)
         {
             var hubspotProperties = new HubSpotProperties();
-            if (properties?.properties == null || prefix.IsNullOrEmpty())
+            if (properties?.properties == null || string.IsNullOrEmpty(prefix))
             {
                 return null;
             }

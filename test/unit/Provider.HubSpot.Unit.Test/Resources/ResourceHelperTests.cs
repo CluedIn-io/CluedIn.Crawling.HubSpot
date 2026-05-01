@@ -1,4 +1,4 @@
-﻿using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit3;
 using CluedIn.Core.Resources;
 using CluedIn.Crawling.HubSpot.Core;
 using Xunit;

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using AutoFixture.Xunit2;
+using AutoFixture.Xunit3;
 using CluedIn.Core.Providers;
 using Shouldly;
 using Xunit;

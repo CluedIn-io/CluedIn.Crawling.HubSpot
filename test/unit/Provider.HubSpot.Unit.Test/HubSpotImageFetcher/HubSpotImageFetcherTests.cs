@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
+using System.Threading;
 using CluedIn.Core;
 using CluedIn.Core.Data.Parts;
 using CluedIn.Core.Resources;
@@ -37,7 +39,8 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
         {
             var fileData = ResourceHelper.GetFile(filename, Assembly.GetAssembly(typeof(HubSpotImageFetcherTests))).ToArray();
 
-            _restClient.Setup(n => n.DownloadData(new RestRequest(url))).Returns(fileData);
+            _restClient.Setup(n => n.DownloadStreamAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(() => new MemoryStream(fileData));
 
             var result = _sut.FetchAsRawDataPart(url, type, filename);
 
@@ -49,8 +52,9 @@ namespace Provider.HubSpot.Unit.Test.HubSpotImageFetcher
         public void CheckExceptionsAreLoggedFromFetchAsRawDataPart(string filename, string url, string type)
         {
             var request = new RestRequest(url);
-            _restClient.Setup(n => n.DownloadData(request)).Throws(new Exception("Invalid URL"));
-            
+            _restClient.Setup(n => n.DownloadStreamAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new Exception("Invalid URL"));
+
             _sut.FetchAsRawDataPart(request, type, filename);
 
             MoqUtils.VerifyLog(_log.Object, LogLevel.Warning, Times.Once());

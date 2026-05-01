@@ -93,7 +93,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
 
             request.AddJsonBody(JsonConvert.SerializeObject(hubSpotProperties));
 
-            var result = client.ExecuteTaskAsync(request).Result;
+            var result = client.ExecuteAsync(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
@@ -103,12 +103,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.GET);
+            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync(request).Result;
+            var result = client.ExecuteAsync(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }

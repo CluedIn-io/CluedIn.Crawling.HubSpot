@@ -5,7 +5,6 @@ using System.Linq;
 using CluedIn.Core.Data;
 using CrawlerIntegrationTesting.Clues;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Crawling.HubSpot.Integration.Test
 {
