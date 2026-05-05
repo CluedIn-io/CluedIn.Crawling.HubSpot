@@ -50,12 +50,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", GetLookupId(entity)), Method.GET);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", GetLookupId(entity)), Method.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
+            var result = client.ExecuteAsync<List<Workflow>>(request).Result;
             if (result.Data == null)
             {
                 return new List<Core.Messages.WebApp.RawQuery>();
@@ -110,12 +110,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var quereis = new List<QueryResponse>();
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.GET);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
+            var result = client.ExecuteAsync<List<Workflow>>(request).Result;
             if (result.Data == null)
             {
                 return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
@@ -133,12 +133,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 
             foreach (var workflow in result.Data)
             {
-                var removeRequest = new RestRequest(string.Format("/automation/v2/workflows/{0}/enrollments/contacts/{1}", workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]), Method.DELETE);
+                var removeRequest = new RestRequest(string.Format("/automation/v2/workflows/{0}/enrollments/contacts/{1}", workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]), Method.Delete);
 
                 client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
                 client.AddDefaultHeader("Content-Type", "application/json");
 
-                var removeResult = client.ExecuteTaskAsync(removeRequest).Result;
+                var removeResult = client.ExecuteAsync(removeRequest).Result;
 
                 quereis.Add(new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode });
             }
@@ -150,12 +150,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.GET);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync<List<Workflow>>(request).Result;
+            var result = client.ExecuteAsync<List<Workflow>>(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }

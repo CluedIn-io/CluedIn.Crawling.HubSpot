@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using AutoFixture.Xunit2;
+using AutoFixture.Xunit3;
 using CluedIn.Core.Data;
 using CluedIn.Crawling;
 using CluedIn.Crawling.HubSpot.ClueProducers;

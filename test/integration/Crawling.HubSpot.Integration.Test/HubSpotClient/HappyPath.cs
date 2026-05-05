@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoFixture.Xunit2;
+using AutoFixture.Xunit3;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using Crawling.HubSpot.Test.Common;
 using Microsoft.Extensions.Logging;
-using RestSharp;
 using Xunit;
 using Moq;
 using Task = System.Threading.Tasks.Task;
@@ -23,8 +22,7 @@ namespace Crawling.HubSpot.Integration.Test.HubSpotClient
             var crawlJobData = new HubSpotCrawlJobData(HubSpotConfiguration.Create());
 
 
-            _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient(logger.Object, crawlJobData,
-                new RestClient());
+            _sut = new CluedIn.Crawling.HubSpot.Infrastructure.HubSpotClient(logger.Object, crawlJobData);
         }
 
         [Fact]

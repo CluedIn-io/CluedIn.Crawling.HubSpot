@@ -83,12 +83,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.DELETE);
-            
+            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.Delete);
+
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync(request).Result;
+            var result = client.ExecuteAsync(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
@@ -98,12 +98,12 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.GET);
+            var request = new RestRequest(string.Format(DeleteUrl + "{0}", id), Method.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
 
-            var result = client.ExecuteTaskAsync(request).Result;
+            var result = client.ExecuteAsync(request).Result;
 
             return new List<QueryResponse>() { new QueryResponse() { Content = result.Content, StatusCode = result.StatusCode } };
         }
