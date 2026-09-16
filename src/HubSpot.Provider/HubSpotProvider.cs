@@ -26,17 +26,19 @@ namespace CluedIn.Provider.HubSpot
         private readonly IHubSpotClientFactory _hubspotClientFactory;
         private readonly ILogger<HubSpotProvider> _log;
         private readonly ISystemNotifications _notifications;
+        private readonly ISystemServiceBus _serviceBus;
 
         /**********************************************************************************************************
          * CONSTRUCTORS
          **********************************************************************************************************/
 
-        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory, ILogger<HubSpotProvider> log, ISystemNotifications notifications)
+        public HubSpotProvider([NotNull] ApplicationContext appContext, IHubSpotClientFactory hubspotClientFactory, ILogger<HubSpotProvider> log, ISystemNotifications notifications, ISystemServiceBus serviceBus)
             : base(appContext, HubSpotConstants.CreateProviderMetadata())
         {
             _hubspotClientFactory = hubspotClientFactory ?? throw new ArgumentNullException(nameof(hubspotClientFactory));
             _log = log ?? throw new ArgumentNullException(nameof(log));
             _notifications = notifications;
+            _serviceBus = serviceBus;
         }
 
         /**********************************************************************************************************
@@ -98,7 +100,16 @@ namespace CluedIn.Provider.HubSpot
 
             if (jobData is HubSpotCrawlJobData hubspotCrawlJobData)
             {
+                // ProviderMessageCommand implements IPushCommand, not INotification, so on
+                // CluedIn 5.0+ it can no longer go through ISystemNotifications.PublishNotificationAsync<T>
+                // (constrained to INotification there). ISystemServiceBus.PublishAsync<T> has no
+                // such constraint on either CluedIn generation, so that's used for the 5.0+ path
+                // instead; the pre-5.0 path is unchanged.
+#if CLUEDIN_V50
+                if (_serviceBus != null) await _serviceBus.PublishAsync(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+#else
                 if (_notifications != null) _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+#endif
 
                 var result = hubspotCrawlJobData.ToDictionary();
 

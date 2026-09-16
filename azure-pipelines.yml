@@ -1,4 +1,16 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
+parameters:
+  - name: pipelineTemplateRef
+    displayName: Pipeline Template Ref
+    type: string
+    default: refs/heads/feature/multi-version-packaging
+
+  # Manual, one-off check that this repo still builds and tests cleanly against a CluedIn.Core
+  # version outside multiVersionCluedInTargets below - leave blank for a normal run.
+  - name: probeCluedInVersion
+    displayName: Probe CluedIn Version (leave blank for a normal run)
+    type: string
+    default: " " # hack: set to space so that the devops ui doesn't show the field as required. the trim later on will convert the space to blank so that shared template works as expected
 
 trigger:
   branches:
@@ -7,12 +19,8 @@ trigger:
     - master
     - release/*
 
-pr:
-  branches:
-    include:
-    - develop
-    - master
-    - release/*
+# Perform build for a PR to any branch, as if you run PR, you most likely want CI checks.
+pr: ['*']
 
 resources:
   repositories:
@@ -20,13 +28,9 @@ resources:
       type: github
       name: CluedIn-io/AzurePipelines.Templates
       endpoint: 'CluedIn-io'
-      ref: refs/heads/refactor
-
-pool:
-  vmImage: 'windows-latest'
+      ref: ${{ parameters.pipelineTemplateRef }}
 
 variables:
-  - group: nuget
   - name: testFolderPath
     value: '$(Build.SourcesDirectory)/test'
   - name: DOTNET_SKIP_FIRST_TIME_EXPERIENCE
@@ -36,9 +40,20 @@ variables:
   - name: buildConfiguration
     value: Release
 
-steps:
-
-- task: NuGetAuthenticate@1
-  displayName: 'Authenticate with nuget'
-
-- template: crawler.build.yml@templates
+# jobs:, not pool:/steps: - crawler.build.jobs.yml is a jobs template, the only one with
+# multi-version support (crawler.build.yml has none).
+jobs:
+  - template: crawler.build.jobs.yml@templates
+    parameters:
+      pool:
+        vmImage: 'ubuntu-22.04'
+      githubReleaseInMaster: true
+      publicReleaseForMaster: true
+      publishCodeCoverage: true
+      useGitVersionDotNetTool: true
+      publishToDevFeed: true
+      probeCluedInVersion: ${{ trim(parameters.probeCluedInVersion) }}
+      multiVersionCluedInTargets:
+        - cluedInVersion: '4.7.0'
+        - cluedInVersion: '4.8.0'
+        - cluedInVersion: '5.0.0-beta.*'

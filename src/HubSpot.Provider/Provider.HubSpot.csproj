@@ -16,6 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CluedIn.Core" />
-    <PackageReference Include="CluedIn.CrawlerIntegrationTesting" />
+    <PackageReference Include="CluedIn.CrawlerIntegrationTesting.$(_CluedInVersionOnly.Replace('.', ''))" />
   </ItemGroup>
 </Project>

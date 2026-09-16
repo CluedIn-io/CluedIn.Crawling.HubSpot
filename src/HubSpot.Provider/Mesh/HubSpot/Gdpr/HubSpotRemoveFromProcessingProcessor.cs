@@ -7,6 +7,7 @@ using CluedIn.Core.Mesh;
 using CluedIn.Core.Messages.Processing;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
+using CluedIn.Crawling.HubSpot.Infrastructure;
 using RestSharp;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
@@ -50,7 +51,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", GetLookupId(entity)), Method.Get);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", GetLookupId(entity)), HubSpotRestMethod.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
@@ -110,7 +111,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var quereis = new List<QueryResponse>();
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.Get);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), HubSpotRestMethod.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
@@ -133,7 +134,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
 
             foreach (var workflow in result.Data)
             {
-                var removeRequest = new RestRequest(string.Format("/automation/v2/workflows/{0}/enrollments/contacts/{1}", workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]), Method.Delete);
+                var removeRequest = new RestRequest(string.Format("/automation/v2/workflows/{0}/enrollments/contacts/{1}", workflow.id, entity.Properties[CluedIn.Core.Data.Vocabularies.Vocabularies.CluedInPerson.Email]), HubSpotRestMethod.Delete);
 
                 client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
                 client.AddDefaultHeader("Content-Type", "application/json");
@@ -150,7 +151,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot.Gdpr
         {
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), Method.Get);
+            var request = new RestRequest(string.Format("/automation/v2/workflows/enrollments/contacts/{0}", id), HubSpotRestMethod.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");
