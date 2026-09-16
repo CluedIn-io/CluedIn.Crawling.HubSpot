@@ -8,6 +8,7 @@ using CluedIn.Core.Mesh;
 using CluedIn.Core.Messages.Processing;
 using CluedIn.Core.Messages.WebApp;
 using CluedIn.Crawling.HubSpot.Core;
+using CluedIn.Crawling.HubSpot.Infrastructure;
 using CluedIn.Provider.HubSpot.Mesh.HubSpot.Extensions;
 using Newtonsoft.Json;
 using RestSharp;
@@ -103,7 +104,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
             var hubSpotCrawlJobData = new HubSpotCrawlJobData(config);
 
             var client = new RestClient("https://api.hubapi.com");
-            var request = new RestRequest(string.Format(EditUrl + "{0}", id), Method.Get);
+            var request = new RestRequest(string.Format(EditUrl + "{0}", id), HubSpotRestMethod.Get);
 
             client.AddDefaultHeader("Authorization", $"Bearer {hubSpotCrawlJobData.ApiToken}");
             client.AddDefaultHeader("Content-Type", "application/json");

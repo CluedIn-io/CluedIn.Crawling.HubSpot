@@ -1,5 +1,12 @@
 mode: ContinuousDeployment
-next-version: 5.0
+# The CluedIn version is now encoded in the published package suffix (e.g. .470/.480/.500), so this
+# repo's own version no longer needs to track CluedIn. Started at 100.0 directly (no intermediate
+# 1.0.0 step - that phase of the org-wide migration effort has been retired) so customers who saw
+# this repo at earlier single-version numbers never see it "go backwards". No
+# commits-before/ignore trick is needed here - GitVersion's next-version only needs help overriding
+# an existing tag when the new value is LOWER than that tag; 100.0 is already higher than every
+# pre-existing tag, so it wins on its own (verified via a real local `dotnet-gitversion` run).
+next-version: 100.0
 branches:
   master:
     mode: ContinuousDelivery

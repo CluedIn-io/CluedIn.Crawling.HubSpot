@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup Label="Dependency Versions">
     <_AutoFixture>5.0.0-preview0012</_AutoFixture>
-    <_CluedIn>5.0.0-*</_CluedIn>
+    <_CluedIn Condition="'$(_CluedIn)' == ''">5.0.0-*</_CluedIn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,10 +11,14 @@
         MUST SPECIFY IN CSPROJ AS <PackageReference Name="<depName>" />
     -->
     <PackageReference Update="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.12.0" Condition="!$(DefineConstants.Contains('CLUEDIN_V50'))" />
     <PackageReference Update="AutoFixture.Xunit3" Version="$(_AutoFixture)" />
+    <PackageReference Update="AutoFixture.Xunit2" Version="4.18.0" />
     <PackageReference Update="coverlet.msbuild" Version="2.8.0" />
     <PackageReference Update="xunit.v3" Version="3.2.2" />
+    <PackageReference Update="xunit" Version="2.9.3" />
     <PackageReference Update="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageReference Update="xunit.runner.visualstudio" Version="2.8.2" Condition="!$(DefineConstants.Contains('CLUEDIN_V50'))" />
     <PackageReference Update="Moq" Version="4.13.1" />
     <PackageReference Update="Shouldly" Version="3.0.2" />
   </ItemGroup>
@@ -28,7 +32,12 @@
     <PackageReference Update="CluedIn.Core" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Core.Agent" Version="$(_CluedIn)" />
     <PackageReference Update="CluedIn.Crawling" Version="$(_CluedIn)" />
-    <PackageReference Update="CluedIn.CrawlerIntegrationTesting" Version="5.0.0-*" />
+    <!-- CluedIn.CrawlerIntegrationTesting is itself multi-version targeted: published as
+         CluedIn.CrawlerIntegrationTesting.470/.480/.500, each at its own independent version, not
+         tracking $(_CluedIn) at all. Confirmed against the actual develop feed during the
+         CluedIn.Crawling.AcceptanceTest migration (done immediately before this repo) - the plain
+         unsuffixed package id only has a stale 5.0.0-alpha.6. -->
+    <PackageReference Update="CluedIn.CrawlerIntegrationTesting.$(_CluedInVersionOnly.Replace('.', ''))" Version="100.1.0-*" />
   </ItemGroup>
 
   <ItemGroup Label="Global tools">

@@ -1,5 +1,4 @@
 using System;
-using AutoFixture.Xunit3;
 using CluedIn.Core.Data;
 using CluedIn.Crawling;
 using CluedIn.Crawling.Factories;

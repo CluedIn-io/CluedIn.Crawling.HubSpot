@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoFixture.Xunit3;
 using CluedIn.Crawling.HubSpot.Core;
 using CluedIn.Crawling.HubSpot.Core.Models;
 using Crawling.HubSpot.Test.Common;

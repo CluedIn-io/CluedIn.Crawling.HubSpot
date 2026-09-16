@@ -1,6 +1,17 @@
 <Project>
   <PropertyGroup Label="Compilation Metadata">
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework Condition="'$(CluedInMultiVersionTargetFramework)' != ''">$(CluedInMultiVersionTargetFramework)</TargetFramework>
+    <TargetFramework Condition="'$(CluedInMultiVersionTargetFramework)' == ''">net10.0</TargetFramework>
+
+    <!-- Version detection: compute DefineConstants early (in props, before csproj body) so that
+         conditional PackageReference ItemGroups in test projects are evaluated correctly. -->
+    <_CluedIn Condition="'$(_CluedIn)' == ''">5.0.0-*</_CluedIn>
+    <_HyphenIndex>$(_CluedIn.IndexOf('-'))</_HyphenIndex>
+    <_CluedInVersionOnly Condition="'$(_HyphenIndex)' != '-1'">$(_CluedIn.Substring(0, $(_HyphenIndex)))</_CluedInVersionOnly>
+    <_CluedInVersionOnly Condition="'$(_HyphenIndex)' == '-1'">$(_CluedIn)</_CluedInVersionOnly>
+    <DefineConstants Condition="$([System.Version]::Parse($(_CluedInVersionOnly))) &gt;= $([System.Version]::Parse('4.7.0'))">$(DefineConstants);CLUEDIN_V47</DefineConstants>
+    <DefineConstants Condition="$([System.Version]::Parse($(_CluedInVersionOnly))) &gt;= $([System.Version]::Parse('4.8.0'))">$(DefineConstants);CLUEDIN_V48</DefineConstants>
+    <DefineConstants Condition="$([System.Version]::Parse($(_CluedInVersionOnly))) &gt;= $([System.Version]::Parse('5.0.0'))">$(DefineConstants);CLUEDIN_V50</DefineConstants>
   </PropertyGroup>
 
   <!-- TODO: Clean up warnings -->
@@ -9,7 +20,7 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors>CS0105;CS0108;CS0109;CS0114;CS0162;CS0168;CS0169;CS0219;CS0252;CS0414;CS0472;CS0649;CS0652;CS1717;CS1998;CS4014;xUnit1013;MSB3245;MSB3270,NU1602</WarningsAsErrors>
     <!--
-      NU5105 : Semver 2 package version 
+      NU5105 : Semver 2 package version
     -->
     <NoWarn>$(NoWarn);NU5105</NoWarn>
     <ErrorReport>prompt</ErrorReport>
@@ -24,14 +35,21 @@
     <AssemblyTitle>$(MSBuildProjectName)</AssemblyTitle>
     <AssemblyName>$(Product).$(AssemblyTitle)</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
+    <!-- Multi-version targeting: PackageId is derived here (from the same $(_CluedInVersionOnly)
+         already computed above for DefineConstants), not passed as a raw -p:PackageId= pipeline
+         override - a raw override on an outer project doesn't reach a ProjectReference's own
+         package identity when NuGet computes that dependency for the nuspec. This repo's own
+         Provider/Crawling -> Infrastructure -> Core ProjectReference chain has the same issue.
+         Also required regardless: AzurePipelines.Templates#30 removed the -p:PackageId= pipeline
+         override entirely, so without this property EVERY package from this repo would pack with
+         a bare, unsuffixed PackageId. Gated on CluedInMultiVersionTargetFramework so local
+         development (no pipeline overrides) keeps the plain $(AssemblyName) as PackageId. -->
+    <PackageId Condition="'$(CluedInMultiVersionTargetFramework)' != ''">$(AssemblyName).$(_CluedInVersionOnly.Replace('.', ''))</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Label="Package Metadata">
     <Title>$(RootNamespace)</Title>
     <Authors>$(Company)</Authors>
-    <!-- TODO: Licensing -->
-    <!-- <PackageLicenseFile> if not using an open source license should be set to the path of a license _in_ the package -->
-    <!-- <PackageRequireLicenseAcceptance> should be set to true if a license is included -->
     <PackageProjectUrl>http://cluedin.com</PackageProjectUrl>
     <PackageIcon>nugetlogo.png</PackageIcon>
   </PropertyGroup>

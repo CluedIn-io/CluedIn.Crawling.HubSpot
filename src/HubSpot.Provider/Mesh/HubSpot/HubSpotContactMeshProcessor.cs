@@ -1,4 +1,5 @@
 ﻿using CluedIn.Core;
+using CluedIn.Crawling.HubSpot.Infrastructure;
 using RestSharp;
 
 namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
@@ -6,7 +7,7 @@ namespace CluedIn.Provider.HubSpot.Mesh.HubSpot
     public class HubSpotContactMeshProcessor : HubSpotUpdateBaseMeshProcessor
     {
         public HubSpotContactMeshProcessor(ApplicationContext appContext)
-            : base(appContext, "contacts/v1/contact/vid/:id/profile", "hubspot.contact.", Method.Post, CluedIn.Core.Data.EntityType.Infrastructure.Contact, CluedIn.Core.Data.EntityType.Person)
+            : base(appContext, "contacts/v1/contact/vid/:id/profile", "hubspot.contact.", HubSpotRestMethod.Post, CluedIn.Core.Data.EntityType.Infrastructure.Contact, CluedIn.Core.Data.EntityType.Person)
         {
         }
 
