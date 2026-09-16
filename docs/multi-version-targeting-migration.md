@@ -123,6 +123,18 @@ assumed:
   - real production code has always called `DownloadData` - so this incidentally fixed a
   pre-existing, silently-dead test double as well.)
 
+### 5b — Pre-existing case-only duplicate path in git's index (unrelated to RestSharp, found while touching these files)
+
+`git ls-files` showed `test/unit/Provider.HubSpot.Unit.Test/HubSpotProvider/` and
+`.../HubspotProvider/` (lowercase `s`/`p`) tracked as two *separate* paths, both resolving to the
+same physical file on Windows's case-insensitive filesystem - confirmed identical content at `HEAD`
+before this migration touched either, so it's a pre-existing repo bug (a case-only rename done
+without the two-step `git mv` workaround at some point), not something introduced here. Left as-is
+it would checkout as two genuinely separate directories on the Linux CI agents this migration moves
+the pipeline to - fixed by removing the stale lowercase-path index entries
+(`git update-index --force-remove`, which only touches the index, not the shared working-tree file)
+so only the properly-cased, migration-updated `HubSpotProvider/` remains tracked.
+
 ---
 
 ## Step 6 — `NuGet.Config`
@@ -160,6 +172,7 @@ needed: highest pre-existing tag is `v4.0.0`, well below `100.0`. Verified with 
 - [x] `HubSpotClient.cs` + 5 Mesh/GDPR processor files - real RestSharp 106.x/114.x API differences found and fixed (`RestClientOptions`, `Method` casing via a new `HubSpotRestMethod` helper, `RestResponse`/`IRestResponse`, base URL access, `QueryParameter`)
 - [x] `HubSpotProvider.cs` - `ISystemNotifications.Publish` incompatibility with `ProviderMessageCommand` on 5.0+ fixed via `ISystemServiceBus.PublishAsync` (verified against real CluedIn.Core assemblies via reflection); test constructor call updated
 - [x] `HubSpotImageFetcherTests.cs` - Moq-vs-extension-method incompatibility for `DownloadData` on RestSharp 114.x fixed by mocking the real underlying interface member (`DownloadStreamAsync`) on that leg instead
+- [x] Removed a pre-existing case-only duplicate tracked path (`HubspotProvider/` vs `HubSpotProvider/`) from git's index - unrelated to multi-version targeting, but would break Linux CI checkout
 - [x] `NuGet.Config` - renamed from `Nuget.config`
 - [x] `GitVersion.yml` - `next-version: 100.0` set directly; no `ignore.commits-before` trick needed
 - [x] `docs/100.0.0-release-notes.md` added
