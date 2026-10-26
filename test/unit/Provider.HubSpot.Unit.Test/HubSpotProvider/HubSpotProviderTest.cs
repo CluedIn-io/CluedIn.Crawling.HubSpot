@@ -41,7 +41,7 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
             Configuration = HubSpotConfiguration.Create();
             CrawlJobData = new HubSpotCrawlJobData(Configuration);
             Client = new Mock<HubSpotClient>(new NullLogger<HubSpotClient>(), CrawlJobData);
-            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null, null);
+            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null);
 
             NameClientFactory.Setup(n => n.CreateNew(It.IsAny<HubSpotCrawlJobData>())).Returns(() => Client.Object);
         }
