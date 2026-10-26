@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Castle.Windsor;
 using CluedIn.Core;
 using CluedIn.Core.Providers;
@@ -36,12 +37,15 @@ namespace Provider.HubSpot.Unit.Test.HubSpotProvider
             Container = new Mock<IWindsorContainer>();
             SystemContext = new Mock<SystemContext>(Container.Object);
             NameClientFactory = new Mock<IHubSpotClientFactory>();
+            // SystemContext.ServiceBus is not virtual and creates a real bus that needs a broker, so swap in a mock
+            typeof(SystemContext).GetField("serviceBus", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(SystemContext.Object, new Mock<ISystemServiceBus>().Object);
+            Container.Setup(c => c.Resolve<SystemContext>()).Returns(SystemContext.Object);
             ApplicationContext = new ApplicationContext(Container.Object);
             Logger = new Mock<ILogger<CluedIn.Provider.HubSpot.HubSpotProvider>>();
             Configuration = HubSpotConfiguration.Create();
             CrawlJobData = new HubSpotCrawlJobData(Configuration);
             Client = new Mock<HubSpotClient>(new NullLogger<HubSpotClient>(), CrawlJobData);
-            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null, null);
+            Sut = new CluedIn.Provider.HubSpot.HubSpotProvider(ApplicationContext, NameClientFactory.Object, Logger.Object, null);
 
             NameClientFactory.Setup(n => n.CreateNew(It.IsAny<HubSpotCrawlJobData>())).Returns(() => Client.Object);
         }
