@@ -104,8 +104,7 @@ namespace CluedIn.Provider.HubSpot
                 // such constraint on either CluedIn generation, so that's used for the 5.0+ path
                 // instead; the pre-5.0 path is unchanged.
 #if CLUEDIN_V50
-                var serviceBus = appContext.System?.ServiceBus;
-                if (serviceBus != null) await serviceBus.PublishAsync(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
+                await appContext.System.ServiceBus.PublishAsync(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
 #else
                 if (_notifications != null) _notifications.Publish<ProviderMessageCommand>(new ProviderMessageCommand() { OrganizationId = organizationId, ProviderDefinitionId = providerDefinitionId, ProviderId = this.Id, ProviderName = this.Name, Message = "Authenticating", UserId = userId });
 #endif
